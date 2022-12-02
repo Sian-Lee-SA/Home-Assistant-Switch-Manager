@@ -24,9 +24,9 @@ At the moment the frontend borrows heavily from the Home Assistants frontend cor
 
 ## How to use
 
-In the side panel you goto Switch Manager. Next click `Add Switch` and select the switch blueprint for the service/integration it's on (If you can't find your service and switch then see Blueprints below). The same switch can be defined multiple times but for different services as they differ their event data's from one another. 
+In the side panel you goto Switch Manager. Next click `Add Switch` and select the switch blueprint for the service/integration it's on (If you can't find your service and switch then see Blueprints below). The same switch can be defined multiple times but not for different services as they differ their event data's from one another. 
 
-Once you've selected the blueprint, you will be taken to the switch editor view. There will be an identifier text box up in the top left with a placeholder asking for the value for that key.
+Once you've selected the blueprint, you will be taken to the switch editor view. There will be an identifier input box up in the top left with a placeholder asking for the value for that key within the event data.
 
 If you do not know the event value then goto Developer Tools -> Events and start listening for events (use * if you're unsure of the event type for your switch). Once you've started listening for events, push a button on your switch then stop the listener. View the data and you will find the event related to your switch. Inside that data you will find the identifier's value. Copy this value to the identifier's textbox on the switch editor page to bind.
 
@@ -41,6 +41,8 @@ Once saved you can test to make sure all is working.
 ## Blueprints
 
 Blueprints are the heart of this component, once a blue print is defined for a switch then it can be reused for all switches for that specific service and type. All blueprints are yaml defined and needs to be placed inside `config/blueprints/switch_manager` eg `config/blueprints/switch_manager/philips-hue-tap.yaml`. For a more user friendly experience and for switches with multiple buttons then a png file should be placed with the same name (case sensitive) eg a philips-hue-tap.yaml blueprint image would be `config/blueprints/switch_manager/philips-hue-tap.png`.
+
+> file names should be defined as {service-name}-{switch-name-or-type}.yaml
 
 *only PNG files are currently supported.
 
@@ -89,7 +91,7 @@ conditions      | `list` [Condition](#condition) | - | This optional list allows
 
 ### Condition
 
-Conditions evaluate the event data
+Conditions evaluate the event data. If the key doesn't exist the it also evaluates to false
 
 Option          | Values       | Required | Details
 --              | -            | -        | -

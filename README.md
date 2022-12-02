@@ -42,11 +42,11 @@ Once saved you can test to make sure all is working.
 
 Blueprints are the heart of this component, once a blue print is defined for a switch then it can be reused for all switches for that specific service and type. All blueprints are yaml defined and needs to be placed inside `config/blueprints/switch_manager` eg `config/blueprints/switch_manager/philips-hue-tap.yaml`. For a more user friendly experience and for switches with multiple buttons then a png file should be placed with the same name (case sensitive) eg a philips-hue-tap.yaml blueprint image would be `config/blueprints/switch_manager/philips-hue-tap.png`.
 
-> file names should be defined as {service-name}-{switch-name-or-type}.yaml
+> file names should be defined as {service-name}-{switch-name-or-type}.yaml and all lower case
 
 *only PNG files are currently supported.
 
-View other blueprint files to get a grasp of how it's constructed if the following table is hard to understand
+View other blueprint files to get a grasp on how it's constructed if the following table is hard to understand.
 
 Once a blueprint file or image file has been created or edited then you will need to restart Home Assistant for the changes to take effect.
 
@@ -60,7 +60,7 @@ name            | `string`     | *        | A friendly name for the switch
 service         | `string`     | *        | The service or integration that this switch relates to (matching services will be grouped when selecting a blueprint from gui)
 event_type      | `string`     | *        | Must match the event type through the event bus triggered by the switch (Monitor events in developer tools if unsure of its value)
 identifier_key  | `string`     | *        | The key in the event data that will uniquely identify a switch, The GUI switch editor will allow entering it's value
-buttons         | `list` [Button](#button) | * | You will need to define a list of buttons event if the switch has only one or multiple. See [Button](#button) for details on defining a button
+buttons         | `list` [Button](#button) | * | You will need to define a list of buttons even if the switch has only one or multiple. See [Button](#button) for details on defining a button
 conditions      | `list` [Condition](#condition)  | - | This optional list allows the switch to only accept conditions within the event data. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition
 
 ### Button
@@ -76,7 +76,7 @@ y               | `int`        | -        | The y (up, down) position of the but
 width           | `int`        | -        | The width of the shape rect or circle. *not valid for shape: path
 height          | `int`        | -        | Only valid for shape: rect. The width of the button
 d               | `string`     | -        | Only valid if shape: path. Using svg path format
-shape           | `rect|circle|path` | - | Default is rect. 
+shape           | `rect\|circle\|path` | - | Default is rect. 
 actions         | `list` [Action](#action) | * | Each button will have atleast one action. Each action would be the result of a tap, double tap or hold etc depending on what the switch supports.
 conditions      | `list` [Condition](#condition) | - | This optional list allows the button to only accept conditions within the event data. This can help scope down to where the button was pressed. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition. 
 

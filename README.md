@@ -48,7 +48,7 @@ View other blueprint files to get a grasp of how it's constructed if the followi
 
 Once a blueprint file or image file has been created or edited then you will need to restart Home Assistant for the changes to take effect.
 
-The following tables shows how to structure you blueprint yaml file
+The following tables shows how to structure a blueprint yaml file
 
 Option          | Values       | Required | Details
 --              | -            | -        | -
@@ -56,8 +56,16 @@ name            | `string`     | *        | A friendly name for the switch
 service         | `string`     | *        | The service or integration that this switch relates to (matching services will be grouped when selecting a blueprint from gui)
 event_type      | `string`     | *        | Must match the event type through the event bus triggered by the switch (Monitor events in developer tools if unsure of its value)
 identifier_key  | `string`     | *        | The key in the event data that will uniquely identify a switch, The GUI switch editor will allow entering it's value
-buttons         | `list[Button]` [Button](#button-structure) | * | You will need to define a list of buttons event if the switch has only one or multiple
-conditions      | `list[Condition]` [Condition](#condition-structure) | - | This optional list allows the button to only accept conditions within the event data. All conditions must evaluate to true to be valid
+buttons         | `list` [Button](#button-structure) | * | You will need to define a list of buttons event if the switch has only one or multiple. See [Button](#button-structure) for details on defining a button
+conditions      | `list` [Condition](#condition-structure)  | - | This optional list allows the button to only accept conditions within the event data. All conditions must evaluate to true to be valid. See [Condition](#condition-structure) for details on defining a condition
+
+
+### Condition Structure
+
+Option          | Values       | Required | Details
+--              | -            | -        | -
+key             | `string`     | *        | The key to match in the event data
+value           | `string`     | *        | The value to match for the key in the event data
 
 ## Donate
 

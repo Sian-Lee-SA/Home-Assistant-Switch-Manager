@@ -13,7 +13,10 @@ At the moment the frontend borrows heavily from the Home Assistants frontend cor
 
 > I am happy to accept any pull requests for anyone who wishes to submit missing switches from this repository as to help eliminate other users from having to build their own.
 
+#### Index page
 ![Demo Switch Index](images/demo-1.png)
+
+#### Switch editor page
 ![Demo Switch Editor](images/demo-2.png)
 
 

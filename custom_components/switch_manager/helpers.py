@@ -11,6 +11,10 @@ async def load_manifest():
         open( os.path.join( COMPONENT_PATH, 'manifest.json') )
     )
 
+async def check_blueprints_folder_exists( hass ):
+    dest_folder = pathlib.Path(hass.config.path(BLUEPRINTS_FOLDER, DOMAIN))
+    return os.path.exists( dest_folder )
+
 async def deploy_blueprints( hass ):
     dest_folder = pathlib.Path(hass.config.path(BLUEPRINTS_FOLDER, DOMAIN))
     if not os.path.exists( dest_folder ):
@@ -25,7 +29,7 @@ async def deploy_blueprints( hass ):
         )
     
 
-def _load_blueprints( hass ):
+def load_blueprints( hass ):
     folder = pathlib.Path(hass.config.path(BLUEPRINTS_FOLDER, DOMAIN))
     results = [];
     for f in _find_files(folder, "*.yaml"):

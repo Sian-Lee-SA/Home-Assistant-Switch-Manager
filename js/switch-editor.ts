@@ -9,7 +9,8 @@ import {
     mdiDelete,
     mdiStopCircleOutline,
     mdiPlayCircleOutline,
-    mdiGestureTapButton
+    mdiGestureTapButton,
+    mdiEarHearing
 } from "@mdi/js";
 import { MODES, SwitchManagerBlueprint, SwitchManagerConfig } from "./types"
 import { haStyle, haStyleScrollbar } from "@hass/resources/styles"
@@ -40,6 +41,7 @@ class SwitchManagerSwitchEditor extends LitElement
 
     @property() disabled = false;
 
+    @state() private _subscribed?: () => void;
 
     @state() private sequence = [];
     @state() private button_index: number = 0;
@@ -133,6 +135,15 @@ class SwitchManagerSwitchEditor extends LitElement
                             required="true" 
                             .label=${this.blueprint?.identifier_key}
                             @input="${this._identifierChanged}"></ha-textfield>
+                        <ha-icon-button
+                            .path=${mdiEarHearing}
+                            ?listening=${(this._subscribed)}
+                            @click=${this._listenForEvent}>
+                        </ha-icon-button>
+                        ${this._subscribed ? html`
+                        <ha-alert alert-type="info">
+                            Press a button on your switch
+                        </ha-alert>` : ''}
                     </span>`:''}
                     
                 
@@ -227,6 +238,14 @@ class SwitchManagerSwitchEditor extends LitElement
             haStyle,
             fabStyle,
             css`
+            @keyframes pulse {
+                from {
+                    opacity: 1;
+                }
+                to {
+                    opacity: 0.4;
+                }
+            }
             ha-card {
                 margin: 0 auto;
                 max-width: 1040px;
@@ -237,6 +256,26 @@ class SwitchManagerSwitchEditor extends LitElement
             }
             #identifier-input {
                 width: 300px;
+            }
+            #identifier ha-icon-button {
+                vertical-align: middle;
+                background: var(--material-secondary-text-color);
+                border-radius: 50%;
+                color: var(--primary-background-color);
+                margn-top: -10px;
+                margin-top: -14px;
+                margin-left: -34px;
+                position: relative;
+                --mdc-icon-button-size: 54px;
+            }
+            #identifier ha-icon-button[listening] {
+                animation: 1s infinite alternate pulse;
+            }
+            #identifier ha-alert {
+                display: block;
+                width: 300px;
+                position: absolute;
+                margin-left: 25px;
             }
             hui-view {
                 height: calc(100vh - var(--header-height));
@@ -311,6 +350,16 @@ class SwitchManagerSwitchEditor extends LitElement
         this._loadConfig();
     }
 
+    disconnectedCallback(): void 
+    {
+        super.disconnectedCallback();
+        if( this._subscribed )
+        {
+            this._subscribed();
+            this._subscribed = null;
+        }
+    }
+
     private _loadConfig()
     {
         if( 'id' in this.params ) {
@@ -326,8 +375,7 @@ class SwitchManagerSwitchEditor extends LitElement
                     this._setConfig( createConfigFromBlueprint(promise.blueprint) );
                     this._showRenameDialog();
                 });
-        }
-        
+        }  
     }
 
     private _loadBlueprint(id: string)
@@ -483,7 +531,28 @@ class SwitchManagerSwitchEditor extends LitElement
         this._dirty = true;
     }
 
-    private _identifierChanged(ev: CustomEvent)
+    private async _listenForEvent()
+    {
+        // Act as a toggle
+        if( this._subscribed )
+        {
+            this._subscribed();
+            this._subscribed = undefined;
+            return;
+        }
+
+        this._subscribed = await this.hass!.connection.subscribeEvents( (event) => {
+            if( 'id' in event.data )
+            {
+                this.identifier_input.value = event.data.id;
+                this._identifierChanged()
+                this._subscribed();
+                this._subscribed = undefined;
+            }
+        }, this.blueprint.event_type )
+    }
+
+    private _identifierChanged(ev?: CustomEvent)
     {
         this.config.identifier = getValueById(this, 'identifier-input');
         this._dirty = true;

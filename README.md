@@ -27,13 +27,17 @@ At the moment the frontend borrows heavily from the Home Assistants frontend cor
 1. Restart Home Assistant
 1. Goto Config -> Integration then find and add Switch Manager
 
+> [![Open your Home Assistant instance and start setting up a new integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=switch_manager)
+
 Once the integration has been loaded, a folder with blueprints will be created in your `config/blueprints/switch_manager` home assistant path. You can add/create extra blueprints to this path.
 
 ## How to use
 
 In the side panel you goto Switch Manager. Next click `Add Switch` and select the switch blueprint for the service/integration it's on (If you can't find your service and switch then see Blueprints below). The same switch can be defined multiple times but not for different services as they differ their event data's from one another. 
 
-Once you've selected the blueprint, you will be taken to the switch editor view. There will be an identifier input box up in the top left with a placeholder asking for the value for that key within the event data.
+Once you've selected the blueprint, you will be taken to the switch editor view. There will be an identifier input box up in the top left with a placeholder asking for the value for that key within the event data. 
+
+You can either enter the identifier manually or use the button on the right then press a button on the switch to auto fill the value. There is a posibility that an identifier from some other device for the event to be discovered if that device sent an event before your button push. If this is the case and the button helper isn't getting the right identifier then follow the next stop to discover it manually. 
 
 If you do not know the event value then goto Developer Tools -> Events and start listening for events (use * if you're unsure of the event type for your switch). Once you've started listening for events, push a button on your switch then stop the listener. View the data and you will find the event related to your switch. Inside that data you will find the identifier's value. Copy this value to the identifier's textbox on the switch editor page to bind.
 
@@ -51,7 +55,9 @@ Blueprints are the heart of this component, once a blue print is defined for a s
 
 > file names should be defined as {service-name}-{switch-name-or-type}.yaml and all lower case
 
-*only PNG files are currently supported.
+* Only PNG files are currently supported.
+* Images should not exceed 500px height or 800px width
+* Images with transparent background are preferred
 
 View other blueprint files to get a grasp on how it's constructed if the following table is hard to understand.
 
@@ -115,7 +121,7 @@ The follow example is a blueprint for a Wallmote Quad which has 4 buttons with e
 
 Each button has a shape of a path as it was traced through inkscape, drawing the shapes whether be rect, circle or path allows GUI representation and allows to select individual buttons within the GUI switch editor.
 
-You should wrap your conditon values in qoutes as 001 equates to an int which would end up being 1 and will not match a value of 001 within the event data.
+> You should wrap your conditon values in qoutes as 001 equates to an int which would end up being 1 and will not match a value of 001 within the event data.
 
 ```yaml
 name: Wallmote Quad

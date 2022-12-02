@@ -12,6 +12,7 @@ export interface SwitchManagerBlueprint
     service: string;
     has_image: boolean;
     identifier_key: string;
+    event_type: string;
     buttons: SwitchManagerBlueprintButton[];
 }
 

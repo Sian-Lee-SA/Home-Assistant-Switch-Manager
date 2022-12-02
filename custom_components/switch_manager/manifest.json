@@ -3,8 +3,10 @@
   "name": "Switch Manager",
   "version": "0.0.2",
   "documentation": "https://github.com/Sian-Lee-SA/switch_manager",
-  "dependencies": [],
+  "dependencies": ["panel_custom", "websocket_api", "http", "frontend", "script"],
   "requirements": [],
   "codeowners": ["@Sian-Lee-SA"],
+  "issue_tracker": "https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager/issues",
+  "iot_class": "local_push",
   "config_flow": true
 }

@@ -44,8 +44,8 @@ export function buildWSPath(suffix: string): string
 export function getValueById(dom: LitElement, id: string, in_render_root: boolean = true): string
 {
     if( in_render_root )
-        return (<HTMLInputElement>dom.renderRoot.querySelector(`#${id}`)).value.trim();
-    return (<HTMLInputElement>dom.querySelector(`#${id}`)).value.trim();
+        return (<HTMLInputElement>dom.renderRoot.querySelector(`#${id}`)).value.toString().trim();
+    return (<HTMLInputElement>dom.querySelector(`#${id}`)).value.toString().trim();
 }
 
 export function createConfigFromBlueprint( blueprint: SwitchManagerBlueprint ): SwitchManagerConfig

@@ -133,13 +133,15 @@ class SwitchManagerSwitchEditor extends LitElement
                             type="text" 
                             .value="${this.config?.identifier}" 
                             required="true" 
-                            .label=${this.blueprint?.identifier_key}
+                            .label=${this.blueprint.event_type == 'mqtt'? 'mqtt topic' : this.blueprint?.identifier_key}
                             @input="${this._identifierChanged}"></ha-textfield>
+                        ${this.blueprint.event_type != 'mqtt' ? html`
                         <ha-icon-button
                             .path=${mdiEarHearing}
                             ?listening=${(this._subscribed)}
                             @click=${this._listenForEvent}>
-                        </ha-icon-button>
+                        </ha-icon-button>` : 
+                            html`${this.blueprint.mqtt_topic_format ? html`<ha-alert alert-type="info">Format: ${this.blueprint.mqtt_topic_format}</ha-alert>` : ''}`}
                         ${this._subscribed ? html`
                         <ha-alert alert-type="info">
                             Press a button on your switch
@@ -228,8 +230,7 @@ class SwitchManagerSwitchEditor extends LitElement
                         </ha-fab>
                     </div>`:''}
                 </hui-panel-view>
-            </hui-view>
-            
+            </hui-view>            
           `;
     }
 

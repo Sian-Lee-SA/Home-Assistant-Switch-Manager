@@ -35,9 +35,9 @@ Once the integration has been loaded, a folder with blueprints will be created i
 
 In the side panel you goto Switch Manager. Next click `Add Switch` and select the switch blueprint for the service/integration it's on (If you can't find your service and switch then see Blueprints below). The same switch can be defined multiple times but not for different services as they differ their event data's from one another. 
 
-Once you've selected the blueprint, you will be taken to the switch editor view. There will be an identifier input box up in the top left with a placeholder asking for the value for that key within the event data. 
+Once you've selected the blueprint, you will be taken to the switch editor view. There will be an identifier input box or mqtt topic input up in the top left with a placeholder asking for the value for that key within the event data. 
 
-You can either enter the identifier manually or use the button on the right then press a button on the switch to auto fill the value. There is a posibility that an identifier from some other device for the event to be discovered if that device sent an event before your button push. If this is the case and the button helper isn't getting the right identifier then follow the next stop to discover it manually. 
+You can either enter the identifier manually or use the button on the right (events only, this does not support mqtt) then press a button on the switch to auto fill the value. There is a posibility that an identifier from some other device for the event to be discovered if that device sent an event before your button push. If this is the case and the button helper isn't getting the right identifier then follow the next stop to discover it manually. 
 
 If you do not know the event value then goto Developer Tools -> Events and start listening for events (use * if you're unsure of the event type for your switch). Once you've started listening for events, push a button on your switch then stop the listener. View the data and you will find the event related to your switch. Inside that data you will find the identifier's value. Copy this value to the identifier's textbox on the switch editor page to bind.
 
@@ -71,8 +71,9 @@ Option          | Values       | Required | Details
 --              | -            | -        | -
 name            | `string`     | *        | A friendly name for the switch
 service         | `string`     | *        | The service or integration that this switch relates to (matching services will be grouped when selecting a blueprint from gui)
-event_type      | `string`     | *        | Must match the event type through the event bus triggered by the switch (Monitor `*` events in developer tools if unsure of its value)
-identifier_key  | `string`     | *        | The key in the event data that will uniquely identify a switch (user input from the switch editor will allow entering it's value)
+event_type      | `string`     | *        | Must match the event type through the event bus triggered by the switch (Monitor `*` events in developer tools if unsure of its value). Set this to mqtt if handling a mqtt message instead of an event (see [mqtt](#mqtt))
+identifier_key  | `string`     | *        | The key in the event data that will uniquely identify a switch (user input from the switch editor will allow entering it's value). This value is ignore if using mqtt
+mqtt_topic_format| `string`    | -        | If event_type is mqtt, then this will give the user an understanding of what they should set their topic as. example: zigbee2mqtt/{device}/action
 buttons         | `list` [Button](#button) | * | You will need to define a list of buttons even if the switch has only one or multiple. See [Button](#button) for details on defining a button
 conditions      | `list` [Condition](#condition)  | - | This optional list allows the switch to only accept these conditions within the event data. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition
 
@@ -115,6 +116,18 @@ Option          | Values       | Required | Details
 key             | `string`     | *        | The key to match in the event data
 value           | `string`     | *        | The value to match for the key in the event data
 
+### MQTT
+
+MQTT is handled differently to events and the incoming data is that of a payload... If a payload is not json formatted then it will be passed in as the key `payload` containing the string. The payload itself is what the conditions will check against.
+
+If you want a condition on a payload that isn't json formatted then you would do as follows:
+```yaml
+- key: payload
+  value: tap
+```
+
+Otherwise you will check against the payloads keys and values
+
 ### Example
 
 The follow example is a blueprint for a Wallmote Quad which has 4 buttons with each button having 2 actions (Tap and Hold). This blueprint is also designed for the Z-Wave JS Integration and handles the event type `zwave_js_value_notification`. With in that we set the identifier key to `node_id` as this key is a way to distinguish which switch the event refers to. Further along we check from the root condition whether the event data has `property: scene` otherwise the switch has no need to further proceed nor does the component process other child conditions. We do this again for the buttons and actions to scope down whether the incoming event should be handled by the switch and its buttons or actions.
@@ -122,6 +135,9 @@ The follow example is a blueprint for a Wallmote Quad which has 4 buttons with e
 Each button has a shape of a path as it was traced through inkscape, drawing the shapes whether be rect, circle or path allows GUI representation and allows to select individual buttons within the GUI switch editor.
 
 > You should wrap your conditon values in qoutes as 001 equates to an int which would end up being 1 and will not match a value of 001 within the event data.
+
+
+#### Event type
 
 ```yaml
 name: Wallmote Quad
@@ -188,6 +204,34 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
+```
+
+#### MQTT Type
+
+```yaml
+name: Sonoff SNZB 01
+service: Zigbee2MQTT
+event_type: mqtt
+identifier_key: topic
+mqtt_topic_format: zigbee2mqtt/{device}/action
+buttons:
+  - x: 2
+    y: 2
+    width: 189
+    height: 159
+    actions:
+      - title: tap
+        conditions:
+          - key: payload
+            value: single
+      - title: double tap
+        conditions:
+          - key: payload
+            value: double
+      - title: hold
+        conditions:
+          - key: payload
+            value: long
 ```
 
 ## Donate

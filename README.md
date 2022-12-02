@@ -75,18 +75,18 @@ If there are more than 1 button on the switch then you should be using a png and
 
 Option          | Values       | Required | Details
 --              | -            | -        | -
-x               | `int`        | -        | The x (left, right) position of the button from top left. *not valid for shape: path
-y               | `int`        | -        | The y (up, down) position of the button from top left. *not valid for shape: path
-width           | `int`        | -        | The width of the shape rect or circle. *not valid for shape: path
-height          | `int`        | -        | Only valid for shape: rect. The width of the button
+x               | `int`px      | -        | The x (left, right) position of the button from top left within the image. *not valid for shape: path
+y               | `int`px      | -        | The y (up, down) position of the button from top left within the image. *not valid for shape: path
+width           | `int`px      | -        | The width of the shape rect or circle. *not valid for shape: path
+height          | `int`px      | -        | Only valid for shape: rect. The width of the button
 d               | `string`     | -        | Only valid if shape: path. Using svg path format
-shape           | `rect\|circle\|path` | - | Default is rect. 
+shape           | `rect\|circle\|path` | - | Default is rect (rectangle). 
 actions         | `list` [Action](#action) | * | Each button will have atleast one action. Each action would be the result of a tap, double tap or hold etc depending on what the switch supports.
 conditions      | `list` [Condition](#condition) | - | This optional list allows the button to only accept conditions within the event data. This can help scope down to where the button was pressed. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition. 
 
 ### Action
 
-An action would be the result of a push/tap, whether its held down or if it was pressed twice etc (all depending on what the device supports). And action must contain a title at minimum. Conditions should be used to differentiate the actions for any button.
+An action would be the result of a push/tap, whether its held down or if it was pressed twice etc (all depending on what the device supports). An action must contain a title at minimum. Conditions should be used to differentiate the actions for any button.
 
 Option          | Values       | Required | Details
 --              | -            | -        | -
@@ -95,7 +95,7 @@ conditions      | `list` [Condition](#condition) | - | This optional list allows
 
 ### Condition
 
-Conditions evaluate the event data. If the key doesn't exist the it also evaluates to false
+Conditions evaluate the event data. If the key doesn't exist then it also evaluates to false. All conditions must be true to be valid
 
 Option          | Values       | Required | Details
 --              | -            | -        | -
@@ -104,7 +104,7 @@ value           | `string`     | *        | The value to match for the key in th
 
 ### Example
 
-The follow example is a blueprint for a Wallmote Quad which has 4 buttons with each button having 2 actions (Tap and Hold). This blueprint is also designed for the Z-Wave JS Integration and handles the event type `zwave_js_value_notification`. With in that we set the identifier key to `node_id` as this key is a way to distinguish which switch the event refers to. Further along we check from the root condition whether the event data has `property: scene` otherwise the switch has no need to further proceed. We do this again for the buttons and actions to scope down whether the incoming event should be handled by the switch and its buttons or actions.
+The follow example is a blueprint for a Wallmote Quad which has 4 buttons with each button having 2 actions (Tap and Hold). This blueprint is also designed for the Z-Wave JS Integration and handles the event type `zwave_js_value_notification`. With in that we set the identifier key to `node_id` as this key is a way to distinguish which switch the event refers to. Further along we check from the root condition whether the event data has `property: scene` otherwise the switch has no need to further proceed nor does the component process other child conditions. We do this again for the buttons and actions to scope down whether the incoming event should be handled by the switch and its buttons or actions.
 
 Each button has a shape of a path as it was traced through inkscape, drawing the shapes whether be rect, circle or path allows GUI representation and allows to select individual buttons within the GUI switch editor.
 

@@ -1,0 +1,5 @@
+{
+    "name": "Switch Manager",
+    "render_readme": true,
+    "homeassistant": "2022.11.4"
+}

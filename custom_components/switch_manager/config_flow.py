@@ -5,7 +5,7 @@ from .const import DOMAIN
 @config_entries.HANDLERS.register(DOMAIN)
 class SwitchManagerConfigFlow(config_entries.ConfigFlow):
 
-    VERSION = 1
+    VERSION = 2
 
     async def async_step_user(self, user_input=None):
         if self._async_current_entries():

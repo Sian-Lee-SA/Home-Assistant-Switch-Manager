@@ -1,7 +1,7 @@
 {
   "name": "switch_manager",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Home Assistant Frontend for Switch Manager",
   "scripts": {
     "build": "rollup -c",

@@ -30,7 +30,7 @@ class SwitchManagerManagedSwitchData:
 
 @attr.s
 class SwitchManagerStoreData:
-    version = attr.ib(type=str, default="1")
+    version = attr.ib(type=str, default="0")
     managed_switches = attr.ib(type=dict[str:SwitchManagerManagedSwitchData], factory=dict)
 
     @classmethod
@@ -67,6 +67,13 @@ class SwitchManagerStore:
 
     async def get_managed_switches(self):
         return self.data.managed_switches
+
+    def compare_version(self, version):
+        return self.data.version == str(version)
+
+    async def update_version(self, version):
+        self.data.version = str(version)
+        await self.updated()
 
     async def delete_managed_switch(self, _id: str):
         del self.data.managed_switches[_id]

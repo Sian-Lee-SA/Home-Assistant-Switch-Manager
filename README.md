@@ -69,6 +69,10 @@ If there are more than 1 button on the switch then you should be using a png and
 
 > if you want more control on positioning and look then you can open the image up in inkscape (with matching width and height values for the viewBox) then draw the paths for each button and copy the d attribute of that path then paste in the d property for the button in yaml. You would also set the shape to path
 
+* Shape `rect` uses x, y, width, height
+* Shape `circle` use x, y, width
+* Shape `path` uses d
+
 Option          | Values       | Required | Details
 --              | -            | -        | -
 x               | `int`        | -        | The x (left, right) position of the button from top left. *not valid for shape: path

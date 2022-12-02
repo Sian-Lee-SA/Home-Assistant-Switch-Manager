@@ -11,10 +11,11 @@ This component is still currently in ALPHA status and will most likely contain b
 
 At the moment the frontend borrows heavily from the Home Assistants frontend core modules etc which may break things in future Home Assistant updates but the backend processing should be stable and your switches should work as expected after being configured by the GUI.
 
-* I am happy to accept any pull requests for anyone who wishes to submit missing switches from this repository as to help eliminate other users from having to build their own.
+> I am happy to accept any pull requests for anyone who wishes to submit missing switches from this repository as to help eliminate other users from having to build their own.
 
 ![Demo Switch Index](images/demo-1.png)
 ![Demo Switch Editor](images/demo-2.png)
+
 
 ## How to install
 
@@ -26,7 +27,7 @@ At the moment the frontend borrows heavily from the Home Assistants frontend cor
 
 ## How to use
 
-In the side panel you goto Switch Manager. Next click Add Switch and select the switch blueprint for the service/integration it's on (If you can find your service and switch then see Blueprints below). The same switch can be defined multiple times but for different services as they differ their event data's from one another. 
+In the side panel you goto Switch Manager. Next click `Add Switch` and select the switch blueprint for the service/integration it's on (If you can't find your service and switch then see Blueprints below). The same switch can be defined multiple times but for different services as they differ their event data's from one another. 
 
 Once you've selected the blueprint, you will be taken to the switch editor view. There will be an identifier text box up in the top left with a placeholder asking for the value for that key.
 
@@ -37,6 +38,8 @@ Depending on the blueprint and the actions that your switch supports, you can se
 Navigation and usage should be pretty straight forward. Next you can start defining actions for each of your buttons. The process is identical to making a script in Home Assistant and should be familiar. 
 
 Once saved you can test to make sure all is working.
+
+> Sometimes you may want certain buttons or actions handled by the devices default handler. For example, a Zigbee device may already be bound to a certain light which also imo has better response, reliability and stability. To remind you of this, you could add a stop action with a description of why the button shouldn't be changed and being handled somehwere else. Then for other actions that aren't handled else where then you can handle them with this component. It's also fine to allow an external handler to handle the button push aswell as this component so a button could turn on the light handled via Zigbee and the component could start playing music based on the same event.
 
 ## Blueprints
 

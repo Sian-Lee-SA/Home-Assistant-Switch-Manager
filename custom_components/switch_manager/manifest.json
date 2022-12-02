@@ -3,7 +3,7 @@
   "name": "Switch Manager",
   "version": "0.0.4",
   "documentation": "https://github.com/Sian-Lee-SA/switch_manager",
-  "dependencies": ["panel_custom", "websocket_api", "http", "frontend", "script"],
+  "dependencies": ["panel_custom", "websocket_api", "http", "frontend", "script", "mqtt"],
   "requirements": [],
   "codeowners": ["@Sian-Lee-SA"],
   "issue_tracker": "https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager/issues",

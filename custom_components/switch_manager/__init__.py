@@ -45,6 +45,7 @@ BLUEPRINT_SCHEMA = vol.Schema({
     vol.Required('service'): cv.string,
     vol.Required('event_type'): cv.string,
     vol.Required('identifier_key'): cv.string,
+    vol.Optional('mqtt_topic_format'): cv.string,
     vol.Optional('conditions'): vol.All(cv.ensure_list, [CONDITION_SCHEMA]),
     vol.Required('buttons'): vol.All(cv.ensure_list, [BLUEPRINT_BUTTON_SCHEMA])
 })
@@ -138,11 +139,11 @@ async def _init_switch_configs( hass: HomeAssistant ):
             _id, 
             switches[_id] 
         )
-        _set_switch_config( hass, switch )
+        await _set_switch_config( hass, switch )
 
-def _set_switch_config( hass: HomeAssistant, config: ManagedSwitchConfig ):
+async def _set_switch_config( hass: HomeAssistant, config: ManagedSwitchConfig ):
     hass.data[DOMAIN][CONF_MANAGED_SWITCHES][config.id] = config
-    config.start();
+    await config.start();
 
 def _get_switch_config( hass: HomeAssistant, _id: str ) -> ManagedSwitchConfig:
     return hass.data[DOMAIN][CONF_MANAGED_SWITCHES].get(_id)
@@ -204,7 +205,7 @@ async def websocket_save_config(
             store.get_available_id(), 
             msg['config'] 
         )
-        _set_switch_config( hass, config )
+        await _set_switch_config( hass, config )
 
     await store.set_managed_switch( config )    
     
@@ -228,7 +229,7 @@ async def websocket_toggle_config_enabled(
 
     config = _get_switch_config( hass, msg['config_id'] )
     config.setEnabled( msg['enabled'] )
-    config.start()
+    await config.start()
 
     await store.set_managed_switch( config )
 

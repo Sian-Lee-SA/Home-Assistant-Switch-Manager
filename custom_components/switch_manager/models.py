@@ -1,8 +1,9 @@
-import voluptuous as vol
-from typing import Callable
 from .const import DOMAIN, LOGGER
-from homeassistant.core import HomeAssistant
-from homeassistant.helpers.script import Script, async_validate_actions_config
+from .helpers import format_mqtt_message
+from homeassistant.core import HomeAssistant, Context
+from homeassistant.helpers.script import Script
+from homeassistant.components.mqtt.client import async_subscribe as mqtt_subscribe
+from homeassistant.components.mqtt.models import ReceiveMessage
 import homeassistant.helpers.config_validation as cv
 
 class Blueprint:
@@ -14,6 +15,7 @@ class Blueprint:
       self.has_image = has_image
       self.service = config.get('service')
       self.event_type = config.get('event_type')
+      self.mqtt_topic_format = config.get('mqtt_topic_format', None)
       self.identifier_key = config.get('identifier_key')
       self.buttons = config.get('buttons')
       self.conditions = config.get('conditions', [])
@@ -174,13 +176,16 @@ class ManagedSwitchConfig:
                     ManagedSwitchConfigButton( self._hass, self.id, i, self.blueprint.buttons[i], buttons_config[i] )
                 )
     
-    def start(self): 
+    async def start(self): 
         # Reset state for new instances as this should also be called as a restart
         self.stop()
         if self._event_listener or not self.valid_blueprint or not self.enabled:
             return
 
-        self._event_listener = self._hass.bus.async_listen(self.blueprint.event_type, self._handleEvent)
+        if self.blueprint.event_type == 'mqtt':
+            self._event_listener = await mqtt_subscribe(self._hass, self.identifier, self._handleMQTT)
+        else:
+            self._event_listener = self._hass.bus.async_listen(self.blueprint.event_type, self._handleEvent)
 
     def stop(self):
         self.stop_running_scripts();
@@ -191,21 +196,30 @@ class ManagedSwitchConfig:
     def setEnabled( self, value: bool ):
         self.enabled = value
 
+    async def _handleMQTT( self, message: ReceiveMessage ):
+        data = format_mqtt_message(message)
+        await self.__processIncoming( data, Context() )
+        
     async def _handleEvent( self, event ):
-        if not self.enabled or not self._check_conditons( event.data ):
+        await self.__processIncoming( event.data, event.context )
+
+    async def __processIncoming( self, data, context ):
+        if not self.enabled or not self._check_conditons( data ):
             return
 
         for button in self.buttons:
-            if not button._check_conditions( event.data ):
+            if not button._check_conditions( data ):
                 continue
             for action in button.actions:
-                if not action._check_conditions( event.data ):
+                if not action._check_conditions( data ):
                     continue
-                await action.run( context=event.context )
+                await action.run( context=context )
+
 
     def _check_conditons( self, data ) -> bool:
-        if str(data.get(self.blueprint.identifier_key)) != str(self.identifier):
-            return False
+        if self.blueprint.event_type != 'mqtt':
+            if str(data.get(self.blueprint.identifier_key)) != str(self.identifier):
+                return False
 
         for condition in self.blueprint.conditions:
             if condition.get('key') not in data or str(data.get(condition.get('key'))) != str(condition.get('value')):

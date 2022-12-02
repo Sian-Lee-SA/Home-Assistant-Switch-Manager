@@ -3,6 +3,7 @@ import json, pathlib, os, shutil
 from homeassistant.util.yaml.loader import _find_files, load_yaml
 from .const import LOGGER, DOMAIN, BLUEPRINTS_FOLDER
 from homeassistant.exceptions import HomeAssistantError
+from homeassistant.components.mqtt.models import ReceiveMessage
 
 COMPONENT_PATH = os.path.dirname(os.path.realpath(__file__))
 
@@ -23,11 +24,11 @@ async def deploy_blueprints( hass ):
     component_blueprints_path = os.path.join( COMPONENT_PATH, 'blueprints' )
     files = os.listdir(component_blueprints_path)
     for file in files:
-        shutil.copy( 
-            os.path.join( component_blueprints_path, file ),
-            dest_folder
-        )
-    
+        if os.path.isfile( os.path.join( component_blueprints_path, file )):
+            shutil.copy( 
+                os.path.join( component_blueprints_path, file ),
+                dest_folder
+            )
 
 def load_blueprints( hass ):
     folder = pathlib.Path(hass.config.path(BLUEPRINTS_FOLDER, DOMAIN))
@@ -46,3 +47,14 @@ def load_blueprints( hass ):
             'data': data        
         })
     return results
+
+def format_mqtt_message( message: ReceiveMessage):
+    try:
+        data = json.loads(message.payload)
+        data['topic'] = message.topic
+    except ValueError as e:
+        data = {
+            "topic": message.topic,
+            "payload": message.payload
+        }
+    return data

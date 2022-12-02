@@ -4,6 +4,7 @@ from homeassistant.core import HomeAssistant, Context
 from homeassistant.helpers.script import Script
 from homeassistant.components.mqtt.client import async_subscribe as mqtt_subscribe
 from homeassistant.components.mqtt.models import ReceiveMessage
+from homeassistant.exceptions import HomeAssistantError
 import homeassistant.helpers.config_validation as cv
 
 class Blueprint:
@@ -183,7 +184,10 @@ class ManagedSwitchConfig:
             return
 
         if self.blueprint.event_type == 'mqtt':
-            self._event_listener = await mqtt_subscribe(self._hass, self.identifier, self._handleMQTT)
+            try:
+                self._event_listener = await mqtt_subscribe(self._hass, self.identifier, self._handleMQTT)
+            except HomeAssistantError:
+                LOGGER.error(f"Unable to handle switch: {self.name} as MQTT is not loaded")
         else:
             self._event_listener = self._hass.bus.async_listen(self.blueprint.event_type, self._handleEvent)
 

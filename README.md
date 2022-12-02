@@ -47,7 +47,7 @@ Once saved you can test to make sure all is working.
 
 ## Blueprints
 
-Blueprints are the heart of this component, once a blue print is defined for a switch then it can be reused for all switches for that specific service and type. All blueprints are yaml defined and needs to be placed inside `config/blueprints/switch_manager` eg `config/blueprints/switch_manager/philips-hue-tap.yaml`. For a more user friendly experience and for switches with multiple buttons then a png file should be placed with the same name (case sensitive) eg a philips-hue-tap.yaml blueprint image would be `config/blueprints/switch_manager/philips-hue-tap.png`.
+Blueprints are the heart of this component, once a blue print is defined for a switch then it can be reused for all switches for that specific service and type. All blueprints are yaml defined and needs to be placed inside `config/blueprints/switch_manager` path eg `config/blueprints/switch_manager/philips-hue-tap.yaml`. For a more user friendly experience and for switches with multiple buttons then a png file should be placed with the same name (case sensitive) eg a philips-hue-tap.yaml blueprint image would be `config/blueprints/switch_manager/philips-hue-tap.png`.
 
 > file names should be defined as {service-name}-{switch-name-or-type}.yaml and all lower case
 
@@ -65,10 +65,10 @@ Option          | Values       | Required | Details
 --              | -            | -        | -
 name            | `string`     | *        | A friendly name for the switch
 service         | `string`     | *        | The service or integration that this switch relates to (matching services will be grouped when selecting a blueprint from gui)
-event_type      | `string`     | *        | Must match the event type through the event bus triggered by the switch (Monitor events in developer tools if unsure of its value)
-identifier_key  | `string`     | *        | The key in the event data that will uniquely identify a switch, The GUI switch editor will allow entering it's value
+event_type      | `string`     | *        | Must match the event type through the event bus triggered by the switch (Monitor `*` events in developer tools if unsure of its value)
+identifier_key  | `string`     | *        | The key in the event data that will uniquely identify a switch (user input from the switch editor will allow entering it's value)
 buttons         | `list` [Button](#button) | * | You will need to define a list of buttons even if the switch has only one or multiple. See [Button](#button) for details on defining a button
-conditions      | `list` [Condition](#condition)  | - | This optional list allows the switch to only accept conditions within the event data. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition
+conditions      | `list` [Condition](#condition)  | - | This optional list allows the switch to only accept these conditions within the event data. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition
 
 ### Button
 
@@ -85,7 +85,7 @@ Option          | Values       | Required | Details
 x               | `int`px      | -        | The x (left, right) position of the button from top left within the image. *not valid for shape: path
 y               | `int`px      | -        | The y (up, down) position of the button from top left within the image. *not valid for shape: path
 width           | `int`px      | -        | The width of the shape rect or circle. *not valid for shape: path
-height          | `int`px      | -        | Only valid for shape: rect. The width of the button
+height          | `int`px      | -        | Only valid for shape: rect. The height of the button
 d               | `string`     | -        | Only valid if shape: path. Using svg path format
 shape           | `rect\|circle\|path` | - | Default is rect (rectangle). 
 actions         | `list` [Action](#action) | * | Each button will have atleast one action. Each action would be the result of a tap, double tap or hold etc depending on what the switch supports.
@@ -93,7 +93,7 @@ conditions      | `list` [Condition](#condition) | - | This optional list allows
 
 ### Action
 
-An action would be the result of a push/tap, whether its held down or if it was pressed twice etc (all depending on what the device supports). An action must contain a title at minimum. Conditions should be used to differentiate the actions for any button.
+An action would be the result of a push/tap, whether its held down or if it was pressed twice etc (all depending on what the device and/or service supports). An action must contain a title at minimum. Conditions should be used to differentiate the actions for any button.
 
 Option          | Values       | Required | Details
 --              | -            | -        | -

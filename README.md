@@ -50,17 +50,46 @@ Once a blueprint file or image file has been created or edited then you will nee
 
 The following tables shows how to structure a blueprint yaml file
 
+### Root Structure
+
 Option          | Values       | Required | Details
 --              | -            | -        | -
 name            | `string`     | *        | A friendly name for the switch
 service         | `string`     | *        | The service or integration that this switch relates to (matching services will be grouped when selecting a blueprint from gui)
 event_type      | `string`     | *        | Must match the event type through the event bus triggered by the switch (Monitor events in developer tools if unsure of its value)
 identifier_key  | `string`     | *        | The key in the event data that will uniquely identify a switch, The GUI switch editor will allow entering it's value
-buttons         | `list` [Button](#button-structure) | * | You will need to define a list of buttons event if the switch has only one or multiple. See [Button](#button-structure) for details on defining a button
-conditions      | `list` [Condition](#condition-structure)  | - | This optional list allows the button to only accept conditions within the event data. All conditions must evaluate to true to be valid. See [Condition](#condition-structure) for details on defining a condition
+buttons         | `list` [Button](#button) | * | You will need to define a list of buttons event if the switch has only one or multiple. See [Button](#button) for details on defining a button
+conditions      | `list` [Condition](#condition)  | - | This optional list allows the switch to only accept conditions within the event data. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition
 
+### Button
 
-### Condition Structure
+If there are more than 1 button on the switch then you should be using a png and defining the buttons position with the x, y, width and height properties. This also can be expanded to being a circular shape or a svg path.
+
+> if you want more control on positioning and look then you can open the image up in inkscape (with matching width and height values for the viewBox) then draw the paths for each button and copy the d attribute of that path then paste in the d property for the button in yaml. You would also set the shape to path
+
+Option          | Values       | Required | Details
+--              | -            | -        | -
+x               | `int`        | -        | The x (left, right) position of the button from top left. *not valid for shape: path
+y               | `int`        | -        | The y (up, down) position of the button from top left. *not valid for shape: path
+width           | `int`        | -        | The width of the shape rect or circle. *not valid for shape: path
+height          | `int`        | -        | Only valid for shape: rect. The width of the button
+d               | `string`     | -        | Only valid if shape: path. Using svg path format
+shape           | `rect|circle|path` | - | Default is rect. 
+actions         | `list` [Action](#action) | * | Each button will have atleast one action. Each action would be the result of a tap, double tap or hold etc depending on what the switch supports.
+conditions      | `list` [Condition](#condition) | - | This optional list allows the button to only accept conditions within the event data. This can help scope down to where the button was pressed. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition. 
+
+### Action
+
+An action would be the result of a push/tap, whether its held down or if it was pressed twice etc (all depending on what the device supports). And action must contain a title at minimum. Conditions should be used to differentiate the actions for any button.
+
+Option          | Values       | Required | Details
+--              | -            | -        | -
+title           | `string`     | *        | A name to decribe the action eg tap or double tap
+conditions      | `list` [Condition](#condition) | - | This optional list allows the action to only accept conditions within the event data. This can help scope down to the kind of action if the button has multiple. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition. 
+
+### Condition
+
+Conditions evaluate the event data
 
 Option          | Values       | Required | Details
 --              | -            | -        | -

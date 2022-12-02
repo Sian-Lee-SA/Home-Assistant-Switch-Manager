@@ -5,7 +5,7 @@
 
 ## About
 
-Switch manager is a centralised component to handle button pushes for your wireless switches. This includes anything passed through the event bus. The component relies on switch blueprints which is easily made to allow GUI configuration of your switches and their button pushes. This helps remove clutter from the automations view as they will be handled independently by this component.
+Switch manager is a centralised component to handle button pushes for your wireless switches. This includes anything passed through the event bus or MQTT. The component relies on switch blueprints which is easily made to allow GUI configuration of your switches and their button pushes. This helps remove clutter from the automations view as they will be handled independently by this component.
 
 This component is still currently in ALPHA status and will most likely contain bugs yet I have done various testings.
 
@@ -33,11 +33,11 @@ Once the integration has been loaded, a folder with blueprints will be created i
 
 ## How to use
 
-In the side panel you goto Switch Manager. Next click `Add Switch` and select the switch blueprint for the service/integration it's on (If you can't find your service and switch then see Blueprints below). The same switch can be defined multiple times but not for different services as they differ their event data's from one another. 
+In the side panel you goto Switch Manager. Next click `Add Switch` and select the switch blueprint for the service/integration it's on (If you can't find your service and switch then see [Blueprints](#blueprints) below). The same switch can be defined multiple times but not for different services as they differ their event data's from one another. 
 
-Once you've selected the blueprint, you will be taken to the switch editor view. There will be an identifier input box or mqtt topic input up in the top left with a placeholder asking for the value for that key within the event data. 
+Once you've selected the blueprint, you will be taken to the switch editor view. There will be an identifier or mqtt topic input box up in the top left with a placeholder asking for the value for that key within the event data. 
 
-You can either enter the identifier manually or use the button on the right (events only, this does not support mqtt) then press a button on the switch to auto fill the value. There is a posibility that an identifier from some other device for the event to be discovered if that device sent an event before your button push. If this is the case and the button helper isn't getting the right identifier then follow the next stop to discover it manually. 
+You can either enter the identifier manually or use the button on the right (events only as this does not support mqtt) then press a button on the switch to auto fill the value. There is a posibility that an identifier from some other device for the event to be discovered if that device sent an event before your button push. If this is the case and the button helper isn't getting the right identifier then follow the next step to discover it manually. 
 
 If you do not know the event value then goto Developer Tools -> Events and start listening for events (use * if you're unsure of the event type for your switch). Once you've started listening for events, push a button on your switch then stop the listener. View the data and you will find the event related to your switch. Inside that data you will find the identifier's value. Copy this value to the identifier's textbox on the switch editor page to bind.
 
@@ -51,7 +51,7 @@ Once saved you can test to make sure all is working.
 
 ## Blueprints
 
-Blueprints are the heart of this component, once a blue print is defined for a switch then it can be reused for all switches for that specific service and type. All blueprints are yaml defined and needs to be placed inside `config/blueprints/switch_manager` path eg `config/blueprints/switch_manager/philips-hue-tap.yaml`. For a more user friendly experience and for switches with multiple buttons then a png file should be placed with the same name (case sensitive) eg a philips-hue-tap.yaml blueprint image would be `config/blueprints/switch_manager/philips-hue-tap.png`.
+Blueprints are the heart of this component, once a blueprint is defined for a switch then it can be reused for all switches for that specific service and type. All blueprints are yaml defined and needs to be placed inside the `config/blueprints/switch_manager` path eg `config/blueprints/switch_manager/philips-hue-tap.yaml`. For a more user friendly experience and for switches with multiple buttons then a png file should be placed with the same name (case sensitive) eg a philips-hue-tap.yaml blueprint image would be `config/blueprints/switch_manager/philips-hue-tap.png`.
 
 > file names should be defined as {service-name}-{switch-name-or-type}.yaml and all lower case
 
@@ -59,7 +59,7 @@ Blueprints are the heart of this component, once a blue print is defined for a s
 * Images should not exceed 500px height or 800px width
 * Images with transparent background are preferred
 
-View other blueprint files to get a grasp on how it's constructed if the following table is hard to understand.
+>> View other blueprint files to get a grasp on how it's constructed if the following table is hard to understand.
 
 Once a blueprint file or image file has been created or edited then you will need to restart Home Assistant for the changes to take effect.
 
@@ -81,31 +81,31 @@ conditions      | `list` [Condition](#condition)  | - | This optional list allow
 
 If there are more than 1 button on the switch then you should be using a png and defining the buttons position with the x, y, width and height properties. This also can be expanded to being a circular shape or a svg path.
 
-> if you want more control on positioning and look then you can open the image up in inkscape (with matching width and height values for the viewBox) then draw the paths for each button and copy the d attribute of that path then paste in the d property for the button in yaml. You would also set the shape to path
+> if you want more control on positioning and look then you can open the image up in inkscape (with matching width and height values for the viewBox) then draw the paths for each button and copy the d attribute of that path then paste in the d property for the button in yaml. You would also set the shape as path
 
 * Shape `rect` uses x, y, width, height
 * Shape `circle` use x, y, width
 * Shape `path` uses d
 
-Option          | Values       | Required | Details
---              | -            | -        | -
-x               | `int`px      | -        | The x (left, right) position of the button from top left within the image. *not valid for shape: path
-y               | `int`px      | -        | The y (up, down) position of the button from top left within the image. *not valid for shape: path
-width           | `int`px      | -        | The width of the shape rect or circle. *not valid for shape: path
-height          | `int`px      | -        | Only valid for shape: rect. The height of the button
-d               | `string`     | -        | Only valid if shape: path. Using svg path format
-shape           | `rect\|circle\|path` | - | Default is rect (rectangle). 
-actions         | `list` [Action](#action) | * | Each button will have atleast one action. Each action would be the result of a tap, double tap or hold etc depending on what the switch supports.
-conditions      | `list` [Condition](#condition) | - | This optional list allows the button to only accept conditions within the event data. This can help scope down to where the button was pressed. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition. 
+Option          | Values                        | Required | Details
+--              | -                             | -        | -
+x               | `int`px                       | -        | The x (left, right) position of the button from top left within the image. *not valid for shape: path
+y               | `int`px                       | -        | The y (up, down) position of the button from top left within the image. *not valid for shape: path
+width           | `int`px                       | -        | The width of the shape rect or circle. *not valid for shape: path
+height          | `int`px                       | -        | Only valid for shape: rect. The height of the button
+d               | `string`                      | -        | Only valid if shape: path. Using svg path format
+shape           | `rect\|circle\|path`          | -        | Default is rect (rectangle). 
+actions         | `list` [Action](#action)      | *        | Each button will have atleast one action. Each action would be the result of a tap, double tap or hold etc depending on what the switch supports.
+conditions      | `list` [Condition](#condition)| -        | This optional list allows the button to only accept conditions within the event data. This can help scope down to where the button was pressed. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition. 
 
 ### Action
 
 An action would be the result of a push/tap, whether its held down or if it was pressed twice etc (all depending on what the device and/or service supports). An action must contain a title at minimum. Conditions should be used to differentiate the actions for any button.
 
-Option          | Values       | Required | Details
---              | -            | -        | -
-title           | `string`     | *        | A name to decribe the action eg tap or double tap
-conditions      | `list` [Condition](#condition) | - | This optional list allows the action to only accept conditions within the event data. This can help scope down to the kind of action if the button has multiple. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition. 
+Option          | Values                          | Required | Details
+--              | -                               | -        | -
+title           | `string`                        | *        | A name to decribe the action eg tap or double tap
+conditions      | `list` [Condition](#condition)  | -        | This optional list allows the action to only accept conditions within the event data. This can help scope down to the kind of action if the button has multiple. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition. 
 
 ### Condition
 

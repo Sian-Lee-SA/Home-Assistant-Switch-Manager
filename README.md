@@ -7,31 +7,40 @@
 
 Switch manager is a centralised component to handle button pushes for your wireless switches. This includes anything passed through the event bus. The component relies on switch blueprints which is easily made to allow GUI configuration of your switches and their button pushes. This helps remove clutter from the automations view as they will be handled independently by this component.
 
-I am happy to accept any pull requests for anyone who wishes to submit missing switches from this repository as to help eliminate other users from having to build their own.
-
 This component is still currently in ALPHA status and will most likely contain bugs yet I have done various testings.
 
 At the moment the frontend borrows heavily from the Home Assistants frontend core modules etc which may break things in future Home Assistant updates but the backend processing should be stable and your switches should work as expected after being configured by the GUI.
 
+* I am happy to accept any pull requests for anyone who wishes to submit missing switches from this repository as to help eliminate other users from having to build their own.
+
+![Demo Switch Index](images/demo-1.png)
+![Demo Switch Editor](images/demo-2.png)
+
 ## How to install
 
 1. Download the [component](https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager/releases)
-1. Place the folder custom_components/switch_manager into the `config/custom_components/` path of your home assistant installation
+1. Place the folder `custom_components/switch_manager` into the `config/custom_components/` path of your home assistant installation
 1. Place the folder `blueprints/switch_manager` into the `config/blueprints/` path of your home assistant installation
 1. Restart Home Assistant
 1. Goto Config -> Integration then find and add Switch Manager
 
 ## How to use
 
-In the side panel you goto Switch Manager. Next click Add Switch and select the switch blueprint for the service/integration it's on. The same switch can be defined multiple times but for different services as they differ their event data's from one another. Once you've selected the blueprint, you will be taken to the switch editor view. There will be an identifier text box up in the top left with a placeholder asking for the value for that key.
+In the side panel you goto Switch Manager. Next click Add Switch and select the switch blueprint for the service/integration it's on (If you can find your service and switch then see Blueprints below). The same switch can be defined multiple times but for different services as they differ their event data's from one another. 
 
-If you do not know the events value then goto Developer Tools -> Events and start listening for events (use * if you're unsure of the event type for your switch). Once you've started listening for events, push a button on your switch then stop the listener. View the data and you will find the event related to your switch. Inside that data you will find the identifier's value. Copy this value to the identifier's textbox on the switch editor page.
+Once you've selected the blueprint, you will be taken to the switch editor view. There will be an identifier text box up in the top left with a placeholder asking for the value for that key.
 
-Depending on the blueprint and the actions that your switch supports, you can select buttons by clicking on them from the image displayed and each button can have multiple actions eg tap, double tap and hold etc. Navigation and usage should be pretty straight forward. Next you can start defining actions for each of your buttons. The process is identical to making a script in Home Assistant and should be familiar. Once saved you can test to make sure all is working.
+If you do not know the event value then goto Developer Tools -> Events and start listening for events (use * if you're unsure of the event type for your switch). Once you've started listening for events, push a button on your switch then stop the listener. View the data and you will find the event related to your switch. Inside that data you will find the identifier's value. Copy this value to the identifier's textbox on the switch editor page to bind.
+
+Depending on the blueprint and the actions that your switch supports, you can select buttons by clicking on them from the image displayed and each button can have multiple actions eg tap, double tap and hold etc. 
+
+Navigation and usage should be pretty straight forward. Next you can start defining actions for each of your buttons. The process is identical to making a script in Home Assistant and should be familiar. 
+
+Once saved you can test to make sure all is working.
 
 ## Blueprints
 
-Blueprints are the heart of this component, once a blue print is defined for a switch then it can be reused for all switches for that specific type. All blueprints are yaml defined and needs to be placed inside `config/blueprints/switch_manager` eg `config/blueprints/switch_manager/philips-hue-tap.yaml`. For a more user friendly experience and for switches with multiple buttons then a png file should be placed with the same name (case sensitive) eg a philips-hue-tap.yaml blueprints image would be `config/blueprints/switch_manager/philips-hue-tap.png`.
+Blueprints are the heart of this component, once a blue print is defined for a switch then it can be reused for all switches for that specific service and type. All blueprints are yaml defined and needs to be placed inside `config/blueprints/switch_manager` eg `config/blueprints/switch_manager/philips-hue-tap.yaml`. For a more user friendly experience and for switches with multiple buttons then a png file should be placed with the same name (case sensitive) eg a philips-hue-tap.yaml blueprint image would be `config/blueprints/switch_manager/philips-hue-tap.png`.
 
 *only PNG files are currently supported.
 

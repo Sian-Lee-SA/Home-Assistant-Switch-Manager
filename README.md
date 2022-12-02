@@ -115,6 +115,8 @@ The follow example is a blueprint for a Wallmote Quad which has 4 buttons with e
 
 Each button has a shape of a path as it was traced through inkscape, drawing the shapes whether be rect, circle or path allows GUI representation and allows to select individual buttons within the GUI switch editor.
 
+You should wrap your conditon values in qoutes as 001 equates to an int which would end up being 1 and will not match a value of 001 within the event data.
+
 ```yaml
 name: Wallmote Quad
 service: ZWave JS

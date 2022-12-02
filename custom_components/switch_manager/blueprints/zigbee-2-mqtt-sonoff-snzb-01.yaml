@@ -4,11 +4,7 @@ event_type: mqtt
 identifier_key: topic
 mqtt_topic_format: zigbee2mqtt/{device}/action
 buttons:
-  - x: 2
-    y: 2
-    width: 189
-    height: 159
-    actions:
+  - actions:
       - title: tap
         conditions:
           - key: payload

@@ -35,7 +35,7 @@ Once the integration has been loaded, a folder with blueprints will be created i
 
 In the side panel you goto Switch Manager. Next click `Add Switch` and select the switch blueprint for the service/integration it's on (If you can't find your service and switch then see [Blueprints](#blueprints) below). The same switch can be defined multiple times but not for different services as they differ their event data's from one another. 
 
-Once you've selected the blueprint, you will be taken to the switch editor view. There will be an identifier or mqtt topic input box up in the top left with a placeholder asking for the value for that key within the event data. 
+Once you've selected the blueprint, you will be taken to the switch editor view. There will be an identifier or mqtt topic input box up in the top left with a placeholder asking for the value for that key within the event data or mqtt topic. 
 
 You can either enter the identifier manually or use the button on the right (events only as this does not support mqtt) then press a button on the switch to auto fill the value. There is a posibility that an identifier from some other device for the event to be discovered if that device sent an event before your button push. If this is the case and the button helper isn't getting the right identifier then follow the next step to discover it manually. 
 
@@ -43,11 +43,11 @@ If you do not know the event value then goto Developer Tools -> Events and start
 
 Depending on the blueprint and the actions that your switch supports, you can select buttons by clicking on them from the image displayed and each button can have multiple actions eg tap, double tap and hold etc. 
 
-Navigation and usage should be pretty straight forward. Next you can start defining actions for each of your buttons. The process is identical to making a script in Home Assistant and should be familiar. 
+Navigation and usage should be pretty straight forward. Next you can start defining sequences for each of your buttons and actions. The sequence process is identical to making a script in Home Assistant and should be familiar. 
 
 Once saved you can test to make sure all is working.
 
-> Sometimes you may want certain buttons or actions handled by the devices default handler. For example, a Zigbee device may already be bound to a certain light which also imo has better response, reliability and stability. To remind you of this, you could add a stop action with a description of why the button shouldn't be changed and being handled somehwere else. Then for other actions that aren't handled else where then you can handle them with this component. It's also fine to allow an external handler to handle the button push aswell as this component so a button could turn on the light handled via Zigbee and the component could start playing music based on the same event.
+> Sometimes you may want certain buttons or actions handled by the devices default handler. For example, a Zigbee device may already be bound to a certain light which also imo has better response, reliability and stability. To remind you of this, you could add a stop action with a description of why the button shouldn't be changed and being handled somehwere else. Then for other actions that aren't handled else where then you can handle them with this component. It's also fine to allow an external handler to handle the button push aswell as this component so a button could turn on the light handled via Zigbee and the component could start playing music based on the same switch action.
 
 ## Blueprints
 
@@ -59,7 +59,7 @@ Blueprints are the heart of this component, once a blueprint is defined for a sw
 * Images should not exceed 500px height or 800px width
 * Images with transparent background are preferred
 
->> View other blueprint files to get a grasp on how it's constructed if the following table is hard to understand.
+> View other blueprint files to get a grasp on how it's constructed if the following table is hard to understand.
 
 Once a blueprint file or image file has been created or edited then you will need to restart Home Assistant for the changes to take effect.
 
@@ -72,10 +72,10 @@ Option          | Values       | Required | Details
 name            | `string`     | *        | A friendly name for the switch
 service         | `string`     | *        | The service or integration that this switch relates to (matching services will be grouped when selecting a blueprint from gui)
 event_type      | `string`     | *        | Must match the event type through the event bus triggered by the switch (Monitor `*` events in developer tools if unsure of its value). Set this to mqtt if handling a mqtt message instead of an event (see [mqtt](#mqtt))
-identifier_key  | `string`     | *        | The key in the event data that will uniquely identify a switch (user input from the switch editor will allow entering it's value). This value is ignore if using mqtt
+identifier_key  | `string`     | *        | The key in the event data that will uniquely identify a switch (user input from the switch editor will allow entering it's value). **This property is ignore if using mqtt but is still currently required
 mqtt_topic_format| `string`    | -        | If event_type is mqtt, then this will give the user an understanding of what they should set their topic as. example: zigbee2mqtt/{device}/action
 buttons         | `list` [Button](#button) | * | You will need to define a list of buttons even if the switch has only one or multiple. See [Button](#button) for details on defining a button
-conditions      | `list` [Condition](#condition)  | - | This optional list allows the switch to only accept these conditions within the event data. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition
+conditions      | `list` [Condition](#condition)  | - | This optional list allows the switch to only accept these conditions within the event data or mqtt payload. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition
 
 ### Button
 
@@ -92,11 +92,11 @@ Option          | Values                        | Required | Details
 x               | `int`px                       | -        | The x (left, right) position of the button from top left within the image. *not valid for shape: path
 y               | `int`px                       | -        | The y (up, down) position of the button from top left within the image. *not valid for shape: path
 width           | `int`px                       | -        | The width of the shape rect or circle. *not valid for shape: path
-height          | `int`px                       | -        | Only valid for shape: rect. The height of the button
+height          | `int`px                       | -        | Only valid for shape: rect. The height you want the rectangle to be
 d               | `string`                      | -        | Only valid if shape: path. Using svg path format
 shape           | `rect\|circle\|path`          | -        | Default is rect (rectangle). 
 actions         | `list` [Action](#action)      | *        | Each button will have atleast one action. Each action would be the result of a tap, double tap or hold etc depending on what the switch supports.
-conditions      | `list` [Condition](#condition)| -        | This optional list allows the button to only accept conditions within the event data. This can help scope down to where the button was pressed. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition. 
+conditions      | `list` [Condition](#condition)| -        | This optional list allows the button to only accept conditions within the event data or mqtt payload. This can help scope down to where the button was pressed. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition. 
 
 ### Action
 
@@ -105,7 +105,7 @@ An action would be the result of a push/tap, whether its held down or if it was 
 Option          | Values                          | Required | Details
 --              | -                               | -        | -
 title           | `string`                        | *        | A name to decribe the action eg tap or double tap
-conditions      | `list` [Condition](#condition)  | -        | This optional list allows the action to only accept conditions within the event data. This can help scope down to the kind of action if the button has multiple. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition. 
+conditions      | `list` [Condition](#condition)  | -        | This optional list allows the action to only accept conditions within the event data or mqtt payload. This can help scope down to the kind of action if the button has multiple. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition. 
 
 ### Condition
 
@@ -113,8 +113,8 @@ Conditions evaluate the event data. If the key doesn't exist then it also evalua
 
 Option          | Values       | Required | Details
 --              | -            | -        | -
-key             | `string`     | *        | The key to match in the event data
-value           | `string`     | *        | The value to match for the key in the event data
+key             | `string`     | *        | The key to match in the event data or mqtt payload
+value           | `string`     | *        | The value to match for the key
 
 ### MQTT
 
@@ -130,14 +130,11 @@ Otherwise you will check against the payloads keys and values
 
 ### Example
 
-The follow example is a blueprint for a Wallmote Quad which has 4 buttons with each button having 2 actions (Tap and Hold). This blueprint is also designed for the Z-Wave JS Integration and handles the event type `zwave_js_value_notification`. With in that we set the identifier key to `node_id` as this key is a way to distinguish which switch the event refers to. Further along we check from the root condition whether the event data has `property: scene` otherwise the switch has no need to further proceed nor does the component process other child conditions. We do this again for the buttons and actions to scope down whether the incoming event should be handled by the switch and its buttons or actions.
+The follow example is a blueprint for a Wallmote Quad which has 4 buttons with each button having 2 actions (tap and hold). This blueprint is also designed for the Z-Wave JS Integration and handles the event type `zwave_js_value_notification`. With in that we set the identifier key to `node_id` as this key is a way to distinguish which switch the event refers to. Further along we check from the root condition whether the event data has `property: scene` otherwise the switch has no need to further proceed nor does the component process other child conditions. We do this again for the buttons and actions to scope down whether the incoming event should be handled by the switch and its buttons or actions.
 
 Each button has a shape of a path as it was traced through inkscape, drawing the shapes whether be rect, circle or path allows GUI representation and allows to select individual buttons within the GUI switch editor.
 
 > You should wrap your conditon values in qoutes as 001 equates to an int which would end up being 1 and will not match a value of 001 within the event data.
-
-
-#### Event type
 
 ```yaml
 name: Wallmote Quad
@@ -206,7 +203,7 @@ buttons:
             value: KeyHeldDown
 ```
 
-#### MQTT Type
+#### MQTT Example
 
 ```yaml
 name: Sonoff SNZB 01
@@ -215,11 +212,7 @@ event_type: mqtt
 identifier_key: topic
 mqtt_topic_format: zigbee2mqtt/{device}/action
 buttons:
-  - x: 2
-    y: 2
-    width: 189
-    height: 159
-    actions:
+  - actions:
       - title: tap
         conditions:
           - key: payload

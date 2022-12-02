@@ -26,6 +26,7 @@ At the moment the frontend borrows heavily from the Home Assistants frontend cor
 1. Place the folder `custom_components/switch_manager` into the `config/custom_components/` path of your home assistant installation
 1. Restart Home Assistant
 1. Goto Config -> Integration then find and add Switch Manager
+[![Open your Home Assistant instance and start setting up a new integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=switch_manager)
 
 Once the integration has been loaded, a folder with blueprints will be created in your `config/blueprints/switch_manager` home assistant path. You can add/create extra blueprints to this path.
 

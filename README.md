@@ -1,5 +1,8 @@
 # Home Assistant Switch Manager [@Sian-Lee-SA](http://github.com/Sian-Lee-SA)
 
+[![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg?style=for-the-badge)](https://github.com/hacs/integration)
+
+
 ## About
 
 Switch manager is a centralised component to handle button pushes for your wireless switches. This includes anything passed through the event bus. The component relies on switch blueprints which is easily made to allow GUI configuration of your switches and their button pushes. This helps remove clutter from the automations view as they will be handled independently by this component.
@@ -18,9 +21,10 @@ At the moment the frontend borrows heavily from the Home Assistants frontend cor
 
 1. Download the [component](https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager/releases)
 1. Place the folder `custom_components/switch_manager` into the `config/custom_components/` path of your home assistant installation
-1. Place the folder `blueprints/switch_manager` into the `config/blueprints/` path of your home assistant installation
 1. Restart Home Assistant
 1. Goto Config -> Integration then find and add Switch Manager
+
+Once the integration has been loaded, a folder with blueprints will be created in your `config/blueprints/switch_manager` home assistant path. You can add/create extra blueprints to this path.
 
 ## How to use
 

@@ -1,4 +1,5 @@
 from __future__ import annotations
+import json
 
 import voluptuous as vol
 from typing import Any
@@ -12,7 +13,7 @@ from .const import (
     LOGGER
 )
 from .store import SwitchManagerStore
-from .helpers import _load_blueprints
+from .helpers import _load_blueprints, load_manifest, deploy_blueprints
 from .view import async_setup_view
 from .models import ( Blueprint, ManagedSwitchConfig )
 
@@ -81,9 +82,11 @@ async def async_setup(hass: HomeAssistant, config: Config):
     # Init hass storage
     await hass.data[DOMAIN][CONF_STORE].load()
 
+    await async_migrate(hass)
+
     _init_blueprints(hass)
     await _init_switch_configs(hass)
-
+    
     # Return boolean to indicate that initialization was successful.
     return True
 
@@ -97,6 +100,17 @@ async def async_setup_entry(hass, config_entry):
     websocket_api.async_register_command(hass, websocket_delete_config)
 
     return True
+
+async def async_migrate(hass):
+    # Opening JSON file
+    manifest = await load_manifest()
+    store = hass.data[DOMAIN][CONF_STORE]
+    if not store.compare_version( manifest['version'] ):
+        LOGGER.debug('Migrating blueprints')
+        await deploy_blueprints(hass)
+        await store.update_version( manifest['version'] )
+        return True
+    return False
 
 def _init_blueprints( hass: HomeAssistant ):
     # Ensure blueprints empty for clean state

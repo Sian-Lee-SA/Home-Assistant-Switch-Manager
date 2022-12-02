@@ -542,10 +542,10 @@ class SwitchManagerSwitchEditor extends LitElement
         }
 
         this._subscribed = await this.hass!.connection.subscribeEvents( (event) => {
-            if( 'id' in event.data )
+            if( this.blueprint.identifier_key in event.data )
             {
-                this.identifier_input.value = event.data.id;
-                this._identifierChanged()
+                this.identifier_input.value = event.data[this.blueprint.identifier_key];
+                this._identifierChanged();
                 this._subscribed();
                 this._subscribed = undefined;
             }

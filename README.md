@@ -11,7 +11,7 @@ This component is still currently in ALPHA status and will most likely contain b
 
 At the moment the frontend borrows heavily from the Home Assistants frontend core modules etc which may break things in future Home Assistant updates but the backend processing should be stable and your switches should work as expected after being configured by the GUI.
 
-> I am happy to accept any pull requests for anyone who wishes to submit missing switches from this repository as to help eliminate other users from having to build their own.
+> I am happy to accept any pull requests for anyone who wishes to submit missing blueprint for switches from this repository as to help eliminate other users from having to build their own.
 
 #### Index page
 ![Demo Switch Index](images/demo-1.png)

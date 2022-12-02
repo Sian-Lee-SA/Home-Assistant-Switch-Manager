@@ -1,0 +1,10 @@
+{
+  "domain": "switch_manager",
+  "name": "Switch Manager",
+  "version": "0.0.1",
+  "documentation": "https://github.com/Sian-Lee-SA/switch_manager",
+  "dependencies": [],
+  "requirements": [],
+  "codeowners": ["@Sian-Lee-SA"],
+  "config_flow": true
+}

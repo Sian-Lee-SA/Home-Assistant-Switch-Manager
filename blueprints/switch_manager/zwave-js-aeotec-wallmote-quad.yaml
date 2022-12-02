@@ -1,0 +1,64 @@
+name: Wallmote Quad
+service: ZWave JS
+event_type: zwave_js_value_notification
+identifier_key: node_id
+conditions:
+  - key: property
+    value: scene
+buttons:
+  - shape: path
+    d: m 45.944466,2.0341694 h 176.769524 v 219.3817306 h -219.1028571 l 0,-177.048398 a 42.333333,42.333333 135 0 1 42.3333331,-42.3333326 z
+    conditions:
+      - key: property_key
+        value: '001'
+    actions:
+      - title: tap
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+  - shape: path
+    d: m 222.78056,2.0572453 h 176.76953 a 42.333333,42.333333 45 0 1 42.33333,42.3333327 v 177.048392 h -219.10286 z
+    conditions:
+      - key: property_key
+        value: '002'
+    actions:
+      - title: tap
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+  - shape: path
+    d: m 3.4383569,221.24492 h 219.1028631 v 219.38173 h -176.76953 a 42.333333,42.333333 45 0 1 -42.3333331,-42.33333 z
+    conditions:
+      - key: property_key
+        value: '003'
+    actions:
+      - title: tap
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+  - shape: path
+    d: m 222.71397,221.28836 h 219.10286 v 177.0484 a 42.333333,42.333333 135 0 1 -42.33333,42.33333 l -176.76953,0 z
+    conditions:
+      - key: property_key
+        value: '004'
+    actions:
+      - title: tap
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown

@@ -1,0 +1,6 @@
+/homeassistant
+/homeassistant-frontend
+**/node_modules
+**/@eaDir
+**/Thumbs.db
+**/__pycache__/

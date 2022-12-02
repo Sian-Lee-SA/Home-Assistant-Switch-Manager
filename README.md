@@ -35,7 +35,9 @@ Once the integration has been loaded, a folder with blueprints will be created i
 
 In the side panel you goto Switch Manager. Next click `Add Switch` and select the switch blueprint for the service/integration it's on (If you can't find your service and switch then see Blueprints below). The same switch can be defined multiple times but not for different services as they differ their event data's from one another. 
 
-Once you've selected the blueprint, you will be taken to the switch editor view. There will be an identifier input box up in the top left with a placeholder asking for the value for that key within the event data. You can either enter this in manually or use the button on the right then press a button on the switch to auto fill the value. There is a posibility that an identifier from some other device for the event be discovered if that device sent an event before your button push. If this is the case and the button helper isn't getting the right identifier then follow the next stop to discover it manually. 
+Once you've selected the blueprint, you will be taken to the switch editor view. There will be an identifier input box up in the top left with a placeholder asking for the value for that key within the event data. 
+
+You can either enter the identifier manually or use the button on the right then press a button on the switch to auto fill the value. There is a posibility that an identifier from some other device for the event to be discovered if that device sent an event before your button push. If this is the case and the button helper isn't getting the right identifier then follow the next stop to discover it manually. 
 
 If you do not know the event value then goto Developer Tools -> Events and start listening for events (use * if you're unsure of the event type for your switch). Once you've started listening for events, push a button on your switch then stop the listener. View the data and you will find the event related to your switch. Inside that data you will find the identifier's value. Copy this value to the identifier's textbox on the switch editor page to bind.
 

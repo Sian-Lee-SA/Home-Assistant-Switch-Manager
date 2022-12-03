@@ -1,6 +1,6 @@
 from .const import DOMAIN, LOGGER
 from .helpers import format_mqtt_message
-from homeassistant.core import HomeAssistant, Context
+from homeassistant.core import HomeAssistant, Context, callback
 from homeassistant.helpers.script import Script
 from homeassistant.components.mqtt.client import async_subscribe as mqtt_subscribe
 from homeassistant.components.mqtt.models import ReceiveMessage
@@ -183,13 +183,34 @@ class ManagedSwitchConfig:
         if self._event_listener or not self.valid_blueprint or not self.enabled:
             return
 
+        @callback
+        def _handleMQTT( message: ReceiveMessage ):
+            data = format_mqtt_message(message)
+            __processIncoming( data, Context() )
+        
+        @callback
+        def _handleEvent( event ):
+            __processIncoming( event.data, event.context )
+
+        def __processIncoming( data, context ):
+            if not self.enabled or not self._check_conditons( data ):
+                return
+
+            for button in self.buttons:
+                if not button._check_conditions( data ):
+                    continue
+                for action in button.actions:
+                    if not action._check_conditions( data ):
+                        continue
+                    self._hass.async_create_task( action.run( context=context ) )
+
         if self.blueprint.event_type == 'mqtt':
             try:
-                self._event_listener = await mqtt_subscribe(self._hass, self.identifier, self._handleMQTT)
+                self._event_listener = await mqtt_subscribe(self._hass, self.identifier, _handleMQTT)
             except HomeAssistantError:
                 LOGGER.error(f"Unable to handle switch: {self.name} as MQTT is not loaded")
         else:
-            self._event_listener = self._hass.bus.async_listen(self.blueprint.event_type, self._handleEvent)
+            self._event_listener = self._hass.bus.async_listen(self.blueprint.event_type, _handleEvent)
 
     def stop(self):
         self.stop_running_scripts();
@@ -199,25 +220,8 @@ class ManagedSwitchConfig:
 
     def setEnabled( self, value: bool ):
         self.enabled = value
+    
 
-    async def _handleMQTT( self, message: ReceiveMessage ):
-        data = format_mqtt_message(message)
-        await self.__processIncoming( data, Context() )
-        
-    async def _handleEvent( self, event ):
-        await self.__processIncoming( event.data, event.context )
-
-    async def __processIncoming( self, data, context ):
-        if not self.enabled or not self._check_conditons( data ):
-            return
-
-        for button in self.buttons:
-            if not button._check_conditions( data ):
-                continue
-            for action in button.actions:
-                if not action._check_conditions( data ):
-                    continue
-                await action.run( context=context )
 
 
     def _check_conditons( self, data ) -> bool:

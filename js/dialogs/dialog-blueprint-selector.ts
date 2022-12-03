@@ -3,17 +3,19 @@ import { customElement, property, state } from "lit/decorators.js";
 import { SwitchManagerBlueprint } from "../types";
 import {
     mdiGestureTapButton,
-    mdiClose
+    mdiClose,
+    mdiHelpCircle
 } from "@mdi/js";
 import { 
     buildAssetUrl, 
     buildUrl,
     buildWSPath,
+    createCloseHeading,
     navigate, 
     showToast
 } from "../helpers";
 import { fireEvent } from "@hass/common/dom/fire_event";
-
+import { haStyleDialog, haStyleScrollbar } from "@hass/resources/styles"
 
 @customElement('switch-manager-dialog-blueprint-selector')
 class SwitchManagerBlueprintSelector extends LitElement 
@@ -46,77 +48,82 @@ class SwitchManagerBlueprintSelector extends LitElement
                 open
                 hideActions
                 @closed=${this.closeDialog}
-                .heading=${html`<div class="header_title">Select Blueprint</div>`}>
-
+                .heading="${createCloseHeading('Select Blueprint')}">
+                <p>Can't find a blueprint for your switch? create your own.
+                    <ha-icon-button .path=${mdiHelpCircle} @click=${() => window.open('https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager#blueprints', '_blank').focus()}></ha-icon-button>
+                </p>
                 <mwc-list>
                     ${this._listBlueprints()}
                 </mwc-list>
-                <!-- <div id="content">
-                    <ha-icon-button id="close-button" .path=${mdiClose}></ha-icon-button>               
-                </div> -->
-                </ha-dialog>
+            </ha-dialog>
         `;
     }
 
 
     static get styles() 
     {
-        return css`
-        :host {
-            --mdc-dialog-min-width: 500px;
-        }
+        return [haStyleDialog, haStyleScrollbar, css`
 
-        mwc-list-item {
-            height: 90px;
-            padding: 0px 20px;
-            align-items: center;
-        }
-
-        h2 {
-            padding: 0px 0px 12px;
-            margin: 0px;
-            font-weight: normal;
-            font-size: 1.3em;
-            border-bottom: 1px solid #DDD;
-            margin-bottom: 5px;
-        }
-
-        .row {
-
-            display: flex;
-            align-items: center;
-        }
-        a.blueprint-item {
-            display: flex;
-            padding: 0px 20px;
-            align-items: center;
-            -webkit-font-smoothing: antialiased;
-            font-family: var(--mdc-typography-subtitle1-font-family, var(--mdc-typography-font-family, Roboto, sans-serif));
-            font-size: var(--mdc-typography-subtitle1-font-size, 1rem);
-            font-weight: var(--mdc-typography-subtitle1-font-weight, 400);
-            letter-spacing: var(--mdc-typography-subtitle1-letter-spacing, 0.009375em);
-            color: var(--mdc-theme-text-primary-on-background, rgba(0, 0, 0, 0.87));
-            text-decoration: none;
-        }
-        .image {
-            height: 90px;
-            width: 90px;
-            text-align: center;
-        }
-        .image img {
-            max-width: 100%;
-            max-height: 100%;
-        }
-        .image ha-svg-icon {
-            fill: var(--primary-color);
-            margin-top: 5px;
-            width: 85%;
-            height: 85%;
-        }
-        .name {
-            padding-left: 1em;
-        }
-        `;
+            mwc-list-item {
+                min-width: 470px;
+                height: 90px;
+                padding: 0px 20px;
+                align-items: center;
+            }
+            h2 {
+                padding: 0px 0px 12px;
+                margin: 15px 0px 0px;
+                font-weight: normal;
+                font-size: 1.3em;
+                border-bottom: 1px solid #DDD;
+            }
+            h2:first-child {
+                margin: 0;
+            }
+            p {
+                margin: -35px 0 0 0;
+                font-size: 0.8em;
+            }
+            ha-icon-button {
+                vertical-align: middle;
+            }
+            .row {
+                display: flex;
+                align-items: center;
+            }
+            a.blueprint-item {
+                display: flex;
+                padding: 0px 20px;
+                align-items: center;
+                -webkit-font-smoothing: antialiased;
+                font-family: var(--mdc-typography-subtitle1-font-family, var(--mdc-typography-font-family, Roboto, sans-serif));
+                font-size: var(--mdc-typography-subtitle1-font-size, 1rem);
+                font-weight: var(--mdc-typography-subtitle1-font-weight, 400);
+                letter-spacing: var(--mdc-typography-subtitle1-letter-spacing, 0.009375em);
+                color: var(--mdc-theme-text-primary-on-background, rgba(0, 0, 0, 0.87));
+                text-decoration: none;
+            }
+            .image {
+                height: 90px;
+                width: 90px;
+                text-align: center;
+                padding: 4px;
+                box-sizing: border-box;
+            }
+            .image img {
+                max-width: 100%;
+                max-height: 100%;
+            }
+            .image ha-svg-icon {
+                fill: var(--primary-color);
+                margin-top: 5px;
+                width: 85%;
+                height: 85%;
+            }
+            .name {
+                padding-left: 1em;
+            }
+        `];
     }
 
 

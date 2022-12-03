@@ -8,10 +8,12 @@ import { loadComponents } from "./helpers";
 @customElement('switch-manager-panel')
 class SwitchManagerPanel extends LitElement 
 {
-    @property({ attribute: false }) hass!: any;
+    @property() hass!: any;
     @property() narrow;
     @property() panel;
     @state() params = {};
+
+    @state() component_name = "custom";
 
     private _route;
     get route() { return this._route };

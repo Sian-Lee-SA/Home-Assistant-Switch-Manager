@@ -13,7 +13,7 @@ import {
     mdiEarHearing
 } from "@mdi/js";
 import { MODES, SwitchManagerBlueprint, SwitchManagerConfig } from "./types"
-import { haStyle, haStyleScrollbar } from "@hass/resources/styles"
+import { haStyle } from "@hass/resources/styles"
 import { 
     buildAssetUrl, 
     buildUrl, 
@@ -254,20 +254,22 @@ class SwitchManagerSwitchEditor extends LitElement
             }
             h3, #identifier {
                 padding-left: 25px;
+                position: relative;
             }
             #identifier-input {
                 width: 300px;
             }
             #identifier ha-icon-button {
                 vertical-align: middle;
-                background: var(--material-secondary-text-color);
+                background: var(--mdc-text-field-fill-color);
                 border-radius: 50%;
-                color: var(--primary-background-color);
+                color: var(--mdc-text-field-ink-color);
                 margn-top: -10px;
                 margin-top: -14px;
                 margin-left: -34px;
                 position: relative;
                 --mdc-icon-button-size: 54px;
+                box-shadow: -5px 1px 8px -6px;
             }
             #identifier ha-icon-button[listening] {
                 animation: 1s infinite alternate pulse;
@@ -326,6 +328,9 @@ class SwitchManagerSwitchEditor extends LitElement
                 fill: var(--primary-color);
                 width: 260px;
                 height: 260px;
+            }
+            #switch-image svg image {
+                filter: drop-shadow(0px 0px 8px #00000033);
             }
             #switch-image svg .button {
                 fill: #00000000;

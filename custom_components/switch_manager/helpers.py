@@ -25,7 +25,6 @@ async def deploy_blueprints( hass ):
     files = os.listdir(component_blueprints_path)
     for file in files:
         if os.path.isfile( os.path.join( component_blueprints_path, file )):
-            LOGGER.error( f'copying {file}')
             shutil.copy( 
                 os.path.join( component_blueprints_path, file ),
                 dest_folder

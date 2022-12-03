@@ -6,10 +6,10 @@ conditions:
   - key: property
     value: scene
 buttons:
-  - x: 0
-    y: 0
-    width: 200
-    height: 200
+  - x: 106
+    y: 113
+    width: 145
+    height: 140
     conditions:
       - key: property_key
         value: '001'
@@ -26,10 +26,10 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
-  - x: 0
-    y: 0
-    width: 200
-    height: 200
+  - x: 250
+    y: 113
+    width: 145
+    height: 140
     conditions:
       - key: property_key
         value: '001'
@@ -46,10 +46,10 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
-  - x: 0
-    y: 0
-    width: 200
-    height: 200
+  - x: 393
+    y: 113
+    width: 145
+    height: 140
     conditions:
       - key: property_key
         value: '001'
@@ -66,10 +66,10 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
-  - x: 0
-    y: 0
-    width: 200
-    height: 200
+  - x: 538
+    y: 113
+    width: 145
+    height: 140
     conditions:
       - key: property_key
         value: '001'
@@ -86,10 +86,10 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
-  - x: 0
-    y: 0
-    width: 200
-    height: 200
+  - x: 106
+    y: 255
+    width: 145
+    height: 141
     conditions:
       - key: property_key
         value: '001'
@@ -106,10 +106,10 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
-  - x: 0
-    y: 0
-    width: 200
-    height: 200
+  - x: 250
+    y: 255
+    width: 145
+    height: 141
     conditions:
       - key: property_key
         value: '001'
@@ -126,10 +126,10 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
-  - x: 0
-    y: 0
-    width: 200
-    height: 200
+  - x: 393
+    y: 255
+    width: 145
+    height: 141
     conditions:
       - key: property_key
         value: '001'
@@ -146,10 +146,10 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
-  - x: 0
-    y: 0
-    width: 200
-    height: 200
+  - x: 538
+    y: 255
+    width: 145
+    height: 141
     conditions:
       - key: property_key
         value: '001'

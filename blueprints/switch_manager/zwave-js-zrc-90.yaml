@@ -1,0 +1,168 @@
+name: Remotec Scene Master
+service: ZWave JS
+event_type: zwave_js_value_notification
+identifier_key: node_id
+conditions:
+  - key: property
+    value: scene
+buttons:
+  - x: 2
+    y: 2
+    width: 0
+    height: 159
+    conditions:
+      - key: property_key
+        value: '001'
+    actions:
+      - title: tap
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: double tap
+        conditions:
+          - key: value
+            value: KeyPressed2x
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+  - x: 2
+    y: 2
+    width: 200
+    height: 159
+    conditions:
+      - key: property_key
+        value: '001'
+    actions:
+      - title: tap
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: double tap
+        conditions:
+          - key: value
+            value: KeyPressed2x
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+  - x: 2
+    y: 2
+    width: 200
+    height: 159
+    conditions:
+      - key: property_key
+        value: '001'
+    actions:
+      - title: tap
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: double tap
+        conditions:
+          - key: value
+            value: KeyPressed2x
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+  - x: 2
+    y: 2
+    width: 189
+    height: 159
+    conditions:
+      - key: property_key
+        value: '001'
+    actions:
+      - title: tap
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: double tap
+        conditions:
+          - key: value
+            value: KeyPressed2x
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+  - x: 2
+    y: 2
+    width: 189
+    height: 159
+    conditions:
+      - key: property_key
+        value: '001'
+    actions:
+      - title: tap
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: double tap
+        conditions:
+          - key: value
+            value: KeyPressed2x
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+  - x: 2
+    y: 2
+    width: 189
+    height: 159
+    conditions:
+      - key: property_key
+        value: '001'
+    actions:
+      - title: tap
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: double tap
+        conditions:
+          - key: value
+            value: KeyPressed2x
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+  - x: 2
+    y: 2
+    width: 189
+    height: 159
+    conditions:
+      - key: property_key
+        value: '001'
+    actions:
+      - title: tap
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: double tap
+        conditions:
+          - key: value
+            value: KeyPressed2x
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+  - x: 2
+    y: 2
+    width: 189
+    height: 159
+    conditions:
+      - key: property_key
+        value: '001'
+    actions:
+      - title: tap
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: double tap
+        conditions:
+          - key: value
+            value: KeyPressed2x
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown

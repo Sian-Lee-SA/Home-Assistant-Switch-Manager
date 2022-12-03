@@ -1,0 +1,19 @@
+name: Sonoff SNZB 01
+service: Zigbee2MQTT
+event_type: mqtt
+identifier_key: topic
+mqtt_topic_format: zigbee2mqtt/{device}/action
+buttons:
+  - actions:
+      - title: tap
+        conditions:
+          - key: payload
+            value: single
+      - title: double tap
+        conditions:
+          - key: payload
+            value: double
+      - title: hold
+        conditions:
+          - key: payload
+            value: long

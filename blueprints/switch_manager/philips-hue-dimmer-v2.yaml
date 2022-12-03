@@ -1,0 +1,69 @@
+name: Philips Hue Dimmer
+service: Philips Hue
+event_type: hue_event
+identifier_key: id
+buttons:
+  - x: 2
+    y: 2
+    width: 189
+    height: 159
+    conditions:
+      - key: subtype
+        value: 1
+    actions:
+      - title: tap
+        conditions:
+          - key: type
+            value: short_release
+      - title: hold
+        conditions:
+          - key: type
+            value: repeat
+  - x: 2
+    y: 161
+    width: 189
+    height: 90
+    conditions:
+      - key: subtype
+        value: 2
+    actions:
+      - title: tap
+        conditions:
+          - key: type
+            value: short_release
+      - title: hold
+        conditions:
+          - key: type
+            value: repeat
+  - x: 2
+    y: 251
+    width: 189
+    height: 90
+    conditions:
+      - key: subtype
+        value: 3
+    actions:
+      - title: tap
+        conditions:
+          - key: type
+            value: short_release
+      - title: hold
+        conditions:
+          - key: type
+            value: repeat
+  - x: 2
+    y: 341
+    width: 189
+    height: 159
+    conditions:
+      - key: subtype
+        value: 4
+    actions:
+      - title: tap
+        conditions:
+          - key: type
+            value: short_release
+      - title: hold
+        conditions:
+          - key: type
+            value: repeat

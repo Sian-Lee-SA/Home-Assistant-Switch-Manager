@@ -6,30 +6,10 @@ conditions:
   - key: property
     value: scene
 buttons:
-  - x: 2
-    y: 2
-    width: 0
-    height: 159
-    conditions:
-      - key: property_key
-        value: '001'
-    actions:
-      - title: tap
-        conditions:
-          - key: value
-            value: KeyPressed
-      - title: double tap
-        conditions:
-          - key: value
-            value: KeyPressed2x
-      - title: hold
-        conditions:
-          - key: value
-            value: KeyHeldDown
-  - x: 2
-    y: 2
+  - x: 0
+    y: 0
     width: 200
-    height: 159
+    height: 200
     conditions:
       - key: property_key
         value: '001'
@@ -46,10 +26,10 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
-  - x: 2
-    y: 2
+  - x: 0
+    y: 0
     width: 200
-    height: 159
+    height: 200
     conditions:
       - key: property_key
         value: '001'
@@ -66,10 +46,10 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
-  - x: 2
-    y: 2
-    width: 189
-    height: 159
+  - x: 0
+    y: 0
+    width: 200
+    height: 200
     conditions:
       - key: property_key
         value: '001'
@@ -86,10 +66,10 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
-  - x: 2
-    y: 2
-    width: 189
-    height: 159
+  - x: 0
+    y: 0
+    width: 200
+    height: 200
     conditions:
       - key: property_key
         value: '001'
@@ -106,10 +86,10 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
-  - x: 2
-    y: 2
-    width: 189
-    height: 159
+  - x: 0
+    y: 0
+    width: 200
+    height: 200
     conditions:
       - key: property_key
         value: '001'
@@ -126,10 +106,10 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
-  - x: 2
-    y: 2
-    width: 189
-    height: 159
+  - x: 0
+    y: 0
+    width: 200
+    height: 200
     conditions:
       - key: property_key
         value: '001'
@@ -146,10 +126,30 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
-  - x: 2
-    y: 2
-    width: 189
-    height: 159
+  - x: 0
+    y: 0
+    width: 200
+    height: 200
+    conditions:
+      - key: property_key
+        value: '001'
+    actions:
+      - title: tap
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: double tap
+        conditions:
+          - key: value
+            value: KeyPressed2x
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+  - x: 0
+    y: 0
+    width: 200
+    height: 200
     conditions:
       - key: property_key
         value: '001'

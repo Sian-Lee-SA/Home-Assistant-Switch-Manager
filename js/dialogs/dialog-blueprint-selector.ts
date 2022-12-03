@@ -109,6 +109,9 @@ class SwitchManagerBlueprintSelector extends LitElement
                 text-align: center;
                 padding: 4px;
                 box-sizing: border-box;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
             .image img {
                 max-width: 100%;

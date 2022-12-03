@@ -83,7 +83,7 @@ async def async_setup( hass: HomeAssistant, config: Config ):
     await hass.data[DOMAIN][CONF_STORE].load()
 
     await async_migrate(hass)
-
+    await deploy_blueprints( hass )
     _init_blueprints(hass)
     await _init_switch_configs(hass)
 

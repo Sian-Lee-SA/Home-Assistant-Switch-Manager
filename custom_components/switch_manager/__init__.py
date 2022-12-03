@@ -52,7 +52,7 @@ BLUEPRINT_SCHEMA = vol.Schema({
 
 SWITCH_MANAGER_CONFIG_ACTION_SCHEMA = vol.Schema({
     vol.Required('mode', default=DEFAULT_SCRIPT_MODE): vol.In(SCRIPT_MODE_CHOICES),
-    vol.Required('sequence', default=[]): cv.SCRIPT_SCHEMA
+    vol.Required('sequence', default=[]): cv.ensure_list # cv.SCRIPT_SCHEMA: This was causing problems and not parsing json format when action delay etc was used
 })
 SWITCH_MANAGER_CONFIG_BUTTON_SCHEMA = vol.Schema({
     vol.Required('actions'): vol.All(cv.ensure_list, [SWITCH_MANAGER_CONFIG_ACTION_SCHEMA])

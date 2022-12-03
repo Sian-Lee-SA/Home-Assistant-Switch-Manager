@@ -47,7 +47,7 @@ class ManagedSwitchConfigButtonAction:
         if self.active:
             self.script = Script(
                     hass=self._hass, 
-                    sequence=self.sequence,
+                    sequence=cv.SCRIPT_SCHEMA(self.sequence),
                     name=f"{DOMAIN}_{switch_id}_{button_index}_{index}",
                     domain=DOMAIN,
                     logger=LOGGER,

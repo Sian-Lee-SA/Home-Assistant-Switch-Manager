@@ -1,4 +1,4 @@
-name: Remotec Scene Master
+name: Remotec Scene Master ZRC-90
 service: ZWave JS
 event_type: zwave_js_value_notification
 identifier_key: node_id
@@ -32,7 +32,7 @@ buttons:
     height: 140
     conditions:
       - key: property_key
-        value: '001'
+        value: '002'
     actions:
       - title: tap
         conditions:
@@ -52,7 +52,7 @@ buttons:
     height: 140
     conditions:
       - key: property_key
-        value: '001'
+        value: '003'
     actions:
       - title: tap
         conditions:
@@ -72,7 +72,7 @@ buttons:
     height: 140
     conditions:
       - key: property_key
-        value: '001'
+        value: '004'
     actions:
       - title: tap
         conditions:
@@ -92,7 +92,7 @@ buttons:
     height: 141
     conditions:
       - key: property_key
-        value: '001'
+        value: '005'
     actions:
       - title: tap
         conditions:
@@ -112,7 +112,7 @@ buttons:
     height: 141
     conditions:
       - key: property_key
-        value: '001'
+        value: '006'
     actions:
       - title: tap
         conditions:
@@ -132,7 +132,7 @@ buttons:
     height: 141
     conditions:
       - key: property_key
-        value: '001'
+        value: '007'
     actions:
       - title: tap
         conditions:
@@ -152,7 +152,7 @@ buttons:
     height: 141
     conditions:
       - key: property_key
-        value: '001'
+        value: '008'
     actions:
       - title: tap
         conditions:

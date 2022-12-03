@@ -134,7 +134,7 @@ class ManagedSwitchConfig:
         self.id = str( _id ) # Ensute id is a string for future proofing
         self.name = config.get('name')        
         self.identifier = config.get('identifier')
-        self.blueprint: Blueprint|str
+        self.blueprint: Blueprint
         self.valid_blueprint: bool
         self.buttons: list[ManagedSwitchConfigButton] = []
         self.enabled: bool = config.get('enabled', True)
@@ -149,7 +149,7 @@ class ManagedSwitchConfig:
         
         self.buildButtons( config.get('buttons') )
         
-    def setBlueprint( self, blueprint: Blueprint|str, buttons_config = None ):
+    def setBlueprint( self, blueprint: Blueprint, buttons_config = None ):
         self.blueprint = blueprint
         self.valid_blueprint = type(blueprint) is Blueprint
         if not self.valid_blueprint:

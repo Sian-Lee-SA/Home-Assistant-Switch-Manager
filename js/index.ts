@@ -46,7 +46,7 @@ class SwitchManagerIndex extends LitElement
                     if( ! data.switch.blueprint.has_image )
                         return html`<ha-svg-icon style="fill: var(--primary-color); margin: 0 auto;display:block;height: 85%;
                         width: 85%;" .path=${mdiGestureTapButton}></ha-svg-icon>`
-                    return html`<img style="max-height: 48px;display: block;margin:0 auto;" src="${buildAssetUrl(`${blueprint_id}.png`)}" />`;
+                    return html`<img style="max-width: 100%;max-height: 48px;display: block;margin:0 auto;" src="${buildAssetUrl(`${blueprint_id}.png`)}" />`;
                 }                
             },
             name: {

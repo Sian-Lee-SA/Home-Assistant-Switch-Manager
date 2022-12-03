@@ -1,26 +1,33 @@
 import { html, css, LitElement } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import { SwitchManagerBlueprintButtonAction } from "./types";
+import { SwitchManagerBlueprintButtonAction, SwitchManagerConfigButtonAction } from "./types";
 
 @customElement('switch-manager-button-actions')
 class SwitchManagerButtonActions extends LitElement 
 {
     @property() hass!: any;
-    @state() actions: SwitchManagerBlueprintButtonAction[];
+    @property() blueprint_actions: SwitchManagerBlueprintButtonAction[];
+    @property() config_actions: SwitchManagerConfigButtonAction[];
     @property({reflect: true}) index = 0;
 
     render() 
     {
-        if( !this.actions || this.actions.length == 1 )
-            return
+        if( !this.blueprint_actions || this.blueprint_actions.length == 1 )
+            return '';
         return html`
             <div id="tabbar" .hass=${this.hass}>
                 <paper-tabs selected="${this.index}" @iron-select=${this._tab_changed}>
-                    ${this.actions.map(i => html`<paper-tab>${i.title}</paper-tab>`)}
+                    ${this.blueprint_actions.map((a, i) => 
+                        html`
+                        <paper-tab>${a.title}
+                            ${this.config_actions[i].sequence.length ? html`<ha-chip>${this.config_actions[i].sequence.length}</ha-chip>`:''}
+                        </paper-tab>`)}
                 </paper-tabs>
             </div> 
         `;
     }
+
+    _render
 
     static get styles() {
         return css`
@@ -43,6 +50,11 @@ class SwitchManagerButtonActions extends LitElement
             paper-tab.iron-selected {
                 border-bottom: 2px solid var(--primary-color);
                 color: var(--primary-color);
+            }
+            ha-chip {
+                position: absolute;
+                top: 0;
+                right: -32px;
             }
         `;
     }

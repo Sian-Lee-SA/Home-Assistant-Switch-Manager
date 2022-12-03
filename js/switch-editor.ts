@@ -12,7 +12,7 @@ import {
     mdiGestureTapButton,
     mdiEarHearing
 } from "@mdi/js";
-import { MODES, SwitchManagerBlueprint, SwitchManagerConfig } from "./types"
+import { MODES, SwitchManagerBlueprint, SwitchManagerConfig, SwitchManagerConfigButton } from "./types"
 import { haStyle } from "@hass/resources/styles"
 import { 
     buildAssetUrl, 
@@ -158,7 +158,8 @@ class SwitchManagerSwitchEditor extends LitElement
                     ${this.config?.valid_blueprint ? html`
                     <switch-manager-button-actions
                         .hass=${this.hass}
-                        .actions=${this.blueprint?.buttons[this.button_index]?.actions}
+                        .blueprint_actions=${this.blueprint?.buttons[this.button_index]?.actions}
+                        .config_actions=${this.config.buttons[this.button_index].actions}
                         .index=${this.action_index}
                         @changed=${this._actionChanged}>
                     </switch-manager-button-actions>`: ''}
@@ -338,6 +339,9 @@ class SwitchManagerSwitchEditor extends LitElement
                 stroke-width: 3;
                 cursor: pointer;
             }
+            #switch-image svg .button[empty] {
+                fill: #cfcfcf66;
+            }
             #switch-image svg .button[selected] {
                 fill: #6bd3ff75;
                 stroke: #0082e9;
@@ -456,6 +460,10 @@ class SwitchManagerSwitchEditor extends LitElement
                 if( this.button_index == index ) {
                     svgshape.setAttribute('selected', '');
                 }
+                if( ! this._buttonTotalSequence( this.config.buttons[index] ) )
+                {
+                    svgshape.setAttribute('empty', '');
+                }
                 svgshape.addEventListener('click', ev => {
                     ev.preventDefault();
                     ev.stopPropagation();
@@ -464,6 +472,15 @@ class SwitchManagerSwitchEditor extends LitElement
                 this.svg.append(svgshape);
             });
         }
+    }
+
+    private _buttonTotalSequence( button: SwitchManagerConfigButton )
+    {
+        let total = 0;
+        button.actions.forEach(a => {
+            total += a.sequence.length;
+        })
+        return total;
     }
 
     private _validate(): boolean
@@ -532,6 +549,7 @@ class SwitchManagerSwitchEditor extends LitElement
 
     private _configSequenceChanged(ev: CustomEvent) 
     {        
+        this.requestUpdate('config');
         this._updateSequence(ev.detail.value);
         this._errors = undefined;
         this._dirty = true;
@@ -598,6 +616,14 @@ class SwitchManagerSwitchEditor extends LitElement
             this.config.buttons[this.button_index].actions[this.action_index].sequence = sequence;
         }
         this.sequence = this.config.buttons[this.button_index].actions[this.action_index].sequence;
+
+        if( ! this._buttonTotalSequence( this.config.buttons[this.button_index] ) )
+        {
+            this.svg?.querySelector('[selected]')?.setAttribute('empty', '');
+        } else {
+            this.svg?.querySelector('[selected]')?.removeAttribute('empty');
+        }
+
         this.requestUpdate('config');
     }
 

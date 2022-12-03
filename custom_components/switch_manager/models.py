@@ -63,13 +63,13 @@ class ManagedSwitchConfigButtonAction:
                 return False
         return True
 
-    async def run( self, context ):
+    async def run( self, data, context ):
         if not self.script:
-            LOGGER.debug(f'No script assigned for switch:{self.switch_id} button:{self.button_index} action:{self.index}')
+            LOGGER.debug(f'No sequence assigned for switch:{self.switch_id} button:{self.button_index} action:{self.index}')
             return
         
-        LOGGER.debug(f"Running script for switch:{self.switch_id} button:{self.button_index} action:{self.index} ")
-        self._hass.async_create_task( self.script.async_run(context=context) )
+        LOGGER.debug(f"Running sequence for switch:{self.switch_id} button:{self.button_index} action:{self.index} ")
+        self._hass.async_create_task( self.script.async_run( run_variables=data, context=context) )
 
     # home assistant json
     def as_dict(self):
@@ -202,7 +202,7 @@ class ManagedSwitchConfig:
                 for action in button.actions:
                     if not action._check_conditions( data ):
                         continue
-                    self._hass.async_create_task( action.run( context=context ) )
+                    self._hass.async_create_task( action.run( data=data, context=context ) )
 
         if self.blueprint.event_type == 'mqtt':
             try:

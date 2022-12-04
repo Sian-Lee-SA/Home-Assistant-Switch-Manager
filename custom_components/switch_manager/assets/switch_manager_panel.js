@@ -1,10 +1,1011 @@
-function t(t,e,i,s){var o,n=arguments.length,r=n<3?e:null===s?s=Object.getOwnPropertyDescriptor(e,i):s;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)r=Reflect.decorate(t,e,i,s);else for(var a=t.length-1;a>=0;a--)(o=t[a])&&(r=(n<3?o(r):n>3?o(e,i,r):o(e,i))||r);return n>3&&r&&Object.defineProperty(e,i,r),r}const e=t=>e=>"function"==typeof e?((t,e)=>(customElements.define(t,e),e))(t,e):((t,e)=>{const{kind:i,elements:s}=e;return{kind:i,elements:s,finisher(e){customElements.define(t,e)}}})(t,e),i=(t,e)=>"method"===e.kind&&e.descriptor&&!("value"in e.descriptor)?{...e,finisher(i){i.createProperty(e.key,t)}}:{kind:"field",key:Symbol(),placement:"own",descriptor:{},originalKey:e.key,initializer(){"function"==typeof e.initializer&&(this[e.key]=e.initializer.call(this))},finisher(i){i.createProperty(e.key,t)}};function s(t){return(e,s)=>void 0!==s?((t,e,i)=>{e.constructor.createProperty(i,t)})(t,e,s):i(t,e)}function o(t){return s({...t,state:!0})}function n(t,e){return(({finisher:t,descriptor:e})=>(i,s)=>{var o;if(void 0===s){const s=null!==(o=i.originalKey)&&void 0!==o?o:i.key,n=null!=e?{kind:"method",placement:"prototype",key:s,descriptor:e(i.key)}:{...i,key:s};return null!=t&&(n.finisher=function(e){t(e,s)}),n}{const o=i.constructor;void 0!==e&&Object.defineProperty(i,s,e(s)),null==t||t(o,s)}})({descriptor:i=>{const s={get(){var e,i;return null!==(i=null===(e=this.renderRoot)||void 0===e?void 0:e.querySelector(t))&&void 0!==i?i:null},enumerable:!0,configurable:!0};if(e){const e="symbol"==typeof i?Symbol():"__"+i;s.get=function(){var i,s;return void 0===this[e]&&(this[e]=null!==(s=null===(i=this.renderRoot)||void 0===i?void 0:i.querySelector(t))&&void 0!==s?s:null),this[e]}}return s}})}var r;null===(r=window.HTMLSlotElement)||void 0===r||r.prototype.assignedElements;const a=window,l=a.ShadowRoot&&(void 0===a.ShadyCSS||a.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,h=Symbol(),d=new WeakMap;class c{constructor(t,e,i){if(this._$cssResult$=!0,i!==h)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=t,this.t=e}get styleSheet(){let t=this.o;const e=this.t;if(l&&void 0===t){const i=void 0!==e&&1===e.length;i&&(t=d.get(e)),void 0===t&&((this.o=t=new CSSStyleSheet).replaceSync(this.cssText),i&&d.set(e,t))}return t}toString(){return this.cssText}}const p=(t,...e)=>{const i=1===t.length?t[0]:e.reduce(((e,i,s)=>e+(t=>{if(!0===t._$cssResult$)return t.cssText;if("number"==typeof t)return t;throw Error("Value passed to 'css' function must be a 'css' function result: "+t+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(i)+t[s+1]),t[0]);return new c(i,t,h)},u=l?t=>t:t=>t instanceof CSSStyleSheet?(t=>{let e="";for(const i of t.cssRules)e+=i.cssText;return(t=>new c("string"==typeof t?t:t+"",void 0,h))(e)})(t):t;var v;const g=window,m=g.trustedTypes,_=m?m.emptyScript:"",f=g.reactiveElementPolyfillSupport,b={toAttribute(t,e){switch(e){case Boolean:t=t?_:null;break;case Object:case Array:t=null==t?t:JSON.stringify(t)}return t},fromAttribute(t,e){let i=t;switch(e){case Boolean:i=null!==t;break;case Number:i=null===t?null:Number(t);break;case Object:case Array:try{i=JSON.parse(t)}catch(t){i=null}}return i}},$=(t,e)=>e!==t&&(e==e||t==t),y={attribute:!0,type:String,converter:b,reflect:!1,hasChanged:$};class w extends HTMLElement{constructor(){super(),this._$Ei=new Map,this.isUpdatePending=!1,this.hasUpdated=!1,this._$El=null,this.u()}static addInitializer(t){var e;this.finalize(),(null!==(e=this.h)&&void 0!==e?e:this.h=[]).push(t)}static get observedAttributes(){this.finalize();const t=[];return this.elementProperties.forEach(((e,i)=>{const s=this._$Ep(i,e);void 0!==s&&(this._$Ev.set(s,i),t.push(s))})),t}static createProperty(t,e=y){if(e.state&&(e.attribute=!1),this.finalize(),this.elementProperties.set(t,e),!e.noAccessor&&!this.prototype.hasOwnProperty(t)){const i="symbol"==typeof t?Symbol():"__"+t,s=this.getPropertyDescriptor(t,i,e);void 0!==s&&Object.defineProperty(this.prototype,t,s)}}static getPropertyDescriptor(t,e,i){return{get(){return this[e]},set(s){const o=this[t];this[e]=s,this.requestUpdate(t,o,i)},configurable:!0,enumerable:!0}}static getPropertyOptions(t){return this.elementProperties.get(t)||y}static finalize(){if(this.hasOwnProperty("finalized"))return!1;this.finalized=!0;const t=Object.getPrototypeOf(this);if(t.finalize(),void 0!==t.h&&(this.h=[...t.h]),this.elementProperties=new Map(t.elementProperties),this._$Ev=new Map,this.hasOwnProperty("properties")){const t=this.properties,e=[...Object.getOwnPropertyNames(t),...Object.getOwnPropertySymbols(t)];for(const i of e)this.createProperty(i,t[i])}return this.elementStyles=this.finalizeStyles(this.styles),!0}static finalizeStyles(t){const e=[];if(Array.isArray(t)){const i=new Set(t.flat(1/0).reverse());for(const t of i)e.unshift(u(t))}else void 0!==t&&e.push(u(t));return e}static _$Ep(t,e){const i=e.attribute;return!1===i?void 0:"string"==typeof i?i:"string"==typeof t?t.toLowerCase():void 0}u(){var t;this._$E_=new Promise((t=>this.enableUpdating=t)),this._$AL=new Map,this._$Eg(),this.requestUpdate(),null===(t=this.constructor.h)||void 0===t||t.forEach((t=>t(this)))}addController(t){var e,i;(null!==(e=this._$ES)&&void 0!==e?e:this._$ES=[]).push(t),void 0!==this.renderRoot&&this.isConnected&&(null===(i=t.hostConnected)||void 0===i||i.call(t))}removeController(t){var e;null===(e=this._$ES)||void 0===e||e.splice(this._$ES.indexOf(t)>>>0,1)}_$Eg(){this.constructor.elementProperties.forEach(((t,e)=>{this.hasOwnProperty(e)&&(this._$Ei.set(e,this[e]),delete this[e])}))}createRenderRoot(){var t;const e=null!==(t=this.shadowRoot)&&void 0!==t?t:this.attachShadow(this.constructor.shadowRootOptions);return((t,e)=>{l?t.adoptedStyleSheets=e.map((t=>t instanceof CSSStyleSheet?t:t.styleSheet)):e.forEach((e=>{const i=document.createElement("style"),s=a.litNonce;void 0!==s&&i.setAttribute("nonce",s),i.textContent=e.cssText,t.appendChild(i)}))})(e,this.constructor.elementStyles),e}connectedCallback(){var t;void 0===this.renderRoot&&(this.renderRoot=this.createRenderRoot()),this.enableUpdating(!0),null===(t=this._$ES)||void 0===t||t.forEach((t=>{var e;return null===(e=t.hostConnected)||void 0===e?void 0:e.call(t)}))}enableUpdating(t){}disconnectedCallback(){var t;null===(t=this._$ES)||void 0===t||t.forEach((t=>{var e;return null===(e=t.hostDisconnected)||void 0===e?void 0:e.call(t)}))}attributeChangedCallback(t,e,i){this._$AK(t,i)}_$EO(t,e,i=y){var s;const o=this.constructor._$Ep(t,i);if(void 0!==o&&!0===i.reflect){const n=(void 0!==(null===(s=i.converter)||void 0===s?void 0:s.toAttribute)?i.converter:b).toAttribute(e,i.type);this._$El=t,null==n?this.removeAttribute(o):this.setAttribute(o,n),this._$El=null}}_$AK(t,e){var i;const s=this.constructor,o=s._$Ev.get(t);if(void 0!==o&&this._$El!==o){const t=s.getPropertyOptions(o),n="function"==typeof t.converter?{fromAttribute:t.converter}:void 0!==(null===(i=t.converter)||void 0===i?void 0:i.fromAttribute)?t.converter:b;this._$El=o,this[o]=n.fromAttribute(e,t.type),this._$El=null}}requestUpdate(t,e,i){let s=!0;void 0!==t&&(((i=i||this.constructor.getPropertyOptions(t)).hasChanged||$)(this[t],e)?(this._$AL.has(t)||this._$AL.set(t,e),!0===i.reflect&&this._$El!==t&&(void 0===this._$EC&&(this._$EC=new Map),this._$EC.set(t,i))):s=!1),!this.isUpdatePending&&s&&(this._$E_=this._$Ej())}async _$Ej(){this.isUpdatePending=!0;try{await this._$E_}catch(t){Promise.reject(t)}const t=this.scheduleUpdate();return null!=t&&await t,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){var t;if(!this.isUpdatePending)return;this.hasUpdated,this._$Ei&&(this._$Ei.forEach(((t,e)=>this[e]=t)),this._$Ei=void 0);let e=!1;const i=this._$AL;try{e=this.shouldUpdate(i),e?(this.willUpdate(i),null===(t=this._$ES)||void 0===t||t.forEach((t=>{var e;return null===(e=t.hostUpdate)||void 0===e?void 0:e.call(t)})),this.update(i)):this._$Ek()}catch(t){throw e=!1,this._$Ek(),t}e&&this._$AE(i)}willUpdate(t){}_$AE(t){var e;null===(e=this._$ES)||void 0===e||e.forEach((t=>{var e;return null===(e=t.hostUpdated)||void 0===e?void 0:e.call(t)})),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(t)),this.updated(t)}_$Ek(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$E_}shouldUpdate(t){return!0}update(t){void 0!==this._$EC&&(this._$EC.forEach(((t,e)=>this._$EO(e,this[e],t))),this._$EC=void 0),this._$Ek()}updated(t){}firstUpdated(t){}}var A;w.finalized=!0,w.elementProperties=new Map,w.elementStyles=[],w.shadowRootOptions={mode:"open"},null==f||f({ReactiveElement:w}),(null!==(v=g.reactiveElementVersions)&&void 0!==v?v:g.reactiveElementVersions=[]).push("1.4.2");const x=window,S=x.trustedTypes,C=S?S.createPolicy("lit-html",{createHTML:t=>t}):void 0,E=`lit$${(Math.random()+"").slice(9)}$`,k="?"+E,H=`<${k}>`,N=document,P=(t="")=>N.createComment(t),M=t=>null===t||"object"!=typeof t&&"function"!=typeof t,U=Array.isArray,T=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,O=/-->/g,L=/>/g,R=RegExp(">|[ \t\n\f\r](?:([^\\s\"'>=/]+)([ \t\n\f\r]*=[ \t\n\f\r]*(?:[^ \t\n\f\r\"'`<>=]|(\"|')|))|$)","g"),D=/'/g,z=/"/g,j=/^(?:script|style|textarea|title)$/i,q=(t=>(e,...i)=>({_$litType$:t,strings:e,values:i}))(1),V=Symbol.for("lit-noChange"),B=Symbol.for("lit-nothing"),I=new WeakMap,W=N.createTreeWalker(N,129,null,!1);class Z{constructor({strings:t,_$litType$:e},i){let s;this.parts=[];let o=0,n=0;const r=t.length-1,a=this.parts,[l,h]=((t,e)=>{const i=t.length-1,s=[];let o,n=2===e?"<svg>":"",r=T;for(let e=0;e<i;e++){const i=t[e];let a,l,h=-1,d=0;for(;d<i.length&&(r.lastIndex=d,l=r.exec(i),null!==l);)d=r.lastIndex,r===T?"!--"===l[1]?r=O:void 0!==l[1]?r=L:void 0!==l[2]?(j.test(l[2])&&(o=RegExp("</"+l[2],"g")),r=R):void 0!==l[3]&&(r=R):r===R?">"===l[0]?(r=null!=o?o:T,h=-1):void 0===l[1]?h=-2:(h=r.lastIndex-l[2].length,a=l[1],r=void 0===l[3]?R:'"'===l[3]?z:D):r===z||r===D?r=R:r===O||r===L?r=T:(r=R,o=void 0);const c=r===R&&t[e+1].startsWith("/>")?" ":"";n+=r===T?i+H:h>=0?(s.push(a),i.slice(0,h)+"$lit$"+i.slice(h)+E+c):i+E+(-2===h?(s.push(void 0),e):c)}const a=n+(t[i]||"<?>")+(2===e?"</svg>":"");if(!Array.isArray(t)||!t.hasOwnProperty("raw"))throw Error("invalid template strings array");return[void 0!==C?C.createHTML(a):a,s]})(t,e);if(this.el=Z.createElement(l,i),W.currentNode=this.el.content,2===e){const t=this.el.content,e=t.firstChild;e.remove(),t.append(...e.childNodes)}for(;null!==(s=W.nextNode())&&a.length<r;){if(1===s.nodeType){if(s.hasAttributes()){const t=[];for(const e of s.getAttributeNames())if(e.endsWith("$lit$")||e.startsWith(E)){const i=h[n++];if(t.push(e),void 0!==i){const t=s.getAttribute(i.toLowerCase()+"$lit$").split(E),e=/([.?@])?(.*)/.exec(i);a.push({type:1,index:o,name:e[2],strings:t,ctor:"."===e[1]?Q:"?"===e[1]?Y:"@"===e[1]?tt:G})}else a.push({type:6,index:o})}for(const e of t)s.removeAttribute(e)}if(j.test(s.tagName)){const t=s.textContent.split(E),e=t.length-1;if(e>0){s.textContent=S?S.emptyScript:"";for(let i=0;i<e;i++)s.append(t[i],P()),W.nextNode(),a.push({type:2,index:++o});s.append(t[e],P())}}}else if(8===s.nodeType)if(s.data===k)a.push({type:2,index:o});else{let t=-1;for(;-1!==(t=s.data.indexOf(E,t+1));)a.push({type:7,index:o}),t+=E.length-1}o++}}static createElement(t,e){const i=N.createElement("template");return i.innerHTML=t,i}}function K(t,e,i=t,s){var o,n,r,a;if(e===V)return e;let l=void 0!==s?null===(o=i._$Co)||void 0===o?void 0:o[s]:i._$Cl;const h=M(e)?void 0:e._$litDirective$;return(null==l?void 0:l.constructor)!==h&&(null===(n=null==l?void 0:l._$AO)||void 0===n||n.call(l,!1),void 0===h?l=void 0:(l=new h(t),l._$AT(t,i,s)),void 0!==s?(null!==(r=(a=i)._$Co)&&void 0!==r?r:a._$Co=[])[s]=l:i._$Cl=l),void 0!==l&&(e=K(t,l._$AS(t,e.values),l,s)),e}class F{constructor(t,e){this.u=[],this._$AN=void 0,this._$AD=t,this._$AM=e}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}v(t){var e;const{el:{content:i},parts:s}=this._$AD,o=(null!==(e=null==t?void 0:t.creationScope)&&void 0!==e?e:N).importNode(i,!0);W.currentNode=o;let n=W.nextNode(),r=0,a=0,l=s[0];for(;void 0!==l;){if(r===l.index){let e;2===l.type?e=new J(n,n.nextSibling,this,t):1===l.type?e=new l.ctor(n,l.name,l.strings,this,t):6===l.type&&(e=new et(n,this,t)),this.u.push(e),l=s[++a]}r!==(null==l?void 0:l.index)&&(n=W.nextNode(),r++)}return o}p(t){let e=0;for(const i of this.u)void 0!==i&&(void 0!==i.strings?(i._$AI(t,i,e),e+=i.strings.length-2):i._$AI(t[e])),e++}}class J{constructor(t,e,i,s){var o;this.type=2,this._$AH=B,this._$AN=void 0,this._$AA=t,this._$AB=e,this._$AM=i,this.options=s,this._$Cm=null===(o=null==s?void 0:s.isConnected)||void 0===o||o}get _$AU(){var t,e;return null!==(e=null===(t=this._$AM)||void 0===t?void 0:t._$AU)&&void 0!==e?e:this._$Cm}get parentNode(){let t=this._$AA.parentNode;const e=this._$AM;return void 0!==e&&11===t.nodeType&&(t=e.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,e=this){t=K(this,t,e),M(t)?t===B||null==t||""===t?(this._$AH!==B&&this._$AR(),this._$AH=B):t!==this._$AH&&t!==V&&this.g(t):void 0!==t._$litType$?this.$(t):void 0!==t.nodeType?this.T(t):(t=>U(t)||"function"==typeof(null==t?void 0:t[Symbol.iterator]))(t)?this.k(t):this.g(t)}O(t,e=this._$AB){return this._$AA.parentNode.insertBefore(t,e)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t))}g(t){this._$AH!==B&&M(this._$AH)?this._$AA.nextSibling.data=t:this.T(N.createTextNode(t)),this._$AH=t}$(t){var e;const{values:i,_$litType$:s}=t,o="number"==typeof s?this._$AC(t):(void 0===s.el&&(s.el=Z.createElement(s.h,this.options)),s);if((null===(e=this._$AH)||void 0===e?void 0:e._$AD)===o)this._$AH.p(i);else{const t=new F(o,this),e=t.v(this.options);t.p(i),this.T(e),this._$AH=t}}_$AC(t){let e=I.get(t.strings);return void 0===e&&I.set(t.strings,e=new Z(t)),e}k(t){U(this._$AH)||(this._$AH=[],this._$AR());const e=this._$AH;let i,s=0;for(const o of t)s===e.length?e.push(i=new J(this.O(P()),this.O(P()),this,this.options)):i=e[s],i._$AI(o),s++;s<e.length&&(this._$AR(i&&i._$AB.nextSibling,s),e.length=s)}_$AR(t=this._$AA.nextSibling,e){var i;for(null===(i=this._$AP)||void 0===i||i.call(this,!1,!0,e);t&&t!==this._$AB;){const e=t.nextSibling;t.remove(),t=e}}setConnected(t){var e;void 0===this._$AM&&(this._$Cm=t,null===(e=this._$AP)||void 0===e||e.call(this,t))}}class G{constructor(t,e,i,s,o){this.type=1,this._$AH=B,this._$AN=void 0,this.element=t,this.name=e,this._$AM=s,this.options=o,i.length>2||""!==i[0]||""!==i[1]?(this._$AH=Array(i.length-1).fill(new String),this.strings=i):this._$AH=B}get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}_$AI(t,e=this,i,s){const o=this.strings;let n=!1;if(void 0===o)t=K(this,t,e,0),n=!M(t)||t!==this._$AH&&t!==V,n&&(this._$AH=t);else{const s=t;let r,a;for(t=o[0],r=0;r<o.length-1;r++)a=K(this,s[i+r],e,r),a===V&&(a=this._$AH[r]),n||(n=!M(a)||a!==this._$AH[r]),a===B?t=B:t!==B&&(t+=(null!=a?a:"")+o[r+1]),this._$AH[r]=a}n&&!s&&this.j(t)}j(t){t===B?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,null!=t?t:"")}}class Q extends G{constructor(){super(...arguments),this.type=3}j(t){this.element[this.name]=t===B?void 0:t}}const X=S?S.emptyScript:"";class Y extends G{constructor(){super(...arguments),this.type=4}j(t){t&&t!==B?this.element.setAttribute(this.name,X):this.element.removeAttribute(this.name)}}class tt extends G{constructor(t,e,i,s,o){super(t,e,i,s,o),this.type=5}_$AI(t,e=this){var i;if((t=null!==(i=K(this,t,e,0))&&void 0!==i?i:B)===V)return;const s=this._$AH,o=t===B&&s!==B||t.capture!==s.capture||t.once!==s.once||t.passive!==s.passive,n=t!==B&&(s===B||o);o&&this.element.removeEventListener(this.name,this,s),n&&this.element.addEventListener(this.name,this,t),this._$AH=t}handleEvent(t){var e,i;"function"==typeof this._$AH?this._$AH.call(null!==(i=null===(e=this.options)||void 0===e?void 0:e.host)&&void 0!==i?i:this.element,t):this._$AH.handleEvent(t)}}class et{constructor(t,e,i){this.element=t,this.type=6,this._$AN=void 0,this._$AM=e,this.options=i}get _$AU(){return this._$AM._$AU}_$AI(t){K(this,t)}}const it=x.litHtmlPolyfillSupport;null==it||it(Z,J),(null!==(A=x.litHtmlVersions)&&void 0!==A?A:x.litHtmlVersions=[]).push("2.4.0");var st,ot;class nt extends w{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){var t,e;const i=super.createRenderRoot();return null!==(t=(e=this.renderOptions).renderBefore)&&void 0!==t||(e.renderBefore=i.firstChild),i}update(t){const e=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(t),this._$Do=((t,e,i)=>{var s,o;const n=null!==(s=null==i?void 0:i.renderBefore)&&void 0!==s?s:e;let r=n._$litPart$;if(void 0===r){const t=null!==(o=null==i?void 0:i.renderBefore)&&void 0!==o?o:null;n._$litPart$=r=new J(e.insertBefore(P(),t),t,void 0,null!=i?i:{})}return r._$AI(t),r})(e,this.renderRoot,this.renderOptions)}connectedCallback(){var t;super.connectedCallback(),null===(t=this._$Do)||void 0===t||t.setConnected(!0)}disconnectedCallback(){var t;super.disconnectedCallback(),null===(t=this._$Do)||void 0===t||t.setConnected(!1)}render(){return V}}nt.finalized=!0,nt._$litElement$=!0,null===(st=globalThis.litElementHydrateSupport)||void 0===st||st.call(globalThis,{LitElement:nt});const rt=globalThis.litElementPolyfillSupport;null==rt||rt({LitElement:nt}),(null!==(ot=globalThis.litElementVersions)&&void 0!==ot?ot:globalThis.litElementVersions=[]).push("3.2.2");var at=Number.isNaN||function(t){return"number"==typeof t&&t!=t};function lt(t,e){if(t.length!==e.length)return!1;for(var i=0;i<t.length;i++)if(s=t[i],o=e[i],!(s===o||at(s)&&at(o)))return!1;var s,o;return!0}var ht="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z",dt="M13 5C15.21 5 17 6.79 17 9C17 10.5 16.2 11.77 15 12.46V11.24C15.61 10.69 16 9.89 16 9C16 7.34 14.66 6 13 6S10 7.34 10 9C10 9.89 10.39 10.69 11 11.24V12.46C9.8 11.77 9 10.5 9 9C9 6.79 10.79 5 13 5M20 20.5C19.97 21.32 19.32 21.97 18.5 22H13C12.62 22 12.26 21.85 12 21.57L8 17.37L8.74 16.6C8.93 16.39 9.2 16.28 9.5 16.28H9.7L12 18V9C12 8.45 12.45 8 13 8S14 8.45 14 9V13.47L15.21 13.6L19.15 15.79C19.68 16.03 20 16.56 20 17.14V20.5M20 2H4C2.9 2 2 2.9 2 4V12C2 13.11 2.9 14 4 14H8V12L4 12L4 4H20L20 12H18V14H20V13.96L20.04 14C21.13 14 22 13.09 22 12V4C22 2.9 21.11 2 20 2Z",ct="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M10,16.5L16,12L10,7.5V16.5Z",pt="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4M9,9V15H15V9";const ut=["single","restart","queued","parallel"],vt=(t,e,i,s)=>{s=s||{},i=null==i?{}:i;const o=new Event(e,{bubbles:void 0===s.bubbles||s.bubbles,cancelable:Boolean(s.cancelable),composed:void 0===s.composed||s.composed});return o.detail=i,t.dispatchEvent(o),o},gt="switch_manager";function mt(t){return t?`/${gt}/${t}`:`/${gt}`}function _t(t){return`/assets/${gt}/${t}`}function ft(t){return`${gt}/${t}`}function bt(t){if("string"==typeof t)return window.history.pushState({},null,t),window.dispatchEvent(new PopStateEvent("popstate")),!1;var e=t.target;return"a"!==e.localName&&(e=e.closest("a")),"a"===e.localName&&e.href&&(window.history.pushState({},null,e.href),window.dispatchEvent(new PopStateEvent("popstate"))),!1}const $t=t=>q`
-    <div class="header_title">${t}</div>
+/******************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+
+function __decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+const e$8=e=>n=>"function"==typeof n?((e,n)=>(customElements.define(e,n),n))(e,n):((e,n)=>{const{kind:t,elements:s}=n;return {kind:t,elements:s,finisher(n){customElements.define(e,n);}}})(e,n);
+
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+const i$6=(i,e)=>"method"===e.kind&&e.descriptor&&!("value"in e.descriptor)?{...e,finisher(n){n.createProperty(e.key,i);}}:{kind:"field",key:Symbol(),placement:"own",descriptor:{},originalKey:e.key,initializer(){"function"==typeof e.initializer&&(this[e.key]=e.initializer.call(this));},finisher(n){n.createProperty(e.key,i);}};function e$7(e){return (n,t)=>void 0!==t?((i,e,n)=>{e.constructor.createProperty(n,i);})(e,n,t):i$6(e,n)}
+
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */function t$5(t){return e$7({...t,state:!0})}
+
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+const o$9=({finisher:e,descriptor:t})=>(o,n)=>{var r;if(void 0===n){const n=null!==(r=o.originalKey)&&void 0!==r?r:o.key,i=null!=t?{kind:"method",placement:"prototype",key:n,descriptor:t(o.key)}:{...o,key:n};return null!=e&&(i.finisher=function(t){e(t,n);}),i}{const r=o.constructor;void 0!==t&&Object.defineProperty(o,n,t(n)),null==e||e(r,n);}};
+
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */function i$5(i,n){return o$9({descriptor:o=>{const t={get(){var o,n;return null!==(n=null===(o=this.renderRoot)||void 0===o?void 0:o.querySelector(i))&&void 0!==n?n:null},enumerable:!0,configurable:!0};if(n){const n="symbol"==typeof o?Symbol():"__"+o;t.get=function(){var o,t;return void 0===this[n]&&(this[n]=null!==(t=null===(o=this.renderRoot)||void 0===o?void 0:o.querySelector(i))&&void 0!==t?t:null),this[n]};}return t}})}
+
+/**
+ * @license
+ * Copyright 2021 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */var n$8;null!=(null===(n$8=window.HTMLSlotElement)||void 0===n$8?void 0:n$8.prototype.assignedElements)?(o,n)=>o.assignedElements(n):(o,n)=>o.assignedNodes(n).filter((o=>o.nodeType===Node.ELEMENT_NODE));
+
+/**
+ * @license
+ * Copyright 2019 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+const t$4=window,e$6=t$4.ShadowRoot&&(void 0===t$4.ShadyCSS||t$4.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,s$7=Symbol(),n$7=new WeakMap;class o$8{constructor(t,e,n){if(this._$cssResult$=!0,n!==s$7)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=t,this.t=e;}get styleSheet(){let t=this.o;const s=this.t;if(e$6&&void 0===t){const e=void 0!==s&&1===s.length;e&&(t=n$7.get(s)),void 0===t&&((this.o=t=new CSSStyleSheet).replaceSync(this.cssText),e&&n$7.set(s,t));}return t}toString(){return this.cssText}}const r$5=t=>new o$8("string"==typeof t?t:t+"",void 0,s$7),i$4=(t,...e)=>{const n=1===t.length?t[0]:e.reduce(((e,s,n)=>e+(t=>{if(!0===t._$cssResult$)return t.cssText;if("number"==typeof t)return t;throw Error("Value passed to 'css' function must be a 'css' function result: "+t+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(s)+t[n+1]),t[0]);return new o$8(n,t,s$7)},S$3=(s,n)=>{e$6?s.adoptedStyleSheets=n.map((t=>t instanceof CSSStyleSheet?t:t.styleSheet)):n.forEach((e=>{const n=document.createElement("style"),o=t$4.litNonce;void 0!==o&&n.setAttribute("nonce",o),n.textContent=e.cssText,s.appendChild(n);}));},c$3=e$6?t=>t:t=>t instanceof CSSStyleSheet?(t=>{let e="";for(const s of t.cssRules)e+=s.cssText;return r$5(e)})(t):t;
+
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */var s$6;const e$5=window,r$4=e$5.trustedTypes,h$3=r$4?r$4.emptyScript:"",o$7=e$5.reactiveElementPolyfillSupport,n$6={toAttribute(t,i){switch(i){case Boolean:t=t?h$3:null;break;case Object:case Array:t=null==t?t:JSON.stringify(t);}return t},fromAttribute(t,i){let s=t;switch(i){case Boolean:s=null!==t;break;case Number:s=null===t?null:Number(t);break;case Object:case Array:try{s=JSON.parse(t);}catch(t){s=null;}}return s}},a$3=(t,i)=>i!==t&&(i==i||t==t),l$5={attribute:!0,type:String,converter:n$6,reflect:!1,hasChanged:a$3};class d$3 extends HTMLElement{constructor(){super(),this._$Ei=new Map,this.isUpdatePending=!1,this.hasUpdated=!1,this._$El=null,this.u();}static addInitializer(t){var i;this.finalize(),(null!==(i=this.h)&&void 0!==i?i:this.h=[]).push(t);}static get observedAttributes(){this.finalize();const t=[];return this.elementProperties.forEach(((i,s)=>{const e=this._$Ep(s,i);void 0!==e&&(this._$Ev.set(e,s),t.push(e));})),t}static createProperty(t,i=l$5){if(i.state&&(i.attribute=!1),this.finalize(),this.elementProperties.set(t,i),!i.noAccessor&&!this.prototype.hasOwnProperty(t)){const s="symbol"==typeof t?Symbol():"__"+t,e=this.getPropertyDescriptor(t,s,i);void 0!==e&&Object.defineProperty(this.prototype,t,e);}}static getPropertyDescriptor(t,i,s){return {get(){return this[i]},set(e){const r=this[t];this[i]=e,this.requestUpdate(t,r,s);},configurable:!0,enumerable:!0}}static getPropertyOptions(t){return this.elementProperties.get(t)||l$5}static finalize(){if(this.hasOwnProperty("finalized"))return !1;this.finalized=!0;const t=Object.getPrototypeOf(this);if(t.finalize(),void 0!==t.h&&(this.h=[...t.h]),this.elementProperties=new Map(t.elementProperties),this._$Ev=new Map,this.hasOwnProperty("properties")){const t=this.properties,i=[...Object.getOwnPropertyNames(t),...Object.getOwnPropertySymbols(t)];for(const s of i)this.createProperty(s,t[s]);}return this.elementStyles=this.finalizeStyles(this.styles),!0}static finalizeStyles(i){const s=[];if(Array.isArray(i)){const e=new Set(i.flat(1/0).reverse());for(const i of e)s.unshift(c$3(i));}else void 0!==i&&s.push(c$3(i));return s}static _$Ep(t,i){const s=i.attribute;return !1===s?void 0:"string"==typeof s?s:"string"==typeof t?t.toLowerCase():void 0}u(){var t;this._$E_=new Promise((t=>this.enableUpdating=t)),this._$AL=new Map,this._$Eg(),this.requestUpdate(),null===(t=this.constructor.h)||void 0===t||t.forEach((t=>t(this)));}addController(t){var i,s;(null!==(i=this._$ES)&&void 0!==i?i:this._$ES=[]).push(t),void 0!==this.renderRoot&&this.isConnected&&(null===(s=t.hostConnected)||void 0===s||s.call(t));}removeController(t){var i;null===(i=this._$ES)||void 0===i||i.splice(this._$ES.indexOf(t)>>>0,1);}_$Eg(){this.constructor.elementProperties.forEach(((t,i)=>{this.hasOwnProperty(i)&&(this._$Ei.set(i,this[i]),delete this[i]);}));}createRenderRoot(){var t;const s=null!==(t=this.shadowRoot)&&void 0!==t?t:this.attachShadow(this.constructor.shadowRootOptions);return S$3(s,this.constructor.elementStyles),s}connectedCallback(){var t;void 0===this.renderRoot&&(this.renderRoot=this.createRenderRoot()),this.enableUpdating(!0),null===(t=this._$ES)||void 0===t||t.forEach((t=>{var i;return null===(i=t.hostConnected)||void 0===i?void 0:i.call(t)}));}enableUpdating(t){}disconnectedCallback(){var t;null===(t=this._$ES)||void 0===t||t.forEach((t=>{var i;return null===(i=t.hostDisconnected)||void 0===i?void 0:i.call(t)}));}attributeChangedCallback(t,i,s){this._$AK(t,s);}_$EO(t,i,s=l$5){var e;const r=this.constructor._$Ep(t,s);if(void 0!==r&&!0===s.reflect){const h=(void 0!==(null===(e=s.converter)||void 0===e?void 0:e.toAttribute)?s.converter:n$6).toAttribute(i,s.type);this._$El=t,null==h?this.removeAttribute(r):this.setAttribute(r,h),this._$El=null;}}_$AK(t,i){var s;const e=this.constructor,r=e._$Ev.get(t);if(void 0!==r&&this._$El!==r){const t=e.getPropertyOptions(r),h="function"==typeof t.converter?{fromAttribute:t.converter}:void 0!==(null===(s=t.converter)||void 0===s?void 0:s.fromAttribute)?t.converter:n$6;this._$El=r,this[r]=h.fromAttribute(i,t.type),this._$El=null;}}requestUpdate(t,i,s){let e=!0;void 0!==t&&(((s=s||this.constructor.getPropertyOptions(t)).hasChanged||a$3)(this[t],i)?(this._$AL.has(t)||this._$AL.set(t,i),!0===s.reflect&&this._$El!==t&&(void 0===this._$EC&&(this._$EC=new Map),this._$EC.set(t,s))):e=!1),!this.isUpdatePending&&e&&(this._$E_=this._$Ej());}async _$Ej(){this.isUpdatePending=!0;try{await this._$E_;}catch(t){Promise.reject(t);}const t=this.scheduleUpdate();return null!=t&&await t,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){var t;if(!this.isUpdatePending)return;this.hasUpdated,this._$Ei&&(this._$Ei.forEach(((t,i)=>this[i]=t)),this._$Ei=void 0);let i=!1;const s=this._$AL;try{i=this.shouldUpdate(s),i?(this.willUpdate(s),null===(t=this._$ES)||void 0===t||t.forEach((t=>{var i;return null===(i=t.hostUpdate)||void 0===i?void 0:i.call(t)})),this.update(s)):this._$Ek();}catch(t){throw i=!1,this._$Ek(),t}i&&this._$AE(s);}willUpdate(t){}_$AE(t){var i;null===(i=this._$ES)||void 0===i||i.forEach((t=>{var i;return null===(i=t.hostUpdated)||void 0===i?void 0:i.call(t)})),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(t)),this.updated(t);}_$Ek(){this._$AL=new Map,this.isUpdatePending=!1;}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$E_}shouldUpdate(t){return !0}update(t){void 0!==this._$EC&&(this._$EC.forEach(((t,i)=>this._$EO(i,this[i],t))),this._$EC=void 0),this._$Ek();}updated(t){}firstUpdated(t){}}d$3.finalized=!0,d$3.elementProperties=new Map,d$3.elementStyles=[],d$3.shadowRootOptions={mode:"open"},null==o$7||o$7({ReactiveElement:d$3}),(null!==(s$6=e$5.reactiveElementVersions)&&void 0!==s$6?s$6:e$5.reactiveElementVersions=[]).push("1.4.2");
+
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+var t$3;const i$3=window,s$5=i$3.trustedTypes,e$4=s$5?s$5.createPolicy("lit-html",{createHTML:t=>t}):void 0,o$6=`lit$${(Math.random()+"").slice(9)}$`,n$5="?"+o$6,l$4=`<${n$5}>`,h$2=document,r$3=(t="")=>h$2.createComment(t),d$2=t=>null===t||"object"!=typeof t&&"function"!=typeof t,u$1=Array.isArray,c$2=t=>u$1(t)||"function"==typeof(null==t?void 0:t[Symbol.iterator]),v$1=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,a$2=/-->/g,f$1=/>/g,_$1=RegExp(">|[ \t\n\f\r](?:([^\\s\"'>=/]+)([ \t\n\f\r]*=[ \t\n\f\r]*(?:[^ \t\n\f\r\"'`<>=]|(\"|')|))|$)","g"),m$1=/'/g,p$1=/"/g,$$1=/^(?:script|style|textarea|title)$/i,g=t=>(i,...s)=>({_$litType$:t,strings:i,values:s}),y=g(1),x$1=Symbol.for("lit-noChange"),b$1=Symbol.for("lit-nothing"),T$1=new WeakMap,A$1=h$2.createTreeWalker(h$2,129,null,!1),E$1=(t,i)=>{const s=t.length-1,n=[];let h,r=2===i?"<svg>":"",d=v$1;for(let i=0;i<s;i++){const s=t[i];let e,u,c=-1,g=0;for(;g<s.length&&(d.lastIndex=g,u=d.exec(s),null!==u);)g=d.lastIndex,d===v$1?"!--"===u[1]?d=a$2:void 0!==u[1]?d=f$1:void 0!==u[2]?($$1.test(u[2])&&(h=RegExp("</"+u[2],"g")),d=_$1):void 0!==u[3]&&(d=_$1):d===_$1?">"===u[0]?(d=null!=h?h:v$1,c=-1):void 0===u[1]?c=-2:(c=d.lastIndex-u[2].length,e=u[1],d=void 0===u[3]?_$1:'"'===u[3]?p$1:m$1):d===p$1||d===m$1?d=_$1:d===a$2||d===f$1?d=v$1:(d=_$1,h=void 0);const y=d===_$1&&t[i+1].startsWith("/>")?" ":"";r+=d===v$1?s+l$4:c>=0?(n.push(e),s.slice(0,c)+"$lit$"+s.slice(c)+o$6+y):s+o$6+(-2===c?(n.push(void 0),i):y);}const u=r+(t[s]||"<?>")+(2===i?"</svg>":"");if(!Array.isArray(t)||!t.hasOwnProperty("raw"))throw Error("invalid template strings array");return [void 0!==e$4?e$4.createHTML(u):u,n]};class C$1{constructor({strings:t,_$litType$:i},e){let l;this.parts=[];let h=0,d=0;const u=t.length-1,c=this.parts,[v,a]=E$1(t,i);if(this.el=C$1.createElement(v,e),A$1.currentNode=this.el.content,2===i){const t=this.el.content,i=t.firstChild;i.remove(),t.append(...i.childNodes);}for(;null!==(l=A$1.nextNode())&&c.length<u;){if(1===l.nodeType){if(l.hasAttributes()){const t=[];for(const i of l.getAttributeNames())if(i.endsWith("$lit$")||i.startsWith(o$6)){const s=a[d++];if(t.push(i),void 0!==s){const t=l.getAttribute(s.toLowerCase()+"$lit$").split(o$6),i=/([.?@])?(.*)/.exec(s);c.push({type:1,index:h,name:i[2],strings:t,ctor:"."===i[1]?M$1:"?"===i[1]?k$1:"@"===i[1]?H$1:S$2});}else c.push({type:6,index:h});}for(const i of t)l.removeAttribute(i);}if($$1.test(l.tagName)){const t=l.textContent.split(o$6),i=t.length-1;if(i>0){l.textContent=s$5?s$5.emptyScript:"";for(let s=0;s<i;s++)l.append(t[s],r$3()),A$1.nextNode(),c.push({type:2,index:++h});l.append(t[i],r$3());}}}else if(8===l.nodeType)if(l.data===n$5)c.push({type:2,index:h});else {let t=-1;for(;-1!==(t=l.data.indexOf(o$6,t+1));)c.push({type:7,index:h}),t+=o$6.length-1;}h++;}}static createElement(t,i){const s=h$2.createElement("template");return s.innerHTML=t,s}}function P$1(t,i,s=t,e){var o,n,l,h;if(i===x$1)return i;let r=void 0!==e?null===(o=s._$Co)||void 0===o?void 0:o[e]:s._$Cl;const u=d$2(i)?void 0:i._$litDirective$;return (null==r?void 0:r.constructor)!==u&&(null===(n=null==r?void 0:r._$AO)||void 0===n||n.call(r,!1),void 0===u?r=void 0:(r=new u(t),r._$AT(t,s,e)),void 0!==e?(null!==(l=(h=s)._$Co)&&void 0!==l?l:h._$Co=[])[e]=r:s._$Cl=r),void 0!==r&&(i=P$1(t,r._$AS(t,i.values),r,e)),i}class V$1{constructor(t,i){this.u=[],this._$AN=void 0,this._$AD=t,this._$AM=i;}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}v(t){var i;const{el:{content:s},parts:e}=this._$AD,o=(null!==(i=null==t?void 0:t.creationScope)&&void 0!==i?i:h$2).importNode(s,!0);A$1.currentNode=o;let n=A$1.nextNode(),l=0,r=0,d=e[0];for(;void 0!==d;){if(l===d.index){let i;2===d.type?i=new N$1(n,n.nextSibling,this,t):1===d.type?i=new d.ctor(n,d.name,d.strings,this,t):6===d.type&&(i=new I$1(n,this,t)),this.u.push(i),d=e[++r];}l!==(null==d?void 0:d.index)&&(n=A$1.nextNode(),l++);}return o}p(t){let i=0;for(const s of this.u)void 0!==s&&(void 0!==s.strings?(s._$AI(t,s,i),i+=s.strings.length-2):s._$AI(t[i])),i++;}}class N$1{constructor(t,i,s,e){var o;this.type=2,this._$AH=b$1,this._$AN=void 0,this._$AA=t,this._$AB=i,this._$AM=s,this.options=e,this._$Cm=null===(o=null==e?void 0:e.isConnected)||void 0===o||o;}get _$AU(){var t,i;return null!==(i=null===(t=this._$AM)||void 0===t?void 0:t._$AU)&&void 0!==i?i:this._$Cm}get parentNode(){let t=this._$AA.parentNode;const i=this._$AM;return void 0!==i&&11===t.nodeType&&(t=i.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,i=this){t=P$1(this,t,i),d$2(t)?t===b$1||null==t||""===t?(this._$AH!==b$1&&this._$AR(),this._$AH=b$1):t!==this._$AH&&t!==x$1&&this.g(t):void 0!==t._$litType$?this.$(t):void 0!==t.nodeType?this.T(t):c$2(t)?this.k(t):this.g(t);}O(t,i=this._$AB){return this._$AA.parentNode.insertBefore(t,i)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t));}g(t){this._$AH!==b$1&&d$2(this._$AH)?this._$AA.nextSibling.data=t:this.T(h$2.createTextNode(t)),this._$AH=t;}$(t){var i;const{values:s,_$litType$:e}=t,o="number"==typeof e?this._$AC(t):(void 0===e.el&&(e.el=C$1.createElement(e.h,this.options)),e);if((null===(i=this._$AH)||void 0===i?void 0:i._$AD)===o)this._$AH.p(s);else {const t=new V$1(o,this),i=t.v(this.options);t.p(s),this.T(i),this._$AH=t;}}_$AC(t){let i=T$1.get(t.strings);return void 0===i&&T$1.set(t.strings,i=new C$1(t)),i}k(t){u$1(this._$AH)||(this._$AH=[],this._$AR());const i=this._$AH;let s,e=0;for(const o of t)e===i.length?i.push(s=new N$1(this.O(r$3()),this.O(r$3()),this,this.options)):s=i[e],s._$AI(o),e++;e<i.length&&(this._$AR(s&&s._$AB.nextSibling,e),i.length=e);}_$AR(t=this._$AA.nextSibling,i){var s;for(null===(s=this._$AP)||void 0===s||s.call(this,!1,!0,i);t&&t!==this._$AB;){const i=t.nextSibling;t.remove(),t=i;}}setConnected(t){var i;void 0===this._$AM&&(this._$Cm=t,null===(i=this._$AP)||void 0===i||i.call(this,t));}}class S$2{constructor(t,i,s,e,o){this.type=1,this._$AH=b$1,this._$AN=void 0,this.element=t,this.name=i,this._$AM=e,this.options=o,s.length>2||""!==s[0]||""!==s[1]?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=b$1;}get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}_$AI(t,i=this,s,e){const o=this.strings;let n=!1;if(void 0===o)t=P$1(this,t,i,0),n=!d$2(t)||t!==this._$AH&&t!==x$1,n&&(this._$AH=t);else {const e=t;let l,h;for(t=o[0],l=0;l<o.length-1;l++)h=P$1(this,e[s+l],i,l),h===x$1&&(h=this._$AH[l]),n||(n=!d$2(h)||h!==this._$AH[l]),h===b$1?t=b$1:t!==b$1&&(t+=(null!=h?h:"")+o[l+1]),this._$AH[l]=h;}n&&!e&&this.j(t);}j(t){t===b$1?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,null!=t?t:"");}}class M$1 extends S$2{constructor(){super(...arguments),this.type=3;}j(t){this.element[this.name]=t===b$1?void 0:t;}}const R$1=s$5?s$5.emptyScript:"";class k$1 extends S$2{constructor(){super(...arguments),this.type=4;}j(t){t&&t!==b$1?this.element.setAttribute(this.name,R$1):this.element.removeAttribute(this.name);}}class H$1 extends S$2{constructor(t,i,s,e,o){super(t,i,s,e,o),this.type=5;}_$AI(t,i=this){var s;if((t=null!==(s=P$1(this,t,i,0))&&void 0!==s?s:b$1)===x$1)return;const e=this._$AH,o=t===b$1&&e!==b$1||t.capture!==e.capture||t.once!==e.once||t.passive!==e.passive,n=t!==b$1&&(e===b$1||o);o&&this.element.removeEventListener(this.name,this,e),n&&this.element.addEventListener(this.name,this,t),this._$AH=t;}handleEvent(t){var i,s;"function"==typeof this._$AH?this._$AH.call(null!==(s=null===(i=this.options)||void 0===i?void 0:i.host)&&void 0!==s?s:this.element,t):this._$AH.handleEvent(t);}}class I$1{constructor(t,i,s){this.element=t,this.type=6,this._$AN=void 0,this._$AM=i,this.options=s;}get _$AU(){return this._$AM._$AU}_$AI(t){P$1(this,t);}}const z$1=i$3.litHtmlPolyfillSupport;null==z$1||z$1(C$1,N$1),(null!==(t$3=i$3.litHtmlVersions)&&void 0!==t$3?t$3:i$3.litHtmlVersions=[]).push("2.4.0");const Z$1=(t,i,s)=>{var e,o;const n=null!==(e=null==s?void 0:s.renderBefore)&&void 0!==e?e:i;let l=n._$litPart$;if(void 0===l){const t=null!==(o=null==s?void 0:s.renderBefore)&&void 0!==o?o:null;n._$litPart$=l=new N$1(i.insertBefore(r$3(),t),t,void 0,null!=s?s:{});}return l._$AI(t),l};
+
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */var l$3,o$5;class s$4 extends d$3{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0;}createRenderRoot(){var t,e;const i=super.createRenderRoot();return null!==(t=(e=this.renderOptions).renderBefore)&&void 0!==t||(e.renderBefore=i.firstChild),i}update(t){const i=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(t),this._$Do=Z$1(i,this.renderRoot,this.renderOptions);}connectedCallback(){var t;super.connectedCallback(),null===(t=this._$Do)||void 0===t||t.setConnected(!0);}disconnectedCallback(){var t;super.disconnectedCallback(),null===(t=this._$Do)||void 0===t||t.setConnected(!1);}render(){return x$1}}s$4.finalized=!0,s$4._$litElement$=!0,null===(l$3=globalThis.litElementHydrateSupport)||void 0===l$3||l$3.call(globalThis,{LitElement:s$4});const n$4=globalThis.litElementPolyfillSupport;null==n$4||n$4({LitElement:s$4});(null!==(o$5=globalThis.litElementVersions)&&void 0!==o$5?o$5:globalThis.litElementVersions=[]).push("3.2.2");
+
+var safeIsNaN = Number.isNaN ||
+    function ponyfill(value) {
+        return typeof value === 'number' && value !== value;
+    };
+function isEqual(first, second) {
+    if (first === second) {
+        return true;
+    }
+    if (safeIsNaN(first) && safeIsNaN(second)) {
+        return true;
+    }
+    return false;
+}
+function areInputsEqual(newInputs, lastInputs) {
+    if (newInputs.length !== lastInputs.length) {
+        return false;
+    }
+    for (var i = 0; i < newInputs.length; i++) {
+        if (!isEqual(newInputs[i], lastInputs[i])) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function memoizeOne(resultFn, isEqual) {
+    if (isEqual === void 0) { isEqual = areInputsEqual; }
+    var cache = null;
+    function memoized() {
+        var newArgs = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            newArgs[_i] = arguments[_i];
+        }
+        if (cache && cache.lastThis === this && isEqual(newArgs, cache.lastArgs)) {
+            return cache.lastResult;
+        }
+        var lastResult = resultFn.apply(this, newArgs);
+        cache = {
+            lastResult: lastResult,
+            lastArgs: newArgs,
+            lastThis: this,
+        };
+        return lastResult;
+    }
+    memoized.clear = function clear() {
+        cache = null;
+    };
+    return memoized;
+}
+
+// Material Design Icons v7.0.96
+var mdiAlertOutline = "M12,2L1,21H23M12,6L19.53,19H4.47M11,10V14H13V10M11,16V18H13V16";
+var mdiArrowLeft = "M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z";
+var mdiClose = "M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z";
+var mdiContentSave = "M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z";
+var mdiDelete = "M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z";
+var mdiDotsVertical = "M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z";
+var mdiEarHearing = "M17,20C16.71,20 16.44,19.94 16.24,19.85C15.53,19.5 15.03,18.97 14.53,17.47C14,15.91 13.06,15.18 12.14,14.47C11.35,13.86 10.53,13.23 9.82,11.94C9.29,11 9,9.93 9,9C9,6.2 11.2,4 14,4C16.8,4 19,6.2 19,9H21C21,5.07 17.93,2 14,2C10.07,2 7,5.07 7,9C7,10.26 7.38,11.65 8.07,12.9C9,14.55 10.05,15.38 10.92,16.05C11.73,16.67 12.31,17.12 12.63,18.1C13.23,19.92 14,20.94 15.36,21.65C15.87,21.88 16.43,22 17,22A4,4 0 0,0 21,18H19A2,2 0 0,1 17,20M7.64,2.64L6.22,1.22C4.23,3.21 3,5.96 3,9C3,12.04 4.23,14.79 6.22,16.78L7.63,15.37C6,13.74 5,11.5 5,9C5,6.5 6,4.26 7.64,2.64M11.5,9A2.5,2.5 0 0,0 14,11.5A2.5,2.5 0 0,0 16.5,9A2.5,2.5 0 0,0 14,6.5A2.5,2.5 0 0,0 11.5,9Z";
+var mdiGestureTapButton = "M13 5C15.21 5 17 6.79 17 9C17 10.5 16.2 11.77 15 12.46V11.24C15.61 10.69 16 9.89 16 9C16 7.34 14.66 6 13 6S10 7.34 10 9C10 9.89 10.39 10.69 11 11.24V12.46C9.8 11.77 9 10.5 9 9C9 6.79 10.79 5 13 5M20 20.5C19.97 21.32 19.32 21.97 18.5 22H13C12.62 22 12.26 21.85 12 21.57L8 17.37L8.74 16.6C8.93 16.39 9.2 16.28 9.5 16.28H9.7L12 18V9C12 8.45 12.45 8 13 8S14 8.45 14 9V13.47L15.21 13.6L19.15 15.79C19.68 16.03 20 16.56 20 17.14V20.5M20 2H4C2.9 2 2 2.9 2 4V12C2 13.11 2.9 14 4 14H8V12L4 12L4 4H20L20 12H18V14H20V13.96L20.04 14C21.13 14 22 13.09 22 12V4C22 2.9 21.11 2 20 2Z";
+var mdiHelpCircle = "M15.07,11.25L14.17,12.17C13.45,12.89 13,13.5 13,15H11V14.5C11,13.39 11.45,12.39 12.17,11.67L13.41,10.41C13.78,10.05 14,9.55 14,9C14,7.89 13.1,7 12,7A2,2 0 0,0 10,9H8A4,4 0 0,1 12,5A4,4 0 0,1 16,9C16,9.88 15.64,10.67 15.07,11.25M13,19H11V17H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z";
+var mdiPlayCircleOutline = "M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M10,16.5L16,12L10,7.5V16.5Z";
+var mdiPlus = "M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z";
+var mdiRenameBox = "M18,17H10.5L12.5,15H18M6,17V14.5L13.88,6.65C14.07,6.45 14.39,6.45 14.59,6.65L16.35,8.41C16.55,8.61 16.55,8.92 16.35,9.12L8.47,17M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3Z";
+var mdiStopCircleOutline = "M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4M9,9V15H15V9";
+
+const MODES = ["single", "restart", "queued", "parallel"];
+
+// Polymer legacy event helpers used courtesy of the Polymer project.
+//
+// Copyright (c) 2017 The Polymer Authors. All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are
+// met:
+//
+//    * Redistributions of source code must retain the above copyright
+// notice, this list of conditions and the following disclaimer.
+//    * Redistributions in binary form must reproduce the above
+// copyright notice, this list of conditions and the following disclaimer
+// in the documentation and/or other materials provided with the
+// distribution.
+//    * Neither the name of Google Inc. nor the names of its
+// contributors may be used to endorse or promote products derived from
+// this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+/**
+ * Dispatches a custom event with an optional detail value.
+ *
+ * @param {string} type Name of event type.
+ * @param {*=} detail Detail value containing event-specific
+ *   payload.
+ * @param {{ bubbles: (boolean|undefined),
+ *           cancelable: (boolean|undefined),
+ *           composed: (boolean|undefined) }=}
+ *  options Object specifying options.  These may include:
+ *  `bubbles` (boolean, defaults to `true`),
+ *  `cancelable` (boolean, defaults to false), and
+ *  `node` on which to fire the event (HTMLElement, defaults to `this`).
+ * @return {Event} The new event that was fired.
+ */
+const fireEvent = (node, type, detail, options) => {
+    options = options || {};
+    // @ts-ignore
+    detail = detail === null || detail === undefined ? {} : detail;
+    const event = new Event(type, {
+        bubbles: options.bubbles === undefined ? true : options.bubbles,
+        cancelable: Boolean(options.cancelable),
+        composed: options.composed === undefined ? true : options.composed,
+    });
+    event.detail = detail;
+    node.dispatchEvent(event);
+    return event;
+};
+
+const DOMAIN = 'switch_manager';
+function computeRTL(hass) {
+    const lang = hass.language || "en";
+    if (hass.translationMetadata.translations[lang]) {
+        return hass.translationMetadata.translations[lang].isRTL || false;
+    }
+    return false;
+}
+function computeRTLDirection(hass) {
+    return emitRTLDirection(computeRTL(hass));
+}
+function emitRTLDirection(rtl) {
+    return rtl ? "rtl" : "ltr";
+}
+function buildUrl(suffix) {
+    if (!suffix)
+        return `/${DOMAIN}`;
+    return `/${DOMAIN}/${suffix}`;
+}
+function buildAssetUrl(asset) {
+    return `/assets/${DOMAIN}/${asset}`;
+}
+function buildWSPath(suffix) {
+    return `${DOMAIN}/${suffix}`;
+}
+function getValueById(dom, id, in_render_root = true) {
+    if (in_render_root)
+        return dom.renderRoot.querySelector(`#${id}`).value.toString().trim();
+    return dom.querySelector(`#${id}`).value.toString().trim();
+}
+function createConfigFromBlueprint(blueprint) {
+    let config = {
+        id: null,
+        name: 'New Switch',
+        enabled: true,
+        identifier: '',
+        blueprint: blueprint,
+        valid_blueprint: true,
+        buttons: []
+    };
+    blueprint.buttons.forEach((button, i) => {
+        config.buttons[i] = {
+            actions: []
+        };
+        button.actions.forEach((action, ii) => {
+            config.buttons[i].actions[ii] = {
+                mode: MODES[0],
+                sequence: []
+            };
+        });
+    });
+    return config;
+}
+function navigate(ev) {
+    if (typeof ev == 'string') {
+        window.history.pushState({}, null, ev);
+        window.dispatchEvent(new PopStateEvent('popstate'));
+        return false;
+    }
+    var target = ev.target;
+    if (target.localName !== 'a')
+        target = target.closest('a');
+    if (target.localName === 'a' && target.href) {
+        window.history.pushState({}, null, target.href);
+        window.dispatchEvent(new PopStateEvent('popstate'));
+    }
+    return false;
+}
+const loadComponents = async () => {
+    var _a, _b, _c, _d, _e, _f, _g;
+    if (customElements.get('ha-automation-action') && customElements.get('ha-data-table')) {
+        return;
+    }
+    await customElements.whenDefined("partial-panel-resolver");
+    const ppResolver = document.createElement("partial-panel-resolver");
+    const routes = ppResolver.getRoutes([
+        {
+            component_name: "config",
+            url_path: "a",
+        },
+    ]);
+    await ((_c = (_b = (_a = routes === null || routes === void 0 ? void 0 : routes.routes) === null || _a === void 0 ? void 0 : _a.a) === null || _b === void 0 ? void 0 : _b.load) === null || _c === void 0 ? void 0 : _c.call(_b));
+    await customElements.whenDefined("ha-panel-config");
+    const configRouter = document.createElement("ha-panel-config");
+    // await configRouter?.routerOptions?.routes?.dashboard?.load?.(); // Load ha-config-dashboard
+    await ((_g = (_f = (_e = (_d = configRouter === null || configRouter === void 0 ? void 0 : configRouter.routerOptions) === null || _d === void 0 ? void 0 : _d.routes) === null || _e === void 0 ? void 0 : _e.script) === null || _f === void 0 ? void 0 : _f.load) === null || _g === void 0 ? void 0 : _g.call(_f)); // Load ha-data-table
+    await customElements.whenDefined("ha-config-dashboard");
+};
+// export const fireEvent = (  
+//     node: HTMLElement | Window,
+//     type: string,
+//     detail?: {},
+//     options?: {
+//       bubbles?: boolean;
+//       cancelable?: boolean;
+//       composed?: boolean;
+//     }) => 
+// {
+//     options = options || {};
+//     // @ts-ignore
+//     detail = detail === null || detail === undefined ? {} : detail;
+//     const event = new Event(type, {
+//       bubbles: options.bubbles === undefined ? true : options.bubbles,
+//       cancelable: Boolean(options.cancelable),
+//       composed: options.composed === undefined ? true : options.composed,
+//     });
+//     (event as any).detail = detail;
+//     node.dispatchEvent(event);
+//     return event;
+// }
+const createCloseHeading = (title) => y `
+    <div class="header_title">${title}</div>
     <ha-icon-button
-      .label=${"Close"}
-      .path=${"M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"}
+      .label=${'Close'}
+      .path=${mdiClose}
       dialogAction="close"
-      class="header_button"></ha-icon-button>`,yt=(t,e)=>vt(t,"hass-notification",e),wt=(t,e)=>new Promise((i=>{const s=e.cancel,o=e.confirm;vt(t,"show-dialog",{dialogTag:"switch-manager-dialog-confirm",dialogImport:()=>Promise.resolve().then((function(){return Oe})),dialogParams:Object.assign(Object.assign({},e),{cancel:()=>{i(!!(null==e?void 0:e.prompt)&&null),s&&s()},confirm:()=>{i(!(null==e?void 0:e.prompt)||null),o&&o()}})})})),At=window,xt=At.ShadowRoot&&(void 0===At.ShadyCSS||At.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,St=Symbol(),Ct=new WeakMap;class Et{constructor(t,e,i){if(this._$cssResult$=!0,i!==St)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=t,this.t=e}get styleSheet(){let t=this.o;const e=this.t;if(xt&&void 0===t){const i=void 0!==e&&1===e.length;i&&(t=Ct.get(e)),void 0===t&&((this.o=t=new CSSStyleSheet).replaceSync(this.cssText),i&&Ct.set(e,t))}return t}toString(){return this.cssText}}const kt=(t,...e)=>{const i=1===t.length?t[0]:e.reduce(((e,i,s)=>e+(t=>{if(!0===t._$cssResult$)return t.cssText;if("number"==typeof t)return t;throw Error("Value passed to 'css' function must be a 'css' function result: "+t+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(i)+t[s+1]),t[0]);return new Et(i,t,St)},Ht=xt?t=>t:t=>t instanceof CSSStyleSheet?(t=>{let e="";for(const i of t.cssRules)e+=i.cssText;return(t=>new Et("string"==typeof t?t:t+"",void 0,St))(e)})(t):t;var Nt;const Pt=window,Mt=Pt.trustedTypes,Ut=Mt?Mt.emptyScript:"",Tt=Pt.reactiveElementPolyfillSupport,Ot={toAttribute(t,e){switch(e){case Boolean:t=t?Ut:null;break;case Object:case Array:t=null==t?t:JSON.stringify(t)}return t},fromAttribute(t,e){let i=t;switch(e){case Boolean:i=null!==t;break;case Number:i=null===t?null:Number(t);break;case Object:case Array:try{i=JSON.parse(t)}catch(t){i=null}}return i}},Lt=(t,e)=>e!==t&&(e==e||t==t),Rt={attribute:!0,type:String,converter:Ot,reflect:!1,hasChanged:Lt};class Dt extends HTMLElement{constructor(){super(),this._$Ei=new Map,this.isUpdatePending=!1,this.hasUpdated=!1,this._$El=null,this.u()}static addInitializer(t){var e;this.finalize(),(null!==(e=this.h)&&void 0!==e?e:this.h=[]).push(t)}static get observedAttributes(){this.finalize();const t=[];return this.elementProperties.forEach(((e,i)=>{const s=this._$Ep(i,e);void 0!==s&&(this._$Ev.set(s,i),t.push(s))})),t}static createProperty(t,e=Rt){if(e.state&&(e.attribute=!1),this.finalize(),this.elementProperties.set(t,e),!e.noAccessor&&!this.prototype.hasOwnProperty(t)){const i="symbol"==typeof t?Symbol():"__"+t,s=this.getPropertyDescriptor(t,i,e);void 0!==s&&Object.defineProperty(this.prototype,t,s)}}static getPropertyDescriptor(t,e,i){return{get(){return this[e]},set(s){const o=this[t];this[e]=s,this.requestUpdate(t,o,i)},configurable:!0,enumerable:!0}}static getPropertyOptions(t){return this.elementProperties.get(t)||Rt}static finalize(){if(this.hasOwnProperty("finalized"))return!1;this.finalized=!0;const t=Object.getPrototypeOf(this);if(t.finalize(),void 0!==t.h&&(this.h=[...t.h]),this.elementProperties=new Map(t.elementProperties),this._$Ev=new Map,this.hasOwnProperty("properties")){const t=this.properties,e=[...Object.getOwnPropertyNames(t),...Object.getOwnPropertySymbols(t)];for(const i of e)this.createProperty(i,t[i])}return this.elementStyles=this.finalizeStyles(this.styles),!0}static finalizeStyles(t){const e=[];if(Array.isArray(t)){const i=new Set(t.flat(1/0).reverse());for(const t of i)e.unshift(Ht(t))}else void 0!==t&&e.push(Ht(t));return e}static _$Ep(t,e){const i=e.attribute;return!1===i?void 0:"string"==typeof i?i:"string"==typeof t?t.toLowerCase():void 0}u(){var t;this._$E_=new Promise((t=>this.enableUpdating=t)),this._$AL=new Map,this._$Eg(),this.requestUpdate(),null===(t=this.constructor.h)||void 0===t||t.forEach((t=>t(this)))}addController(t){var e,i;(null!==(e=this._$ES)&&void 0!==e?e:this._$ES=[]).push(t),void 0!==this.renderRoot&&this.isConnected&&(null===(i=t.hostConnected)||void 0===i||i.call(t))}removeController(t){var e;null===(e=this._$ES)||void 0===e||e.splice(this._$ES.indexOf(t)>>>0,1)}_$Eg(){this.constructor.elementProperties.forEach(((t,e)=>{this.hasOwnProperty(e)&&(this._$Ei.set(e,this[e]),delete this[e])}))}createRenderRoot(){var t;const e=null!==(t=this.shadowRoot)&&void 0!==t?t:this.attachShadow(this.constructor.shadowRootOptions);return((t,e)=>{xt?t.adoptedStyleSheets=e.map((t=>t instanceof CSSStyleSheet?t:t.styleSheet)):e.forEach((e=>{const i=document.createElement("style"),s=At.litNonce;void 0!==s&&i.setAttribute("nonce",s),i.textContent=e.cssText,t.appendChild(i)}))})(e,this.constructor.elementStyles),e}connectedCallback(){var t;void 0===this.renderRoot&&(this.renderRoot=this.createRenderRoot()),this.enableUpdating(!0),null===(t=this._$ES)||void 0===t||t.forEach((t=>{var e;return null===(e=t.hostConnected)||void 0===e?void 0:e.call(t)}))}enableUpdating(t){}disconnectedCallback(){var t;null===(t=this._$ES)||void 0===t||t.forEach((t=>{var e;return null===(e=t.hostDisconnected)||void 0===e?void 0:e.call(t)}))}attributeChangedCallback(t,e,i){this._$AK(t,i)}_$EO(t,e,i=Rt){var s;const o=this.constructor._$Ep(t,i);if(void 0!==o&&!0===i.reflect){const n=(void 0!==(null===(s=i.converter)||void 0===s?void 0:s.toAttribute)?i.converter:Ot).toAttribute(e,i.type);this._$El=t,null==n?this.removeAttribute(o):this.setAttribute(o,n),this._$El=null}}_$AK(t,e){var i;const s=this.constructor,o=s._$Ev.get(t);if(void 0!==o&&this._$El!==o){const t=s.getPropertyOptions(o),n="function"==typeof t.converter?{fromAttribute:t.converter}:void 0!==(null===(i=t.converter)||void 0===i?void 0:i.fromAttribute)?t.converter:Ot;this._$El=o,this[o]=n.fromAttribute(e,t.type),this._$El=null}}requestUpdate(t,e,i){let s=!0;void 0!==t&&(((i=i||this.constructor.getPropertyOptions(t)).hasChanged||Lt)(this[t],e)?(this._$AL.has(t)||this._$AL.set(t,e),!0===i.reflect&&this._$El!==t&&(void 0===this._$EC&&(this._$EC=new Map),this._$EC.set(t,i))):s=!1),!this.isUpdatePending&&s&&(this._$E_=this._$Ej())}async _$Ej(){this.isUpdatePending=!0;try{await this._$E_}catch(t){Promise.reject(t)}const t=this.scheduleUpdate();return null!=t&&await t,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){var t;if(!this.isUpdatePending)return;this.hasUpdated,this._$Ei&&(this._$Ei.forEach(((t,e)=>this[e]=t)),this._$Ei=void 0);let e=!1;const i=this._$AL;try{e=this.shouldUpdate(i),e?(this.willUpdate(i),null===(t=this._$ES)||void 0===t||t.forEach((t=>{var e;return null===(e=t.hostUpdate)||void 0===e?void 0:e.call(t)})),this.update(i)):this._$Ek()}catch(t){throw e=!1,this._$Ek(),t}e&&this._$AE(i)}willUpdate(t){}_$AE(t){var e;null===(e=this._$ES)||void 0===e||e.forEach((t=>{var e;return null===(e=t.hostUpdated)||void 0===e?void 0:e.call(t)})),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(t)),this.updated(t)}_$Ek(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$E_}shouldUpdate(t){return!0}update(t){void 0!==this._$EC&&(this._$EC.forEach(((t,e)=>this._$EO(e,this[e],t))),this._$EC=void 0),this._$Ek()}updated(t){}firstUpdated(t){}}var zt;Dt.finalized=!0,Dt.elementProperties=new Map,Dt.elementStyles=[],Dt.shadowRootOptions={mode:"open"},null==Tt||Tt({ReactiveElement:Dt}),(null!==(Nt=Pt.reactiveElementVersions)&&void 0!==Nt?Nt:Pt.reactiveElementVersions=[]).push("1.4.2");const jt=window,qt=jt.trustedTypes,Vt=qt?qt.createPolicy("lit-html",{createHTML:t=>t}):void 0,Bt=`lit$${(Math.random()+"").slice(9)}$`,It="?"+Bt,Wt=`<${It}>`,Zt=document,Kt=(t="")=>Zt.createComment(t),Ft=t=>null===t||"object"!=typeof t&&"function"!=typeof t,Jt=Array.isArray,Gt=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,Qt=/-->/g,Xt=/>/g,Yt=RegExp(">|[ \t\n\f\r](?:([^\\s\"'>=/]+)([ \t\n\f\r]*=[ \t\n\f\r]*(?:[^ \t\n\f\r\"'`<>=]|(\"|')|))|$)","g"),te=/'/g,ee=/"/g,ie=/^(?:script|style|textarea|title)$/i,se=Symbol.for("lit-noChange"),oe=Symbol.for("lit-nothing"),ne=new WeakMap,re=Zt.createTreeWalker(Zt,129,null,!1),ae=(t,e)=>{const i=t.length-1,s=[];let o,n=2===e?"<svg>":"",r=Gt;for(let e=0;e<i;e++){const i=t[e];let a,l,h=-1,d=0;for(;d<i.length&&(r.lastIndex=d,l=r.exec(i),null!==l);)d=r.lastIndex,r===Gt?"!--"===l[1]?r=Qt:void 0!==l[1]?r=Xt:void 0!==l[2]?(ie.test(l[2])&&(o=RegExp("</"+l[2],"g")),r=Yt):void 0!==l[3]&&(r=Yt):r===Yt?">"===l[0]?(r=null!=o?o:Gt,h=-1):void 0===l[1]?h=-2:(h=r.lastIndex-l[2].length,a=l[1],r=void 0===l[3]?Yt:'"'===l[3]?ee:te):r===ee||r===te?r=Yt:r===Qt||r===Xt?r=Gt:(r=Yt,o=void 0);const c=r===Yt&&t[e+1].startsWith("/>")?" ":"";n+=r===Gt?i+Wt:h>=0?(s.push(a),i.slice(0,h)+"$lit$"+i.slice(h)+Bt+c):i+Bt+(-2===h?(s.push(void 0),e):c)}const a=n+(t[i]||"<?>")+(2===e?"</svg>":"");if(!Array.isArray(t)||!t.hasOwnProperty("raw"))throw Error("invalid template strings array");return[void 0!==Vt?Vt.createHTML(a):a,s]};class le{constructor({strings:t,_$litType$:e},i){let s;this.parts=[];let o=0,n=0;const r=t.length-1,a=this.parts,[l,h]=ae(t,e);if(this.el=le.createElement(l,i),re.currentNode=this.el.content,2===e){const t=this.el.content,e=t.firstChild;e.remove(),t.append(...e.childNodes)}for(;null!==(s=re.nextNode())&&a.length<r;){if(1===s.nodeType){if(s.hasAttributes()){const t=[];for(const e of s.getAttributeNames())if(e.endsWith("$lit$")||e.startsWith(Bt)){const i=h[n++];if(t.push(e),void 0!==i){const t=s.getAttribute(i.toLowerCase()+"$lit$").split(Bt),e=/([.?@])?(.*)/.exec(i);a.push({type:1,index:o,name:e[2],strings:t,ctor:"."===e[1]?ue:"?"===e[1]?ge:"@"===e[1]?me:pe})}else a.push({type:6,index:o})}for(const e of t)s.removeAttribute(e)}if(ie.test(s.tagName)){const t=s.textContent.split(Bt),e=t.length-1;if(e>0){s.textContent=qt?qt.emptyScript:"";for(let i=0;i<e;i++)s.append(t[i],Kt()),re.nextNode(),a.push({type:2,index:++o});s.append(t[e],Kt())}}}else if(8===s.nodeType)if(s.data===It)a.push({type:2,index:o});else{let t=-1;for(;-1!==(t=s.data.indexOf(Bt,t+1));)a.push({type:7,index:o}),t+=Bt.length-1}o++}}static createElement(t,e){const i=Zt.createElement("template");return i.innerHTML=t,i}}function he(t,e,i=t,s){var o,n,r,a;if(e===se)return e;let l=void 0!==s?null===(o=i._$Co)||void 0===o?void 0:o[s]:i._$Cl;const h=Ft(e)?void 0:e._$litDirective$;return(null==l?void 0:l.constructor)!==h&&(null===(n=null==l?void 0:l._$AO)||void 0===n||n.call(l,!1),void 0===h?l=void 0:(l=new h(t),l._$AT(t,i,s)),void 0!==s?(null!==(r=(a=i)._$Co)&&void 0!==r?r:a._$Co=[])[s]=l:i._$Cl=l),void 0!==l&&(e=he(t,l._$AS(t,e.values),l,s)),e}class de{constructor(t,e){this.u=[],this._$AN=void 0,this._$AD=t,this._$AM=e}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}v(t){var e;const{el:{content:i},parts:s}=this._$AD,o=(null!==(e=null==t?void 0:t.creationScope)&&void 0!==e?e:Zt).importNode(i,!0);re.currentNode=o;let n=re.nextNode(),r=0,a=0,l=s[0];for(;void 0!==l;){if(r===l.index){let e;2===l.type?e=new ce(n,n.nextSibling,this,t):1===l.type?e=new l.ctor(n,l.name,l.strings,this,t):6===l.type&&(e=new _e(n,this,t)),this.u.push(e),l=s[++a]}r!==(null==l?void 0:l.index)&&(n=re.nextNode(),r++)}return o}p(t){let e=0;for(const i of this.u)void 0!==i&&(void 0!==i.strings?(i._$AI(t,i,e),e+=i.strings.length-2):i._$AI(t[e])),e++}}class ce{constructor(t,e,i,s){var o;this.type=2,this._$AH=oe,this._$AN=void 0,this._$AA=t,this._$AB=e,this._$AM=i,this.options=s,this._$Cm=null===(o=null==s?void 0:s.isConnected)||void 0===o||o}get _$AU(){var t,e;return null!==(e=null===(t=this._$AM)||void 0===t?void 0:t._$AU)&&void 0!==e?e:this._$Cm}get parentNode(){let t=this._$AA.parentNode;const e=this._$AM;return void 0!==e&&11===t.nodeType&&(t=e.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,e=this){t=he(this,t,e),Ft(t)?t===oe||null==t||""===t?(this._$AH!==oe&&this._$AR(),this._$AH=oe):t!==this._$AH&&t!==se&&this.g(t):void 0!==t._$litType$?this.$(t):void 0!==t.nodeType?this.T(t):(t=>Jt(t)||"function"==typeof(null==t?void 0:t[Symbol.iterator]))(t)?this.k(t):this.g(t)}O(t,e=this._$AB){return this._$AA.parentNode.insertBefore(t,e)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t))}g(t){this._$AH!==oe&&Ft(this._$AH)?this._$AA.nextSibling.data=t:this.T(Zt.createTextNode(t)),this._$AH=t}$(t){var e;const{values:i,_$litType$:s}=t,o="number"==typeof s?this._$AC(t):(void 0===s.el&&(s.el=le.createElement(s.h,this.options)),s);if((null===(e=this._$AH)||void 0===e?void 0:e._$AD)===o)this._$AH.p(i);else{const t=new de(o,this),e=t.v(this.options);t.p(i),this.T(e),this._$AH=t}}_$AC(t){let e=ne.get(t.strings);return void 0===e&&ne.set(t.strings,e=new le(t)),e}k(t){Jt(this._$AH)||(this._$AH=[],this._$AR());const e=this._$AH;let i,s=0;for(const o of t)s===e.length?e.push(i=new ce(this.O(Kt()),this.O(Kt()),this,this.options)):i=e[s],i._$AI(o),s++;s<e.length&&(this._$AR(i&&i._$AB.nextSibling,s),e.length=s)}_$AR(t=this._$AA.nextSibling,e){var i;for(null===(i=this._$AP)||void 0===i||i.call(this,!1,!0,e);t&&t!==this._$AB;){const e=t.nextSibling;t.remove(),t=e}}setConnected(t){var e;void 0===this._$AM&&(this._$Cm=t,null===(e=this._$AP)||void 0===e||e.call(this,t))}}class pe{constructor(t,e,i,s,o){this.type=1,this._$AH=oe,this._$AN=void 0,this.element=t,this.name=e,this._$AM=s,this.options=o,i.length>2||""!==i[0]||""!==i[1]?(this._$AH=Array(i.length-1).fill(new String),this.strings=i):this._$AH=oe}get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}_$AI(t,e=this,i,s){const o=this.strings;let n=!1;if(void 0===o)t=he(this,t,e,0),n=!Ft(t)||t!==this._$AH&&t!==se,n&&(this._$AH=t);else{const s=t;let r,a;for(t=o[0],r=0;r<o.length-1;r++)a=he(this,s[i+r],e,r),a===se&&(a=this._$AH[r]),n||(n=!Ft(a)||a!==this._$AH[r]),a===oe?t=oe:t!==oe&&(t+=(null!=a?a:"")+o[r+1]),this._$AH[r]=a}n&&!s&&this.j(t)}j(t){t===oe?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,null!=t?t:"")}}class ue extends pe{constructor(){super(...arguments),this.type=3}j(t){this.element[this.name]=t===oe?void 0:t}}const ve=qt?qt.emptyScript:"";class ge extends pe{constructor(){super(...arguments),this.type=4}j(t){t&&t!==oe?this.element.setAttribute(this.name,ve):this.element.removeAttribute(this.name)}}class me extends pe{constructor(t,e,i,s,o){super(t,e,i,s,o),this.type=5}_$AI(t,e=this){var i;if((t=null!==(i=he(this,t,e,0))&&void 0!==i?i:oe)===se)return;const s=this._$AH,o=t===oe&&s!==oe||t.capture!==s.capture||t.once!==s.once||t.passive!==s.passive,n=t!==oe&&(s===oe||o);o&&this.element.removeEventListener(this.name,this,s),n&&this.element.addEventListener(this.name,this,t),this._$AH=t}handleEvent(t){var e,i;"function"==typeof this._$AH?this._$AH.call(null!==(i=null===(e=this.options)||void 0===e?void 0:e.host)&&void 0!==i?i:this.element,t):this._$AH.handleEvent(t)}}class _e{constructor(t,e,i){this.element=t,this.type=6,this._$AN=void 0,this._$AM=e,this.options=i}get _$AU(){return this._$AM._$AU}_$AI(t){he(this,t)}}const fe=jt.litHtmlPolyfillSupport;null==fe||fe(le,ce),(null!==(zt=jt.litHtmlVersions)&&void 0!==zt?zt:jt.litHtmlVersions=[]).push("2.4.0");var be,$e;class ye extends Dt{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){var t,e;const i=super.createRenderRoot();return null!==(t=(e=this.renderOptions).renderBefore)&&void 0!==t||(e.renderBefore=i.firstChild),i}update(t){const e=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(t),this._$Do=((t,e,i)=>{var s,o;const n=null!==(s=null==i?void 0:i.renderBefore)&&void 0!==s?s:e;let r=n._$litPart$;if(void 0===r){const t=null!==(o=null==i?void 0:i.renderBefore)&&void 0!==o?o:null;n._$litPart$=r=new ce(e.insertBefore(Kt(),t),t,void 0,null!=i?i:{})}return r._$AI(t),r})(e,this.renderRoot,this.renderOptions)}connectedCallback(){var t;super.connectedCallback(),null===(t=this._$Do)||void 0===t||t.setConnected(!0)}disconnectedCallback(){var t;super.disconnectedCallback(),null===(t=this._$Do)||void 0===t||t.setConnected(!1)}render(){return se}}ye.finalized=!0,ye._$litElement$=!0,null===(be=globalThis.litElementHydrateSupport)||void 0===be||be.call(globalThis,{LitElement:ye});const we=globalThis.litElementPolyfillSupport;null==we||we({LitElement:ye}),(null!==($e=globalThis.litElementVersions)&&void 0!==$e?$e:globalThis.litElementVersions=[]).push("3.2.2");const Ae=kt`
+      class="header_button"></ha-icon-button>`;
+const showToast = (el, params) => fireEvent(el, "hass-notification", params);
+const showConfirmDialog = (element, dialogParams) => new Promise((resolve) => {
+    const origCancel = dialogParams.cancel;
+    const origConfirm = dialogParams.confirm;
+    fireEvent(element, "show-dialog", {
+        dialogTag: "switch-manager-dialog-confirm",
+        dialogImport: () => Promise.resolve().then(function () { return dialogConfirm; }),
+        dialogParams: Object.assign(Object.assign({}, dialogParams), { cancel: () => {
+                resolve((dialogParams === null || dialogParams === void 0 ? void 0 : dialogParams.prompt) ? null : false);
+                if (origCancel) {
+                    origCancel();
+                }
+            }, confirm: () => {
+                resolve((dialogParams === null || dialogParams === void 0 ? void 0 : dialogParams.prompt) ? null : true);
+                if (origConfirm) {
+                    origConfirm();
+                }
+            } }),
+    });
+});
+
+/**
+ * @license
+ * Copyright 2019 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+const t$2 = window,
+  e$3 = t$2.ShadowRoot && (void 0 === t$2.ShadyCSS || t$2.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype,
+  s$3 = Symbol(),
+  n$3 = new WeakMap();
+class o$4 {
+  constructor(t, e, n) {
+    if (this._$cssResult$ = !0, n !== s$3) throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
+    this.cssText = t, this.t = e;
+  }
+  get styleSheet() {
+    let t = this.o;
+    const s = this.t;
+    if (e$3 && void 0 === t) {
+      const e = void 0 !== s && 1 === s.length;
+      e && (t = n$3.get(s)), void 0 === t && ((this.o = t = new CSSStyleSheet()).replaceSync(this.cssText), e && n$3.set(s, t));
+    }
+    return t;
+  }
+  toString() {
+    return this.cssText;
+  }
+}
+const r$2 = t => new o$4("string" == typeof t ? t : t + "", void 0, s$3),
+  i$2 = (t, ...e) => {
+    const n = 1 === t.length ? t[0] : e.reduce((e, s, n) => e + (t => {
+      if (!0 === t._$cssResult$) return t.cssText;
+      if ("number" == typeof t) return t;
+      throw Error("Value passed to 'css' function must be a 'css' function result: " + t + ". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.");
+    })(s) + t[n + 1], t[0]);
+    return new o$4(n, t, s$3);
+  },
+  S$1 = (s, n) => {
+    e$3 ? s.adoptedStyleSheets = n.map(t => t instanceof CSSStyleSheet ? t : t.styleSheet) : n.forEach(e => {
+      const n = document.createElement("style"),
+        o = t$2.litNonce;
+      void 0 !== o && n.setAttribute("nonce", o), n.textContent = e.cssText, s.appendChild(n);
+    });
+  },
+  c$1 = e$3 ? t => t : t => t instanceof CSSStyleSheet ? (t => {
+    let e = "";
+    for (const s of t.cssRules) e += s.cssText;
+    return r$2(e);
+  })(t) : t;
+
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+var s$2;
+const e$2 = window,
+  r$1 = e$2.trustedTypes,
+  h$1 = r$1 ? r$1.emptyScript : "",
+  o$3 = e$2.reactiveElementPolyfillSupport,
+  n$2 = {
+    toAttribute(t, i) {
+      switch (i) {
+        case Boolean:
+          t = t ? h$1 : null;
+          break;
+        case Object:
+        case Array:
+          t = null == t ? t : JSON.stringify(t);
+      }
+      return t;
+    },
+    fromAttribute(t, i) {
+      let s = t;
+      switch (i) {
+        case Boolean:
+          s = null !== t;
+          break;
+        case Number:
+          s = null === t ? null : Number(t);
+          break;
+        case Object:
+        case Array:
+          try {
+            s = JSON.parse(t);
+          } catch (t) {
+            s = null;
+          }
+      }
+      return s;
+    }
+  },
+  a$1 = (t, i) => i !== t && (i == i || t == t),
+  l$2 = {
+    attribute: !0,
+    type: String,
+    converter: n$2,
+    reflect: !1,
+    hasChanged: a$1
+  };
+class d$1 extends HTMLElement {
+  constructor() {
+    super(), this._$Ei = new Map(), this.isUpdatePending = !1, this.hasUpdated = !1, this._$El = null, this.u();
+  }
+  static addInitializer(t) {
+    var i;
+    this.finalize(), (null !== (i = this.h) && void 0 !== i ? i : this.h = []).push(t);
+  }
+  static get observedAttributes() {
+    this.finalize();
+    const t = [];
+    return this.elementProperties.forEach((i, s) => {
+      const e = this._$Ep(s, i);
+      void 0 !== e && (this._$Ev.set(e, s), t.push(e));
+    }), t;
+  }
+  static createProperty(t, i = l$2) {
+    if (i.state && (i.attribute = !1), this.finalize(), this.elementProperties.set(t, i), !i.noAccessor && !this.prototype.hasOwnProperty(t)) {
+      const s = "symbol" == typeof t ? Symbol() : "__" + t,
+        e = this.getPropertyDescriptor(t, s, i);
+      void 0 !== e && Object.defineProperty(this.prototype, t, e);
+    }
+  }
+  static getPropertyDescriptor(t, i, s) {
+    return {
+      get() {
+        return this[i];
+      },
+      set(e) {
+        const r = this[t];
+        this[i] = e, this.requestUpdate(t, r, s);
+      },
+      configurable: !0,
+      enumerable: !0
+    };
+  }
+  static getPropertyOptions(t) {
+    return this.elementProperties.get(t) || l$2;
+  }
+  static finalize() {
+    if (this.hasOwnProperty("finalized")) return !1;
+    this.finalized = !0;
+    const t = Object.getPrototypeOf(this);
+    if (t.finalize(), void 0 !== t.h && (this.h = [...t.h]), this.elementProperties = new Map(t.elementProperties), this._$Ev = new Map(), this.hasOwnProperty("properties")) {
+      const t = this.properties,
+        i = [...Object.getOwnPropertyNames(t), ...Object.getOwnPropertySymbols(t)];
+      for (const s of i) this.createProperty(s, t[s]);
+    }
+    return this.elementStyles = this.finalizeStyles(this.styles), !0;
+  }
+  static finalizeStyles(i) {
+    const s = [];
+    if (Array.isArray(i)) {
+      const e = new Set(i.flat(1 / 0).reverse());
+      for (const i of e) s.unshift(c$1(i));
+    } else void 0 !== i && s.push(c$1(i));
+    return s;
+  }
+  static _$Ep(t, i) {
+    const s = i.attribute;
+    return !1 === s ? void 0 : "string" == typeof s ? s : "string" == typeof t ? t.toLowerCase() : void 0;
+  }
+  u() {
+    var t;
+    this._$E_ = new Promise(t => this.enableUpdating = t), this._$AL = new Map(), this._$Eg(), this.requestUpdate(), null === (t = this.constructor.h) || void 0 === t || t.forEach(t => t(this));
+  }
+  addController(t) {
+    var i, s;
+    (null !== (i = this._$ES) && void 0 !== i ? i : this._$ES = []).push(t), void 0 !== this.renderRoot && this.isConnected && (null === (s = t.hostConnected) || void 0 === s || s.call(t));
+  }
+  removeController(t) {
+    var i;
+    null === (i = this._$ES) || void 0 === i || i.splice(this._$ES.indexOf(t) >>> 0, 1);
+  }
+  _$Eg() {
+    this.constructor.elementProperties.forEach((t, i) => {
+      this.hasOwnProperty(i) && (this._$Ei.set(i, this[i]), delete this[i]);
+    });
+  }
+  createRenderRoot() {
+    var t;
+    const s = null !== (t = this.shadowRoot) && void 0 !== t ? t : this.attachShadow(this.constructor.shadowRootOptions);
+    return S$1(s, this.constructor.elementStyles), s;
+  }
+  connectedCallback() {
+    var t;
+    void 0 === this.renderRoot && (this.renderRoot = this.createRenderRoot()), this.enableUpdating(!0), null === (t = this._$ES) || void 0 === t || t.forEach(t => {
+      var i;
+      return null === (i = t.hostConnected) || void 0 === i ? void 0 : i.call(t);
+    });
+  }
+  enableUpdating(t) {}
+  disconnectedCallback() {
+    var t;
+    null === (t = this._$ES) || void 0 === t || t.forEach(t => {
+      var i;
+      return null === (i = t.hostDisconnected) || void 0 === i ? void 0 : i.call(t);
+    });
+  }
+  attributeChangedCallback(t, i, s) {
+    this._$AK(t, s);
+  }
+  _$EO(t, i, s = l$2) {
+    var e;
+    const r = this.constructor._$Ep(t, s);
+    if (void 0 !== r && !0 === s.reflect) {
+      const h = (void 0 !== (null === (e = s.converter) || void 0 === e ? void 0 : e.toAttribute) ? s.converter : n$2).toAttribute(i, s.type);
+      this._$El = t, null == h ? this.removeAttribute(r) : this.setAttribute(r, h), this._$El = null;
+    }
+  }
+  _$AK(t, i) {
+    var s;
+    const e = this.constructor,
+      r = e._$Ev.get(t);
+    if (void 0 !== r && this._$El !== r) {
+      const t = e.getPropertyOptions(r),
+        h = "function" == typeof t.converter ? {
+          fromAttribute: t.converter
+        } : void 0 !== (null === (s = t.converter) || void 0 === s ? void 0 : s.fromAttribute) ? t.converter : n$2;
+      this._$El = r, this[r] = h.fromAttribute(i, t.type), this._$El = null;
+    }
+  }
+  requestUpdate(t, i, s) {
+    let e = !0;
+    void 0 !== t && (((s = s || this.constructor.getPropertyOptions(t)).hasChanged || a$1)(this[t], i) ? (this._$AL.has(t) || this._$AL.set(t, i), !0 === s.reflect && this._$El !== t && (void 0 === this._$EC && (this._$EC = new Map()), this._$EC.set(t, s))) : e = !1), !this.isUpdatePending && e && (this._$E_ = this._$Ej());
+  }
+  async _$Ej() {
+    this.isUpdatePending = !0;
+    try {
+      await this._$E_;
+    } catch (t) {
+      Promise.reject(t);
+    }
+    const t = this.scheduleUpdate();
+    return null != t && (await t), !this.isUpdatePending;
+  }
+  scheduleUpdate() {
+    return this.performUpdate();
+  }
+  performUpdate() {
+    var t;
+    if (!this.isUpdatePending) return;
+    this.hasUpdated, this._$Ei && (this._$Ei.forEach((t, i) => this[i] = t), this._$Ei = void 0);
+    let i = !1;
+    const s = this._$AL;
+    try {
+      i = this.shouldUpdate(s), i ? (this.willUpdate(s), null === (t = this._$ES) || void 0 === t || t.forEach(t => {
+        var i;
+        return null === (i = t.hostUpdate) || void 0 === i ? void 0 : i.call(t);
+      }), this.update(s)) : this._$Ek();
+    } catch (t) {
+      throw i = !1, this._$Ek(), t;
+    }
+    i && this._$AE(s);
+  }
+  willUpdate(t) {}
+  _$AE(t) {
+    var i;
+    null === (i = this._$ES) || void 0 === i || i.forEach(t => {
+      var i;
+      return null === (i = t.hostUpdated) || void 0 === i ? void 0 : i.call(t);
+    }), this.hasUpdated || (this.hasUpdated = !0, this.firstUpdated(t)), this.updated(t);
+  }
+  _$Ek() {
+    this._$AL = new Map(), this.isUpdatePending = !1;
+  }
+  get updateComplete() {
+    return this.getUpdateComplete();
+  }
+  getUpdateComplete() {
+    return this._$E_;
+  }
+  shouldUpdate(t) {
+    return !0;
+  }
+  update(t) {
+    void 0 !== this._$EC && (this._$EC.forEach((t, i) => this._$EO(i, this[i], t)), this._$EC = void 0), this._$Ek();
+  }
+  updated(t) {}
+  firstUpdated(t) {}
+}
+d$1.finalized = !0, d$1.elementProperties = new Map(), d$1.elementStyles = [], d$1.shadowRootOptions = {
+  mode: "open"
+}, null == o$3 || o$3({
+  ReactiveElement: d$1
+}), (null !== (s$2 = e$2.reactiveElementVersions) && void 0 !== s$2 ? s$2 : e$2.reactiveElementVersions = []).push("1.4.2");
+
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+var t$1;
+const i$1 = window,
+  s$1 = i$1.trustedTypes,
+  e$1 = s$1 ? s$1.createPolicy("lit-html", {
+    createHTML: t => t
+  }) : void 0,
+  o$2 = `lit$${(Math.random() + "").slice(9)}$`,
+  n$1 = "?" + o$2,
+  l$1 = `<${n$1}>`,
+  h = document,
+  r = (t = "") => h.createComment(t),
+  d = t => null === t || "object" != typeof t && "function" != typeof t,
+  u = Array.isArray,
+  c = t => u(t) || "function" == typeof (null == t ? void 0 : t[Symbol.iterator]),
+  v = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,
+  a = /-->/g,
+  f = />/g,
+  _ = RegExp(">|[ \t\n\f\r](?:([^\\s\"'>=/]+)([ \t\n\f\r]*=[ \t\n\f\r]*(?:[^ \t\n\f\r\"'`<>=]|(\"|')|))|$)", "g"),
+  m = /'/g,
+  p = /"/g,
+  $ = /^(?:script|style|textarea|title)$/i,
+  x = Symbol.for("lit-noChange"),
+  b = Symbol.for("lit-nothing"),
+  T = new WeakMap(),
+  A = h.createTreeWalker(h, 129, null, !1),
+  E = (t, i) => {
+    const s = t.length - 1,
+      n = [];
+    let h,
+      r = 2 === i ? "<svg>" : "",
+      d = v;
+    for (let i = 0; i < s; i++) {
+      const s = t[i];
+      let e,
+        u,
+        c = -1,
+        g = 0;
+      for (; g < s.length && (d.lastIndex = g, u = d.exec(s), null !== u);) g = d.lastIndex, d === v ? "!--" === u[1] ? d = a : void 0 !== u[1] ? d = f : void 0 !== u[2] ? ($.test(u[2]) && (h = RegExp("</" + u[2], "g")), d = _) : void 0 !== u[3] && (d = _) : d === _ ? ">" === u[0] ? (d = null != h ? h : v, c = -1) : void 0 === u[1] ? c = -2 : (c = d.lastIndex - u[2].length, e = u[1], d = void 0 === u[3] ? _ : '"' === u[3] ? p : m) : d === p || d === m ? d = _ : d === a || d === f ? d = v : (d = _, h = void 0);
+      const y = d === _ && t[i + 1].startsWith("/>") ? " " : "";
+      r += d === v ? s + l$1 : c >= 0 ? (n.push(e), s.slice(0, c) + "$lit$" + s.slice(c) + o$2 + y) : s + o$2 + (-2 === c ? (n.push(void 0), i) : y);
+    }
+    const u = r + (t[s] || "<?>") + (2 === i ? "</svg>" : "");
+    if (!Array.isArray(t) || !t.hasOwnProperty("raw")) throw Error("invalid template strings array");
+    return [void 0 !== e$1 ? e$1.createHTML(u) : u, n];
+  };
+class C {
+  constructor({
+    strings: t,
+    _$litType$: i
+  }, e) {
+    let l;
+    this.parts = [];
+    let h = 0,
+      d = 0;
+    const u = t.length - 1,
+      c = this.parts,
+      [v, a] = E(t, i);
+    if (this.el = C.createElement(v, e), A.currentNode = this.el.content, 2 === i) {
+      const t = this.el.content,
+        i = t.firstChild;
+      i.remove(), t.append(...i.childNodes);
+    }
+    for (; null !== (l = A.nextNode()) && c.length < u;) {
+      if (1 === l.nodeType) {
+        if (l.hasAttributes()) {
+          const t = [];
+          for (const i of l.getAttributeNames()) if (i.endsWith("$lit$") || i.startsWith(o$2)) {
+            const s = a[d++];
+            if (t.push(i), void 0 !== s) {
+              const t = l.getAttribute(s.toLowerCase() + "$lit$").split(o$2),
+                i = /([.?@])?(.*)/.exec(s);
+              c.push({
+                type: 1,
+                index: h,
+                name: i[2],
+                strings: t,
+                ctor: "." === i[1] ? M : "?" === i[1] ? k : "@" === i[1] ? H : S
+              });
+            } else c.push({
+              type: 6,
+              index: h
+            });
+          }
+          for (const i of t) l.removeAttribute(i);
+        }
+        if ($.test(l.tagName)) {
+          const t = l.textContent.split(o$2),
+            i = t.length - 1;
+          if (i > 0) {
+            l.textContent = s$1 ? s$1.emptyScript : "";
+            for (let s = 0; s < i; s++) l.append(t[s], r()), A.nextNode(), c.push({
+              type: 2,
+              index: ++h
+            });
+            l.append(t[i], r());
+          }
+        }
+      } else if (8 === l.nodeType) if (l.data === n$1) c.push({
+        type: 2,
+        index: h
+      });else {
+        let t = -1;
+        for (; -1 !== (t = l.data.indexOf(o$2, t + 1));) c.push({
+          type: 7,
+          index: h
+        }), t += o$2.length - 1;
+      }
+      h++;
+    }
+  }
+  static createElement(t, i) {
+    const s = h.createElement("template");
+    return s.innerHTML = t, s;
+  }
+}
+function P(t, i, s = t, e) {
+  var o, n, l, h;
+  if (i === x) return i;
+  let r = void 0 !== e ? null === (o = s._$Co) || void 0 === o ? void 0 : o[e] : s._$Cl;
+  const u = d(i) ? void 0 : i._$litDirective$;
+  return (null == r ? void 0 : r.constructor) !== u && (null === (n = null == r ? void 0 : r._$AO) || void 0 === n || n.call(r, !1), void 0 === u ? r = void 0 : (r = new u(t), r._$AT(t, s, e)), void 0 !== e ? (null !== (l = (h = s)._$Co) && void 0 !== l ? l : h._$Co = [])[e] = r : s._$Cl = r), void 0 !== r && (i = P(t, r._$AS(t, i.values), r, e)), i;
+}
+class V {
+  constructor(t, i) {
+    this.u = [], this._$AN = void 0, this._$AD = t, this._$AM = i;
+  }
+  get parentNode() {
+    return this._$AM.parentNode;
+  }
+  get _$AU() {
+    return this._$AM._$AU;
+  }
+  v(t) {
+    var i;
+    const {
+        el: {
+          content: s
+        },
+        parts: e
+      } = this._$AD,
+      o = (null !== (i = null == t ? void 0 : t.creationScope) && void 0 !== i ? i : h).importNode(s, !0);
+    A.currentNode = o;
+    let n = A.nextNode(),
+      l = 0,
+      r = 0,
+      d = e[0];
+    for (; void 0 !== d;) {
+      if (l === d.index) {
+        let i;
+        2 === d.type ? i = new N(n, n.nextSibling, this, t) : 1 === d.type ? i = new d.ctor(n, d.name, d.strings, this, t) : 6 === d.type && (i = new I(n, this, t)), this.u.push(i), d = e[++r];
+      }
+      l !== (null == d ? void 0 : d.index) && (n = A.nextNode(), l++);
+    }
+    return o;
+  }
+  p(t) {
+    let i = 0;
+    for (const s of this.u) void 0 !== s && (void 0 !== s.strings ? (s._$AI(t, s, i), i += s.strings.length - 2) : s._$AI(t[i])), i++;
+  }
+}
+class N {
+  constructor(t, i, s, e) {
+    var o;
+    this.type = 2, this._$AH = b, this._$AN = void 0, this._$AA = t, this._$AB = i, this._$AM = s, this.options = e, this._$Cm = null === (o = null == e ? void 0 : e.isConnected) || void 0 === o || o;
+  }
+  get _$AU() {
+    var t, i;
+    return null !== (i = null === (t = this._$AM) || void 0 === t ? void 0 : t._$AU) && void 0 !== i ? i : this._$Cm;
+  }
+  get parentNode() {
+    let t = this._$AA.parentNode;
+    const i = this._$AM;
+    return void 0 !== i && 11 === t.nodeType && (t = i.parentNode), t;
+  }
+  get startNode() {
+    return this._$AA;
+  }
+  get endNode() {
+    return this._$AB;
+  }
+  _$AI(t, i = this) {
+    t = P(this, t, i), d(t) ? t === b || null == t || "" === t ? (this._$AH !== b && this._$AR(), this._$AH = b) : t !== this._$AH && t !== x && this.g(t) : void 0 !== t._$litType$ ? this.$(t) : void 0 !== t.nodeType ? this.T(t) : c(t) ? this.k(t) : this.g(t);
+  }
+  O(t, i = this._$AB) {
+    return this._$AA.parentNode.insertBefore(t, i);
+  }
+  T(t) {
+    this._$AH !== t && (this._$AR(), this._$AH = this.O(t));
+  }
+  g(t) {
+    this._$AH !== b && d(this._$AH) ? this._$AA.nextSibling.data = t : this.T(h.createTextNode(t)), this._$AH = t;
+  }
+  $(t) {
+    var i;
+    const {
+        values: s,
+        _$litType$: e
+      } = t,
+      o = "number" == typeof e ? this._$AC(t) : (void 0 === e.el && (e.el = C.createElement(e.h, this.options)), e);
+    if ((null === (i = this._$AH) || void 0 === i ? void 0 : i._$AD) === o) this._$AH.p(s);else {
+      const t = new V(o, this),
+        i = t.v(this.options);
+      t.p(s), this.T(i), this._$AH = t;
+    }
+  }
+  _$AC(t) {
+    let i = T.get(t.strings);
+    return void 0 === i && T.set(t.strings, i = new C(t)), i;
+  }
+  k(t) {
+    u(this._$AH) || (this._$AH = [], this._$AR());
+    const i = this._$AH;
+    let s,
+      e = 0;
+    for (const o of t) e === i.length ? i.push(s = new N(this.O(r()), this.O(r()), this, this.options)) : s = i[e], s._$AI(o), e++;
+    e < i.length && (this._$AR(s && s._$AB.nextSibling, e), i.length = e);
+  }
+  _$AR(t = this._$AA.nextSibling, i) {
+    var s;
+    for (null === (s = this._$AP) || void 0 === s || s.call(this, !1, !0, i); t && t !== this._$AB;) {
+      const i = t.nextSibling;
+      t.remove(), t = i;
+    }
+  }
+  setConnected(t) {
+    var i;
+    void 0 === this._$AM && (this._$Cm = t, null === (i = this._$AP) || void 0 === i || i.call(this, t));
+  }
+}
+class S {
+  constructor(t, i, s, e, o) {
+    this.type = 1, this._$AH = b, this._$AN = void 0, this.element = t, this.name = i, this._$AM = e, this.options = o, s.length > 2 || "" !== s[0] || "" !== s[1] ? (this._$AH = Array(s.length - 1).fill(new String()), this.strings = s) : this._$AH = b;
+  }
+  get tagName() {
+    return this.element.tagName;
+  }
+  get _$AU() {
+    return this._$AM._$AU;
+  }
+  _$AI(t, i = this, s, e) {
+    const o = this.strings;
+    let n = !1;
+    if (void 0 === o) t = P(this, t, i, 0), n = !d(t) || t !== this._$AH && t !== x, n && (this._$AH = t);else {
+      const e = t;
+      let l, h;
+      for (t = o[0], l = 0; l < o.length - 1; l++) h = P(this, e[s + l], i, l), h === x && (h = this._$AH[l]), n || (n = !d(h) || h !== this._$AH[l]), h === b ? t = b : t !== b && (t += (null != h ? h : "") + o[l + 1]), this._$AH[l] = h;
+    }
+    n && !e && this.j(t);
+  }
+  j(t) {
+    t === b ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, null != t ? t : "");
+  }
+}
+class M extends S {
+  constructor() {
+    super(...arguments), this.type = 3;
+  }
+  j(t) {
+    this.element[this.name] = t === b ? void 0 : t;
+  }
+}
+const R = s$1 ? s$1.emptyScript : "";
+class k extends S {
+  constructor() {
+    super(...arguments), this.type = 4;
+  }
+  j(t) {
+    t && t !== b ? this.element.setAttribute(this.name, R) : this.element.removeAttribute(this.name);
+  }
+}
+class H extends S {
+  constructor(t, i, s, e, o) {
+    super(t, i, s, e, o), this.type = 5;
+  }
+  _$AI(t, i = this) {
+    var s;
+    if ((t = null !== (s = P(this, t, i, 0)) && void 0 !== s ? s : b) === x) return;
+    const e = this._$AH,
+      o = t === b && e !== b || t.capture !== e.capture || t.once !== e.once || t.passive !== e.passive,
+      n = t !== b && (e === b || o);
+    o && this.element.removeEventListener(this.name, this, e), n && this.element.addEventListener(this.name, this, t), this._$AH = t;
+  }
+  handleEvent(t) {
+    var i, s;
+    "function" == typeof this._$AH ? this._$AH.call(null !== (s = null === (i = this.options) || void 0 === i ? void 0 : i.host) && void 0 !== s ? s : this.element, t) : this._$AH.handleEvent(t);
+  }
+}
+class I {
+  constructor(t, i, s) {
+    this.element = t, this.type = 6, this._$AN = void 0, this._$AM = i, this.options = s;
+  }
+  get _$AU() {
+    return this._$AM._$AU;
+  }
+  _$AI(t) {
+    P(this, t);
+  }
+}
+const z = i$1.litHtmlPolyfillSupport;
+null == z || z(C, N), (null !== (t$1 = i$1.litHtmlVersions) && void 0 !== t$1 ? t$1 : i$1.litHtmlVersions = []).push("2.4.0");
+const Z = (t, i, s) => {
+  var e, o;
+  const n = null !== (e = null == s ? void 0 : s.renderBefore) && void 0 !== e ? e : i;
+  let l = n._$litPart$;
+  if (void 0 === l) {
+    const t = null !== (o = null == s ? void 0 : s.renderBefore) && void 0 !== o ? o : null;
+    n._$litPart$ = l = new N(i.insertBefore(r(), t), t, void 0, null != s ? s : {});
+  }
+  return l._$AI(t), l;
+};
+
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+var l, o$1;
+class s extends d$1 {
+  constructor() {
+    super(...arguments), this.renderOptions = {
+      host: this
+    }, this._$Do = void 0;
+  }
+  createRenderRoot() {
+    var t, e;
+    const i = super.createRenderRoot();
+    return null !== (t = (e = this.renderOptions).renderBefore) && void 0 !== t || (e.renderBefore = i.firstChild), i;
+  }
+  update(t) {
+    const i = this.render();
+    this.hasUpdated || (this.renderOptions.isConnected = this.isConnected), super.update(t), this._$Do = Z(i, this.renderRoot, this.renderOptions);
+  }
+  connectedCallback() {
+    var t;
+    super.connectedCallback(), null === (t = this._$Do) || void 0 === t || t.setConnected(!0);
+  }
+  disconnectedCallback() {
+    var t;
+    super.disconnectedCallback(), null === (t = this._$Do) || void 0 === t || t.setConnected(!1);
+  }
+  render() {
+    return x;
+  }
+}
+s.finalized = !0, s._$litElement$ = !0, null === (l = globalThis.litElementHydrateSupport) || void 0 === l || l.call(globalThis, {
+  LitElement: s
+});
+const n = globalThis.litElementPolyfillSupport;
+null == n || n({
+  LitElement: s
+});
+(null !== (o$1 = globalThis.litElementVersions) && void 0 !== o$1 ? o$1 : globalThis.litElementVersions = []).push("3.2.2");
+
+const buttonLinkStyle = i$2 `
+  button.link {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    text-align: left;
+    text-decoration: underline;
+    cursor: pointer;
+    outline: none;
+  }
+`;
+const haStyle = i$2 `
   :host {
     font-family: var(--paper-font-body1_-_font-family);
     -webkit-font-smoothing: var(--paper-font-body1_-_-webkit-font-smoothing);
@@ -92,19 +1093,7 @@ function t(t,e,i,s){var o,n=arguments.length,r=n<3?e:null===s?s=Object.getOwnPro
     --mdc-theme-primary: var(--error-color);
   }
 
-  ${kt`
-  button.link {
-    background: none;
-    color: inherit;
-    border: none;
-    padding: 0;
-    font: inherit;
-    text-align: left;
-    text-decoration: underline;
-    cursor: pointer;
-    outline: none;
-  }
-`}
+  ${buttonLinkStyle}
 
   .card-actions a {
     text-decoration: none;
@@ -157,7 +1146,8 @@ function t(t,e,i,s){var o,n=arguments.length,r=n<3?e:null===s?s=Object.getOwnPro
   .layout.justified {
     justify-content: space-between;
   }
-`,xe=kt`
+`;
+const haStyleDialog = i$2 `
   /* mwc-dialog (ha-dialog) styles */
   ha-dialog {
     --mdc-dialog-min-width: 400px;
@@ -196,7 +1186,8 @@ function t(t,e,i,s){var o,n=arguments.length,r=n<3?e:null===s?s=Object.getOwnPro
   .error {
     color: var(--error-color);
   }
-`,Se=kt`
+`;
+const haStyleScrollbar = i$2 `
   .ha-scrollbar::-webkit-scrollbar {
     width: 0.4rem;
     height: 0.4rem;
@@ -213,14 +1204,17 @@ function t(t,e,i,s){var o,n=arguments.length,r=n<3?e:null===s?s=Object.getOwnPro
     scrollbar-color: var(--scrollbar-thumb-color) transparent;
     scrollbar-width: thin;
   }
-`;kt`
+`;
+i$2 `
   body {
     background-color: var(--primary-background-color);
     color: var(--primary-text-color);
     height: calc(100vh - 32px);
     width: 100vw;
   }
-`;const Ce=p`
+`;
+
+const fabStyle = i$4 `
   .fab-container {
     position: absolute;
     right: 0;
@@ -241,16 +1235,88 @@ function t(t,e,i,s){var o,n=arguments.length,r=n<3?e:null===s?s=Object.getOwnPro
   ha-fab.blocked {
     bottom: calc(-80px - env(safe-area-inset-bottom));
   }
-`;let Ee=class extends nt{constructor(){super(...arguments),this._data=[],this._columns=function(t,e){void 0===e&&(e=lt);var i=null;function s(){for(var s=[],o=0;o<arguments.length;o++)s[o]=arguments[o];if(i&&i.lastThis===this&&e(s,i.lastArgs))return i.lastResult;var n=t.apply(this,s);return i={lastResult:n,lastArgs:s,lastThis:this},n}return s.clear=function(){i=null},s}((()=>({image:{title:"",sortable:!1,filterable:!1,grows:!1,width:"90px",template:(t,e)=>e.switch.valid_blueprint?e.switch.blueprint.has_image?q`<img style="max-width: 100%;max-height: 48px;display: block;margin:0 auto;" src="${_t(`${t}.png`)}" />`:q`<ha-svg-icon style="fill: var(--primary-color); margin: 0 auto;display:block;height: 85%;
-                        width: 85%;" .path=${dt}></ha-svg-icon>`:""},name:{title:"Name",main:!0,direction:"asc",sortable:!0,filterable:!0,grows:!0,template:(t,e)=>e.error?q`<span style="color: red;">${t} (${e.error})</span>`:t},enabled:{title:"",width:"10%",template:t=>t?"":q`
+`;
+
+let SwitchManagerIndex = class SwitchManagerIndex extends s$4 {
+    constructor() {
+        super(...arguments);
+        this._data = [];
+        this._columns = memoizeOne(() => ({
+            image: {
+                title: "",
+                sortable: false,
+                filterable: false,
+                grows: false,
+                width: '90px',
+                template: (blueprint_id, data) => {
+                    if (!data.switch.valid_blueprint)
+                        return '';
+                    if (!data.switch.blueprint.has_image)
+                        return y `<ha-svg-icon style="fill: var(--primary-color); margin: 0 auto;display:block;height: 85%;
+                        width: 85%;" .path=${mdiGestureTapButton}></ha-svg-icon>`;
+                    return y `<img style="max-width: 100%;max-height: 48px;display: block;margin:0 auto;" src="${buildAssetUrl(`${blueprint_id}.png`)}" />`;
+                }
+            },
+            name: {
+                title: 'Name',
+                main: true,
+                direction: "asc",
+                sortable: true,
+                filterable: true,
+                grows: true,
+                template: (name, data) => data.error ?
+                    y `<span style="color: red;">${name} (${data.error})</span>`
+                    : name
+            },
+            enabled: {
+                title: "",
+                width: "10%",
+                template: (enabled) => !enabled ? y `
                         <ha-chip>
                             Disabled
-                        </ha-chip>`},service:{title:"Service",sortable:!0,filterable:!0,width:"15%"},type:{title:"Type",sortable:!0,filterable:!0,grows:!1,width:"15%"},actions:{title:"",width:this.narrow?void 0:"10%",type:"overflow-menu",template:(t,e)=>q`
+                        </ha-chip>` : '',
+            },
+            service: {
+                title: 'Service',
+                sortable: true,
+                filterable: true,
+                width: '15%'
+            },
+            type: {
+                title: 'Type',
+                sortable: true,
+                filterable: true,
+                grows: false,
+                width: '15%'
+            },
+            actions: {
+                title: "",
+                width: this.narrow ? undefined : "10%",
+                type: "overflow-menu",
+                template: (id, data) => y `
                         <ha-icon-overflow-menu
                         .hass=${this.hass}
                         narrow
-                        .items=${[{path:e.enabled?pt:ct,label:e.enabled?"Disable":"Enable",disabled:e.error,action:()=>this._toggleEnabled(e.switch_id,e.enabled)},{label:"Delete",path:ht,action:()=>this._deleteConfirm(e),warning:!0}]}>
-                        </ha-icon-overflow-menu>`}})))}render(){return q`
+                        .items=${[
+                    {
+                        path: !data.enabled ? mdiPlayCircleOutline : mdiStopCircleOutline,
+                        label: !data.enabled ? 'Enable' : 'Disable',
+                        disabled: (data.error),
+                        action: () => this._toggleEnabled(data.switch_id, data.enabled),
+                    },
+                    {
+                        label: "Delete",
+                        path: mdiDelete,
+                        action: () => this._deleteConfirm(data),
+                        warning: true,
+                    }
+                ]}>
+                        </ha-icon-overflow-menu>`
+            }
+        }));
+    }
+    render() {
+        return y `
             <ha-app-layout>
                 <app-header slot="header" fixed>
                     <app-toolbar>
@@ -272,22 +1338,29 @@ function t(t,e,i,s){var o,n=arguments.length,r=n<3?e:null===s?s=Object.getOwnPro
                         index="index"
                         clickable
                         @row-click=${this._rowClicked}
-                        .dir=${t=this.hass,e=function(t){const e=t.language||"en";return t.translationMetadata.translations[e]&&t.translationMetadata.translations[e].isRTL||!1}(t),e?"rtl":"ltr"}>
+                        .dir=${computeRTLDirection(this.hass)}>
 
                     </ha-data-table>
 
                     <div class="fab-container">
                         <ha-fab
                             slot="fab"
-                            .label=${"Add Switch"}
+                            .label=${'Add Switch'}
                             extended
                             @click=${this._showBlueprintDialog}>
-                            <ha-svg-icon slot="icon" .path=${"M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"}></ha-svg-icon>
+                            <ha-svg-icon slot="icon" .path=${mdiPlus}></ha-svg-icon>
                         </ha-fab>
                     </div>
                 </hui-panel-view>
             </hui-view>
-        `;var t,e}static get styles(){return[Ae,Se,Ce,p`
+        `;
+    }
+    static get styles() {
+        return [
+            haStyle,
+            haStyleScrollbar,
+            fabStyle,
+            i$4 `
             ha-data-table {
             }
             hui-view {
@@ -295,16 +1368,128 @@ function t(t,e,i,s){var o,n=arguments.length,r=n<3?e:null===s?s=Object.getOwnPro
                 height: calc(100vh - var(--header-height));
                 overflow-y: auto;
             }
-        `]}connectedCallback(){super.connectedCallback(),this._populateSwitches()}_populateSwitches(){const t=[];this.hass.callWS({type:ft("configs")}).then((e=>{Object.values(e.configs).forEach((e=>{let i;i=e.valid_blueprint?e.blueprint:{id:e.blueprint},t.push({switch:e,image:i.id,switch_id:e.id,error:e._error,enabled:e.enabled,name:e.name,service:i.service,type:i.name,actions:e.id})})),this._data=t}))}_rowClicked(t){bt(mt(`edit/${t.detail.id}`))}async _toggleEnabled(t,e){this.hass.callWS({type:ft("config/enabled"),enabled:!e,config_id:t}).then((t=>{this._populateSwitches(),yt(this,{message:"Switch "+(t.enabled?"Enabled":"Disabled")})})).catch((t=>yt(this,{message:t.message})))}async _deleteConfirm(t){wt(this,{title:"Delete switch?",text:`${t.name} will be permanently deleted.`,confirmText:"Delete",dismissText:"Cancel",confirm:()=>this._delete(t.switch_id),confirmation:!0,destructive:!0})}async _delete(t){this.hass.callWS({type:ft("config/delete"),config_id:t.toString()}).then((t=>{this._populateSwitches(),yt(this,{message:"Switch Deleted"})})).catch((t=>yt(this,{message:t.message})))}_showBlueprintDialog(){vt(this,"show-dialog",{dialogTag:"switch-manager-dialog-blueprint-selector",dialogImport:()=>Promise.resolve().then((function(){return Re})),dialogParams:{}})}};t([s()],Ee.prototype,"hass",void 0),t([s()],Ee.prototype,"narrow",void 0),t([s()],Ee.prototype,"panel",void 0),t([s()],Ee.prototype,"route",void 0),t([o()],Ee.prototype,"_data",void 0),Ee=t([e("switch-manager-index")],Ee);const ke=1;class He{constructor(t){}get _$AU(){return this._$AM._$AU}_$AT(t,e,i){this._$Ct=t,this._$AM=e,this._$Ci=i}_$AS(t,e){return this.update(t,e)}update(t,e){return this.render(...e)}}const Ne=(t=>(...e)=>({_$litDirective$:t,values:e}))(class extends He{constructor(t){var e;if(super(t),t.type!==ke||"class"!==t.name||(null===(e=t.strings)||void 0===e?void 0:e.length)>2)throw Error("`classMap()` can only be used in the `class` attribute and must be the only part in the attribute.")}render(t){return" "+Object.keys(t).filter((e=>t[e])).join(" ")+" "}update(t,[e]){var i,s;if(void 0===this.nt){this.nt=new Set,void 0!==t.strings&&(this.st=new Set(t.strings.join(" ").split(/\s/).filter((t=>""!==t))));for(const t in e)e[t]&&!(null===(i=this.st)||void 0===i?void 0:i.has(t))&&this.nt.add(t);return this.render(e)}const o=t.element.classList;this.nt.forEach((t=>{t in e||(o.remove(t),this.nt.delete(t))}));for(const t in e){const i=!!e[t];i===this.nt.has(t)||(null===(s=this.st)||void 0===s?void 0:s.has(t))||(i?(o.add(t),this.nt.add(t)):(o.remove(t),this.nt.delete(t)))}return V}});let Pe=class extends nt{constructor(){super(...arguments),this.index=0}render(){return this.blueprint_actions&&1!=this.blueprint_actions.length?q`
+        `
+        ];
+    }
+    connectedCallback() {
+        super.connectedCallback();
+        this._populateSwitches();
+    }
+    _populateSwitches() {
+        const __data = [];
+        this.hass.callWS({ type: buildWSPath('configs') }).then(promise => {
+            Object.values(promise.configs).forEach((_switch) => {
+                let blueprint;
+                if (_switch.valid_blueprint)
+                    blueprint = _switch.blueprint;
+                else
+                    blueprint = { id: _switch.blueprint };
+                __data.push({
+                    switch: _switch,
+                    image: blueprint.id,
+                    switch_id: _switch.id,
+                    error: _switch._error,
+                    enabled: _switch.enabled,
+                    name: _switch.name,
+                    service: blueprint.service,
+                    type: blueprint.name,
+                    actions: _switch.id
+                });
+            });
+            this._data = __data;
+        });
+    }
+    _rowClicked(e) {
+        navigate(buildUrl(`edit/${e.detail.id}`));
+    }
+    async _toggleEnabled(id, enabled) {
+        this.hass.callWS({ type: buildWSPath('config/enabled'), enabled: !enabled, config_id: id }).then(r => {
+            this._populateSwitches();
+            showToast(this, {
+                message: `Switch ${r.enabled ? 'Enabled' : 'Disabled'}`
+            });
+        }).catch(error => showToast(this, { message: error.message }));
+    }
+    async _deleteConfirm(_switch) {
+        showConfirmDialog(this, {
+            title: 'Delete switch?',
+            text: `${_switch.name} will be permanently deleted.`,
+            confirmText: 'Delete',
+            dismissText: 'Cancel',
+            confirm: () => this._delete(_switch.switch_id),
+            confirmation: true,
+            destructive: true,
+        });
+    }
+    async _delete(id) {
+        this.hass.callWS({ type: buildWSPath('config/delete'), config_id: id.toString() }).then(promise => {
+            this._populateSwitches();
+            showToast(this, {
+                message: 'Switch Deleted'
+            });
+        }).catch(error => showToast(this, { message: error.message }));
+    }
+    _showBlueprintDialog() {
+        fireEvent(this, 'show-dialog', {
+            dialogTag: "switch-manager-dialog-blueprint-selector",
+            dialogImport: () => Promise.resolve().then(function () { return dialogBlueprintSelector; }),
+            dialogParams: {},
+        });
+    }
+};
+__decorate([
+    e$7()
+], SwitchManagerIndex.prototype, "hass", void 0);
+__decorate([
+    e$7()
+], SwitchManagerIndex.prototype, "narrow", void 0);
+__decorate([
+    e$7()
+], SwitchManagerIndex.prototype, "panel", void 0);
+__decorate([
+    e$7()
+], SwitchManagerIndex.prototype, "route", void 0);
+__decorate([
+    t$5()
+], SwitchManagerIndex.prototype, "_data", void 0);
+SwitchManagerIndex = __decorate([
+    e$8('switch-manager-index')
+], SwitchManagerIndex);
+
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+const t={ATTRIBUTE:1,CHILD:2,PROPERTY:3,BOOLEAN_ATTRIBUTE:4,EVENT:5,ELEMENT:6},e=t=>(...e)=>({_$litDirective$:t,values:e});class i{constructor(t){}get _$AU(){return this._$AM._$AU}_$AT(t,e,i){this._$Ct=t,this._$AM=e,this._$Ci=i;}_$AS(t,e){return this.update(t,e)}update(t,e){return this.render(...e)}}
+
+/**
+ * @license
+ * Copyright 2018 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */const o=e(class extends i{constructor(t$1){var i;if(super(t$1),t$1.type!==t.ATTRIBUTE||"class"!==t$1.name||(null===(i=t$1.strings)||void 0===i?void 0:i.length)>2)throw Error("`classMap()` can only be used in the `class` attribute and must be the only part in the attribute.")}render(t){return " "+Object.keys(t).filter((i=>t[i])).join(" ")+" "}update(i,[s]){var r,o;if(void 0===this.nt){this.nt=new Set,void 0!==i.strings&&(this.st=new Set(i.strings.join(" ").split(/\s/).filter((t=>""!==t))));for(const t in s)s[t]&&!(null===(r=this.st)||void 0===r?void 0:r.has(t))&&this.nt.add(t);return this.render(s)}const e=i.element.classList;this.nt.forEach((t=>{t in s||(e.remove(t),this.nt.delete(t));}));for(const t in s){const i=!!s[t];i===this.nt.has(t)||(null===(o=this.st)||void 0===o?void 0:o.has(t))||(i?(e.add(t),this.nt.add(t)):(e.remove(t),this.nt.delete(t)));}return x$1}});
+
+let SwitchManagerButtonActions = class SwitchManagerButtonActions extends s$4 {
+    constructor() {
+        super(...arguments);
+        this.index = 0;
+    }
+    render() {
+        if (!this.blueprint_actions || this.blueprint_actions.length == 1)
+            return '';
+        return y `
             <div id="tabbar" .hass=${this.hass}>
                 <paper-tabs selected="${this.index}" @iron-select=${this._tab_changed}>
-                    ${this.blueprint_actions.map(((t,e)=>q`
-                        <paper-tab>${t.title}
-                            ${this.config_actions[e].sequence.length?q`<ha-chip>${this.config_actions[e].sequence.length}</ha-chip>`:""}
-                        </paper-tab>`))}
+                    ${this.blueprint_actions.map((a, i) => y `
+                        <paper-tab>${a.title}
+                            ${this.config_actions[i].sequence.length ? y `<ha-chip>${this.config_actions[i].sequence.length}</ha-chip>` : ''}
+                        </paper-tab>`)}
                 </paper-tabs>
             </div> 
-        `:""}static get styles(){return p`
+        `;
+    }
+    static get styles() {
+        return i$4 `
             :host {
                 display: flex;
                 justify-content: center;
@@ -330,7 +1515,48 @@ function t(t,e,i,s){var o,n=arguments.length,r=n<3?e:null===s?s=Object.getOwnPro
                 top: 0;
                 right: -32px;
             }
-        `}_tab_changed(t){let e=new CustomEvent("changed",{detail:{index:t.detail.item.parentNode.indexOf(t.detail.item)}});this.dispatchEvent(e)}};t([s()],Pe.prototype,"hass",void 0),t([s()],Pe.prototype,"blueprint_actions",void 0),t([s()],Pe.prototype,"config_actions",void 0),t([s({reflect:!0})],Pe.prototype,"index",void 0),Pe=t([e("switch-manager-button-actions")],Pe);class Me extends nt{constructor(){super(...arguments),this.disabled=!1,this.sequence=[],this.button_index=0,this.action_index=0,this._dirty=!1,this._block_save=!1}render(){var t,e,i,s,o,n,r,a,l,h,d,c,p,u,v,g,m,_;return this.config?q`
+        `;
+    }
+    _tab_changed(ev) {
+        let event = new CustomEvent('changed', {
+            detail: {
+                index: ev.detail.item.parentNode.indexOf(ev.detail.item)
+            }
+        });
+        this.dispatchEvent(event);
+    }
+};
+__decorate([
+    e$7()
+], SwitchManagerButtonActions.prototype, "hass", void 0);
+__decorate([
+    e$7()
+], SwitchManagerButtonActions.prototype, "blueprint_actions", void 0);
+__decorate([
+    e$7()
+], SwitchManagerButtonActions.prototype, "config_actions", void 0);
+__decorate([
+    e$7({ reflect: true })
+], SwitchManagerButtonActions.prototype, "index", void 0);
+SwitchManagerButtonActions = __decorate([
+    e$8('switch-manager-button-actions')
+], SwitchManagerButtonActions);
+
+class SwitchManagerSwitchEditor extends s$4 {
+    constructor() {
+        super(...arguments);
+        this.disabled = false;
+        this.sequence = [];
+        this.button_index = 0;
+        this.action_index = 0;
+        this._dirty = false;
+        this._block_save = false;
+    }
+    render() {
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s;
+        if (!this.config)
+            return y ``;
+        return y `
             <ha-app-layout>
                 <app-header slot="header" fixed>
                     <app-toolbar>
@@ -339,37 +1565,36 @@ function t(t,e,i,s){var o,n=arguments.length,r=n<3?e:null===s?s=Object.getOwnPro
                             .narrow=${this.narrow}>
                         </ha-menu-button>
                         <ha-icon-button
-                            .path=${"M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"}
-                            @click=${()=>bt(mt())}>
+                            .path=${mdiArrowLeft}
+                            @click=${() => navigate(buildUrl())}>
                         </ha-icon-button>
                         <div main-title id="title-container">
-                            <span>Switch Manager - ${null===(t=this.config)||void 0===t?void 0:t.name}</span>
+                            <span>Switch Manager - ${(_a = this.config) === null || _a === void 0 ? void 0 : _a.name}</span>
                         </div>
                         <div>
                             <ha-button-menu corner="BOTTOM_START" slot="toolbar-icon">
                                 <ha-icon-button
                                     slot="trigger"
                                     .label=${this.hass.localize("ui.common.menu")}
-                                    .path=${"M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z"}>
+                                    .path=${mdiDotsVertical}>
                                 </ha-icon-button>
                                 
                                 <mwc-list-item
                                     graphic="icon"
-                                    @click=${this._showRenameDialog}
-                                    .disabled=${null===(e=this.config)||void 0===e?void 0:e._error}>
+                                    @click=${this._showRenameDialog}>
                                         Rename
-                                        <ha-svg-icon slot="graphic" .path=${"M18,17H10.5L12.5,15H18M6,17V14.5L13.88,6.65C14.07,6.45 14.39,6.45 14.59,6.65L16.35,8.41C16.55,8.61 16.55,8.92 16.35,9.12L8.47,17M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3Z"}>
+                                        <ha-svg-icon slot="graphic" .path=${mdiRenameBox}>
                                         </ha-svg-icon>
                                 </mwc-list-item>
                                 
                                 <mwc-list-item
                                     graphic="icon"
-                                    .disabled=${!this.config||this.is_new||!(null===(i=this.config)||void 0===i?void 0:i.valid_blueprint)}
+                                    .disabled=${!this.config || this.is_new || !((_b = this.config) === null || _b === void 0 ? void 0 : _b.valid_blueprint)}
                                     @click=${this._toggleEnabled}>
-                                        ${(null===(s=this.config)||void 0===s?void 0:s.enabled)?"Disable":"Enable"}
+                                        ${!((_c = this.config) === null || _c === void 0 ? void 0 : _c.enabled) ? 'Enable' : 'Disable'}
                                         <ha-svg-icon
                                             slot="graphic"
-                                            .path=${(null===(o=this.config)||void 0===o?void 0:o.enabled)?pt:ct}>
+                                            .path=${!((_d = this.config) === null || _d === void 0 ? void 0 : _d.enabled) ? mdiPlayCircleOutline : mdiStopCircleOutline}>
                                         </ha-svg-icon>
                                 </mwc-list-item>
                                 
@@ -377,14 +1602,14 @@ function t(t,e,i,s){var o,n=arguments.length,r=n<3?e:null===s?s=Object.getOwnPro
 
                                 <mwc-list-item
                                     .disabled=${this.is_new}
-                                    class=${Ne({warning:Boolean(!this.is_new)})}
+                                    class=${o({ warning: Boolean(!this.is_new) })}
                                     graphic="icon"
                                     @click=${this._deleteConfirm}>
                                         Delete
                                         <ha-svg-icon
-                                            class=${Ne({warning:Boolean(!this.is_new)})}
+                                            class=${o({ warning: Boolean(!this.is_new) })}
                                             slot="graphic"
-                                            .path=${ht}>
+                                            .path=${mdiDelete}>
                                         </ha-svg-icon>
                                 </mwc-list-item>
                             </ha-button-menu>
@@ -394,57 +1619,60 @@ function t(t,e,i,s){var o,n=arguments.length,r=n<3?e:null===s?s=Object.getOwnPro
             </ha-app-layout>
             <hui-view>
                 <hui-panel-view>
-                    ${(null===(n=this.config)||void 0===n?void 0:n.valid_blueprint)?q`
-                    <h3 id="blueprint-name">${null===(r=this.blueprint)||void 0===r?void 0:r.service} / ${null===(a=this.blueprint)||void 0===a?void 0:a.name}</h3>
+                    ${((_e = this.config) === null || _e === void 0 ? void 0 : _e.valid_blueprint) ? y `
+                    <h3 id="blueprint-name">${(_f = this.blueprint) === null || _f === void 0 ? void 0 : _f.service} / ${(_g = this.blueprint) === null || _g === void 0 ? void 0 : _g.name}</h3>
                     <span id="identifier">
                         <ha-textfield 
                             id="identifier-input" 
                             type="text" 
-                            .value="${null===(l=this.config)||void 0===l?void 0:l.identifier}" 
+                            .value="${(_h = this.config) === null || _h === void 0 ? void 0 : _h.identifier}" 
                             required="true" 
-                            .label=${"mqtt"==this.blueprint.event_type?"mqtt topic":null===(h=this.blueprint)||void 0===h?void 0:h.identifier_key}
+                            .label=${this.blueprint.event_type == 'mqtt' ? 'mqtt topic' : (_j = this.blueprint) === null || _j === void 0 ? void 0 : _j.identifier_key}
                             @input="${this._identifierChanged}"></ha-textfield>
-                        ${"mqtt"!=this.blueprint.event_type?q`
+                        ${this.blueprint.event_type != 'mqtt' ? y `
                         <ha-icon-button
-                            .path=${"M17,20C16.71,20 16.44,19.94 16.24,19.85C15.53,19.5 15.03,18.97 14.53,17.47C14,15.91 13.06,15.18 12.14,14.47C11.35,13.86 10.53,13.23 9.82,11.94C9.29,11 9,9.93 9,9C9,6.2 11.2,4 14,4C16.8,4 19,6.2 19,9H21C21,5.07 17.93,2 14,2C10.07,2 7,5.07 7,9C7,10.26 7.38,11.65 8.07,12.9C9,14.55 10.05,15.38 10.92,16.05C11.73,16.67 12.31,17.12 12.63,18.1C13.23,19.92 14,20.94 15.36,21.65C15.87,21.88 16.43,22 17,22A4,4 0 0,0 21,18H19A2,2 0 0,1 17,20M7.64,2.64L6.22,1.22C4.23,3.21 3,5.96 3,9C3,12.04 4.23,14.79 6.22,16.78L7.63,15.37C6,13.74 5,11.5 5,9C5,6.5 6,4.26 7.64,2.64M11.5,9A2.5,2.5 0 0,0 14,11.5A2.5,2.5 0 0,0 16.5,9A2.5,2.5 0 0,0 14,6.5A2.5,2.5 0 0,0 11.5,9Z"}
-                            ?listening=${this._subscribed}
+                            .path=${mdiEarHearing}
+                            ?listening=${(this._subscribed)}
                             @click=${this._listenForEvent}>
-                        </ha-icon-button>`:q`${this.blueprint.mqtt_topic_format?q`<ha-alert alert-type="info">Format: ${this.blueprint.mqtt_topic_format}</ha-alert>`:""}`}
-                        ${this._subscribed?q`
+                        </ha-icon-button>` :
+            y `${this.blueprint.mqtt_topic_format ? y `<ha-alert alert-type="info">Format: ${this.blueprint.mqtt_topic_format}</ha-alert>` : ''}`}
+                        ${this._subscribed ? y `
                         <ha-alert alert-type="info">
                             Press a button on your switch
-                        </ha-alert>`:""}
-                    </span>`:""}
+                        </ha-alert>` : ''}
+                    </span>` : ''}
                     
                 
                     <div id="switch-image">
-                    ${this.blueprint&&!(null===(d=this.blueprint)||void 0===d?void 0:d.has_image)?q`<ha-svg-icon .path=${dt}></ha-svg-icon>`:q`<svg id="switch-svg"></svg>`}
+                    ${this.blueprint && !((_k = this.blueprint) === null || _k === void 0 ? void 0 : _k.has_image) ?
+            y `<ha-svg-icon .path=${mdiGestureTapButton}></ha-svg-icon>` :
+            y `<svg id="switch-svg"></svg>`}
                     </div>
 
-                    ${(null===(c=this.config)||void 0===c?void 0:c.valid_blueprint)?q`
+                    ${((_l = this.config) === null || _l === void 0 ? void 0 : _l.valid_blueprint) ? y `
                     <switch-manager-button-actions
                         .hass=${this.hass}
-                        .blueprint_actions=${null===(u=null===(p=this.blueprint)||void 0===p?void 0:p.buttons[this.button_index])||void 0===u?void 0:u.actions}
+                        .blueprint_actions=${(_o = (_m = this.blueprint) === null || _m === void 0 ? void 0 : _m.buttons[this.button_index]) === null || _o === void 0 ? void 0 : _o.actions}
                         .config_actions=${this.config.buttons[this.button_index].actions}
                         .index=${this.action_index}
                         @changed=${this._actionChanged}>
-                    </switch-manager-button-actions>`:""}
+                    </switch-manager-button-actions>` : ''}
                     
                     <ha-card outlined>
                         <div class="card-content">
 
-                            ${this._errors?q`
+                            ${this._errors ? y `
                             <ha-alert alert-type="error">
                                 ${this._errors}
-                            </ha-alert>`:""}
-                            ${this.config&&!this.config.enabled?q`
+                            </ha-alert>` : ''}
+                            ${this.config && !this.config.enabled ? y `
                             <ha-alert alert-type="info">
                                 Switch is disabled
                                 <mwc-button slot="action" @click=${this._toggleEnabled}>
                                     Enable
                                 </mwc-button>
-                            </ha-alert>`:""}
-                            ${(null===(v=this.config)||void 0===v?void 0:v.valid_blueprint)?q`
+                            </ha-alert>` : ''}
+                            ${((_p = this.config) === null || _p === void 0 ? void 0 : _p.valid_blueprint) ? y `
                             <div id="sequence-container">
                                 <div class="header">
                                     <h2 id="sequence-heading" class="name">
@@ -452,9 +1680,17 @@ function t(t,e,i,s){var o,n=arguments.length,r=n<3?e:null===s?s=Object.getOwnPro
                                         <ha-selector-select
                                             id="mode-selector"
                                             .hass=${this.hass}
-                                            .value=${null===(m=null===(g=this.config)||void 0===g?void 0:g.buttons[this.button_index])||void 0===m?void 0:m.actions[this.action_index].mode}
+                                            .value=${(_r = (_q = this.config) === null || _q === void 0 ? void 0 : _q.buttons[this.button_index]) === null || _r === void 0 ? void 0 : _r.actions[this.action_index].mode}
                                             label="Mode"
-                                            .selector=${{select:{mode:"dropdown",options:ut.map((t=>({label:t.charAt(0).toUpperCase()+t.slice(1),value:t})))}}}
+                                            .selector=${{
+            select: {
+                mode: "dropdown",
+                options: MODES.map((mode) => ({
+                    label: mode.charAt(0).toUpperCase() + mode.slice(1),
+                    value: mode,
+                })),
+            }
+        }}
                                             @value-changed=${this._modeValueChanged}>
                                         </ha-selector-select>
                                     </h2>
@@ -470,24 +1706,33 @@ function t(t,e,i,s){var o,n=arguments.length,r=n<3?e:null===s?s=Object.getOwnPro
                                     .disabled=${this.disabled}>
                                 </ha-automation-action>
 
-                            </div>`:""}
+                            </div>` : ''}
                         </div>
                     </ha-card>
-                    ${(null===(_=this.config)||void 0===_?void 0:_.valid_blueprint)?q`
+                    ${((_s = this.config) === null || _s === void 0 ? void 0 : _s.valid_blueprint) ? y `
                     <div class="fab-container">
                         <ha-fab
                             slot="fab"
-                            .label=${"Save"}
+                            .label=${'Save'}
                             extended
                             collapse
                             @click=${this._save}
-                            class=${Ne({dirty:this._dirty,blocked:this._block_save})}>
-                            <ha-svg-icon slot="icon" .path=${"M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z"}></ha-svg-icon>
+                            class=${o({
+            dirty: this._dirty,
+            blocked: this._block_save
+        })}>
+                            <ha-svg-icon slot="icon" .path=${mdiContentSave}></ha-svg-icon>
                         </ha-fab>
-                    </div>`:""}
+                    </div>` : ''}
                 </hui-panel-view>
             </hui-view>            
-          `:q``}static get styles(){return[Ae,Ce,p`
+          `;
+    }
+    static get styles() {
+        return [
+            haStyle,
+            fabStyle,
+            i$4 `
             @keyframes pulse {
                 from {
                     opacity: 1;
@@ -505,6 +1750,7 @@ function t(t,e,i,s){var o,n=arguments.length,r=n<3?e:null===s?s=Object.getOwnPro
                 padding-left: 25px;
                 position: relative;
             }
+
             #identifier-input {
                 width: 300px;
             }
@@ -528,6 +1774,13 @@ function t(t,e,i,s){var o,n=arguments.length,r=n<3?e:null===s?s=Object.getOwnPro
                 width: 300px;
                 position: absolute;
                 margin-left: 25px;
+            }
+            @media screen and ( max-width: 690px )
+            {
+                #identifier-input, #identifier ha-alert {
+                    width: 90%;
+                    position: relative;
+                }
             }
             hui-view {
                 height: calc(100vh - var(--header-height));
@@ -556,7 +1809,7 @@ function t(t,e,i,s){var o,n=arguments.length,r=n<3?e:null===s?s=Object.getOwnPro
                 margin: 1em;
                 justify-content: center;
             }           
-            @media screen and ( min-width: 1200px )
+            @media screen and ( min-width: 1500px )
             {
                 #switch-image {
                     margin-top: -65px;
@@ -599,42 +1852,464 @@ function t(t,e,i,s){var o,n=arguments.length,r=n<3?e:null===s?s=Object.getOwnPro
                 font-weight: bold;
                 color: var(--error-color);
             }
-            `]}connectedCallback(){super.connectedCallback(),this._loadConfig()}disconnectedCallback(){super.disconnectedCallback(),this._subscribed&&(this._subscribed(),this._subscribed=null)}_loadConfig(){"id"in this.params?(this.is_new=!1,this.hass.callWS({type:ft("configs"),config_id:this.params.id}).then((t=>{this._setConfig(t.config)}))):(this.is_new=!0,this._dirty=!0,"blueprint"in this.params&&this._loadBlueprint(this.params.blueprint).then((t=>{this._setConfig(function(t){let e={id:null,name:"New Switch",enabled:!0,identifier:"",blueprint:t,valid_blueprint:!0,buttons:[]};return t.buttons.forEach(((t,i)=>{e.buttons[i]={actions:[]},t.actions.forEach(((t,s)=>{e.buttons[i].actions[s]={mode:ut[0],sequence:[]}}))})),e}(t.blueprint)),this._showRenameDialog()})))}_loadBlueprint(t){return this.hass.callWS({type:ft("blueprints"),blueprint_id:t})}_setConfig(t){if(this.config=t,t._error)return this._errors=t._error,void(this._block_save=!0);this._setBlueprint(t.blueprint),this._updateSequence()}_setBlueprint(t){this.blueprint=t,this.requestUpdate(),this._drawSVG()}async _drawSVG(){if(this.blueprint.has_image){await this.updateComplete;var t=new Image;t.src=_t(`${this.blueprint.id}.png`),t.onload=()=>{this.svg.setAttributeNS(null,"viewBox",`0 0 ${t.width.toString()} ${t.height.toString()}`);var e=document.createElementNS("http://www.w3.org/2000/svg","image");e.setAttributeNS(null,"x","0"),e.setAttributeNS(null,"y","0"),e.setAttributeNS(null,"width",t.width.toString()),e.setAttributeNS(null,"height",t.height.toString()),e.setAttributeNS("http://www.w3.org/1999/xlink","href",t.src),e.setAttributeNS(null,"visibility","visible"),this.svg.prepend(e)},this.blueprint.buttons.length>1&&this.blueprint.buttons.forEach(((t,e)=>{let i;"circle"==t.shape?(i=document.createElementNS("http://www.w3.org/2000/svg","circle"),i.setAttributeNS(null,"cx",t.x.toString()),i.setAttributeNS(null,"cy",t.y.toString()),i.setAttributeNS(null,"r",t.width.toString())):"path"==t.shape?(i=document.createElementNS("http://www.w3.org/2000/svg","path"),i.setAttributeNS(null,"d",t.d.toString())):(i=document.createElementNS("http://www.w3.org/2000/svg","rect"),i.setAttributeNS(null,"x",t.x.toString()),i.setAttributeNS(null,"y",t.y.toString()),i.setAttributeNS(null,"width",t.width.toString()),i.setAttributeNS(null,"height",t.height.toString())),i.setAttribute("class","button"),i.setAttribute("index",e.toString()),this.button_index==e&&i.setAttribute("selected",""),this._buttonTotalSequence(this.config.buttons[e])||i.setAttribute("empty",""),i.addEventListener("click",(t=>{t.preventDefault(),t.stopPropagation(),this._setButtonIndex(parseInt(t.target.getAttribute("index")))})),this.svg.append(i)}))}}_buttonTotalSequence(t){let e=0;return t.actions.forEach((t=>{e+=t.sequence.length})),e}_validate(){return this._errors=null,this.identifier_input.invalid=!1,!!this.config.identifier||(this._errors="Identifier must not be empty",this.identifier_input.invalid=!0,this.identifier_input.errorMessage="Identifier required",!1)}_save(){!this._block_save&&this._validate()&&(this._block_save=!0,this._dirty=!1,this.hass.callWS({type:ft("config/save"),config:Object.assign(Object.assign({},this.config),{blueprint:this.config.blueprint.id})}).then((t=>{this.is_new&&(this.is_new=!1,this.config.id=t.config_id,bt(mt(`edit/${t.config_id}`))),yt(this,{message:"Switch Saved"})})).catch((t=>{yt(this,{message:t.message}),this._errors=t.message,this._dirty=!0})).finally((()=>this._block_save=!1)))}_actionChanged(t){this._setActionIndex(t.detail.index)}_setButtonIndex(t){t!=this.button_index&&(this.svg.querySelector("[selected]").removeAttribute("selected"),this.svg.querySelector(`[index="${t}"]`).setAttribute("selected",""),this.button_index=t,this._setActionIndex(0))}_setActionIndex(t){this.action_index=t,this._updateSequence()}_configSequenceChanged(t){this.requestUpdate("config"),this._updateSequence(t.detail.value),this._errors=void 0,this._dirty=!0}async _listenForEvent(){if(this._subscribed)return this._subscribed(),void(this._subscribed=void 0);this._subscribed=await this.hass.connection.subscribeEvents((t=>{this.blueprint.identifier_key in t.data&&(this.identifier_input.value=t.data[this.blueprint.identifier_key],this._identifierChanged(),this._subscribed(),this._subscribed=void 0)}),this.blueprint.event_type)}_identifierChanged(t){this.config.identifier=function(t,e,i=!0){return i?t.renderRoot.querySelector(`#${e}`).value.toString().trim():t.querySelector(`#${e}`).value.toString().trim()}(this,"identifier-input"),this._dirty=!0}_modeValueChanged(t){var e;(null===(e=this.config)||void 0===e?void 0:e.buttons[this.button_index].actions[this.action_index].mode)!=t.detail.value&&(this.config.buttons[this.button_index].actions[this.action_index].mode=t.detail.value,this.requestUpdate("config"),this._dirty=!0)}async _showRenameDialog(){vt(this,"show-dialog",{dialogTag:"switch-manager-dialog-rename-switch",dialogImport:()=>Promise.resolve().then((function(){return ze})),dialogParams:{config:this.config,update:t=>{this.config.name=t.name,this._dirty=!0,this.requestUpdate()},onClose:()=>{}}})}_updateSequence(t){var e,i,s,o;t&&(this.config.buttons[this.button_index].actions[this.action_index].sequence=t),this.sequence=this.config.buttons[this.button_index].actions[this.action_index].sequence,this._buttonTotalSequence(this.config.buttons[this.button_index])?null===(o=null===(s=this.svg)||void 0===s?void 0:s.querySelector("[selected]"))||void 0===o||o.removeAttribute("empty"):null===(i=null===(e=this.svg)||void 0===e?void 0:e.querySelector("[selected]"))||void 0===i||i.setAttribute("empty",""),this.requestUpdate("config")}_toggleEnabled(){this.hass.callWS({type:ft("config/enabled"),enabled:!this.config.enabled,config_id:this.config.id}).then((t=>{this.config.enabled=t.enabled,this.requestUpdate("config"),yt(this,{message:"Switch "+(t.enabled?"Enabled":"Disabled")})})).catch((t=>yt(this,{message:t.message})))}async _deleteConfirm(){wt(this,{title:"Delete switch?",text:`${this.config.name} will be permanently deleted.`,confirmText:"Delete",dismissText:"Cancel",confirm:()=>this._delete(),confirmation:!0,destructive:!0})}async _delete(){this.hass.callWS({type:ft("config/delete"),config_id:this.config.id.toString()}).then((t=>{yt(this,{message:"Switch Deleted"}),bt(mt())}))}}t([s()],Me.prototype,"hass",void 0),t([s()],Me.prototype,"narrow",void 0),t([s()],Me.prototype,"panel",void 0),t([s()],Me.prototype,"route",void 0),t([s()],Me.prototype,"params",void 0),t([s()],Me.prototype,"blueprint",void 0),t([s()],Me.prototype,"config",void 0),t([s()],Me.prototype,"disabled",void 0),t([o()],Me.prototype,"_subscribed",void 0),t([o()],Me.prototype,"sequence",void 0),t([o()],Me.prototype,"button_index",void 0),t([o()],Me.prototype,"action_index",void 0),t([o()],Me.prototype,"is_new",void 0),t([o()],Me.prototype,"_dirty",void 0),t([o()],Me.prototype,"_block_save",void 0),t([o()],Me.prototype,"_errors",void 0),t([n("#switch-svg")],Me.prototype,"svg",void 0),t([n("#identifier-input")],Me.prototype,"identifier_input",void 0),customElements.define("switch-manager-switch-editor",Me);let Ue=class extends nt{get route(){return this._route}set route(t){this._route=t;let e=t.path.split("/");"new"==e[1]?this.params={action:"new",blueprint:e[2]}:"edit"==e[1]?this.params={action:"edit",id:e[2]}:this.params={}}constructor(){super(),this.params={},this.component_name="custom",(async()=>{var t,e,i,s,o,n,r;if(customElements.get("ha-automation-action")&&customElements.get("ha-data-table"))return;await customElements.whenDefined("partial-panel-resolver");const a=document.createElement("partial-panel-resolver").getRoutes([{component_name:"config",url_path:"a"}]);await(null===(i=null===(e=null===(t=null==a?void 0:a.routes)||void 0===t?void 0:t.a)||void 0===e?void 0:e.load)||void 0===i?void 0:i.call(e)),await customElements.whenDefined("ha-panel-config");const l=document.createElement("ha-panel-config");await(null===(r=null===(n=null===(o=null===(s=null==l?void 0:l.routerOptions)||void 0===s?void 0:s.routes)||void 0===o?void 0:o.script)||void 0===n?void 0:n.load)||void 0===r?void 0:r.call(n)),await customElements.whenDefined("ha-config-dashboard")})()}render(){return"action"in this.params?q`        
+            `
+        ];
+    }
+    connectedCallback() {
+        super.connectedCallback();
+        this._loadConfig();
+    }
+    disconnectedCallback() {
+        super.disconnectedCallback();
+        if (this._subscribed) {
+            this._subscribed();
+            this._subscribed = null;
+        }
+    }
+    _loadConfig() {
+        if ('id' in this.params) {
+            this.is_new = false;
+            this.hass.callWS({ type: buildWSPath('configs'), config_id: this.params.id }).then(promise => {
+                this._setConfig(promise.config);
+            });
+        }
+        else {
+            this.is_new = true;
+            this._dirty = true;
+            if ('blueprint' in this.params)
+                this._loadBlueprint(this.params.blueprint).then(promise => {
+                    this._setConfig(createConfigFromBlueprint(promise.blueprint));
+                    this._showRenameDialog();
+                });
+        }
+    }
+    _loadBlueprint(id) {
+        return this.hass.callWS({ type: buildWSPath('blueprints'), blueprint_id: id });
+    }
+    _setConfig(config) {
+        this.config = config;
+        if (config._error) {
+            this._errors = config._error;
+            this._block_save = true;
+            return;
+        }
+        this._setBlueprint(config.blueprint);
+        this._updateSequence();
+    }
+    _setBlueprint(blueprint) {
+        this.blueprint = blueprint;
+        this.requestUpdate();
+        this._drawSVG();
+    }
+    async _drawSVG() {
+        if (!this.blueprint.has_image) {
+            return;
+        }
+        await this.updateComplete;
+        var img = new Image;
+        img.src = buildAssetUrl(`${this.blueprint.id}.png`);
+        img.onload = () => {
+            // Add headroom for button strokes      
+            this.svg.setAttributeNS(null, 'viewBox', `0 0 ${(img.width).toString()} ${(img.height).toString()}`);
+            var svgimg = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+            svgimg.setAttributeNS(null, 'x', '0');
+            svgimg.setAttributeNS(null, 'y', '0');
+            svgimg.setAttributeNS(null, 'width', img.width.toString());
+            svgimg.setAttributeNS(null, 'height', img.height.toString());
+            svgimg.setAttributeNS('http://www.w3.org/1999/xlink', 'href', img.src);
+            svgimg.setAttributeNS(null, 'visibility', 'visible');
+            this.svg.prepend(svgimg);
+        };
+        // No need to render buttons or selection on buttons if there is only 1 button
+        if (this.blueprint.buttons.length > 1) {
+            this.blueprint.buttons.forEach((button, index) => {
+                let svgshape;
+                if (button.shape == 'circle') {
+                    svgshape = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    svgshape.setAttributeNS(null, 'cx', button.x.toString());
+                    svgshape.setAttributeNS(null, 'cy', button.y.toString());
+                    svgshape.setAttributeNS(null, 'r', button.width.toString());
+                }
+                else if (button.shape == 'path') {
+                    svgshape = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                    svgshape.setAttributeNS(null, 'd', button.d.toString());
+                }
+                else {
+                    svgshape = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                    svgshape.setAttributeNS(null, 'x', button.x.toString());
+                    svgshape.setAttributeNS(null, 'y', button.y.toString());
+                    svgshape.setAttributeNS(null, 'width', button.width.toString());
+                    svgshape.setAttributeNS(null, 'height', button.height.toString());
+                }
+                svgshape.setAttribute('class', 'button');
+                svgshape.setAttribute('index', index.toString());
+                if (this.button_index == index) {
+                    svgshape.setAttribute('selected', '');
+                }
+                if (!this._buttonTotalSequence(this.config.buttons[index])) {
+                    svgshape.setAttribute('empty', '');
+                }
+                svgshape.addEventListener('click', ev => {
+                    ev.preventDefault();
+                    ev.stopPropagation();
+                    this._setButtonIndex(parseInt(ev.target.getAttribute('index')));
+                });
+                this.svg.append(svgshape);
+            });
+        }
+    }
+    _buttonTotalSequence(button) {
+        let total = 0;
+        button.actions.forEach(a => {
+            total += a.sequence.length;
+        });
+        return total;
+    }
+    _validate() {
+        this._errors = null;
+        this.identifier_input.invalid = false;
+        if (!this.config.identifier) {
+            this._errors = 'Identifier must not be empty';
+            this.identifier_input.invalid = true;
+            this.identifier_input.errorMessage = 'Identifier required';
+            return false;
+        }
+        return true;
+    }
+    _save() {
+        if (this._block_save || !this._validate())
+            return;
+        this._block_save = true;
+        this._dirty = false;
+        this.hass.callWS({
+            type: buildWSPath('config/save'),
+            config: Object.assign(Object.assign({}, this.config), { blueprint: this.config.blueprint.id })
+        }).then(r => {
+            if (this.is_new) {
+                this.is_new = false;
+                this.config.id = r.config_id;
+                navigate(buildUrl(`edit/${r.config_id}`));
+            }
+            showToast(this, { message: 'Switch Saved' });
+        }).catch(error => {
+            showToast(this, { message: error.message });
+            this._errors = error.message;
+            this._dirty = true;
+        }).finally(() => this._block_save = false);
+    }
+    _actionChanged(ev) {
+        this._setActionIndex(ev.detail.index);
+    }
+    _setButtonIndex(index) {
+        if (index == this.button_index)
+            return;
+        this.svg.querySelector('[selected]').removeAttribute('selected');
+        this.svg.querySelector(`[index="${index}"]`).setAttribute('selected', '');
+        this.button_index = index;
+        this._setActionIndex(0);
+    }
+    _setActionIndex(index) {
+        this.action_index = index;
+        this._updateSequence();
+    }
+    _configSequenceChanged(ev) {
+        this.requestUpdate('config');
+        this._updateSequence(ev.detail.value);
+        this._errors = undefined;
+        this._dirty = true;
+    }
+    async _listenForEvent() {
+        // Act as a toggle
+        if (this._subscribed) {
+            this._subscribed();
+            this._subscribed = undefined;
+            return;
+        }
+        this._subscribed = await this.hass.connection.subscribeEvents((event) => {
+            if (this.blueprint.identifier_key in event.data) {
+                this.identifier_input.value = event.data[this.blueprint.identifier_key];
+                this._identifierChanged();
+                this._subscribed();
+                this._subscribed = undefined;
+            }
+        }, this.blueprint.event_type);
+    }
+    _identifierChanged(ev) {
+        this.config.identifier = getValueById(this, 'identifier-input');
+        this._dirty = true;
+    }
+    _modeValueChanged(ev) {
+        var _a;
+        if (((_a = this.config) === null || _a === void 0 ? void 0 : _a.buttons[this.button_index].actions[this.action_index].mode) == ev.detail.value)
+            return;
+        this.config.buttons[this.button_index].actions[this.action_index].mode = ev.detail.value;
+        this.requestUpdate('config');
+        this._dirty = true;
+    }
+    async _showRenameDialog() {
+        fireEvent(this, "show-dialog", {
+            dialogTag: "switch-manager-dialog-rename-switch",
+            dialogImport: () => Promise.resolve().then(function () { return dialogRenameSwitch; }),
+            dialogParams: {
+                config: this.config,
+                update: (config) => {
+                    this.config.name = config.name;
+                    this._dirty = true;
+                    this.requestUpdate();
+                },
+                onClose: () => { }
+            },
+        });
+    }
+    _updateSequence(sequence) {
+        var _a, _b, _c, _d;
+        if (sequence) {
+            this.config.buttons[this.button_index].actions[this.action_index].sequence = sequence;
+        }
+        this.sequence = this.config.buttons[this.button_index].actions[this.action_index].sequence;
+        if (!this._buttonTotalSequence(this.config.buttons[this.button_index])) {
+            (_b = (_a = this.svg) === null || _a === void 0 ? void 0 : _a.querySelector('[selected]')) === null || _b === void 0 ? void 0 : _b.setAttribute('empty', '');
+        }
+        else {
+            (_d = (_c = this.svg) === null || _c === void 0 ? void 0 : _c.querySelector('[selected]')) === null || _d === void 0 ? void 0 : _d.removeAttribute('empty');
+        }
+        this.requestUpdate('config');
+    }
+    _toggleEnabled() {
+        this.hass.callWS({ type: buildWSPath('config/enabled'), enabled: !this.config.enabled, config_id: this.config.id }).then(r => {
+            this.config.enabled = r.enabled;
+            this.requestUpdate('config');
+            showToast(this, { message: `Switch ${r.enabled ? 'Enabled' : 'Disabled'}` });
+        }).catch(error => showToast(this, { message: error.message }));
+    }
+    async _deleteConfirm() {
+        showConfirmDialog(this, {
+            title: 'Delete switch?',
+            text: `${this.config.name} will be permanently deleted.`,
+            confirmText: 'Delete',
+            dismissText: 'Cancel',
+            confirm: () => this._delete(),
+            confirmation: true,
+            destructive: true,
+        });
+    }
+    async _delete() {
+        this.hass.callWS({ type: buildWSPath('config/delete'), config_id: this.config.id.toString() }).then(promise => {
+            showToast(this, {
+                message: 'Switch Deleted'
+            });
+            navigate(buildUrl());
+        });
+    }
+}
+__decorate([
+    e$7()
+], SwitchManagerSwitchEditor.prototype, "hass", void 0);
+__decorate([
+    e$7()
+], SwitchManagerSwitchEditor.prototype, "narrow", void 0);
+__decorate([
+    e$7()
+], SwitchManagerSwitchEditor.prototype, "panel", void 0);
+__decorate([
+    e$7()
+], SwitchManagerSwitchEditor.prototype, "route", void 0);
+__decorate([
+    e$7()
+], SwitchManagerSwitchEditor.prototype, "params", void 0);
+__decorate([
+    e$7()
+], SwitchManagerSwitchEditor.prototype, "blueprint", void 0);
+__decorate([
+    e$7()
+], SwitchManagerSwitchEditor.prototype, "config", void 0);
+__decorate([
+    e$7()
+], SwitchManagerSwitchEditor.prototype, "disabled", void 0);
+__decorate([
+    t$5()
+], SwitchManagerSwitchEditor.prototype, "_subscribed", void 0);
+__decorate([
+    t$5()
+], SwitchManagerSwitchEditor.prototype, "sequence", void 0);
+__decorate([
+    t$5()
+], SwitchManagerSwitchEditor.prototype, "button_index", void 0);
+__decorate([
+    t$5()
+], SwitchManagerSwitchEditor.prototype, "action_index", void 0);
+__decorate([
+    t$5()
+], SwitchManagerSwitchEditor.prototype, "is_new", void 0);
+__decorate([
+    t$5()
+], SwitchManagerSwitchEditor.prototype, "_dirty", void 0);
+__decorate([
+    t$5()
+], SwitchManagerSwitchEditor.prototype, "_block_save", void 0);
+__decorate([
+    t$5()
+], SwitchManagerSwitchEditor.prototype, "_errors", void 0);
+__decorate([
+    i$5('#switch-svg')
+], SwitchManagerSwitchEditor.prototype, "svg", void 0);
+__decorate([
+    i$5('#identifier-input')
+], SwitchManagerSwitchEditor.prototype, "identifier_input", void 0);
+customElements.define("switch-manager-switch-editor", SwitchManagerSwitchEditor);
+
+let SwitchManagerPanel = class SwitchManagerPanel extends s$4 {
+    get route() { return this._route; }
+    ;
+    set route(route) {
+        this._route = route;
+        let parts = route.path.split('/');
+        if (parts[1] == 'new') {
+            this.params = { action: 'new', blueprint: parts[2] };
+        }
+        else if (parts[1] == 'edit') {
+            this.params = { action: 'edit', id: parts[2] };
+        }
+        else {
+            this.params = {};
+        }
+    }
+    ;
+    constructor() {
+        super();
+        this.params = {};
+        this.component_name = "custom";
+        loadComponents();
+    }
+    render() {
+        if ('action' in this.params)
+            return y `        
                 <switch-manager-switch-editor .hass=${this.hass} .narrow=${this.narrow} .route=${this.route} .params=${this.params}></switch-manager-index>
-            `:q`
+            `;
+        return y `
                 <switch-manager-index .hass=${this.hass} .narrow=${this.narrow} .route=${this.route}>
-            `}firstUpdated(t){super.firstUpdated(t),this.hass.loadFragmentTranslation("config")}};t([s()],Ue.prototype,"hass",void 0),t([s()],Ue.prototype,"narrow",void 0),t([s()],Ue.prototype,"panel",void 0),t([o()],Ue.prototype,"params",void 0),t([o()],Ue.prototype,"component_name",void 0),t([s()],Ue.prototype,"route",null),Ue=t([e("switch-manager-panel")],Ue);let Te=class extends nt{async showDialog(t){this._params=t}closeDialog(){var t,e;return!(null===(t=this._params)||void 0===t?void 0:t.confirmation)&&!(null===(e=this._params)||void 0===e?void 0:e.prompt)&&(!this._params||(this._dismiss(),!0))}render(){if(!this._params)return q``;const t=this._params.confirmation||this._params.prompt;return q`
+            `;
+    }
+    firstUpdated(changedProps) {
+        super.firstUpdated(changedProps);
+        this.hass.loadFragmentTranslation("config");
+    }
+};
+__decorate([
+    e$7()
+], SwitchManagerPanel.prototype, "hass", void 0);
+__decorate([
+    e$7()
+], SwitchManagerPanel.prototype, "narrow", void 0);
+__decorate([
+    e$7()
+], SwitchManagerPanel.prototype, "panel", void 0);
+__decorate([
+    t$5()
+], SwitchManagerPanel.prototype, "params", void 0);
+__decorate([
+    t$5()
+], SwitchManagerPanel.prototype, "component_name", void 0);
+__decorate([
+    e$7()
+], SwitchManagerPanel.prototype, "route", null);
+SwitchManagerPanel = __decorate([
+    e$8('switch-manager-panel')
+], SwitchManagerPanel);
+
+let SwitchManagerDialogConfirm = class SwitchManagerDialogConfirm extends s$4 {
+    async showDialog(params) {
+        this._params = params;
+    }
+    closeDialog() {
+        var _a, _b;
+        if (((_a = this._params) === null || _a === void 0 ? void 0 : _a.confirmation) || ((_b = this._params) === null || _b === void 0 ? void 0 : _b.prompt)) {
+            return false;
+        }
+        if (this._params) {
+            this._dismiss();
+            return true;
+        }
+        return true;
+    }
+    render() {
+        if (!this._params) {
+            return y ``;
+        }
+        const confirmPrompt = this._params.confirmation || this._params.prompt;
+        return y `
             <ha-dialog
                 open
-                ?scrimClickAction=${t}
-                ?escapeKeyAction=${t}
+                ?scrimClickAction=${confirmPrompt}
+                ?escapeKeyAction=${confirmPrompt}
                 @closed=${this._dialogClosed}
                 defaultAction="ignore"
-                .heading=${q`${this._params.warning?q`<ha-svg-icon
-                    .path=${"M12,2L1,21H23M12,6L19.53,19H4.47M11,10V14H13V10M11,16V18H13V16"}
+                .heading=${y `${this._params.warning
+            ? y `<ha-svg-icon
+                    .path=${mdiAlertOutline}
                     style="color: var(--warning-color)"
-                    ></ha-svg-icon> `:""}${this._params.title?this._params.title:this._params.confirmation&&this.hass.localize("ui.dialogs.generic.default_confirmation_title")}`}>
+                    ></ha-svg-icon> `
+            : ""}${this._params.title
+            ? this._params.title
+            : this._params.confirmation &&
+                this.hass.localize("ui.dialogs.generic.default_confirmation_title")}`}>
                 
                 <div>
-                    ${this._params.text?q`
-                    <p class=${this._params.prompt?"no-bottom-padding":""}>
+                    ${this._params.text ? y `
+                    <p class=${this._params.prompt ? "no-bottom-padding" : ""}>
                         ${this._params.text}
-                    </p>`:""}
+                    </p>` : ""}
                 </div>
-                ${t&&q`
+                ${confirmPrompt &&
+            y `
                 <mwc-button @click=${this._dismiss} slot="secondaryAction">
-                    ${this._params.dismissText?this._params.dismissText:this.hass.localize("ui.dialogs.generic.cancel")}
+                    ${this._params.dismissText
+                ? this._params.dismissText
+                : this.hass.localize("ui.dialogs.generic.cancel")}
                 </mwc-button>
                 `}
                 <mwc-button
                     @click=${this._confirm}
                     ?dialogInitialFocus=${!this._params.prompt}
                     slot="primaryAction"
-                    class=${Ne({destructive:this._params.destructive||!1})}>
-                    ${this._params.confirmText?this._params.confirmText:this.hass.localize("ui.dialogs.generic.ok")}
+                    class=${o({
+            destructive: this._params.destructive || false,
+        })}>
+                    ${this._params.confirmText
+            ? this._params.confirmText
+            : this.hass.localize("ui.dialogs.generic.ok")}
                 </mwc-button>
             </ha-dialog>
-        `}_dismiss(){var t;(null===(t=this._params)||void 0===t?void 0:t.cancel)&&this._params.cancel(),this._close()}_confirm(){this._params.confirm&&this._params.confirm(),this._close()}_dialogClosed(t){"ignore"!==t.detail.action&&this._dismiss()}_close(){this._params&&(this._params=void 0,vt(this,"dialog-closed",{dialog:this.localName}))}static get styles(){return p`
+        `;
+    }
+    _dismiss() {
+        var _a;
+        if ((_a = this._params) === null || _a === void 0 ? void 0 : _a.cancel) {
+            this._params.cancel();
+        }
+        this._close();
+    }
+    _confirm() {
+        if (this._params.confirm) {
+            this._params.confirm();
+        }
+        this._close();
+    }
+    _dialogClosed(ev) {
+        if (ev.detail.action === "ignore") {
+            return;
+        }
+        this._dismiss();
+    }
+    _close() {
+        if (!this._params) {
+            return;
+        }
+        this._params = undefined;
+        fireEvent(this, "dialog-closed", { dialog: this.localName });
+    }
+    static get styles() {
+        return i$4 `
             :host([inert]) {
                 pointer-events: initial !important;
                 cursor: initial !important;
@@ -669,20 +2344,58 @@ function t(t,e,i,s){var o,n=arguments.length,r=n<3?e:null===s?s=Object.getOwnPro
             ha-textfield {
                 width: 100%;
             }
-        `}};t([s({attribute:!1})],Te.prototype,"hass",void 0),t([o()],Te.prototype,"_params",void 0),Te=t([e("switch-manager-dialog-confirm")],Te);var Oe=Object.freeze({__proto__:null});let Le=class extends nt{constructor(){super(...arguments),this._opened=!1}showDialog(){this._opened=!0}closeDialog(){this._opened&&vt(this,"dialog-closed",{dialog:this.localName}),this._opened=!1}render(){return this._opened?q`
+        `;
+    }
+};
+__decorate([
+    e$7({ attribute: false })
+], SwitchManagerDialogConfirm.prototype, "hass", void 0);
+__decorate([
+    t$5()
+], SwitchManagerDialogConfirm.prototype, "_params", void 0);
+SwitchManagerDialogConfirm = __decorate([
+    e$8("switch-manager-dialog-confirm")
+], SwitchManagerDialogConfirm);
+
+var dialogConfirm = /*#__PURE__*/Object.freeze({
+    __proto__: null
+});
+
+let SwitchManagerBlueprintSelector = class SwitchManagerBlueprintSelector extends s$4 {
+    constructor() {
+        super(...arguments);
+        this._opened = false;
+    }
+    showDialog() {
+        this._opened = true;
+    }
+    closeDialog() {
+        if (this._opened) {
+            fireEvent(this, "dialog-closed", { dialog: this.localName });
+        }
+        this._opened = false;
+    }
+    render() {
+        if (!this._opened) {
+            return y ``;
+        }
+        return y `
             <ha-dialog        
                 open
                 hideActions
                 @closed=${this.closeDialog}
-                .heading="${$t("Select Blueprint")}">
+                .heading="${createCloseHeading('Select Blueprint')}">
                 <p>Can't find a blueprint for your switch? create your own.
-                    <ha-icon-button .path=${"M15.07,11.25L14.17,12.17C13.45,12.89 13,13.5 13,15H11V14.5C11,13.39 11.45,12.39 12.17,11.67L13.41,10.41C13.78,10.05 14,9.55 14,9C14,7.89 13.1,7 12,7A2,2 0 0,0 10,9H8A4,4 0 0,1 12,5A4,4 0 0,1 16,9C16,9.88 15.64,10.67 15.07,11.25M13,19H11V17H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z"} @click=${()=>window.open("https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager#blueprints","_blank").focus()}></ha-icon-button>
+                    <ha-icon-button .path=${mdiHelpCircle} @click=${() => window.open('https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager#blueprints', '_blank').focus()}></ha-icon-button>
                 </p>
                 <mwc-list>
                     ${this._listBlueprints()}
                 </mwc-list>
             </ha-dialog>
-        `:q``}static get styles(){return[xe,Se,p`
+        `;
+    }
+    static get styles() {
+        return [haStyleDialog, haStyleScrollbar, i$4 `
 
             mwc-list-item {
                 min-width: 470px;
@@ -746,21 +2459,96 @@ function t(t,e,i,s){var o,n=arguments.length,r=n<3?e:null===s?s=Object.getOwnPro
             .name {
                 padding-left: 1em;
             }
-        `]}_itemClicked(t){bt(mt(`new/${t}`)),this.closeDialog()}connectedCallback(){super.connectedCallback(),this._updateBlueprints()}_updateBlueprints(){this.hass.callWS({type:ft("blueprints")}).then((t=>{this.blueprints=t.blueprints})).catch((t=>yt(this,{message:t.message})))}_listBlueprints(){if(!this.blueprints)return;let t={};for(let e of Object.values(this.blueprints))t[e.service]||(t[e.service]=[]),t[e.service].push(e);let e=[];for(let i in t){e.push(q`<h2>${i}</h2>`);for(let s of t[i])e.push(q`
-                <mwc-list-item @click=${()=>this._itemClicked(s.id)} data-item-id="${s.id}">
+        `];
+    }
+    _itemClicked(id) {
+        navigate(buildUrl(`new/${id}`));
+        this.closeDialog();
+    }
+    connectedCallback() {
+        super.connectedCallback();
+        this._updateBlueprints();
+    }
+    _updateBlueprints() {
+        this.hass.callWS({ type: buildWSPath('blueprints') }).then(promise => {
+            this.blueprints = promise.blueprints;
+        }).catch(error => showToast(this, { message: error.message }));
+    }
+    _listBlueprints() {
+        if (!this.blueprints)
+            return;
+        let ordered = {};
+        for (let b of Object.values(this.blueprints)) {
+            if (!ordered[b.service])
+                ordered[b.service] = [];
+            ordered[b.service].push(b);
+        }
+        let _html = [];
+        for (let k in ordered) {
+            _html.push(y `<h2>${k}</h2>`);
+            for (let i of ordered[k]) {
+                _html.push(y `
+                <mwc-list-item @click=${() => this._itemClicked(i.id)} data-item-id="${i.id}">
                         <div class="row">
                             <div class="image">
-                                ${s.has_image?q`<img src="${_t(`${s.id}.png`)}" />`:q`<ha-svg-icon style="fill: var(--primary-color);" .path=${dt}></ha-svg-icon>`}
+                                ${i.has_image ?
+                    y `<img src="${buildAssetUrl(`${i.id}.png`)}" />` :
+                    y `<ha-svg-icon style="fill: var(--primary-color);" .path=${mdiGestureTapButton}></ha-svg-icon>`}
                             </div>
-                            <div class="name">${s.name}</div>
+                            <div class="name">${i.name}</div>
                         </div>
-                </mwc-list-item>`)}return e}};t([s({attribute:!1})],Le.prototype,"hass",void 0),t([s({attribute:!1})],Le.prototype,"blueprints",void 0),t([o()],Le.prototype,"_opened",void 0),Le=t([e("switch-manager-dialog-blueprint-selector")],Le);var Re=Object.freeze({__proto__:null});let De=class extends nt{constructor(){super(...arguments),this._opened=!1}showDialog(t){this._opened=!0,this._error=null,this._params=t,this._newName=t.config.name}closeDialog(){this._params.onClose(),this._opened&&vt(this,"dialog-closed",{dialog:this.localName}),this._opened=!1}render(){return this._opened?q`
+                </mwc-list-item>`);
+            }
+        }
+        return _html;
+    }
+};
+__decorate([
+    e$7({ attribute: false })
+], SwitchManagerBlueprintSelector.prototype, "hass", void 0);
+__decorate([
+    e$7({ attribute: false })
+], SwitchManagerBlueprintSelector.prototype, "blueprints", void 0);
+__decorate([
+    t$5()
+], SwitchManagerBlueprintSelector.prototype, "_opened", void 0);
+SwitchManagerBlueprintSelector = __decorate([
+    e$8('switch-manager-dialog-blueprint-selector')
+], SwitchManagerBlueprintSelector);
+
+var dialogBlueprintSelector = /*#__PURE__*/Object.freeze({
+    __proto__: null
+});
+
+let SwitchManagerDialogRenameSwitch = class SwitchManagerDialogRenameSwitch extends s$4 {
+    constructor() {
+        super(...arguments);
+        this._opened = false;
+    }
+    showDialog(params) {
+        this._opened = true;
+        this._error = null;
+        this._params = params;
+        this._newName = params.config.name;
+    }
+    closeDialog() {
+        this._params.onClose();
+        if (this._opened) {
+            fireEvent(this, "dialog-closed", { dialog: this.localName });
+        }
+        this._opened = false;
+    }
+    render() {
+        if (!this._opened) {
+            return y ``;
+        }
+        return y `
             <ha-dialog
                 open
                 scrimClickAction
                 @closed=${this.closeDialog}
-                .heading="${$t("Rename")}">
-                ${this._error?q`<ha-alert alert-type="error">Missing Name</ha-alert>`:""}
+                .heading="${createCloseHeading('Rename')}">
+                ${this._error ? y `<ha-alert alert-type="error">Missing Name</ha-alert>` : ""}
 
                 <ha-textfield
                     dialogInitialFocus
@@ -778,7 +2566,13 @@ function t(t,e,i,s){var o,n=arguments.length,r=n<3?e:null===s?s=Object.getOwnPro
                     Rename
                 </mwc-button>
             </ha-dialog>
-        `:q``}static get styles(){return[Ae,xe,p`
+        `;
+    }
+    static get styles() {
+        return [
+            haStyle,
+            haStyleDialog,
+            i$4 `
             ha-textfield,
             ha-textarea {
               display: block;
@@ -787,4 +2581,36 @@ function t(t,e,i,s){var o,n=arguments.length,r=n<3?e:null===s?s=Object.getOwnPro
               display: block;
               margin-bottom: 16px;
             }
-          `]}_valueChanged(t){t.stopPropagation();const e=t.target;this._newName=e.value}_save(){this._newName?(this._params.update(Object.assign(Object.assign({},this._params.config),{name:this._newName})),this.closeDialog()):this._error="Name is required"}};t([s({attribute:!1})],De.prototype,"hass",void 0),t([o()],De.prototype,"_opened",void 0),t([o()],De.prototype,"_error",void 0),De=t([e("switch-manager-dialog-rename-switch")],De);var ze=Object.freeze({__proto__:null});
+          `,
+        ];
+    }
+    _valueChanged(ev) {
+        ev.stopPropagation();
+        const target = ev.target;
+        this._newName = target.value;
+    }
+    _save() {
+        if (!this._newName) {
+            this._error = "Name is required";
+            return;
+        }
+        this._params.update(Object.assign(Object.assign({}, this._params.config), { name: this._newName }));
+        this.closeDialog();
+    }
+};
+__decorate([
+    e$7({ attribute: false })
+], SwitchManagerDialogRenameSwitch.prototype, "hass", void 0);
+__decorate([
+    t$5()
+], SwitchManagerDialogRenameSwitch.prototype, "_opened", void 0);
+__decorate([
+    t$5()
+], SwitchManagerDialogRenameSwitch.prototype, "_error", void 0);
+SwitchManagerDialogRenameSwitch = __decorate([
+    e$8('switch-manager-dialog-rename-switch')
+], SwitchManagerDialogRenameSwitch);
+
+var dialogRenameSwitch = /*#__PURE__*/Object.freeze({
+    __proto__: null
+});

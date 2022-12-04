@@ -86,8 +86,7 @@ class SwitchManagerSwitchEditor extends LitElement
                                 
                                 <mwc-list-item
                                     graphic="icon"
-                                    @click=${this._showRenameDialog}
-                                    .disabled=${(this.config?._error)}>
+                                    @click=${this._showRenameDialog}>
                                         Rename
                                         <ha-svg-icon slot="graphic" .path=${mdiRenameBox}>
                                         </ha-svg-icon>
@@ -257,6 +256,7 @@ class SwitchManagerSwitchEditor extends LitElement
                 padding-left: 25px;
                 position: relative;
             }
+
             #identifier-input {
                 width: 300px;
             }
@@ -280,6 +280,13 @@ class SwitchManagerSwitchEditor extends LitElement
                 width: 300px;
                 position: absolute;
                 margin-left: 25px;
+            }
+            @media screen and ( max-width: 690px )
+            {
+                #identifier-input, #identifier ha-alert {
+                    width: 90%;
+                    position: relative;
+                }
             }
             hui-view {
                 height: calc(100vh - var(--header-height));
@@ -308,7 +315,7 @@ class SwitchManagerSwitchEditor extends LitElement
                 margin: 1em;
                 justify-content: center;
             }           
-            @media screen and ( min-width: 1200px )
+            @media screen and ( min-width: 1500px )
             {
                 #switch-image {
                     margin-top: -65px;

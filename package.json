@@ -1,12 +1,12 @@
 {
   "name": "switch_manager",
   "private": true,
-  "version": "0.10.1",
+  "version": "0.1.2",
   "description": "Home Assistant Frontend for Switch Manager",
   "scripts": {
     "build": "rollup -c",
     "watch": "rollup -c --watch",
-    "update_live": "cp -r ./custom_components/switch_manager/* ../../home-assistant/config/custom_components/switch_manager/"
+    "update_live": "cp -r ./custom_components/switch_manager/* ../../home-assistant/config/custom_components/switch_manager/; sudo docker restart Home-Assistant;"
   },
   "keywords": [],
   "author": "Sian",

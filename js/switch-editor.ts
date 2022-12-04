@@ -12,8 +12,9 @@ import {
     mdiGestureTapButton,
     mdiEarHearing
 } from "@mdi/js";
-import { MODES, SwitchManagerBlueprint, SwitchManagerConfig, SwitchManagerConfigButton } from "./types"
-import { haStyle } from "@hass/resources/styles"
+import { MODES, SwitchManagerBlueprint, SwitchManagerBlueprintCondition, SwitchManagerConfig, SwitchManagerConfigButton } from "./types";
+import { haStyle } from "@hass/resources/styles";
+import { subscribeMQTTTopic } from "@hass/data/mqtt";
 import { 
     buildAssetUrl, 
     buildUrl, 
@@ -134,7 +135,7 @@ class SwitchManagerSwitchEditor extends LitElement
                             required="true" 
                             .label=${this.blueprint.event_type == 'mqtt'? 'mqtt topic' : this.blueprint?.identifier_key}
                             @input="${this._identifierChanged}"></ha-textfield>
-                        ${this.blueprint.event_type != 'mqtt' ? html`
+                        ${this.blueprint.event_type != 'mqtt' || this.blueprint.mqtt_topic_format ? html`
                         <ha-icon-button
                             .path=${mdiEarHearing}
                             ?listening=${(this._subscribed)}
@@ -423,9 +424,9 @@ class SwitchManagerSwitchEditor extends LitElement
     private async _drawSVG()
     {
         if( !this.blueprint.has_image )
-        {
             return;
-        }
+        
+        // Ensure SVG is in DOM
         await this.updateComplete;
         var img = new Image;
         img.src = buildAssetUrl(`${this.blueprint.id}.png`);
@@ -539,11 +540,10 @@ class SwitchManagerSwitchEditor extends LitElement
     {
         if( index == this.button_index )
           return;
-
+        this.button_index = index;
+        
         this.svg.querySelector('[selected]').removeAttribute('selected');
         this.svg.querySelector(`[index="${index}"]`).setAttribute('selected', '');
-
-        this.button_index = index;
 
         this._setActionIndex(0);
     }
@@ -572,15 +572,51 @@ class SwitchManagerSwitchEditor extends LitElement
             return;
         }
 
-        this._subscribed = await this.hass!.connection.subscribeEvents( (event) => {
-            if( this.blueprint.identifier_key in event.data )
-            {
-                this.identifier_input.value = event.data[this.blueprint.identifier_key];
-                this._identifierChanged();
-                this._subscribed();
-                this._subscribed = undefined;
-            }
-        }, this.blueprint.event_type )
+        const __process_conditions = ( conditions: SwitchManagerBlueprintCondition[], data: any): boolean =>
+        {
+            if( ! conditions )
+                return true;
+
+            for( const condition of conditions )
+                if( !(condition.key in data) || String(condition.value) != String(data[condition.key]) )
+                    return false;
+                    
+            return true;
+        }
+
+        const __validate_data = ( data: any ): boolean => {
+            if( ! __process_conditions( this.blueprint.conditions, data ) )
+                return false;
+
+            for( const button of this.blueprint.buttons )
+                if( __process_conditions(button.conditions, data) )
+                    for( const action of button.actions )
+                        if( __process_conditions(action.conditions, data) )
+                            return true;
+
+            return false;
+        }
+
+        const __handle_response = ( id: string, data: any ) => {
+            if( !__validate_data(data) )
+                return;
+
+            this.identifier_input.value = id;
+            this._identifierChanged();
+            this._subscribed();
+            this._subscribed = undefined;
+        }
+
+        if( this.blueprint.event_type == 'mqtt' && this.blueprint.mqtt_topic_format )
+            this._subscribed = await subscribeMQTTTopic( this.hass, this.blueprint.mqtt_topic_format, (message) => {
+                const data = typeof(message.payload) == 'string' ? { payload: message.payload } : message.payload;
+                __handle_response( message.topic, data );
+            });
+        else
+            this._subscribed = await this.hass!.connection.subscribeEvents( (event) => {
+                if( this.blueprint.identifier_key in event.data )
+                    __handle_response( event.data[this.blueprint.identifier_key], event.data );
+            }, this.blueprint.event_type );
     }
 
     private _identifierChanged(ev?: CustomEvent)

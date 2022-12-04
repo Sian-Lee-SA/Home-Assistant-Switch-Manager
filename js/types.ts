@@ -5,15 +5,22 @@ export const isMaxMode = (
   ): mode is typeof MODES_MAX[number] =>
     MODES_MAX.includes(mode as typeof MODES_MAX[number]);
 
+export interface SwitchManagerBlueprintCondition
+{
+    key: string;
+    value: string;
+}
+
 export interface SwitchManagerBlueprint
 {
     id: string;
     name: string;
     service: string;
-    has_image: boolean;
-    identifier_key: string;
-    mqtt_topic_format: string;
     event_type: string;
+    identifier_key?: string;
+    conditions?: SwitchManagerBlueprintCondition[],
+    has_image: boolean;
+    mqtt_topic_format?: string;
     buttons: SwitchManagerBlueprintButton[];
 }
 
@@ -25,12 +32,14 @@ export interface SwitchManagerBlueprintButton
     width: number;
     height: number;
     shape: string;
+    conditions?: SwitchManagerBlueprintCondition[],
     actions: SwitchManagerBlueprintButtonAction[];
 }
 
 export interface SwitchManagerBlueprintButtonAction
 {
     title: string;
+    conditions?: SwitchManagerBlueprintCondition[],
 }
 
 export interface SwitchManagerConfig

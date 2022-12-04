@@ -82,8 +82,12 @@ async def async_setup( hass: HomeAssistant, config: Config ):
     # Init hass storage
     await hass.data[DOMAIN][CONF_STORE].load()
 
-    await async_migrate(hass)
-    await deploy_blueprints( hass )
+    is_dev = config.get(DOMAIN, {}).get('dev', False)
+    if is_dev:
+        LOGGER.warning('In Developer Mode')
+
+    await async_migrate( hass, is_dev )
+    
     _init_blueprints(hass)
     await _init_switch_configs(hass)
 
@@ -102,19 +106,16 @@ async def async_setup_entry( hass, config_entry ):
 
     return True
 
-async def async_migrate( hass ):
-    # Opening JSON file
+async def async_migrate( hass, in_dev ):
     manifest = await load_manifest()
     store = hass.data[DOMAIN][CONF_STORE]
-    if not store.compare_version( manifest['version'] ):
+
+    version_update = not store.compare_version( manifest['version'] )
+    if in_dev or version_update or not await check_blueprints_folder_exists( hass ):
         LOGGER.debug('Migrating blueprints')
         await deploy_blueprints( hass )
-        await store.update_version( manifest['version'] )
-        return True
-    elif not await check_blueprints_folder_exists( hass ):
-        await deploy_blueprints( hass )
-
-    return False
+        if version_update:
+            await store.update_version( manifest['version'] )
 
 def _init_blueprints( hass: HomeAssistant ):
     # Ensure blueprints empty for clean state

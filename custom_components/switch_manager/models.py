@@ -220,9 +220,6 @@ class ManagedSwitchConfig:
 
     def setEnabled( self, value: bool ):
         self.enabled = value
-    
-
-
 
     def _check_conditons( self, data ) -> bool:
         if self.blueprint.event_type != 'mqtt':

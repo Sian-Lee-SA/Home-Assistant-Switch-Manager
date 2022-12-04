@@ -95,10 +95,10 @@ export function navigate(ev)
 }
 
 export const loadComponents = async() => {
-    if(customElements.get('ha-automation-action') && customElements.get('ha-data-table'))
+    /*if(customElements.get('ha-automation-action') && customElements.get('ha-data-table'))
     {
         return;
-    }
+    }*/
     
     await customElements.whenDefined("partial-panel-resolver");
     const ppResolver = document.createElement("partial-panel-resolver");
@@ -111,8 +111,8 @@ export const loadComponents = async() => {
     await routes?.routes?.a?.load?.();
     await customElements.whenDefined("ha-panel-config");
     const configRouter: any = document.createElement("ha-panel-config");
-    // await configRouter?.routerOptions?.routes?.dashboard?.load?.(); // Load ha-config-dashboard
-    await configRouter?.routerOptions?.routes?.script?.load?.(); // Load ha-data-table
+    await configRouter?.routerOptions?.routes?.dashboard?.load?.(); // Load ha-config-dashboard
+    await configRouter?.routerOptions?.routes?.script?.load?.(); // Load ha-data-table, editor
     await customElements.whenDefined("ha-config-dashboard");
 }
 

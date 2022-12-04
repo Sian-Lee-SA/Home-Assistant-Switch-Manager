@@ -1,11 +1,12 @@
 import { mdiClose } from "@mdi/js";
 import { html, LitElement, TemplateResult } from "lit";
 import { MODES, ShowToastParams, SwitchManagerBlueprint, SwitchManagerConfig } from "./types";
+import { HomeAssistant } from "@hass/types";
 import { fireEvent } from "@hass/common/dom/fire_event";
 
 export const DOMAIN = 'switch_manager'
 
-export function computeRTL(hass) 
+export function computeRTL(hass: HomeAssistant) 
 {
     const lang = hass.language || "en";
     if (hass.translationMetadata.translations[lang]) {
@@ -14,7 +15,7 @@ export function computeRTL(hass)
     return false;
 }
 
-export function computeRTLDirection(hass) 
+export function computeRTLDirection(hass: HomeAssistant) 
 {
     return emitRTLDirection(computeRTL(hass));
 }

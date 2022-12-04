@@ -1,6 +1,6 @@
 import { customElement, property, state } from "lit/decorators.js";
 import { html, LitElement } from "lit";
-
+import { HomeAssistant } from "@hass/types";
 import "./index";
 import "./switch-editor";
 import { loadComponents } from "./helpers";
@@ -8,9 +8,12 @@ import { loadComponents } from "./helpers";
 @customElement('switch-manager-panel')
 class SwitchManagerPanel extends LitElement 
 {
-    @property() hass!: any;
+    @property() hass!: HomeAssistant;
+
     @property() narrow;
+
     @property() panel;
+    
     @state() params = {};
 
     @state() component_name = "custom";

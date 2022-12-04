@@ -1,6 +1,7 @@
 import { html, css, LitElement } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { SwitchManagerBlueprint } from "../types";
+import { HomeAssistant } from "@hass/types";
 import {
     mdiGestureTapButton,
     mdiClose,
@@ -20,7 +21,8 @@ import { haStyleDialog, haStyleScrollbar } from "@hass/resources/styles"
 @customElement('switch-manager-dialog-blueprint-selector')
 class SwitchManagerBlueprintSelector extends LitElement 
 {
-    @property({attribute: false}) public hass!: any;
+    @property({attribute: false}) public hass!: HomeAssistant;
+
     @property({attribute: false}) blueprints: {[key: string]: SwitchManagerBlueprint};
 
     @state() private _opened = false;
@@ -48,10 +50,10 @@ class SwitchManagerBlueprintSelector extends LitElement
                 open
                 hideActions
                 @closed=${this.closeDialog}
-                .heading="${createCloseHeading('Select Blueprint')}">
-                <p>Can't find a blueprint for your switch? create your own.
-                    <ha-icon-button .path=${mdiHelpCircle} @click=${() => window.open('https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager#blueprints', '_blank').focus()}></ha-icon-button>
-                </p>
+                .heading=${createCloseHeading(html`Select Blueprint
+                <p style="margin: 0;margin-bottom: -16px;font-size: 12px;">Can't find a blueprint for your switch? create your own.
+                    <ha-icon-button style="vertical-align: middle;" .path=${mdiHelpCircle} @click=${() => window.open('https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager#blueprints', '_blank').focus()}></ha-icon-button>
+                </p>`)}>
                 <mwc-list>
                     ${this._listBlueprints()}
                 </mwc-list>
@@ -79,10 +81,6 @@ class SwitchManagerBlueprintSelector extends LitElement
             }
             h2:first-child {
                 margin: 0;
-            }
-            p {
-                margin: -35px 0 0 0;
-                font-size: 0.8em;
             }
             ha-icon-button {
                 vertical-align: middle;
@@ -143,8 +141,8 @@ class SwitchManagerBlueprintSelector extends LitElement
 
     private _updateBlueprints()
     {
-        this.hass.callWS({type: buildWSPath('blueprints')}).then( promise => {
-            this.blueprints = promise.blueprints;            
+        this.hass.callWS<any>({type: buildWSPath('blueprints')}).then( r => {
+            this.blueprints = r.blueprints;            
         }).catch(error => showToast(this, { message: error.message }));
     }
 

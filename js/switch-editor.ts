@@ -14,6 +14,7 @@ import {
 } from "@mdi/js";
 import { MODES, SwitchManagerBlueprint, SwitchManagerBlueprintCondition, SwitchManagerConfig, SwitchManagerConfigButton } from "./types";
 import { haStyle } from "@hass/resources/styles";
+import { HomeAssistant } from "@hass/types";
 import { subscribeMQTTTopic } from "@hass/data/mqtt";
 import { 
     buildAssetUrl, 
@@ -31,7 +32,7 @@ import "./button-actions";
 
 class SwitchManagerSwitchEditor extends LitElement
 {
-    @property() hass!: any;
+    @property() hass!: HomeAssistant;
     @property() narrow;
     @property() panel;
     @property() route;
@@ -255,9 +256,10 @@ class SwitchManagerSwitchEditor extends LitElement
             }
             h3, #identifier {
                 padding-left: 25px;
+            }
+            #identifier {
                 position: relative;
             }
-
             #identifier-input {
                 width: 300px;
             }
@@ -382,15 +384,15 @@ class SwitchManagerSwitchEditor extends LitElement
     {
         if( 'id' in this.params ) {
             this.is_new = false;
-            this.hass.callWS({type: buildWSPath('configs'), config_id: this.params.id}).then( promise => {
-                this._setConfig(promise.config);
+            this.hass.callWS<any>({type: buildWSPath('configs'), config_id: this.params.id}).then( r => {
+                this._setConfig(r.config);
             });
         } else {
             this.is_new = true;
             this._dirty = true;
             if( 'blueprint' in this.params )
-                this._loadBlueprint(this.params.blueprint).then( promise => {
-                    this._setConfig( createConfigFromBlueprint(promise.blueprint) );
+                this._loadBlueprint(this.params.blueprint).then( r => {
+                    this._setConfig( createConfigFromBlueprint(r.blueprint) );
                     this._showRenameDialog();
                 });
         }  
@@ -398,7 +400,7 @@ class SwitchManagerSwitchEditor extends LitElement
 
     private _loadBlueprint(id: string)
     {
-        return this.hass.callWS({type: buildWSPath('blueprints'), blueprint_id: id});
+        return this.hass.callWS<any>({type: buildWSPath('blueprints'), blueprint_id: id});
     }
 
     private _setConfig( config: SwitchManagerConfig )
@@ -513,7 +515,7 @@ class SwitchManagerSwitchEditor extends LitElement
         this._block_save = true;
         this._dirty = false;
 
-        this.hass.callWS({
+        this.hass.callWS<any>({
             type: buildWSPath('config/save'), 
             config: {...this.config, blueprint: this.config.blueprint.id}
         }).then(r => {            
@@ -673,7 +675,7 @@ class SwitchManagerSwitchEditor extends LitElement
     private _toggleEnabled()
     {
         
-        this.hass.callWS({ type: buildWSPath('config/enabled'), enabled: !this.config.enabled, config_id: this.config.id }).then( r => {
+        this.hass.callWS<any>({ type: buildWSPath('config/enabled'), enabled: !this.config.enabled, config_id: this.config.id }).then( r => {
             this.config.enabled = r.enabled;
             this.requestUpdate('config');
             showToast(this, { message: `Switch ${r.enabled? 'Enabled':'Disabled'}` });

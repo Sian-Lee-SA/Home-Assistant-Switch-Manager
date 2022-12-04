@@ -1,5 +1,6 @@
 import { css, CSSResultGroup, html, LitElement, TemplateResult } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
+import { HomeAssistant } from "@hass/types";
 import { createCloseHeading } from "../helpers";
 import { haStyle, haStyleDialog } from "@hass/resources/styles";
 import { fireEvent } from "@hass/common/dom/fire_event";
@@ -7,7 +8,7 @@ import { fireEvent } from "@hass/common/dom/fire_event";
 @customElement('switch-manager-dialog-rename-switch')
 class SwitchManagerDialogRenameSwitch extends LitElement 
 {
-    @property({ attribute: false }) public hass!: any;
+    @property({ attribute: false }) public hass!: HomeAssistant;
 
     @state() private _opened = false;
   

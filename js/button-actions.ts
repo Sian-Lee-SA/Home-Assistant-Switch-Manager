@@ -1,13 +1,17 @@
 import { html, css, LitElement } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { SwitchManagerBlueprintButtonAction, SwitchManagerConfigButtonAction } from "./types";
+import { HomeAssistant } from "@hass/types";
 
 @customElement('switch-manager-button-actions')
 class SwitchManagerButtonActions extends LitElement 
 {
-    @property() hass!: any;
+    @property() hass!: HomeAssistant;
+
     @property() blueprint_actions: SwitchManagerBlueprintButtonAction[];
+
     @property() config_actions: SwitchManagerConfigButtonAction[];
+    
     @property({reflect: true}) index = 0;
 
     render() 

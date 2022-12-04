@@ -502,9 +502,10 @@ function t(t,e,i,s){var o,n=arguments.length,r=n<3?e:null===s?s=Object.getOwnPro
             }
             h3, #identifier {
                 padding-left: 25px;
+            }
+            #identifier {
                 position: relative;
             }
-
             #identifier-input {
                 width: 300px;
             }
@@ -681,10 +682,10 @@ function t(t,e,i,s){var o,n=arguments.length,r=n<3?e:null===s?s=Object.getOwnPro
                 open
                 hideActions
                 @closed=${this.closeDialog}
-                .heading="${$t("Select Blueprint")}">
-                <p>Can't find a blueprint for your switch? create your own.
-                    <ha-icon-button .path=${"M15.07,11.25L14.17,12.17C13.45,12.89 13,13.5 13,15H11V14.5C11,13.39 11.45,12.39 12.17,11.67L13.41,10.41C13.78,10.05 14,9.55 14,9C14,7.89 13.1,7 12,7A2,2 0 0,0 10,9H8A4,4 0 0,1 12,5A4,4 0 0,1 16,9C16,9.88 15.64,10.67 15.07,11.25M13,19H11V17H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z"} @click=${()=>window.open("https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager#blueprints","_blank").focus()}></ha-icon-button>
-                </p>
+                .heading=${$t(j`Select Blueprint
+                <p style="margin: 0;margin-bottom: -16px;font-size: 12px;">Can't find a blueprint for your switch? create your own.
+                    <ha-icon-button style="vertical-align: middle;" .path=${"M15.07,11.25L14.17,12.17C13.45,12.89 13,13.5 13,15H11V14.5C11,13.39 11.45,12.39 12.17,11.67L13.41,10.41C13.78,10.05 14,9.55 14,9C14,7.89 13.1,7 12,7A2,2 0 0,0 10,9H8A4,4 0 0,1 12,5A4,4 0 0,1 16,9C16,9.88 15.64,10.67 15.07,11.25M13,19H11V17H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z"} @click=${()=>window.open("https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager#blueprints","_blank").focus()}></ha-icon-button>
+                </p>`)}>
                 <mwc-list>
                     ${this._listBlueprints()}
                 </mwc-list>
@@ -706,10 +707,6 @@ function t(t,e,i,s){var o,n=arguments.length,r=n<3?e:null===s?s=Object.getOwnPro
             }
             h2:first-child {
                 margin: 0;
-            }
-            p {
-                margin: -35px 0 0 0;
-                font-size: 0.8em;
             }
             ha-icon-button {
                 vertical-align: middle;

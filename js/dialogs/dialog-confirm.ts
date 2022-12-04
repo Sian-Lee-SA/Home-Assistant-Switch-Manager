@@ -3,12 +3,13 @@ import { css, CSSResultGroup, html, LitElement, TemplateResult } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ConfirmationDialogParams } from "../helpers";
+import { HomeAssistant } from "@hass/types";
 import { fireEvent } from "@hass/common/dom/fire_event";
 
 @customElement("switch-manager-dialog-confirm")
 class SwitchManagerDialogConfirm extends LitElement 
 {
-    @property({ attribute: false }) public hass!: any;
+    @property({ attribute: false }) public hass!: HomeAssistant;
 
     @state() private _params?: ConfirmationDialogParams;
 

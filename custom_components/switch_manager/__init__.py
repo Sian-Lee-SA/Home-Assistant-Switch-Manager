@@ -44,8 +44,6 @@ BLUEPRINT_SCHEMA = vol.Schema({
     vol.Required('name'): cv.string,
     vol.Required('service'): cv.string,
     vol.Required('event_type'): cv.string,
-    vol.Required('identifier_key'): cv.string,
-    vol.Optional('mqtt_topic_format'): cv.string,
     vol.Optional('conditions'): vol.All(cv.ensure_list, [CONDITION_SCHEMA]),
     vol.Required('buttons'): vol.All(cv.ensure_list, [BLUEPRINT_BUTTON_SCHEMA])
 })
@@ -122,7 +120,16 @@ def _init_blueprints( hass: HomeAssistant ):
     blueprints = hass.data[DOMAIN][CONF_BLUEPRINTS] = {}
     for config in load_blueprints(hass):
         try:
-            c_validated = BLUEPRINT_SCHEMA(config.get('data'))
+            schema = None
+            if config.get('data').get('event_type') == 'mqtt':
+                schema = BLUEPRINT_SCHEMA.extend({
+                        vol.Optional('mqtt_topic_format'): cv.string
+                    })
+            else:
+                schema = BLUEPRINT_SCHEMA.extend({
+                        vol.Required('identifier_key'): cv.string
+                    })    
+            c_validated = schema(config.get('data'))
         except vol.Invalid as ex:
             LOGGER.error(_format_config_error(ex, f"{DOMAIN} {CONF_BLUEPRINTS}({config.get('id')})", config))
             continue

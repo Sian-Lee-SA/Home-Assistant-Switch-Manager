@@ -14,41 +14,41 @@ export function computeRTL(hass: any)
     return false;
 }
 
-export function computeRTLDirection(hass: any) 
+export const computeRTLDirection = (hass: any)  =>
 {
     return emitRTLDirection(computeRTL(hass));
 }
   
-export function emitRTLDirection(rtl: boolean) 
+export const emitRTLDirection = (rtl: boolean) =>
 {
     return rtl ? "rtl" : "ltr";
 }
 
-export function buildUrl(suffix?: string): string
+export const buildUrl = (suffix?: string): string =>
 {
     if( ! suffix )
         return `/${_DOMAIN}`;
     return `/${_DOMAIN}/${suffix}`;
 }
 
-export function buildAssetUrl(asset: string): string
+export const buildAssetUrl = (asset: string): string =>
 {
     return `/assets/${_DOMAIN}/${asset}`;
 }
 
-export function buildWSPath(suffix: string): string
+export const buildWSPath = (suffix: string): string =>
 {
     return `${_DOMAIN}/${suffix}`;
 }
 
-export function getValueById(dom: LitElement, id: string, in_render_root: boolean = true): string
+export const getValueById = (dom: LitElement, id: string, in_render_root: boolean = true): string =>
 {
     if( in_render_root )
         return (<HTMLInputElement>dom.renderRoot.querySelector(`#${id}`)).value.toString().trim();
     return (<HTMLInputElement>dom.querySelector(`#${id}`)).value.toString().trim();
 }
 
-export function createConfigFromBlueprint( blueprint: SwitchManagerBlueprint ): SwitchManagerConfig
+export const createConfigFromBlueprint = ( blueprint: SwitchManagerBlueprint ): SwitchManagerConfig =>
 {
     let config: SwitchManagerConfig = {
         id: null,

@@ -15,9 +15,14 @@ module.exports = [
       file: "custom_components/switch_manager/assets/switch_manager_panel.js",
       format: "es",
     },
+    preserveEntrySignatures: false,
     inlineDynamicImports: true,
     plugins: [
-      nodeResolve(),
+      nodeResolve({
+        extensions,
+        preferBuiltins: false,
+        browser: true,       
+      }),
       json(),
       typescript(),
       babel({

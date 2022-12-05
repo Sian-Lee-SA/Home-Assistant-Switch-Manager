@@ -64,15 +64,3 @@ export interface SwitchManagerConfigButtonAction
     mode: typeof MODES[number];
     sequence: any[];
 }
-
-export interface ShowToastParams {
-    message: string;
-    action?: ToastActionParams;
-    duration?: number;
-    dismissable?: boolean;
-}
-
-export interface ToastActionParams {
-    action: () => void;
-    text: string;
-}

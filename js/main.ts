@@ -1,22 +1,18 @@
-import { customElement, property, state } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { html, LitElement } from "lit";
-import { HomeAssistant } from "@hass/types";
+import { loadComponents } from "./helpers";
 import "./index";
 import "./switch-editor";
-import { loadComponents } from "./helpers";
 
-@customElement('switch-manager-panel')
 class SwitchManagerPanel extends LitElement 
 {
-    @property() hass!: HomeAssistant;
+    @property() hass!: any;
 
     @property() narrow;
 
     @property() panel;
     
     @state() params = {};
-
-    @state() component_name = "custom";
 
     private _route;
     get route() { return this._route };
@@ -32,12 +28,6 @@ class SwitchManagerPanel extends LitElement
         }
     };
 
-    constructor()
-    {
-        super();        
-        loadComponents();
-    }
-
     render()
     {
         if( 'action' in this.params )
@@ -52,6 +42,8 @@ class SwitchManagerPanel extends LitElement
     protected firstUpdated(changedProps) 
     {
         super.firstUpdated(changedProps);
+        loadComponents();
         this.hass.loadFragmentTranslation("config");
     }
 }
+customElements.define('switch-manager-panel', SwitchManagerPanel)

@@ -1,12 +1,11 @@
 import { mdiClose } from "@mdi/js";
 import { html, LitElement, TemplateResult } from "lit";
-import { MODES, ShowToastParams, SwitchManagerBlueprint, SwitchManagerConfig } from "./types";
-import { HomeAssistant } from "@hass/types";
-import { fireEvent } from "@hass/common/dom/fire_event";
+import { MODES, SwitchManagerBlueprint, SwitchManagerConfig } from "./types";
+import { fireEvent } from "./hass";
 
-export const DOMAIN = 'switch_manager'
+export const _DOMAIN = 'switch_manager'
 
-export function computeRTL(hass: HomeAssistant) 
+export function computeRTL(hass: any) 
 {
     const lang = hass.language || "en";
     if (hass.translationMetadata.translations[lang]) {
@@ -15,7 +14,7 @@ export function computeRTL(hass: HomeAssistant)
     return false;
 }
 
-export function computeRTLDirection(hass: HomeAssistant) 
+export function computeRTLDirection(hass: any) 
 {
     return emitRTLDirection(computeRTL(hass));
 }
@@ -28,18 +27,18 @@ export function emitRTLDirection(rtl: boolean)
 export function buildUrl(suffix?: string): string
 {
     if( ! suffix )
-        return `/${DOMAIN}`;
-    return `/${DOMAIN}/${suffix}`;
+        return `/${_DOMAIN}`;
+    return `/${_DOMAIN}/${suffix}`;
 }
 
 export function buildAssetUrl(asset: string): string
 {
-    return `/assets/${DOMAIN}/${asset}`;
+    return `/assets/${_DOMAIN}/${asset}`;
 }
 
 export function buildWSPath(suffix: string): string
 {
-    return `${DOMAIN}/${suffix}`;
+    return `${_DOMAIN}/${suffix}`;
 }
 
 export function getValueById(dom: LitElement, id: string, in_render_root: boolean = true): string
@@ -75,7 +74,7 @@ export function createConfigFromBlueprint( blueprint: SwitchManagerBlueprint ): 
     return config;
 }
 
-export function navigate(ev)
+export const navigate = (ev) =>
 {
     if( typeof ev == 'string' )
     {
@@ -96,49 +95,26 @@ export function navigate(ev)
 }
 
 export const loadComponents = async() => {
-    /*if(customElements.get('ha-automation-action') && customElements.get('ha-data-table'))
+    if( customElements.get('ha-automation-action') && customElements.get('ha-data-table') )
     {
         return;
-    }*/
+    }
     
     await customElements.whenDefined("partial-panel-resolver");
     const ppResolver = document.createElement("partial-panel-resolver");
     const routes = (ppResolver as any).getRoutes([
       {
         component_name: "config",
-        url_path: "a",
+        url_path: "_sw",
       },
     ]);
-    await routes?.routes?.a?.load?.();
+    await routes?.routes?._sw?.load?.();
     await customElements.whenDefined("ha-panel-config");
     const configRouter: any = document.createElement("ha-panel-config");
     await configRouter?.routerOptions?.routes?.dashboard?.load?.(); // Load ha-config-dashboard
     await configRouter?.routerOptions?.routes?.script?.load?.(); // Load ha-data-table, editor
     await customElements.whenDefined("ha-config-dashboard");
 }
-
-// export const fireEvent = (  
-//     node: HTMLElement | Window,
-//     type: string,
-//     detail?: {},
-//     options?: {
-//       bubbles?: boolean;
-//       cancelable?: boolean;
-//       composed?: boolean;
-//     }) => 
-// {
-//     options = options || {};
-//     // @ts-ignore
-//     detail = detail === null || detail === undefined ? {} : detail;
-//     const event = new Event(type, {
-//       bubbles: options.bubbles === undefined ? true : options.bubbles,
-//       cancelable: Boolean(options.cancelable),
-//       composed: options.composed === undefined ? true : options.composed,
-//     });
-//     (event as any).detail = detail;
-//     node.dispatchEvent(event);
-//     return event;
-// }
 
 export const createCloseHeading = (
     title: string | TemplateResult
@@ -150,9 +126,8 @@ export const createCloseHeading = (
       dialogAction="close"
       class="header_button"></ha-icon-button>`;
 
-export const showToast = (el: HTMLElement, params: ShowToastParams) =>
+export const showToast = (el: HTMLElement, params) =>
   fireEvent(el, "hass-notification", params);
-
 
 export interface ConfirmationDialogParams {
     title?: string;

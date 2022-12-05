@@ -1,7 +1,6 @@
 import { html, css, LitElement } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { SwitchManagerBlueprint, SwitchManagerConfig } from "./types";
-import { HomeAssistant } from "@hass/types";
 import memoizeOne from "memoize-one";
 import {
     mdiPlus,
@@ -12,22 +11,20 @@ import {
 } from "@mdi/js";
 import { 
     buildAssetUrl, 
-    buildUrl, 
+    buildUrl,     
     buildWSPath, 
     computeRTLDirection,
     showToast, 
     navigate, 
     showConfirmDialog
 } from "./helpers";
-import { fireEvent } from "@hass/common/dom/fire_event";
-import { haStyle, haStyleScrollbar } from "@hass/resources/styles";
-import { fabStyle } from "./styles";
-
+import { fireEvent } from "./hass";
+import { fabStyle, haStyle, haStyleScrollbar } from "./styles";
 
 @customElement('switch-manager-index')
 class SwitchManagerIndex extends LitElement 
 {
-    @property() hass!: HomeAssistant;
+    @property() hass!: any;
 
     @property() narrow;
 
@@ -182,7 +179,7 @@ class SwitchManagerIndex extends LitElement
     private _populateSwitches()
     {
         const __data = [];
-        this.hass.callWS<any>({type: buildWSPath('configs')}).then( promise => {
+        this.hass.callWS({type: buildWSPath('configs')}).then( promise => {
             Object.values(promise.configs).forEach( (_switch: SwitchManagerConfig) => {
                 let blueprint;
                 if( _switch.valid_blueprint )
@@ -212,7 +209,7 @@ class SwitchManagerIndex extends LitElement
 
     private async _toggleEnabled( id: string, enabled: boolean )
     {        
-        this.hass.callWS<any>({ type: buildWSPath('config/enabled'), enabled: !enabled, config_id: id }).then( r => {
+        this.hass.callWS({ type: buildWSPath('config/enabled'), enabled: !enabled, config_id: id }).then( r => {
             this._populateSwitches();
             showToast(this, { 
                 message: `Switch ${r.enabled ? 'Enabled':'Disabled'}` 

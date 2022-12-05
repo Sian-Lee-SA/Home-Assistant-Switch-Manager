@@ -1,10 +1,8 @@
 import { html, css, LitElement } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { SwitchManagerBlueprint } from "../types";
-import { HomeAssistant } from "@hass/types";
 import {
     mdiGestureTapButton,
-    mdiClose,
     mdiHelpCircle
 } from "@mdi/js";
 import { 
@@ -15,13 +13,13 @@ import {
     navigate, 
     showToast
 } from "../helpers";
-import { fireEvent } from "@hass/common/dom/fire_event";
-import { haStyleDialog, haStyleScrollbar } from "@hass/resources/styles"
+import { fireEvent } from "../hass";
+import { haStyleDialog, haStyleScrollbar } from "../styles"
 
 @customElement('switch-manager-dialog-blueprint-selector')
 class SwitchManagerBlueprintSelector extends LitElement 
 {
-    @property({attribute: false}) public hass!: HomeAssistant;
+    @property({attribute: false}) public hass!: any;
 
     @property({attribute: false}) blueprints: {[key: string]: SwitchManagerBlueprint};
 
@@ -141,7 +139,7 @@ class SwitchManagerBlueprintSelector extends LitElement
 
     private _updateBlueprints()
     {
-        this.hass.callWS<any>({type: buildWSPath('blueprints')}).then( r => {
+        this.hass.callWS({type: buildWSPath('blueprints')}).then( r => {
             this.blueprints = r.blueprints;            
         }).catch(error => showToast(this, { message: error.message }));
     }

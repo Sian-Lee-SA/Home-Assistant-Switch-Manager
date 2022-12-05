@@ -17,9 +17,7 @@ module.exports = [
     },
     inlineDynamicImports: true,
     plugins: [
-      nodeResolve({
-        extensions: extensions
-      }),
+      nodeResolve(),
       json(),
       typescript(),
       babel({

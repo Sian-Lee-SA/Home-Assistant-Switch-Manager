@@ -5,9 +5,6 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
-    "paths": {
-      "@hass/*": ["./homeassistant-frontend/*"]
-    }
+    "experimentalDecorators": true
   }
 }

@@ -41,7 +41,7 @@ SHAPE_RECT_SCHEMA = SHAPE_CIRCLE_SCHEMA.extend({
 SHAPE_PATH_SCHEMA = vol.Schema({
     vol.Required('d'): cv.string
 })
-
+## Comment
 BLUEPRINT_BUTTON_SCHEMA = vol.Schema({
     vol.Required('actions'): vol.All(cv.ensure_list, [BLUEPRINT_ACTION_SCHEMA]),
     vol.Optional('conditions', default=[]): vol.All(cv.ensure_list, [CONDITION_SCHEMA]),

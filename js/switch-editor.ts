@@ -260,6 +260,7 @@ class SwitchManagerSwitchEditor extends LitElement
             }
             #identifier-input {
                 width: 300px;
+                --text-field-padding: 0 36px 0 12px;
             }
             #identifier ha-icon-button {
                 vertical-align: middle;

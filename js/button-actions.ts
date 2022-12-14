@@ -1,15 +1,22 @@
 import { html, css, LitElement } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
 import { SwitchManagerBlueprintButtonAction, SwitchManagerConfigButtonAction } from "./types";
+import "@polymer/paper-tabs";
+
+declare global {
+    interface HTMLElementTagNameMap {
+      "switch-manager-button-actions": SwitchManagerButtonActions;
+    }
+}
 
 @customElement('switch-manager-button-actions')
 class SwitchManagerButtonActions extends LitElement 
 {
     @property() hass!: any;
 
-    @property() blueprint_actions: SwitchManagerBlueprintButtonAction[];
+    @property() blueprint_actions!: SwitchManagerBlueprintButtonAction[];
 
-    @property() config_actions: SwitchManagerConfigButtonAction[];
+    @property() config_actions!: SwitchManagerConfigButtonAction[];
     
     @property({reflect: true}) index = 0;
 

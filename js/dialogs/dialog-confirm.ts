@@ -3,7 +3,13 @@ import { css, CSSResultGroup, html, LitElement, TemplateResult } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ConfirmationDialogParams } from "../helpers";
-import { fireEvent } from "../hass";
+import { fireEvent } from "../../ha-frontend/common/dom/fire_event";
+
+declare global {
+    interface HTMLElementTagNameMap {
+        "switch-manager-dialog-confirm": SwitchManagerDialogConfirm;
+    }
+}
 
 @customElement("switch-manager-dialog-confirm")
 class SwitchManagerDialogConfirm extends LitElement 
@@ -156,11 +162,5 @@ class SwitchManagerDialogConfirm extends LitElement
                 width: 100%;
             }
         `;
-    }
-}
-
-declare global {
-    interface HTMLElementTagNameMap {
-        "switch-manager-dialog-confirm": SwitchManagerDialogConfirm;
     }
 }

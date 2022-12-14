@@ -1,10 +1,11 @@
-export const MODES = ["single", "restart", "queued", "parallel"] as const;
+/*export const MODES = ["single", "restart", "queued", "parallel"] as const;
 export const MODES_MAX = ["queued", "parallel"] as const;
 export const isMaxMode = (
     mode: typeof MODES[number]
   ): mode is typeof MODES_MAX[number] =>
     MODES_MAX.includes(mode as typeof MODES_MAX[number]);
-
+*/
+import { MODES } from "../ha-frontend/data/script";
 export interface SwitchManagerBlueprintCondition
 {
     key: string;

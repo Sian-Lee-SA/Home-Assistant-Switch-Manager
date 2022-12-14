@@ -1,8 +1,16 @@
 import { css, CSSResultGroup, html, LitElement, TemplateResult } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import { createCloseHeading } from "../helpers";
-import { haStyle, haStyleDialog } from "../styles";
-import { fireEvent } from "../hass";
+import { createCloseHeading } from "../../ha-frontend/components/ha-dialog";
+import { haStyle, haStyleDialog } from "../../ha-frontend/resources/styles"
+import { fireEvent } from "../../ha-frontend/common/dom/fire_event";
+import "@material/mwc-button";
+import "../../ha-frontend/components/ha-textfield";
+
+declare global {
+    interface HTMLElementTagNameMap {
+        "switch-manager-dialog-rename-switch": SwitchManagerDialogRenameSwitch;
+    }
+}
 
 @customElement('switch-manager-dialog-rename-switch')
 class SwitchManagerDialogRenameSwitch extends LitElement 
@@ -20,7 +28,7 @@ class SwitchManagerDialogRenameSwitch extends LitElement
     public showDialog(params: any): void 
     {
         this._opened = true;
-        this._error = null;
+        this._error = undefined;
         this._params = params;
         this._newName = params.config.name;
     }
@@ -45,7 +53,7 @@ class SwitchManagerDialogRenameSwitch extends LitElement
                 open
                 scrimClickAction
                 @closed=${this.closeDialog}
-                .heading="${createCloseHeading('Rename')}">
+                .heading="${createCloseHeading(this.hass, 'Rename')}">
                 ${this._error ? html`<ha-alert alert-type="error">Missing Name</ha-alert>` : ""}
 
                 <ha-textfield
@@ -102,11 +110,5 @@ class SwitchManagerDialogRenameSwitch extends LitElement
             name: this._newName
         });
         this.closeDialog();
-    }
-}
-
-declare global {
-    interface HTMLElementTagNameMap {
-        "switch-manager-dialog-rename-switch": SwitchManagerDialogRenameSwitch;
     }
 }

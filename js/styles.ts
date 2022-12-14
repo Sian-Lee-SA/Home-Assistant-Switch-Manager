@@ -22,7 +22,7 @@ export const fabStyle = css`
     bottom: calc(-80px - env(safe-area-inset-bottom));
   }
 `;
-
+/*
 export const buttonLinkStyle = css`
   button.link {
     background: none;
@@ -181,7 +181,6 @@ export const haStyle = css`
 `;
 
 export const haStyleDialog = css`
-  /* mwc-dialog (ha-dialog) styles */
   ha-dialog {
     --mdc-dialog-min-width: 400px;
     --mdc-dialog-max-width: 600px;
@@ -198,7 +197,6 @@ export const haStyleDialog = css`
     color: var(--primary-color);
   }
 
-  /* make dialog fullscreen on small screens */
   @media all and (max-width: 450px), all and (max-height: 500px) {
     ha-dialog {
       --mdc-dialog-min-width: calc(
@@ -239,3 +237,4 @@ export const haStyleScrollbar = css`
     scrollbar-width: thin;
   }
 `;
+*/

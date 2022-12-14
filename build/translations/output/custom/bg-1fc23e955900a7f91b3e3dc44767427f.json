@@ -1,0 +1,1 @@
+{"ui.panel.custom.external_panel.question_trust":"Do you trust the external panel {name} at {link}?","ui.panel.custom.external_panel.complete_access":"Той ще има достъп до всички данни в Home Assistant.","ui.panel.custom.external_panel.hide_message":"Check docs for the panel_custom component to hide this message"}

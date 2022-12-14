@@ -8,26 +8,35 @@ import {
 import { 
     buildAssetUrl, 
     buildUrl,
-    buildWSPath,
-    createCloseHeading,
-    navigate, 
-    showToast
+    buildWSPath
 } from "../helpers";
-import { fireEvent } from "../hass";
-import { haStyleDialog, haStyleScrollbar } from "../styles"
+import { showToast } from "../../ha-frontend/util/toast";
+import { createCloseHeading } from "../../ha-frontend/components/ha-dialog";
+import { fireEvent } from "../../ha-frontend/common/dom/fire_event";
+import { haStyleDialog, haStyleScrollbar } from "../../ha-frontend/resources/styles";
+import { navigate } from "../../ha-frontend/common/navigate";
+import "../../ha-frontend/components/ha-dialog";
+import "@material/mwc-list/mwc-list";
+import "@material/mwc-list/mwc-list-item";
+
+declare global {
+    interface HTMLElementTagNameMap {
+        "switch-manager-dialog-blueprint-selector": SwitchManagerBlueprintSelector;
+    }
+}
 
 @customElement('switch-manager-dialog-blueprint-selector')
 class SwitchManagerBlueprintSelector extends LitElement 
 {
     @property({attribute: false}) public hass!: any;
 
-    @property({attribute: false}) blueprints: {[key: string]: SwitchManagerBlueprint};
+    @property({attribute: false}) blueprints?: {[key: string]: SwitchManagerBlueprint};
 
     @state() private _opened = false;
 
     public showDialog(): void 
     {
-        this._opened = true;
+        this._opened = true;        
     }
   
     public closeDialog(): void 
@@ -48,9 +57,9 @@ class SwitchManagerBlueprintSelector extends LitElement
                 open
                 hideActions
                 @closed=${this.closeDialog}
-                .heading=${createCloseHeading(html`Select Blueprint
+                .heading=${createCloseHeading(this.hass, html`Select Blueprint
                 <p style="margin: 0;margin-bottom: -16px;font-size: 12px;">Can't find a blueprint for your switch? create your own.
-                    <ha-icon-button style="vertical-align: middle;" .path=${mdiHelpCircle} @click=${() => window.open('https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager#blueprints', '_blank').focus()}></ha-icon-button>
+                    <ha-icon-button style="vertical-align: middle;" .path=${mdiHelpCircle} @click=${() => window.open('https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager#blueprints', '_blank')!.focus()}></ha-icon-button>
                 </p>`)}>
                 <mwc-list>
                     ${this._listBlueprints()}
@@ -147,7 +156,8 @@ class SwitchManagerBlueprintSelector extends LitElement
     private _listBlueprints(): any[]
     {
         if( !this.blueprints )
-            return;
+            return [];
+
         let ordered = {}
         for( let b of Object.values(this.blueprints) )
         {
@@ -176,11 +186,5 @@ class SwitchManagerBlueprintSelector extends LitElement
             }
         }
         return _html;
-    }
-}
-
-declare global {
-    interface HTMLElementTagNameMap {
-        "switch-manager-dialog-blueprint-selector": SwitchManagerBlueprintSelector;
     }
 }

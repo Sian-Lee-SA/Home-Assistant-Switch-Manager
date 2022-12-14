@@ -1,5 +1,6 @@
 /homeassistant
 /homeassistant-frontend
+/ha-frontend
 **/node_modules
 **/@eaDir
 **/Thumbs.db

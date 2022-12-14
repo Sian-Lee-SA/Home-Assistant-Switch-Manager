@@ -12,20 +12,36 @@ import {
     mdiGestureTapButton,
     mdiEarHearing
 } from "@mdi/js";
-import { MODES, SwitchManagerBlueprint, SwitchManagerBlueprintCondition, SwitchManagerConfig, SwitchManagerConfigButton } from "./types";
+import { SwitchManagerBlueprint, SwitchManagerBlueprintCondition, SwitchManagerConfig, SwitchManagerConfigButton } from "./types";
+import { MODES } from "../ha-frontend/data/script";
 import { 
     buildAssetUrl, 
     buildUrl, 
     buildWSPath, 
     createConfigFromBlueprint,
     getValueById,
-    navigate, 
-    showConfirmDialog, 
-    showToast 
+    showConfirmDialog
 } from "./helpers";
-import { fireEvent } from "./hass";
-import { fabStyle, haStyle } from "./styles";
+import { navigate } from "../ha-frontend/common/navigate";
+import { fireEvent } from "../ha-frontend/common/dom/fire_event";
+import { showToast } from "../ha-frontend/util/toast";
+import { fabStyle } from "./styles";
+import { haStyle } from "../ha-frontend/resources/styles";
+import "@polymer/app-layout/app-header/app-header";
+import "@polymer/app-layout/app-toolbar/app-toolbar";
 import "./button-actions";
+import "../ha-frontend/types";
+import "../ha-frontend/panels/config/automation/action/ha-automation-action";
+import "../ha-frontend/components/ha-fab";
+import "../ha-frontend/components/ha-card";
+import "../ha-frontend/components/ha-button-menu";
+import "../ha-frontend/components/ha-chip";
+
+declare global {
+    interface HTMLElementTagNameMap {
+      "switch-manager-switch-editor": SwitchManagerSwitchEditor;
+    }
+}
 
 @customElement("switch-manager-switch-editor")
 class SwitchManagerSwitchEditor extends LitElement
@@ -36,24 +52,24 @@ class SwitchManagerSwitchEditor extends LitElement
     @property() route;
     @property() params;
 
-    @property() blueprint: SwitchManagerBlueprint;
-    @property() config: SwitchManagerConfig;
+    @property() blueprint: SwitchManagerBlueprint|undefined;
+    @property() config: SwitchManagerConfig|undefined;
 
     @property() disabled = false;
 
     @state() private _subscribed?: () => void;
 
-    @state() private sequence = [];
+    @state() private sequence: any[] = [];
     @state() private button_index: number = 0;
     @state() private action_index: number = 0;
 
-    @state() private is_new: boolean;
+    @state() private is_new: boolean = true;
 
     @state() private _dirty: boolean = false;
     @state() private _block_save: boolean = false;
     @state() private _errors?: string;
 
-    @query('#switch-svg') svg: SVGElement;
+    @query('#switch-svg') svg;
     @query('#identifier-input') identifier_input;
 
     render() 
@@ -132,9 +148,9 @@ class SwitchManagerSwitchEditor extends LitElement
                             type="text" 
                             .value="${this.config?.identifier}" 
                             required="true" 
-                            .label=${this.blueprint.event_type == 'mqtt'? 'mqtt topic' : this.blueprint?.identifier_key}
+                            .label=${this.blueprint?.event_type == 'mqtt'? 'mqtt topic' : this.blueprint?.identifier_key}
                             @input="${this._identifierChanged}"></ha-textfield>
-                        ${this.blueprint.event_type != 'mqtt' || this.blueprint.mqtt_topic_format ? html`
+                        ${this.blueprint?.event_type != 'mqtt' || this.blueprint?.mqtt_topic_format ? html`
                         <ha-icon-button
                             .path=${mdiEarHearing}
                             ?listening=${(this._subscribed)}
@@ -260,6 +276,7 @@ class SwitchManagerSwitchEditor extends LitElement
             }
             #identifier-input {
                 width: 300px;
+                --text-field-padding: 0 36px 0 12px;
             }
             #identifier ha-icon-button {
                 vertical-align: middle;
@@ -365,7 +382,7 @@ class SwitchManagerSwitchEditor extends LitElement
     connectedCallback(): void 
     {
         super.connectedCallback();
-        this._loadConfig();
+        this._loadConfig();        
     }
 
     disconnectedCallback(): void 
@@ -374,7 +391,7 @@ class SwitchManagerSwitchEditor extends LitElement
         if( this._subscribed )
         {
             this._subscribed();
-            this._subscribed = null;
+            this._subscribed = undefined;
         }
     }
 
@@ -423,7 +440,7 @@ class SwitchManagerSwitchEditor extends LitElement
 
     private async _drawSVG()
     {
-        if( !this.blueprint.has_image )
+        if( !this.blueprint?.has_image )
             return;
         
         // Ensure SVG is in DOM
@@ -468,14 +485,14 @@ class SwitchManagerSwitchEditor extends LitElement
                 if( this.button_index == index ) {
                     svgshape.setAttribute('selected', '');
                 }
-                if( ! this._buttonTotalSequence( this.config.buttons[index] ) )
+                if( ! this._buttonTotalSequence( this.config!.buttons[index] ) )
                 {
                     svgshape.setAttribute('empty', '');
                 }
                 svgshape.addEventListener('click', ev => {
                     ev.preventDefault();
                     ev.stopPropagation();
-                    this._setButtonIndex(parseInt((<HTMLElement>ev.target).getAttribute('index')));                
+                    this._setButtonIndex(parseInt((<HTMLElement>ev.target).getAttribute('index')!));                
                 });
                 this.svg.append(svgshape);
             });
@@ -493,9 +510,9 @@ class SwitchManagerSwitchEditor extends LitElement
 
     private _validate(): boolean
     {
-        this._errors = null;
+        this._errors = undefined;
         this.identifier_input.invalid = false;
-        if( !this.config.identifier )
+        if( !this.config?.identifier )
         {
             this._errors = 'Identifier must not be empty';
             this.identifier_input.invalid = true;
@@ -507,8 +524,9 @@ class SwitchManagerSwitchEditor extends LitElement
 
     private _save()
     {
-        if( this._block_save || !this._validate() )
+        if( this._block_save || !this._validate() || !this.config )
             return;
+
 
         this._block_save = true;
         this._dirty = false;
@@ -520,7 +538,7 @@ class SwitchManagerSwitchEditor extends LitElement
             if( this.is_new )
             {
                 this.is_new = false;
-                this.config.id = r.config_id;
+                this.config!.id = r.config_id;
                 navigate( buildUrl(`edit/${r.config_id}`) )
             }
             showToast(this, { message: 'Switch Saved' });
@@ -585,13 +603,13 @@ class SwitchManagerSwitchEditor extends LitElement
         }
 
         const __validate_data = ( data: any ): boolean => {
-            if( ! __process_conditions( this.blueprint.conditions, data ) )
+            if( ! __process_conditions( this.blueprint!.conditions!, data ) )
                 return false;
 
-            for( const button of this.blueprint.buttons )
-                if( __process_conditions(button.conditions, data) )
+            for( const button of this.blueprint!.buttons )
+                if( __process_conditions(button.conditions!, data) )
                     for( const action of button.actions )
-                        if( __process_conditions(action.conditions, data) )
+                        if( __process_conditions(action.conditions!, data) )
                             return true;
 
             return false;
@@ -603,28 +621,28 @@ class SwitchManagerSwitchEditor extends LitElement
 
             this.identifier_input.value = id;
             this._identifierChanged();
-            this._subscribed();
+            this._subscribed!();
             this._subscribed = undefined;
         }
 
-        if( this.blueprint.event_type == 'mqtt' && this.blueprint.mqtt_topic_format )
+        if( this.blueprint!.event_type == 'mqtt' && this.blueprint!.mqtt_topic_format )
             this._subscribed = await   this.hass.connection.subscribeMessage((message) => {
                 const data = typeof(message.payload) == 'string' ? { payload: message.payload } : message.payload;
                 __handle_response( message.topic, data );
             }, {
                 type: "mqtt/subscribe",
-                topic: this.blueprint.mqtt_topic_format,
+                topic: this.blueprint!.mqtt_topic_format,
             });
         else
             this._subscribed = await this.hass!.connection.subscribeEvents( (event) => {
-                if( this.blueprint.identifier_key in event.data )
-                    __handle_response( event.data[this.blueprint.identifier_key], event.data );
-            }, this.blueprint.event_type );
+                if( this.blueprint!.identifier_key! in event.data )
+                    __handle_response( event.data[this.blueprint!.identifier_key!], event.data );
+            }, this.blueprint!.event_type );
     }
 
     private _identifierChanged(ev?: CustomEvent)
     {
-        this.config.identifier = getValueById(this, 'identifier-input');
+        this.config!.identifier = getValueById(this, 'identifier-input');
         this._dirty = true;
     }
 
@@ -633,7 +651,7 @@ class SwitchManagerSwitchEditor extends LitElement
         if( this.config?.buttons[this.button_index].actions[this.action_index].mode == ev.detail.value )
             return;
 
-        this.config.buttons[this.button_index].actions[this.action_index].mode = ev.detail.value;
+        this.config!.buttons[this.button_index].actions[this.action_index].mode = ev.detail.value;
         this.requestUpdate('config');
         this._dirty = true;
     }
@@ -646,7 +664,7 @@ class SwitchManagerSwitchEditor extends LitElement
             dialogParams: {
                 config: this.config,
                 update: (config) => {
-                    this.config.name = config.name;
+                    this.config!.name = config.name;
                     this._dirty = true;
                     this.requestUpdate();
                 },
@@ -659,11 +677,11 @@ class SwitchManagerSwitchEditor extends LitElement
     {
         if( sequence )
         {
-            this.config.buttons[this.button_index].actions[this.action_index].sequence = sequence;
+            this.config!.buttons[this.button_index].actions[this.action_index].sequence = sequence;
         }
-        this.sequence = this.config.buttons[this.button_index].actions[this.action_index].sequence;
+        this.sequence = this.config!.buttons[this.button_index].actions[this.action_index].sequence;
 
-        if( ! this._buttonTotalSequence( this.config.buttons[this.button_index] ) )
+        if( ! this._buttonTotalSequence( this.config!.buttons[this.button_index] ) )
         {
             this.svg?.querySelector('[selected]')?.setAttribute('empty', '');
         } else {
@@ -676,8 +694,8 @@ class SwitchManagerSwitchEditor extends LitElement
     private _toggleEnabled()
     {
         
-        this.hass.callWS({ type: buildWSPath('config/enabled'), enabled: !this.config.enabled, config_id: this.config.id }).then( r => {
-            this.config.enabled = r.enabled;
+        this.hass.callWS({ type: buildWSPath('config/enabled'), enabled: !this.config!.enabled, config_id: this.config!.id }).then( r => {
+            this.config!.enabled = r.enabled;
             this.requestUpdate('config');
             showToast(this, { message: `Switch ${r.enabled? 'Enabled':'Disabled'}` });
         }).catch(error => showToast(this, { message: error.message }))
@@ -687,7 +705,7 @@ class SwitchManagerSwitchEditor extends LitElement
     {
         showConfirmDialog(this, {
             title: 'Delete switch?',
-            text: `${this.config.name} will be permanently deleted.`,
+            text: `${this.config!.name} will be permanently deleted.`,
             confirmText: 'Delete',
             dismissText: 'Cancel',
             confirm: () => this._delete(),
@@ -698,7 +716,7 @@ class SwitchManagerSwitchEditor extends LitElement
 
     private async _delete()
     {
-        this.hass.callWS({type: buildWSPath('config/delete'), config_id: this.config.id.toString()}).then( promise => {
+        this.hass.callWS({type: buildWSPath('config/delete'), config_id: this.config!.id!.toString()}).then( r => {
             showToast(this, {
                 message: 'Switch Deleted'
             })

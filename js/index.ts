@@ -12,14 +12,30 @@ import {
 import { 
     buildAssetUrl, 
     buildUrl,     
-    buildWSPath, 
-    computeRTLDirection,
-    showToast, 
-    navigate, 
+    buildWSPath,
     showConfirmDialog
 } from "./helpers";
-import { fireEvent } from "./hass";
-import { fabStyle, haStyle, haStyleScrollbar } from "./styles";
+import { navigate } from "../ha-frontend/common/navigate";
+import { fireEvent } from "../ha-frontend/common/dom/fire_event";
+import { showToast } from "../ha-frontend/util/toast";
+import { fabStyle } from "./styles";
+import { haStyle, haStyleScrollbar } from "../ha-frontend/resources/styles"
+import { computeRTLDirection } from "../ha-frontend/common/util/compute_rtl";
+import "@polymer/app-layout/app-header/app-header";
+import "@polymer/app-layout/app-toolbar/app-toolbar";
+import "../ha-frontend/layouts/ha-app-layout";
+import "../ha-frontend/components/ha-menu-button";
+import "../ha-frontend/components/ha-fab";
+import "../ha-frontend/components/ha-chip";
+import "../ha-frontend/components/ha-icon-overflow-menu";
+import "./components/sm-data-table";
+import "./dialogs/dialog-blueprint-selector";
+
+declare global {
+    interface HTMLElementTagNameMap {
+      "switch-manager-index": SwitchManagerIndex;
+    }
+}
 
 @customElement('switch-manager-index')
 class SwitchManagerIndex extends LitElement 
@@ -127,7 +143,8 @@ class SwitchManagerIndex extends LitElement
             </ha-app-layout>
             <hui-view>
                 <hui-panel-view>
-                    <ha-data-table
+                    <sm-data-table
+                        .hass=${this.hass}
                         .columns=${this._columns()}
                         .data=${this._data}
                         noDataText="No Switches"
@@ -137,7 +154,7 @@ class SwitchManagerIndex extends LitElement
                         @row-click=${this._rowClicked}
                         .dir=${computeRTLDirection(this.hass)}>
 
-                    </ha-data-table>
+                    </sm-data-table>
 
                     <div class="fab-container">
                         <ha-fab
@@ -178,10 +195,11 @@ class SwitchManagerIndex extends LitElement
 
     private _populateSwitches()
     {
-        const __data = [];
-        this.hass.callWS({type: buildWSPath('configs')}).then( promise => {
-            Object.values(promise.configs).forEach( (_switch: SwitchManagerConfig) => {
+        const __data: any[] = [];
+        this.hass.callWS({type: buildWSPath('configs')}).then( r => {
+            Object.values(r.configs as SwitchManagerConfig[]).forEach( (_switch: SwitchManagerConfig) => {
                 let blueprint;
+                
                 if( _switch.valid_blueprint )
                     blueprint = <SwitchManagerBlueprint>_switch.blueprint;
                 else
@@ -198,7 +216,7 @@ class SwitchManagerIndex extends LitElement
                     actions: _switch.id
                 });
             });
-            this._data = __data;         
+            this._data = __data;
         })
     }
 
@@ -233,7 +251,7 @@ class SwitchManagerIndex extends LitElement
 
     private async _delete( id: string )
     {
-        this.hass.callWS({type: buildWSPath('config/delete'), config_id: id.toString()}).then( promise => {
+        this.hass.callWS({type: buildWSPath('config/delete'), config_id: id.toString()}).then( () => {
             this._populateSwitches();
             showToast(this, {
                 message: 'Switch Deleted'
@@ -243,9 +261,10 @@ class SwitchManagerIndex extends LitElement
 
     private _showBlueprintDialog()
     {
+        
         fireEvent(this, 'show-dialog', {
             dialogTag: "switch-manager-dialog-blueprint-selector",
-            dialogImport: () => import('./dialogs/dialog-blueprint-selector'),
+            dialogImport: () => import("./dialogs/dialog-blueprint-selector"),
             dialogParams: {},
         });
     }

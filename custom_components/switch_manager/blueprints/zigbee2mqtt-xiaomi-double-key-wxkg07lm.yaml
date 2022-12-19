@@ -1,0 +1,56 @@
+name: Xiaomi Double Key (WXKG07LM)
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+buttons:
+  - x: 12
+    y: 12
+    width: 238
+    height: 318
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: single_left
+      - title: double press
+        conditions:
+          - key: payload
+            value: double_left
+      - title: hold
+        conditions:
+          - key: payload
+            value: hold_left
+  - x: 250
+    y: 12
+    width: 238
+    height: 318
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: single_right
+      - title: double press
+        conditions:
+          - key: payload
+            value: double_right
+      - title: hold
+        conditions:
+          - key: payload
+            value: hold_right
+  - x: 12
+    y: 330
+    width: 476
+    height: 158
+    actions:
+      - title: both press
+        conditions:
+          - key: payload
+            value: single_both
+      - title: both double press
+        conditions:
+          - key: payload
+            value: double_both
+      - title: both hold
+        conditions:
+          - key: payload
+            value: hold_both

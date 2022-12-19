@@ -1,0 +1,101 @@
+name: Homematic 6 Buttons
+service: Homematic
+event_type: homematic.keypress
+identifier_key: device_id
+buttons:
+  - x: 85
+    y: 85
+    width: 96
+    height: 109
+    conditions:
+      - key: subtype
+        value: 1
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: press_short
+      - title: hold
+        conditions:
+          - key: type
+            value: press_long
+  - x: 319
+    y: 85
+    width: 96
+    height: 109
+    conditions:
+      - key: subtype
+        value: 2
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: press_short
+      - title: hold
+        conditions:
+          - key: type
+            value: press_long
+  - x: 85
+    y: 196
+    width: 96
+    height: 109
+    conditions:
+      - key: subtype
+        value: 3
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: press_short
+      - title: hold
+        conditions:
+          - key: type
+            value: press_long
+  - x: 319
+    y: 196
+    width: 96
+    height: 109
+    conditions:
+      - key: subtype
+        value: 4
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: press_short
+      - title: hold
+        conditions:
+          - key: type
+            value: press_long      
+  - x: 85
+    y: 304
+    width: 96
+    height: 109
+    conditions:
+      - key: subtype
+        value: 5
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: press_short
+      - title: hold
+        conditions:
+          - key: type
+            value: press_long          
+  - x: 319
+    y: 304
+    width: 96
+    height: 109
+    conditions:
+      - key: subtype
+        value: 6
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: press_short
+      - title: hold
+        conditions:
+          - key: type
+            value: press_long

@@ -1,0 +1,85 @@
+name: Tuya 4 Button Scene
+service: ZHA
+event_type: zha_event
+identifier_key: device_id
+buttons:
+  - x: 23
+    y: 23
+    width: 216
+    height: 208
+    conditions:
+      - key: endpoint_id
+        value: 1
+    actions:
+      - title: tap
+        conditions:
+          - key: command
+            value: remote_button_short_press
+      - title: double tap
+        conditions:
+          - key: command
+            value: remote_button_double_press
+      - title: hold
+        conditions:
+          - key: command
+            value: remote_button_long_press
+  - x: 239
+    y: 23
+    width: 216
+    height: 208
+    conditions:
+      - key: endpoint_id
+        value: 2
+    actions:
+      - title: tap
+        conditions:
+          - key: command
+            value: remote_button_short_press
+      - title: double tap
+        conditions:
+          - key: command
+            value: remote_button_double_press
+      - title: hold
+        conditions:
+          - key: command
+            value: remote_button_long_press
+  - x: 23
+    y: 231
+    width: 216
+    height: 208
+    conditions:
+      - key: endpoint_id
+        value: 3
+    actions:
+      - title: tap
+        conditions:
+          - key: command
+            value: remote_button_short_press
+      - title: double tap
+        conditions:
+          - key: command
+            value: remote_button_double_press
+      - title: hold
+        conditions:
+          - key: command
+            value: remote_button_long_press
+  - x: 239
+    y: 231
+    width: 216
+    height: 208
+    conditions:
+      - key: endpoint_id
+        value: 4
+    actions:
+      - title: tap
+        conditions:
+          - key: command
+            value: remote_button_short_press
+      - title: double tap
+        conditions:
+          - key: command
+            value: remote_button_double_press
+      - title: hold
+        conditions:
+          - key: command
+            value: remote_button_long_press

@@ -1,0 +1,74 @@
+name: WallMote 7
+service: ZWave JS
+event_type: zwave_js_value_notification
+identifier_key: node_id
+conditions:
+  - key: property
+    value: scene
+buttons:
+  - shape: rect
+    x: 24
+    y: 24
+    width: 198
+    height: 218
+    conditions:
+      - key: property_key
+        value: '001'
+    actions:
+      - title: tap
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: tap 2x
+        conditions:
+          - key: value
+            value: KeyPressed2x
+      - title: tap 3x
+        conditions:
+          - key: value
+            value: KeyPressed3x
+      - title: tap 4x
+        conditions:
+          - key: value
+            value: KeyPressed4x
+      - title: tap 5x
+        conditions:
+          - key: value
+            value: KeyPressed5x
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+  - shape: rect
+    x: 24
+    y: 246
+    width: 198
+    height: 218
+    conditions:
+      - key: property_key
+        value: '002'
+    actions:
+      - title: tap
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: tap 2x
+        conditions:
+          - key: value
+            value: KeyPressed2x
+      - title: tap 3x
+        conditions:
+          - key: value
+            value: KeyPressed3x
+      - title: tap 4x
+        conditions:
+          - key: value
+            value: KeyPressed4x
+      - title: tap 5x
+        conditions:
+          - key: value
+            value: KeyPressed5x
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown

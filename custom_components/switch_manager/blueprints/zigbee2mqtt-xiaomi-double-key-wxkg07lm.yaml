@@ -11,15 +11,15 @@ buttons:
       - title: press
         conditions:
           - key: payload
-            value: single_left
+            value: left
       - title: double press
         conditions:
           - key: payload
-            value: double_left
+            value: left_double
       - title: hold
         conditions:
           - key: payload
-            value: hold_left
+            value: left_long
   - x: 250
     y: 12
     width: 238
@@ -28,15 +28,15 @@ buttons:
       - title: press
         conditions:
           - key: payload
-            value: single_right
+            value: right
       - title: double press
         conditions:
           - key: payload
-            value: double_right
+            value: right_double
       - title: hold
         conditions:
           - key: payload
-            value: hold_right
+            value: right_long
   - x: 12
     y: 330
     width: 476
@@ -45,12 +45,12 @@ buttons:
       - title: both press
         conditions:
           - key: payload
-            value: single_both
+            value: both
       - title: both double press
         conditions:
           - key: payload
-            value: double_both
+            value: both_double
       - title: both hold
         conditions:
           - key: payload
-            value: hold_both
+            value: both_long

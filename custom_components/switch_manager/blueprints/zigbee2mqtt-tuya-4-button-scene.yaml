@@ -1,4 +1,4 @@
-name: Tuya 4 Button Scene
+name: TuYa 4 Button Scene
 service: Zigbee2MQTT
 event_type: mqtt
 mqtt_topic_format: zigbee2mqtt/+/action

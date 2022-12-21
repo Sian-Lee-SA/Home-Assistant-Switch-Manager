@@ -1,0 +1,56 @@
+name: Aqara Opple 1x2
+service: Deconz
+event_type: deconz_event
+identifier_key: device_id
+buttons:
+  - x: 93
+    y: 85
+    width: 157
+    height: 317
+    actions:
+      - title: Long press
+        conditions:
+          - key: event
+            value: 1001
+      - title: Short release
+        conditions:
+          - key: event
+            value: 1002
+      - title: Long release
+        conditions:
+          - key: event
+            value: 1003
+      - title: Double press
+        conditions:
+          - key: event
+            value: 1004
+      - title: Triple press
+        conditions:
+          - key: event
+            value: 1005
+
+  - x: 250
+    y: 85
+    width: 157
+    height: 317
+    actions:
+      - title: Long press
+        conditions:
+          - key: event
+            value: 2001
+      - title: Short release
+        conditions:
+          - key: event
+            value: 2002
+      - title: Long release
+        conditions:
+          - key: event
+            value: 2003
+      - title: Double press
+        conditions:
+          - key: event
+            value: 2004
+      - title: Triple press
+        conditions:
+          - key: event
+            value: 2005

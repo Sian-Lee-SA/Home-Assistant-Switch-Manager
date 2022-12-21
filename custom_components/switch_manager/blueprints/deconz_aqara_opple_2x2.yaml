@@ -1,0 +1,106 @@
+name: Aqara Opple 2x2
+service: Deconz
+event_type: deconz_event
+identifier_key: device_id
+buttons:
+  - x: 93
+    y: 85
+    width: 157
+    height: 160
+    actions:
+      - title: Long press
+        conditions:
+          - key: event
+            value: 1001
+      - title: Short release
+        conditions:
+          - key: event
+            value: 1002
+      - title: Long release
+        conditions:
+          - key: event
+            value: 1003
+      - title: Double press
+        conditions:
+          - key: event
+            value: 1004
+      - title: Triple press
+        conditions:
+          - key: event
+            value: 1005
+
+  - x: 250
+    y: 85
+    width: 157
+    height: 160
+    actions:
+      - title: Long press
+        conditions:
+          - key: event
+            value: 2001
+      - title: Short release
+        conditions:
+          - key: event
+            value: 2002
+      - title: Long release
+        conditions:
+          - key: event
+            value: 2003
+      - title: Double press
+        conditions:
+          - key: event
+            value: 2004
+      - title: Triple press
+        conditions:
+          - key: event
+            value: 2005
+  - x: 93
+    y: 253
+    width: 157
+    height: 160
+    actions:
+      - title: Long press
+        conditions:
+          - key: event
+            value: 3001
+      - title: Short release
+        conditions:
+          - key: event
+            value: 3002
+      - title: Long release
+        conditions:
+          - key: event
+            value: 2003
+      - title: Double press
+        conditions:
+          - key: event
+            value: 3004
+      - title: Triple press
+        conditions:
+          - key: event
+            value: 3005
+  - x: 250
+    y: 253
+    width: 157
+    height: 160
+    actions:
+      - title: Long press
+        conditions:
+          - key: event
+            value: 4001
+      - title: Short release
+        conditions:
+          - key: event
+            value: 4002
+      - title: Long release
+        conditions:
+          - key: event
+            value: 4003
+      - title: Double press
+        conditions:
+          - key: event
+            value: 4004
+      - title: Triple press
+        conditions:
+          - key: event
+            value: 4005

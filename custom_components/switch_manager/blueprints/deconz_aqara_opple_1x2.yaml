@@ -1,5 +1,5 @@
 name: Aqara Opple 1x2
-service: Deconz
+service: deCONZ
 event_type: deconz_event
 identifier_key: device_id
 buttons:

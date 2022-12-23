@@ -1,4 +1,5 @@
 from .const import DOMAIN, CONF_BLUEPRINTS, BLUEPRINTS_FOLDER, PANEL_URL, NAME
+from .helpers import VERSION
 from homeassistant.core import HomeAssistant
 
 async def async_setup_view(hass: HomeAssistant):
@@ -24,7 +25,7 @@ async def async_setup_view(hass: HomeAssistant):
         config={
             "_panel_custom": {
                 "name": "switch-manager-panel",
-                "module_url":PANEL_URL,
+                "module_url": f"{PANEL_URL}?{VERSION}",
                 "embed_iframe": True
             }
         },

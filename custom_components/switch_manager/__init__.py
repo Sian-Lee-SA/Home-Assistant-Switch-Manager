@@ -9,10 +9,10 @@ from .const import (
     CONF_SWITCH_CONFIGS,
     CONF_MANAGED_SWITCHES,
     CONF_STORE,
-    LOGGER
+    LOGGER    
 )
 from .store import SwitchManagerStore
-from .helpers import load_blueprints, load_manifest, deploy_blueprints, check_blueprints_folder_exists
+from .helpers import load_blueprints, VERSION, deploy_blueprints, check_blueprints_folder_exists
 from .view import async_setup_view
 from .models import ( Blueprint, ManagedSwitchConfig )
 
@@ -121,15 +121,14 @@ async def async_setup_entry( hass, config_entry ):
     return True
 
 async def async_migrate( hass, in_dev ):
-    manifest = await load_manifest()
     store = hass.data[DOMAIN][CONF_STORE]
 
-    version_update = not store.compare_version( manifest['version'] )
+    version_update = not store.compare_version( VERSION )
     if in_dev or version_update or not await check_blueprints_folder_exists( hass ):
         LOGGER.debug('Migrating blueprints')
         await deploy_blueprints( hass )
         if version_update:
-            await store.update_version( manifest['version'] )
+            await store.update_version( VERSION )
 
 def _init_blueprints( hass: HomeAssistant ):
     # Ensure blueprints empty for clean state

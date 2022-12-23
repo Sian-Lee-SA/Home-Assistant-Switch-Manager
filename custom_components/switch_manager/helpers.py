@@ -7,10 +7,12 @@ from homeassistant.components.mqtt.models import ReceiveMessage
 
 COMPONENT_PATH = os.path.dirname(os.path.realpath(__file__))
 
-async def load_manifest():
-    return json.load(
+MANIFEST = json.load(
         open( os.path.join( COMPONENT_PATH, 'manifest.json') )
     )
+    
+VERSION = MANIFEST['version']
+
 
 async def check_blueprints_folder_exists( hass ):
     dest_folder = pathlib.Path(hass.config.path(BLUEPRINTS_FOLDER, DOMAIN))

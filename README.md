@@ -57,7 +57,7 @@ Blueprints are the heart of this component, once a blueprint is defined for a sw
 
 > View other blueprint files to get a grasp on how it's constructed if the following table is hard to understand.
 
-> For images, I tend to just google the device under the images tab. Next I will skim through til I find an image that has a flat perspective (top down) and is above 800px or 500px depending on the switches ratio. Next I will open the image in photoshop then mask out the background area with the shape tool. I then control click the layer to make only the visible selected which I then crop. Lastly I resize the image to be either 800px width or 500px height depending on which one has a greater value but I do not upscale if the image is below thos values.
+> For images, I tend to just google the device under the images tab. Next I will skim through til I find an image that has a flat perspective (top down) and is above 800px or 500px depending on the switches ratio. Next I will open the image in photoshop then mask out the background area with the shape tool. I then control click the layer to make only the visible selected which I then crop. Lastly I resize the image to be either 800px width or 500px height depending on which one has a greater value but I do not upscale if the image is below those sizes.
 
 Once a blueprint file or image file has been created or edited then you will need to restart Home Assistant for the changes to take effect.
 

@@ -1,0 +1,37 @@
+name: Homematic 2 Buttons
+service: Homematic
+event_type: homematic.keypress
+identifier_key: device_id
+buttons:
+  - x: 85
+    y: 85
+    width: 330
+    height: 164
+    conditions:
+      - key: subtype
+        value: 2
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: press_short
+      - title: hold
+        conditions:
+          - key: type
+            value: press_long
+  - x: 85
+    y: 252
+    width: 330
+    height: 164
+    conditions:
+      - key: subtype
+        value: 1
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: press_short
+      - title: hold
+        conditions:
+          - key: type
+            value: press_long

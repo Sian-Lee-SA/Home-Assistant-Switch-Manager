@@ -12,7 +12,7 @@ import {
     mdiGestureTapButton,
     mdiEarHearing
 } from "@mdi/js";
-import { SwitchManagerBlueprint, SwitchManagerBlueprintCondition, SwitchManagerConfig, SwitchManagerConfigButton } from "./types";
+import { SwitchManagerBlueprint, SwitchManagerBlueprintButton, SwitchManagerBlueprintCondition, SwitchManagerConfig, SwitchManagerConfigButton } from "./types";
 import { MODES } from "../ha-frontend/data/script";
 import { 
     buildAssetUrl, 
@@ -58,6 +58,7 @@ class SwitchManagerSwitchEditor extends LitElement
     @property() disabled = false;
 
     @state() private _subscribed?: () => void;
+    @state() private _buttonListener?: () => void;
 
     @state() private sequence: any[] = [];
     @state() private button_index: number = 0;
@@ -263,6 +264,12 @@ class SwitchManagerSwitchEditor extends LitElement
                     opacity: 0.4;
                 }
             }
+            @keyframes pressed {
+                to {
+                    fill: #3ff17975;
+                    stroke: #00e903;
+                }
+            }
             ha-card {
                 margin: 0 auto;
                 max-width: 1040px;
@@ -371,6 +378,11 @@ class SwitchManagerSwitchEditor extends LitElement
                 fill: #6bd3ff75;
                 stroke: #0082e9;
             }
+            #switch-image svg .button[pressed] {
+                animation: 0.4s pressed;
+                animation-iteration-count: 2;
+                animation-direction: alternate;
+            }
             .errors {
                 padding: 20px;
                 font-weight: bold;
@@ -429,6 +441,7 @@ class SwitchManagerSwitchEditor extends LitElement
         }
         this._setBlueprint( config.blueprint )
         this._updateSequence();
+        this._listenForButtonPress();
     }
 
     private _setBlueprint( blueprint: SwitchManagerBlueprint )
@@ -626,7 +639,7 @@ class SwitchManagerSwitchEditor extends LitElement
         }
 
         if( this.blueprint!.event_type == 'mqtt' && this.blueprint!.mqtt_topic_format )
-            this._subscribed = await   this.hass.connection.subscribeMessage((message) => {
+            this._subscribed = await this.hass.connection.subscribeMessage((message) => {
                 const data = typeof(message.payload) == 'string' ? { payload: message.payload } : message.payload;
                 __handle_response( message.topic, data );
             }, {
@@ -640,9 +653,81 @@ class SwitchManagerSwitchEditor extends LitElement
             }, this.blueprint!.event_type );
     }
 
+    private async _listenForButtonPress()
+    {
+        if( this._buttonListener )
+        {
+            this._buttonListener();
+            this._buttonListener = undefined;
+        }
+
+        if( ! this.config?.identifier )
+            return;
+
+        const __process_conditions = ( conditions: SwitchManagerBlueprintCondition[], data: any): boolean =>
+        {
+            if( ! conditions )
+                return true;
+
+            for( const condition of conditions )
+                if( !(condition.key in data) || String(condition.value) != String(data[condition.key]) )
+                    return false;
+                    
+            return true;
+        }
+
+        const __validate_data = ( data: any ): number => {
+            if( ! __process_conditions( this.blueprint!.conditions!, data ) )
+                return -1;
+
+            let i = 0;
+            for( const button of this.blueprint!.buttons )
+            {
+                if( __process_conditions(button.conditions!, data) )
+                    for( const action of button.actions )
+                        if( __process_conditions(action.conditions!, data) )
+                            return i;
+                
+                i++;
+            }
+
+            return -1;
+        }
+
+        const __handle_response = ( data: any ) => {
+            let button_index = __validate_data(data);
+            if( button_index == -1 )
+                return;
+            this.svg.querySelector(`[index="${button_index}"]`).setAttribute('pressed', '');
+            setTimeout(() => {
+                this.svg.querySelector(`[index="${button_index}"]`).removeAttribute('pressed');
+            }, 1000);            
+        }
+
+        if( this.blueprint!.event_type == 'mqtt' && this.blueprint!.mqtt_topic_format )
+        {
+            this._buttonListener = await this.hass.connection.subscribeMessage((message) => {
+                const data = typeof(message.payload) == 'string' ? { payload: message.payload } : message.payload;
+                __handle_response( data );
+            }, {
+                type: "mqtt/subscribe",
+                topic: this.config!.identifier
+            });
+        } else {
+            this._buttonListener = await this.hass!.connection.subscribeEvents( (event) => {
+                if( this.blueprint!.identifier_key! in event.data && event.data[this.blueprint!.identifier_key!] == this.config!.identifier )
+                {
+                    __handle_response( event.data );
+                }
+            }, this.blueprint!.event_type );
+        }
+        
+    }
+
     private _identifierChanged(ev?: CustomEvent)
     {
         this.config!.identifier = getValueById(this, 'identifier-input');
+        this._listenForButtonPress();
         this._dirty = true;
     }
 

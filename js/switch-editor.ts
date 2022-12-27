@@ -12,7 +12,7 @@ import {
     mdiGestureTapButton,
     mdiEarHearing
 } from "@mdi/js";
-import { SwitchManagerBlueprint, SwitchManagerBlueprintButton, SwitchManagerBlueprintCondition, SwitchManagerConfig, SwitchManagerConfigButton } from "./types";
+import { SwitchManagerBlueprint, SwitchManagerBlueprintCondition, SwitchManagerConfig, SwitchManagerConfigButton } from "./types";
 import { MODES } from "../ha-frontend/data/script";
 import { 
     buildAssetUrl, 
@@ -661,7 +661,7 @@ class SwitchManagerSwitchEditor extends LitElement
             this._buttonListener = undefined;
         }
 
-        if( ! this.config?.identifier )
+        if( ! this.config?.identifier || this.blueprint?.buttons?.length == 1 )
             return;
 
         const __process_conditions = ( conditions: SwitchManagerBlueprintCondition[], data: any): boolean =>

@@ -11,7 +11,7 @@ buttons:
       - key: subtype
         value: 1
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: type
             value: short_release
@@ -19,6 +19,10 @@ buttons:
         conditions:
           - key: type
             value: repeat
+      - title: hold (released)
+        conditions:
+          - key: type
+            value: long_release      
   - x: 2
     y: 161
     width: 189
@@ -27,7 +31,7 @@ buttons:
       - key: subtype
         value: 2
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: type
             value: short_release
@@ -35,6 +39,10 @@ buttons:
         conditions:
           - key: type
             value: repeat
+      - title: hold (released)
+        conditions:
+          - key: type
+            value: long_release
   - x: 2
     y: 251
     width: 189
@@ -43,7 +51,7 @@ buttons:
       - key: subtype
         value: 3
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: type
             value: short_release
@@ -51,6 +59,10 @@ buttons:
         conditions:
           - key: type
             value: repeat
+      - title: hold (released)
+        conditions:
+          - key: type
+            value: long_release
   - x: 2
     y: 341
     width: 189
@@ -59,7 +71,7 @@ buttons:
       - key: subtype
         value: 4
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: type
             value: short_release
@@ -67,3 +79,7 @@ buttons:
         conditions:
           - key: type
             value: repeat
+      - title: hold (released)
+        conditions:
+          - key: type
+            value: long_release

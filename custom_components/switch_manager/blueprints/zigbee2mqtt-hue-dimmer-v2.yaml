@@ -8,66 +8,66 @@ buttons:
     width: 189
     height: 159
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: payload
             value: on_press_release
-      - title: long
-        conditions:
-          - key: payload
-            value: on_hold_release
       - title: hold
         conditions:
           - key: payload
             value: on_hold
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: on_hold_release
   - x: 2
     y: 161
     width: 189
     height: 90
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: payload
             value: up_press_release
-      - title: long
-        conditions:
-          - key: payload
-            value: up_hold_release
       - title: hold
         conditions:
           - key: payload
             value: up_hold
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: up_hold_release
   - x: 2
     y: 251
     width: 189
     height: 90
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: payload
             value: down_press_release
-      - title: long
-        conditions:
-          - key: payload
-            value: down_hold_release
       - title: hold
         conditions:
           - key: payload
             value: down_hold
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: down_hold_release
   - x: 2
     y: 341
     width: 189
     height: 159
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: payload
             value: off_press_release
-      - title: long
-        conditions:
-          - key: payload
-            value: off_hold_release
       - title: hold
         conditions:
           - key: payload
-            value: off_hold
+            value: 
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: off_hold_release

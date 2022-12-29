@@ -698,9 +698,12 @@ class SwitchManagerSwitchEditor extends LitElement
             let button_index = __validate_data(data);
             if( button_index == -1 )
                 return;
-            this.svg.querySelector(`[index="${button_index}"]`).setAttribute('pressed', '');
+
+            const element = this.svg.querySelector(`[index="${button_index}"]`);
+            element.removeAttribute('pressed');
+            element.setAttribute('pressed', '');
             setTimeout(() => {
-                this.svg.querySelector(`[index="${button_index}"]`).removeAttribute('pressed');
+                element.removeAttribute('pressed');
             }, 1000);            
         }
 

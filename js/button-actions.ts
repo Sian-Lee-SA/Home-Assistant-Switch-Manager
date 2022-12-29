@@ -44,6 +44,8 @@ class SwitchManagerButtonActions extends LitElement
             :host {
                 display: flex;
                 justify-content: center;
+                --paper-tab-ink: transparent;
+                --paper-tabs-selection-bar-color: transparent;
             }
 
             paper-tabs {

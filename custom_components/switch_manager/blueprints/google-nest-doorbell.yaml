@@ -1,0 +1,20 @@
+name: Doorbell
+service: Google Nest
+event_type: nest_event
+identifier_key: device_id
+buttons:
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: doorbell_chime
+      # Below actions goes against what switch manager was intended for but as it's being the same device
+      # within it's own ecosystem, i'm letting it slide also nest integration lacks these sensors
+      - title: motion
+        conditions:
+          - key: type
+            value: camera_motion
+      - title: person
+        conditions:
+          - key: type
+            value: camera_person

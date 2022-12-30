@@ -17,8 +17,7 @@ module.exports = [
     output: {
       file: "custom_components/switch_manager/assets/switch_manager_panel.js",
       format: "es",
-      externalLiveBindings: false,
-      sourcemap: 'inline'
+      externalLiveBindings: false
     },
     preserveEntrySignatures: false,
     inlineDynamicImports: true,

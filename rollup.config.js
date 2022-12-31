@@ -1,6 +1,7 @@
 import nodeResolve from "@rollup/plugin-node-resolve";
 import json from "@rollup/plugin-json";
 import babel from "@rollup/plugin-babel";
+import cleanup from "rollup-plugin-cleanup";
 const commonjs = require("@rollup/plugin-commonjs");
 const babelTypescript = require("@babel/preset-typescript");
 const babelDecorators = require("@babel/plugin-proposal-decorators");
@@ -11,13 +12,16 @@ const replace = require("@rollup/plugin-replace");
 const { string } = require("rollup-plugin-string");
 const extensions = [".js", ".ts"];
 
+const production = !process.env.ROLLUP_WATCH;
+
 module.exports = [
   {
     input: "js/main.ts",
     output: {
       file: "custom_components/switch_manager/assets/switch_manager_panel.js",
       format: "es",
-      externalLiveBindings: false
+      externalLiveBindings: false,
+      sourcemap: (!production) ? 'inline' : false
     },
     preserveEntrySignatures: false,
     inlineDynamicImports: true,
@@ -30,6 +34,11 @@ module.exports = [
       }),
       commonjs(),
       json(),
+      production && cleanup({
+        comments: 'none',
+        sourcemap: false,
+        extensions: ['js', 'ts']
+      }),
       babel({
         babelrc: false,
         compact: true,

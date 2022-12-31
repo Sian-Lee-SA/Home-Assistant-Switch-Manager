@@ -7791,6 +7791,15 @@ jpeg-js@^0.4.2:
   resolved "https://registry.npmjs.org/jpeg-js/-/jpeg-js-0.4.4.tgz"
   integrity sha512-WZzeDOEtTOBK4Mdsar0IqEU5sMr3vSV2RqkAIzUEV2BHnUfKGyswWFPFwK5EeDo93K3FohSHbLAjj0s1Wzd+dg==
 
+js-cleanup@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/js-cleanup/-/js-cleanup-1.2.0.tgz#8dbc65954b1d38b255f1e8cf02cd17b3f7a053f9"
+  integrity sha512-JeDD0yiiSt80fXzAVa/crrS0JDPQljyBG/RpOtaSbyDq03VHa9szJWMaWOYU/bcTn412uMN2MxApXq8v79cUiQ==
+  dependencies:
+    magic-string "^0.25.7"
+    perf-regexes "^1.0.1"
+    skip-regex "^1.0.2"
+
 js-levenshtein-esm@^1.2.0:
   version "1.2.0"
   resolved "https://registry.npmjs.org/js-levenshtein-esm/-/js-levenshtein-esm-1.2.0.tgz"
@@ -9258,6 +9267,11 @@ pathval@^1.1.1:
   resolved "https://registry.npmjs.org/pathval/-/pathval-1.1.1.tgz"
   integrity sha512-Dp6zGqpTdETdR63lehJYPeIOqpiNBNtc7BpWSLrOje7UaIsE5aY92r/AunQA7rsXvet3lrJ3JnZX29UPTKXyKQ==
 
+perf-regexes@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/perf-regexes/-/perf-regexes-1.0.1.tgz#6da1d62f5a94bf9353a0451bccacf69068b75d0b"
+  integrity sha512-L7MXxUDtqr4PUaLFCDCXBfGV/6KLIuSEccizDI7JxT+c9x1G1v04BQ4+4oag84SHaCdrBgQAIs/Cqn+flwFPng==
+
 phin@^2.9.1:
   version "2.9.3"
   resolved "https://registry.npmjs.org/phin/-/phin-2.9.3.tgz"
@@ -9911,6 +9925,14 @@ roboto-fontface@^0.10.0:
   resolved "https://registry.npmjs.org/roboto-fontface/-/roboto-fontface-0.10.0.tgz"
   integrity sha512-OlwfYEgA2RdboZohpldlvJ1xngOins5d7ejqnIBWr9KaMxsnBqotpptRXTyfNRLnFpqzX6sTDt+X+a+6udnU8g==
 
+rollup-plugin-cleanup@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-cleanup/-/rollup-plugin-cleanup-3.2.1.tgz#8cbc92ecf58babd7c210051929797f137bbf777c"
+  integrity sha512-zuv8EhoO3TpnrU8MX8W7YxSbO4gmOR0ny06Lm3nkFfq0IVKdBUtHwhVzY1OAJyNCIAdLiyPnOrU0KnO0Fri1GQ==
+  dependencies:
+    js-cleanup "^1.2.0"
+    rollup-pluginutils "^2.8.2"
+
 rollup-plugin-string@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/rollup-plugin-string/-/rollup-plugin-string-3.0.0.tgz"
@@ -10258,6 +10280,11 @@ sinon@^11.0.0:
     diff "^5.0.0"
     nise "^5.1.0"
     supports-color "^7.2.0"
+
+skip-regex@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/skip-regex/-/skip-regex-1.0.2.tgz#ac655d77e7c771ac2b9f37585fea37bff56ad65b"
+  integrity sha512-pEjMUbwJ5Pl/6Vn6FsamXHXItJXSRftcibixDmNCWbWhic0hzHrwkMZo0IZ7fMRH9KxcWDFSkzhccB4285PutA==
 
 slash@^3.0.0:
   version "3.0.0"

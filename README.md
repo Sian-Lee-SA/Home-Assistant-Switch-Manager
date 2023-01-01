@@ -2,6 +2,7 @@
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg?style=for-the-badge)](https://github.com/hacs/integration)
 
+[![switch_manager_release](https://badgen.net/github/release/Sian-Lee-SA/Home-Assistant-Switch-Manager/stable)](https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager/stable) [![switch_manager_stars](https://badgen.net/github/stars/Sian-Lee-SA/Home-Assistant-Switch-Manager)](https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager/stargazers)
 
 ## About
 

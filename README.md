@@ -1,8 +1,8 @@
-# Home Assistant Switch Manager [@Sian-Lee-SA](http://github.com/Sian-Lee-SA)
+# Home Assistant Switch Manager
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg?style=for-the-badge)](https://github.com/hacs/integration)
 
-[![switch_manager_release](https://badgen.net/github/release/Sian-Lee-SA/Home-Assistant-Switch-Manager/stable?scale=1.3&color=41bdf5)](https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager/stable) [![switch_manager_stars](https://badgen.net/github/stars/Sian-Lee-SA/Home-Assistant-Switch-Manager?scale=1.3&color=41bdf5)](https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager/stargazers)
+[![switch_manager_release](https://badgen.net/github/release/Sian-Lee-SA/Home-Assistant-Switch-Manager/stable?scale=1.3&color=41bdf5)](https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager/stable) [![switch_manager_stars](https://badgen.net/github/stars/Sian-Lee-SA/Home-Assistant-Switch-Manager?scale=1.3&color=41bdf5)](https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager/stargazers) [![switch_manager_contributors](https://badgen.net/github/contributors/Sian-Lee-SA/Home-Assistant-Switch-Manager)](https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager) [![switch_manager_downloads](https://badgen.net/github/assets-dl/Sian-Lee-SA/Home-Assistant-Switch-Manager)](https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager)
 
 ## About
 

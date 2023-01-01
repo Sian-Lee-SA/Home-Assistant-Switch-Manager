@@ -79,6 +79,8 @@ conditions      | `list` [Condition](#condition)  | - | This optional list allow
 
 If there are more than 1 button on the switch then you should be using a png (even one button should have an image for better visualisation) and defining the buttons position with the x, y, width and height properties. This also can be expanded to being a circular shape or a svg path.
 
+If a switch supports multiple button presses (so two buttons are pushed at the same time) then add another button with circle shape between the two buttons to indicate they're linked. Within the actions, the title should prefix **both**
+
 > if you want more control on positioning and look then you can open the image up in inkscape (with matching width and height values for the viewBox) then draw the paths for each button and copy the d attribute of that path then paste in the d property for the button in yaml. You would also set the shape as path
 
 * Shape `rect` uses x, y, width, height
@@ -104,11 +106,13 @@ An action would be the result of a press/tap, whether its held down or if it was
 
 To unify switches added to Switch Manager, it makes sense to conform to a naming convention so the below dot points are some rules to go by
 
+* All characters should be lowercase
 * If mechanical button then the action should be **press**
 * If touch button (as in there's no mechanical trigger) then the action should be **tap** (if unsure then resort to **press**)
 * If action is double press/tap or triple press/tap and so on then the action should be **press 2x** / **tap 2x** or **press 3x** / **tap 3x** and so on
 * If the button supports a hold/long and hold/long release then there should be an action for both **hold** and **hold (released)** do **NOT** use **long**
 * Do **NOT** use **short** or **short release** as this is generally a generic **press**
+* In the case where a switch allows multiple buttons to be pushed the you can prefix each action with **both** so a dual button press would be **both press** and **both press 2x** etc.
 
 #### Order convention
 
@@ -121,7 +125,7 @@ conditions      | `list` [Condition](#condition)  | -        | This optional lis
 
 ### Condition
 
-Conditions evaluate the event data. If the key doesn't exist then it also evaluates to false. All conditions must be true to be valid
+Conditions evaluate the event/mqtt data. If the key doesn't exist then it also evaluates to false. All conditions must be true to be valid
 
 Option          | Values       | Required | Details
 --              | -            | -        | -

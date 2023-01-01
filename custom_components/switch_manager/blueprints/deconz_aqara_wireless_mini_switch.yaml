@@ -1,0 +1,30 @@
+name: Aqara Wireless Mini Switch
+service: deCONZ
+event_type: deconz_event
+identifier_key: device_id
+buttons:
+  - x: 250
+    y: 253
+    width: 100
+    shape: circle
+    actions:
+      - title: Long press
+        conditions:
+          - key: event
+            value: 1001
+      - title: Short release
+        conditions:
+          - key: event
+            value: 1002
+      - title: Long release
+        conditions:
+          - key: event
+            value: 1003
+      - title: Double press
+        conditions:
+          - key: event
+            value: 1004
+      - title: Vibration
+        conditions:
+          - key: event
+            value: 1007

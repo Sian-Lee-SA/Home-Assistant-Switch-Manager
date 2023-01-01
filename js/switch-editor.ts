@@ -399,7 +399,9 @@ class SwitchManagerSwitchEditor extends LitElement
 
         this._reloadListener = this.hass!.connection.subscribeEvents( (event) => {
             if( event.data.domain == 'switch_manager' && event.data.service == 'reload' )
+            {
                 this._loadConfig();
+            }
         }, 'call_service' );
     }
 
@@ -474,6 +476,10 @@ class SwitchManagerSwitchEditor extends LitElement
         
         // Ensure SVG is in DOM
         await this.updateComplete;
+        
+        // As this could be a reload, we ensure svg is empty
+        this.svg.parentNode.replaceChild(this.svg.cloneNode(false), this.svg);
+
         var img = new Image;
         img.src = buildAssetUrl(`${this.blueprint.id}.png`);
         img.onload = () => {      

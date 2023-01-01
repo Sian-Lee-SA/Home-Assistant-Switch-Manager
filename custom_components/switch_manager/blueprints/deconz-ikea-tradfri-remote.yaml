@@ -31,42 +31,42 @@ buttons:
       - title: press
         conditions:
           - key: event
-            value: 2002
+            value: 3002
       - title: hold
         conditions:
           - key: event
-            value: 2001
+            value: 3001
       - title: hold (released)
         conditions:
           - key: event
-            value: 2003
+            value: 3003
   - d: "m 54.065279,125.9253 a 226.71716,226.71716 0 0 0 -36.948383,123.9048 226.71716,226.71716 0 0 0 37.042197,123.841 l 66.872437,-44.9577 a 145.95894,145.95894 0 0 1 -23.15251,-78.8846 145.95894,145.95894 0 0 1 23.2763,-78.8011 z"
     shape: path
     actions:
       - title: press
         conditions:
           - key: event
-            value: 2002
+            value: 4002
       - title: hold
         conditions:
           - key: event
-            value: 2001
+            value: 4001
       - title: hold (released)
         conditions:
           - key: event
-            value: 2003
+            value: 4003
   - d: "m 433.51163,126.0556 -66.87245,44.9565 a 145.95894,145.95894 0 0 1 23.15512,78.8845 145.95894,145.95894 0 0 1 -23.2789,78.8012 l 67.09004,45.1036 a 226.71716,226.71716 0 0 0 36.94838,-123.9048 226.71716,226.71716 0 0 0 -37.04219,-123.841 z"
     shape: path
     actions:
       - title: press
         conditions:
           - key: event
-            value: 2002
+            value: 5002
       - title: hold
         conditions:
           - key: event
-            value: 2001
+            value: 5001
       - title: hold (released)
         conditions:
           - key: event
-            value: 2003
+            value: 5003

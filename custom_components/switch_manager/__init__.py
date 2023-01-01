@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import voluptuous as vol
 from typing import Any
-import homeassistant.helpers.config_validation as cv
 from .const import (
     DOMAIN, 
     CONF_BLUEPRINTS,

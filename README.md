@@ -98,7 +98,7 @@ conditions      | `list` [Condition](#condition)| -        | This optional list 
 
 ### Action
 
-An action would be the result of a push/tap, whether its held down or if it was pressed twice etc (all depending on what the device and/or service supports). An action must contain a title at minimum. Conditions should be used to differentiate the actions for any button.
+An action would be the result of a press/tap, whether its held down or if it was pressed twice etc (all depending on what the device and/or service supports). An action must contain a title at minimum. Conditions should be used to differentiate the actions for any button.
 
 #### Title naming convention
 
@@ -116,7 +116,7 @@ Actions should be ordered logically. This would be **press** -> **press x2** -> 
 
 Option          | Values                          | Required | Details
 --              | -                               | -        | -
-title           | `string`                        | *        | A name to decribe the action eg tap or double tap. Please read naming convention to better understand what title should be used
+title           | `string`                        | *        | Please read naming convention to better understand what title should be used
 conditions      | `list` [Condition](#condition)  | -        | This optional list allows the action to only accept conditions within the event data or mqtt payload. This can help scope down to the kind of action if the button has multiple. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition. 
 
 ### Condition
@@ -226,11 +226,11 @@ event_type: mqtt
 mqtt_topic_format: zigbee2mqtt/+/action
 buttons:
   - actions:
-      - title: tap
+      - title: press
         conditions:
           - key: payload
             value: single
-      - title: double tap
+      - title: press 2x
         conditions:
           - key: payload
             value: double

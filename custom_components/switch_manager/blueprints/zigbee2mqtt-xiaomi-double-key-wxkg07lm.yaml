@@ -6,7 +6,7 @@ buttons:
   - x: 12
     y: 12
     width: 238
-    height: 318
+    height: 475
     actions:
       - title: press
         conditions:
@@ -23,7 +23,7 @@ buttons:
   - x: 250
     y: 12
     width: 238
-    height: 318
+    height: 475
     actions:
       - title: press
         conditions:
@@ -37,10 +37,10 @@ buttons:
         conditions:
           - key: payload
             value: right_long
-  - x: 12
-    y: 330
-    width: 476
-    height: 158
+  - x: 250
+    y: 250
+    width: 75
+    shape: circle
     actions:
       - title: both press
         conditions:

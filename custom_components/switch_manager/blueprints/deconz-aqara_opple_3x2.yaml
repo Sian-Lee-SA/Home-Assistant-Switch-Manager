@@ -12,11 +12,11 @@ buttons:
         conditions:
           - key: event
             value: 1002
-      - title: press x2
+      - title: press 2x
         conditions:
           - key: event
             value: 1004
-      - title: press x3
+      - title: press 3x
         conditions:
           - key: event
             value: 1005
@@ -28,7 +28,6 @@ buttons:
         conditions:
           - key: event
             value: 1003
-
   - x: 250
     y: 85
     width: 157
@@ -38,11 +37,11 @@ buttons:
         conditions:
           - key: event
             value: 2002
-      - title: press x2
+      - title: press 2x
         conditions:
           - key: event
             value: 2004
-      - title: press x3
+      - title: press 3x
         conditions:
           - key: event
             value: 2005
@@ -63,11 +62,11 @@ buttons:
         conditions:
           - key: event
             value: 3002
-      - title: press x2
+      - title: press 2x
         conditions:
           - key: event
             value: 3004
-      - title: press x3
+      - title: press 3x
         conditions:
           - key: event
             value: 3005
@@ -88,11 +87,11 @@ buttons:
         conditions:
           - key: event
             value: 4002
-      - title: press x2
+      - title: press 2x
         conditions:
           - key: event
             value: 4004
-      - title: press x3
+      - title: press 3x
         conditions:
           - key: event
             value: 4005
@@ -113,11 +112,11 @@ buttons:
         conditions:
           - key: event
             value: 5002
-      - title: press x2
+      - title: press 2x
         conditions:
           - key: event
             value: 5004
-      - title: press x3
+      - title: press 3x
         conditions:
           - key: event
             value: 5005
@@ -138,11 +137,11 @@ buttons:
         conditions:
           - key: event
             value: 6002
-      - title: press x2
+      - title: press 2x
         conditions:
           - key: event
             value: 6004
-      - title: press x3
+      - title: press 3x
         conditions:
           - key: event
             value: 6005

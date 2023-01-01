@@ -9,11 +9,11 @@ buttons:
     width: 216
     height: 208
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: payload
             value: 4_single
-      - title: double tap
+      - title: press 2x
         conditions:
           - key: payload
             value: 4_double
@@ -26,11 +26,11 @@ buttons:
     width: 216
     height: 208
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: payload
             value: 3_single
-      - title: double tap
+      - title: press 2x
         conditions:
           - key: payload
             value: 3_double
@@ -43,11 +43,11 @@ buttons:
     width: 216
     height: 208
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: payload
             value: 1_single
-      - title: double tap
+      - title: press 2x
         conditions:
           - key: payload
             value: 1_double
@@ -60,11 +60,11 @@ buttons:
     width: 216
     height: 208
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: payload
             value: 2_single
-      - title: double tap
+      - title: press 2x
         conditions:
           - key: payload
             value: 2_double

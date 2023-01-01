@@ -12,7 +12,7 @@ buttons:
         conditions:
           - key: payload
             value: left
-      - title: double press
+      - title: press 2x
         conditions:
           - key: payload
             value: left_double
@@ -29,7 +29,7 @@ buttons:
         conditions:
           - key: payload
             value: right
-      - title: double press
+      - title: press 2x
         conditions:
           - key: payload
             value: right_double
@@ -46,7 +46,7 @@ buttons:
         conditions:
           - key: payload
             value: both
-      - title: both double press
+      - title: both press 2x
         conditions:
           - key: payload
             value: both_double

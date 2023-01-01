@@ -9,7 +9,7 @@ buttons:
     width: 50
     shape: circle
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: payload
             value: 'on'
@@ -22,7 +22,7 @@ buttons:
     width: 50
     shape: circle
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: payload
             value: arrow_right_click
@@ -39,7 +39,7 @@ buttons:
     width: 50
     shape: circle
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: payload
             value: 'off'
@@ -52,7 +52,7 @@ buttons:
     width: 50
     shape: circle
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: payload
             value: arrow_left_click

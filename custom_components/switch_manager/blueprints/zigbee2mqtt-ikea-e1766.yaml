@@ -9,7 +9,7 @@ buttons:
     width: 40
     shape: circle
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: payload
             value: open
@@ -18,7 +18,7 @@ buttons:
     width: 40
     shape: circle
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: payload
             value: close

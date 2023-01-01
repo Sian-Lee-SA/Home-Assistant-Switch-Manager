@@ -6,7 +6,7 @@ buttons:
   - x: 93
     y: 85
     width: 157
-    height: 317
+    height: 327
     actions:
       - title: press
         conditions:
@@ -28,11 +28,10 @@ buttons:
         conditions:
           - key: event
             value: 1003
-
   - x: 250
     y: 85
     width: 157
-    height: 317
+    height: 327
     actions:
       - title: press
         conditions:

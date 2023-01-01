@@ -116,7 +116,7 @@ To unify switches added to Switch Manager, it makes sense to conform to a naming
 
 #### Order convention
 
-Actions should be ordered logically. This would be **press** -> **press x2** -> **press x3** -> **hold** -> **hold (released)** -> Then anything that is more unique like **shake**, **viabrate** and so on.
+Actions should be ordered logically. This would be **press** -> **press 2x** -> **press 3x** -> **hold** -> **hold (released)** -> Then anything that is more unique like **shake**, **viabrate** and so on.
 
 Option          | Values                          | Required | Details
 --              | -                               | -        | -

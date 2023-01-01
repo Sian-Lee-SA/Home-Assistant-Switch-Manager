@@ -108,6 +108,7 @@ To unify switches added to Switch Manager, it makes sense to conform to a naming
 * If touch button (as in there's no mechanical trigger) then the action should be **tap** (if unsure then resort to **press**)
 * If action is double press/tap or triple press/tap and so on then the action should be **press 2x** / **tap 2x** or **press 3x** / **tap 3x** and so on
 * If the button supports a hold and hold release then there should be an action for both **hold** and **hold (released)**
+* Do **NOT** use **short** or **short release** as this is generally a generic **press**
 
 #### Order convention
 

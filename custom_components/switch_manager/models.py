@@ -1,3 +1,4 @@
+import asyncio
 from .const import DOMAIN, LOGGER
 from .helpers import format_mqtt_message
 from homeassistant.core import HomeAssistant, Context, callback
@@ -213,11 +214,17 @@ class ManagedSwitchConfig:
             self._event_listener = self._hass.bus.async_listen(self.blueprint.event_type, _handleEvent)
 
     def stop(self):
-        self.stop_running_scripts();
+        self.stop_running_scripts()
         if self._event_listener:
             self._event_listener()
             self._event_listener = None
 
+    def stop_running_scripts( self ):
+        for button in self.buttons:
+            for action in button.actions:
+                if action.script:
+                    self._hass.async_create_task( action.script.async_stop() )
+                    
     def setEnabled( self, value: bool ):
         self.enabled = value
 
@@ -236,11 +243,6 @@ class ManagedSwitchConfig:
         if self._error:
             LOGGER.error(self._error)
 
-    async def stop_running_scripts( self ):
-        for button in self.buttons:
-            for action in button.actions:
-                if action.script:
-                    await self._hass.async_create_task( action.script.async_stop() )
     
     # home assistant json
     def as_dict(self):

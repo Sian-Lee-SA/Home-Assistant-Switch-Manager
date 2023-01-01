@@ -11,11 +11,11 @@ buttons:
       - key: endpoint_id
         value: 1
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: command
             value: remote_button_short_press
-      - title: double tap
+      - title: press 2x
         conditions:
           - key: command
             value: remote_button_double_press
@@ -31,11 +31,11 @@ buttons:
       - key: endpoint_id
         value: 2
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: command
             value: remote_button_short_press
-      - title: double tap
+      - title: press 2x
         conditions:
           - key: command
             value: remote_button_double_press
@@ -51,11 +51,11 @@ buttons:
       - key: endpoint_id
         value: 3
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: command
             value: remote_button_short_press
-      - title: double tap
+      - title: press 2x
         conditions:
           - key: command
             value: remote_button_double_press
@@ -71,11 +71,11 @@ buttons:
       - key: endpoint_id
         value: 4
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: command
             value: remote_button_short_press
-      - title: double tap
+      - title: press 2x
         conditions:
           - key: command
             value: remote_button_double_press

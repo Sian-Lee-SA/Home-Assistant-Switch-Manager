@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import voluptuous as vol
 from typing import Any
-import homeassistant.helpers.config_validation as cv
 from .const import (
     DOMAIN, 
     CONF_BLUEPRINTS,
@@ -16,7 +15,7 @@ from .helpers import load_blueprints, VERSION, deploy_blueprints, check_blueprin
 from .view import async_setup_view
 from .models import ( Blueprint, ManagedSwitchConfig )
 
-from homeassistant.core import Config, HomeAssistant
+from homeassistant.core import Config, HomeAssistant, callback
 from homeassistant.components import websocket_api
 from homeassistant.helpers import config_validation as cv
 from homeassistant.config import _format_config_error
@@ -102,10 +101,22 @@ async def async_setup( hass: HomeAssistant, config: Config ):
 
     await async_migrate( hass, is_dev )
     
-    _init_blueprints(hass)
+    @callback
+    async def reload_all( call ):
+        for switch_id in hass.data[DOMAIN][CONF_MANAGED_SWITCHES]:
+            hass.data[DOMAIN][CONF_MANAGED_SWITCHES][switch_id].stop()
+        hass.data[DOMAIN][CONF_BLUEPRINTS] = {}
+        hass.data[DOMAIN][CONF_MANAGED_SWITCHES] = {}
+
+        await _init_blueprints(hass)
+        await _init_switch_configs(hass)
+
+
+    await _init_blueprints(hass)
     await _init_switch_configs(hass)
 
-    
+    hass.async_add_executor_job( hass.services.register, DOMAIN, 'reload', reload_all )
+
     # Return boolean to indicate that initialization was successful.
     return True
 
@@ -130,7 +141,7 @@ async def async_migrate( hass, in_dev ):
         if version_update:
             await store.update_version( VERSION )
 
-def _init_blueprints( hass: HomeAssistant ):
+async def _init_blueprints( hass: HomeAssistant ):
     # Ensure blueprints empty for clean state
     blueprints = hass.data[DOMAIN][CONF_BLUEPRINTS] = {}
     for config in load_blueprints(hass):
@@ -162,7 +173,7 @@ async def _set_switch_config( hass: HomeAssistant, config: ManagedSwitchConfig )
 def _get_switch_config( hass: HomeAssistant, _id: str ) -> ManagedSwitchConfig:
     return hass.data[DOMAIN][CONF_MANAGED_SWITCHES].get(_id)
 
-def _remove_switch_config( hass: HomeAssistant, _id: str ):
+async def _remove_switch_config( hass: HomeAssistant, _id: str ):
     hass.data[DOMAIN][CONF_MANAGED_SWITCHES][_id].stop()
     del hass.data[DOMAIN][CONF_MANAGED_SWITCHES][_id]
 
@@ -264,7 +275,7 @@ async def websocket_delete_config(
 ) -> None:
     store = hass.data[DOMAIN][CONF_STORE]
 
-    _remove_switch_config( hass, msg['config_id'] )    
+    await _remove_switch_config( hass, msg['config_id'] )    
     await store.delete_managed_switch( msg['config_id'] )
     
     connection.send_result( msg['id'], {

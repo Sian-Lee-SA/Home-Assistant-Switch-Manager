@@ -10,23 +10,23 @@ buttons:
       - key: property_key
         value: '001'
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: value
             value: KeyPressed
-      - title: tap 2x
+      - title: press 2x
         conditions:
           - key: value
             value: KeyPressed2x
-      - title: tap 3x
+      - title: press 3x
         conditions:
           - key: value
             value: KeyPressed3x
-      - title: tap 4x
+      - title: press 4x
         conditions:
           - key: value
             value: KeyPressed4x
-      - title: tap 5x
+      - title: press 5x
         conditions:
           - key: value
             value: KeyPressed5x

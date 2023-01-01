@@ -4,11 +4,11 @@ event_type: mqtt
 mqtt_topic_format: zigbee2mqtt/+/action
 buttons:
   - actions:
-      - title: tap
+      - title: press
         conditions:
           - key: payload
             value: single
-      - title: double tap
+      - title: press 2x
         conditions:
           - key: payload
             value: double

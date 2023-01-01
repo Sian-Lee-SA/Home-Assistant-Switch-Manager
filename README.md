@@ -59,7 +59,7 @@ Blueprints are the heart of this component, once a blueprint is defined for a sw
 
 > For images, I tend to just google the device under the images tab. Next I will skim through til I find an image that has a flat perspective (top down) and is above 800px or 500px depending on the switches ratio. Next I will open the image in photoshop then mask out the background area with the shape tool. I then control click the layer to make only the visible selected which I then crop. Lastly I resize the image to be either 800px width or 500px height depending on which one has a greater value but I do not upscale if the image is below those sizes.
 
-Once a blueprint file or image file has been created or edited then you will need to restart Home Assistant for the changes to take effect.
+Once a blueprint file or image file has been created or edited then you will need to either call the switch_manager.reload service or restart Home Assistant for the changes to take effect.
 
 The following tables shows how to structure a blueprint yaml file
 
@@ -100,9 +100,22 @@ conditions      | `list` [Condition](#condition)| -        | This optional list 
 
 An action would be the result of a push/tap, whether its held down or if it was pressed twice etc (all depending on what the device and/or service supports). An action must contain a title at minimum. Conditions should be used to differentiate the actions for any button.
 
+#### Title naming convention
+
+To unify switches added to Switch Manager, it makes sense to conform to a naming convention so the below dot points are some rules to go by
+
+* If mechanical button then the action should be **press**
+* If touch button (as in there's no mechanical trigger) then the action should be **tap** (if unsure then resort to **press**)
+* If action is double press/tap or triple press/tap and so on then the action should be **press 2x** or **tap 2x** (replacing the 2 with how many times it was pressed)
+* If the button supports a hold and hold release then there should be an action for both **hold** and **hold (released)**
+
+#### Order convention
+
+Actions should be ordered logically. This would be **press** -> **press x2** -> **press x3** -> **hold** -> **hold (released)** -> Then anything that is more unique like **shake**, **viabrate** and so on.
+
 Option          | Values                          | Required | Details
 --              | -                               | -        | -
-title           | `string`                        | *        | A name to decribe the action eg tap or double tap
+title           | `string`                        | *        | A name to decribe the action eg tap or double tap. Please read naming convention to better understand what title should be used
 conditions      | `list` [Condition](#condition)  | -        | This optional list allows the action to only accept conditions within the event data or mqtt payload. This can help scope down to the kind of action if the button has multiple. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition. 
 
 ### Condition

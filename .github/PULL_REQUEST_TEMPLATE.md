@@ -4,7 +4,7 @@
   creating the PR. If you're unsure about any of them, don't hesitate to ask.
 -->
 
-- [ ] You viewed the README and [naming conventions](https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager#title-naming-convention)
+- [ ] You viewed the README and conformed to the [naming conventions](https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager#title-naming-convention)
 - [ ] You ordered the actions as stated in the README [action order](https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager#order-convention)
 - [ ] All filenames are lowercase and uses '-' for spaces and **not** '_'
 - [ ] Images are png

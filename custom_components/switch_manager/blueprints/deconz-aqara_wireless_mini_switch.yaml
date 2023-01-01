@@ -8,23 +8,23 @@ buttons:
     width: 100
     shape: circle
     actions:
-      - title: Long press
-        conditions:
-          - key: event
-            value: 1001
-      - title: Short release
+      - title: press
         conditions:
           - key: event
             value: 1002
-      - title: Long release
-        conditions:
-          - key: event
-            value: 1003
-      - title: Double press
+      - title: press x2
         conditions:
           - key: event
             value: 1004
-      - title: Vibration
+      - title: hold
+        conditions:
+          - key: event
+            value: 1001
+      - title: hold (released)
+        conditions:
+          - key: event
+            value: 1003
+      - title: viabrate
         conditions:
           - key: event
             value: 1007

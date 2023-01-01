@@ -396,13 +396,7 @@ class SwitchManagerSwitchEditor extends LitElement
     {
         super.connectedCallback();
         this._loadConfig();
-
-        this._reloadListener = this.hass!.connection.subscribeEvents( (event) => {
-            if( event.data.domain == 'switch_manager' && event.data.service == 'reload' )
-            {
-                this._loadConfig();
-            }
-        }, 'call_service' );
+        this.startListeners();
     }
 
     disconnectedCallback(): void 
@@ -423,6 +417,16 @@ class SwitchManagerSwitchEditor extends LitElement
             this._buttonListener();
             this._buttonListener = undefined;
         }
+    }
+    
+    private async startListeners()
+    {
+        this._reloadListener = await this.hass!.connection.subscribeEvents( (event) => {
+            if( event.data.domain == 'switch_manager' && event.data.service == 'reload' )
+            {
+                this._loadConfig();
+            }
+        }, 'call_service' );
     }
 
     private _loadConfig()

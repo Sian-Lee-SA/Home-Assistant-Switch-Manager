@@ -9,6 +9,7 @@
 - [ ] All filenames are lowercase and uses '-' for spaces and **not** '_'
 - [ ] Images are png
 - [ ] Image backgrounds are transparent and is cropped to the device boundries
+- [ ] Images has a maximum width of 800px and maximum height of 500px
 - [ ] You have tested your blueprints and made sure each button and action works
 
 <!--

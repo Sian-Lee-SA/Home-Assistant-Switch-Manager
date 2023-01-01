@@ -59,6 +59,7 @@ class SwitchManagerSwitchEditor extends LitElement
 
     @state() private _subscribed?: () => void;
     @state() private _buttonListener?: () => void;
+    @state() private _reloadListener?: () => void;
 
     @state() private sequence: any[] = [];
     @state() private button_index: number = 0;
@@ -394,16 +395,31 @@ class SwitchManagerSwitchEditor extends LitElement
     connectedCallback(): void 
     {
         super.connectedCallback();
-        this._loadConfig();        
+        this._loadConfig();
+
+        this._reloadListener = this.hass!.connection.subscribeEvents( (event) => {
+            if( event.data.domain == 'switch_manager' && event.data.service == 'reload' )
+                this._loadConfig();
+        }, 'call_service' );
     }
 
     disconnectedCallback(): void 
     {
         super.disconnectedCallback();
+        if( this._reloadListener )
+        {
+            this._reloadListener();
+            this._reloadListener = undefined;
+        }
         if( this._subscribed )
         {
             this._subscribed();
             this._subscribed = undefined;
+        }
+        if( this._buttonListener )
+        {
+            this._buttonListener();
+            this._buttonListener = undefined;
         }
     }
 

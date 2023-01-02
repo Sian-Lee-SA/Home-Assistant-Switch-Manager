@@ -10,7 +10,7 @@ Switch manager is a centralised component to handle button pushes for your wirel
 > I am happy to accept any pull requests for anyone who wishes to submit missing blueprint for switches from this repository as to help eliminate other users from having to build their own.
 
 #### Index page
-![Demo Switch Index](images/demo-1.png)
+![Demo Switch Index](images/demo-2.png)
 
 #### Switch editor page
 ![Demo Switch Editor](images/demo-3.png)

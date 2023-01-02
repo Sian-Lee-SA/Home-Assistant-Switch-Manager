@@ -7,10 +7,10 @@ conditions:
     value: scene
 buttons:
   - shape: rect
-    x: 32
-    y: 29
-    width: 336
-    height: 360
+    x: 38
+    y: 39
+    width: 326
+    height: 348
     conditions:
       - key: property_key
         value: '001'
@@ -40,10 +40,10 @@ buttons:
           - key: value
             value: KeyHeldDown
   - shape: rect
-    x: 32
-    y: 389
-    width: 336
-    height: 340
+    x: 38
+    y: 388
+    width: 326
+    height: 342
     conditions:
       - key: property_key
         value: '002'

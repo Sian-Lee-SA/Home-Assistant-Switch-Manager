@@ -9,7 +9,7 @@ buttons:
   - shape: rect
     x: 24
     y: 24
-    width: 198
+    width: 200
     height: 218
     conditions:
       - key: property_key
@@ -42,7 +42,7 @@ buttons:
   - shape: rect
     x: 24
     y: 246
-    width: 198
+    width: 200
     height: 218
     conditions:
       - key: property_key

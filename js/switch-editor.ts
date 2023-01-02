@@ -271,10 +271,17 @@ class SwitchManagerSwitchEditor extends LitElement
                     stroke: #00e903;
                 }
             }
+            :host {
+                --max-width: 1040px;
+            }
             ha-card {
                 margin: 0 auto;
-                max-width: 1040px;
+                max-width: var(--max-width);
                 --mdc-select-fill-color: transparent;
+            }
+            switch-manager-button-actions {
+                max-width: var(--max-width);
+                margin: 0 auto;
             }
             h3, #identifier {
                 padding-left: 25px;

@@ -36,9 +36,9 @@ buttons:
           - key: type
             value: press_long
   - x: 85
-    y: 196
+    y: 194
     width: 96
-    height: 109
+    height: 111
     conditions:
       - key: subtype
         value: 3
@@ -52,9 +52,9 @@ buttons:
           - key: type
             value: press_long
   - x: 319
-    y: 196
+    y: 194
     width: 96
-    height: 109
+    height: 111
     conditions:
       - key: subtype
         value: 4

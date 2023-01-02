@@ -13,7 +13,7 @@ Switch manager is a centralised component to handle button pushes for your wirel
 ![Demo Switch Index](images/demo-1.png)
 
 #### Switch editor page
-![Demo Switch Editor](images/demo-2.png)
+![Demo Switch Editor](images/demo-3.png)
 
 
 ## How to install

@@ -1,0 +1,39 @@
+name: TuYa 2 Gang Remote
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+buttons:
+  - x: 60
+    y: 60
+    width: 190
+    height: 385
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: 1_single
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: 1_double
+      - title: hold
+        conditions:
+          - key: payload
+            value: 1_hold
+  - x: 250
+    y: 60
+    width: 190
+    height: 385
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: 2_single
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: 2_double
+      - title: hold
+        conditions:
+          - key: payload
+            value: 2_hold

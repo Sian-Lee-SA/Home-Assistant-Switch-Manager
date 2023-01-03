@@ -39,6 +39,10 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
+      - title: released
+        conditions:
+          - key: value
+            value: KeyReleased
   - shape: rect
     x: 38
     y: 388
@@ -72,3 +76,8 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
+      - title: released
+        conditions:
+          - key: value
+            value: KeyReleased
+      

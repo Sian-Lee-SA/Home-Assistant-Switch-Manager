@@ -39,7 +39,7 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
-      - title: released
+      - title: hold (released)
         conditions:
           - key: value
             value: KeyReleased
@@ -76,7 +76,7 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
-      - title: released
+      - title: hold (released)
         conditions:
           - key: value
             value: KeyReleased

@@ -138,6 +138,7 @@ class SwitchManagerIndex extends LitElement
                             .narrow=${this.narrow}
                             ></ha-menu-button>
                         <div main-title>Switch Manager</div>
+                        <div>v${this.panel.config.version}</div>
                     </app-toolbar>
                 </app-header>      
             </ha-app-layout>
@@ -153,7 +154,6 @@ class SwitchManagerIndex extends LitElement
                         clickable
                         @row-click=${this._rowClicked}
                         .dir=${computeRTLDirection(this.hass)}>
-
                     </sm-data-table>
 
                     <div class="fab-container">
@@ -190,7 +190,8 @@ class SwitchManagerIndex extends LitElement
     connectedCallback(): void 
     {        
         super.connectedCallback();
-        this._populateSwitches();        
+        this._populateSwitches();
+        console.dir(this.panel);
     }
 
     private _populateSwitches()

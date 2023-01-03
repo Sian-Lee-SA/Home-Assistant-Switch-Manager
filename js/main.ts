@@ -49,10 +49,10 @@ class SwitchManagerPanel extends ext(LitElement, [dialogManagerMixin, Notificati
     {
         if( 'action' in this.params )
             return html`
-                <switch-manager-switch-editor .hass=${this.hass} .narrow=${this.narrow} .route=${this.route} .params=${this.params}></switch-manager-switch-editor>
+                <switch-manager-switch-editor .hass=${this.hass} .narrow=${this.narrow} .route=${this.route} .panel=${this.panel} .params=${this.params}></switch-manager-switch-editor>
             `;
         return html`
-                <switch-manager-index .hass=${this.hass} .narrow=${this.narrow} .route=${this.route}></switch-manager-index>
+                <switch-manager-index .hass=${this.hass} .narrow=${this.narrow} .route=${this.route} .panel=${this.panel}></switch-manager-index>
             `;
     }
 

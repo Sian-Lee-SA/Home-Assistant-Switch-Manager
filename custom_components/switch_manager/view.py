@@ -27,6 +27,7 @@ async def async_setup_view(hass: HomeAssistant):
                 "name": "switch-manager-panel",
                 "module_url": f"{PANEL_URL}?{VERSION}",
                 "embed_iframe": True
-            }
+            },
+            "version": VERSION
         },
     )

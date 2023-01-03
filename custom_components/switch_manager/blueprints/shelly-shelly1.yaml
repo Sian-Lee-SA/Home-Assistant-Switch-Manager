@@ -1,0 +1,18 @@
+name: Shelly 1
+service: Shelly
+event_type: shelly.click
+identifier_key: device
+buttons:
+  - x: 123
+    y: 215
+    width: 80
+    height: 80
+    actions:
+      - title: tap
+        conditions:
+          - key: click_type
+            value: single
+      - title: hold
+        conditions:
+          - key: click_type
+            value: long

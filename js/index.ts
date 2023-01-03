@@ -191,7 +191,6 @@ class SwitchManagerIndex extends LitElement
     {        
         super.connectedCallback();
         this._populateSwitches();
-        console.dir(this.panel);
     }
 
     private _populateSwitches()

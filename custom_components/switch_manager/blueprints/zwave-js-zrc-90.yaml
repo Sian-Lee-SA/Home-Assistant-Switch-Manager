@@ -26,6 +26,10 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
+      - title: hold (released)
+        conditions:
+          - key: value
+            value: KeyReleased
   - x: 250
     y: 113
     width: 145
@@ -46,6 +50,10 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
+      - title: hold (released)
+        conditions:
+          - key: value
+            value: KeyReleased
   - x: 393
     y: 113
     width: 145
@@ -66,6 +74,10 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
+      - title: hold (released)
+        conditions:
+          - key: value
+            value: KeyReleased
   - x: 538
     y: 113
     width: 145
@@ -86,6 +98,10 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
+      - title: hold (released)
+        conditions:
+          - key: value
+            value: KeyReleased
   - x: 106
     y: 255
     width: 145
@@ -106,6 +122,10 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
+      - title: hold (released)
+        conditions:
+          - key: value
+            value: KeyReleased
   - x: 250
     y: 255
     width: 145
@@ -126,6 +146,10 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
+      - title: hold (released)
+        conditions:
+          - key: value
+            value: KeyReleased
   - x: 393
     y: 255
     width: 145
@@ -146,6 +170,10 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
+      - title: hold (released)
+        conditions:
+          - key: value
+            value: KeyReleased
   - x: 538
     y: 255
     width: 145
@@ -166,3 +194,7 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
+      - title: hold (released)
+        conditions:
+          - key: value
+            value: KeyReleased

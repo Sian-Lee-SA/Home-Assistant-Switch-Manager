@@ -16,6 +16,7 @@ import { fireEvent } from "../../ha-frontend/common/dom/fire_event";
 import { haStyleDialog, haStyleScrollbar } from "../../ha-frontend/resources/styles";
 import { navigate } from "../../ha-frontend/common/navigate";
 import "../../ha-frontend/components/ha-dialog";
+import "../../ha-frontend/components/ha-expansion-panel";
 import "@material/mwc-list/mwc-list";
 import "@material/mwc-list/mwc-list-item";
 
@@ -80,11 +81,10 @@ class SwitchManagerBlueprintSelector extends LitElement
                 align-items: center;
             }
             h2 {
-                padding: 0px 0px 12px;
+                min-width: 475px;
                 margin: 15px 0px 0px;
                 font-weight: normal;
                 font-size: 1.3em;
-                border-bottom: 1px solid #DDD;
             }
             h2:first-child {
                 margin: 0;
@@ -168,22 +168,27 @@ class SwitchManagerBlueprintSelector extends LitElement
         let _html: any[] = []
         for( let k in ordered )
         {
-            _html.push(html`<h2>${k}</h2>`);
-            
-            for( let i of ordered[k] )
-            {
-                _html.push(html`
-                <mwc-list-item @click=${() => this._itemClicked(i.id)} data-item-id="${i.id}">
-                        <div class="row">
-                            <div class="image">
-                                ${i.has_image ? 
-                                    html`<img src="${buildAssetUrl(`${i.id}.png`)}" />` : 
-                                    html`<ha-svg-icon style="fill: var(--primary-color);" .path=${mdiGestureTapButton}></ha-svg-icon>`}
-                            </div>
-                            <div class="name">${i.name}</div>
+            _html.push( html`<ha-expansion-panel><h2 slot="header">${k}</h2>${this._switchItem(ordered[k])}</ha-expansion-panel>` )
+        }
+        return _html;
+    }
+
+    private _switchItem( items )
+    {
+        let _html: any[] = []
+        for( let i of items )
+        {
+            _html.push(html`
+            <mwc-list-item @click=${() => this._itemClicked(i.id)} data-item-id="${i.id}">
+                    <div class="row">
+                        <div class="image">
+                            ${i.has_image ? 
+                                html`<img src="${buildAssetUrl(`${i.id}.png`)}" />` : 
+                                html`<ha-svg-icon style="fill: var(--primary-color);" .path=${mdiGestureTapButton}></ha-svg-icon>`}
                         </div>
-                </mwc-list-item>`);
-            }
+                        <div class="name">${i.name}</div>
+                    </div>
+            </mwc-list-item>`);
         }
         return _html;
     }

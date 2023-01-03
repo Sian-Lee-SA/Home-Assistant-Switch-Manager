@@ -1,5 +1,5 @@
 name: Zooz Zen76
-service: ZWave JS
+service: Z-Wave JS
 event_type: zwave_js_value_notification
 identifier_key: node_id
 conditions:

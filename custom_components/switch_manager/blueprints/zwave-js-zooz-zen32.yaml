@@ -1,0 +1,194 @@
+name: Zooz Zen32
+service: Z-Wave JS
+event_type: zwave_js_value_notification
+identifier_key: node_id
+conditions:
+  - key: property
+    value: scene
+buttons:
+  - shape: rect
+    x: 15
+    y: 14
+    width: 215
+    height: 248
+    conditions:
+      - key: property_key
+        value: '005'
+    actions:
+      - title: press
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: press 2x
+        conditions:
+          - key: value
+            value: KeyPressed2x
+      - title: press 3x
+        conditions:
+          - key: value
+            value: KeyPressed3x
+      - title: press 4x
+        conditions:
+          - key: value
+            value: KeyPressed4x
+      - title: press 5x
+        conditions:
+          - key: value
+            value: KeyPressed5x
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+      - title: hold (released)
+        conditions:
+          - key: value
+            value: KeyReleased
+  - shape: rect
+    x: 14
+    y: 284
+    width: 101
+    height: 90
+    conditions:
+      - key: property_key
+        value: '001'
+    actions:
+      - title: press
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: press 2x
+        conditions:
+          - key: value
+            value: KeyPressed2x
+      - title: press 3x
+        conditions:
+          - key: value
+            value: KeyPressed3x
+      - title: press 4x
+        conditions:
+          - key: value
+            value: KeyPressed4x
+      - title: press 5x
+        conditions:
+          - key: value
+            value: KeyPressed5x
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+      - title: hold (released)
+        conditions:
+          - key: value
+            value: KeyReleased
+  - shape: rect
+    x: 128
+    y: 284
+    width: 101
+    height: 90
+    conditions:
+      - key: property_key
+        value: '002'
+    actions:
+      - title: press
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: press 2x
+        conditions:
+          - key: value
+            value: KeyPressed2x
+      - title: press 3x
+        conditions:
+          - key: value
+            value: KeyPressed3x
+      - title: press 4x
+        conditions:
+          - key: value
+            value: KeyPressed4x
+      - title: press 5x
+        conditions:
+          - key: value
+            value: KeyPressed5x
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+      - title: hold (released)
+        conditions:
+          - key: value
+            value: KeyReleased
+  - shape: rect
+    x: 128
+    y: 388
+    width: 101
+    height: 90
+    conditions:
+      - key: property_key
+        value: '004'
+    actions:
+      - title: press
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: press 2x
+        conditions:
+          - key: value
+            value: KeyPressed2x
+      - title: press 3x
+        conditions:
+          - key: value
+            value: KeyPressed3x
+      - title: press 4x
+        conditions:
+          - key: value
+            value: KeyPressed4x
+      - title: press 5x
+        conditions:
+          - key: value
+            value: KeyPressed5x
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+      - title: hold (released)
+        conditions:
+          - key: value
+            value: KeyReleased
+  - shape: rect
+    x: 14
+    y: 388
+    width: 101
+    height: 90
+    conditions:
+      - key: property_key
+        value: '003'
+    actions:
+      - title: press
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: press 2x
+        conditions:
+          - key: value
+            value: KeyPressed2x
+      - title: press 3x
+        conditions:
+          - key: value
+            value: KeyPressed3x
+      - title: press 4x
+        conditions:
+          - key: value
+            value: KeyPressed4x
+      - title: press 5x
+        conditions:
+          - key: value
+            value: KeyPressed5x
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+      - title: hold (released)
+        conditions:
+          - key: value
+            value: KeyReleased
+

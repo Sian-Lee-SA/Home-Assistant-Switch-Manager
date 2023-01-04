@@ -12,7 +12,7 @@ buttons:
         conditions:
           - key: event
             value: 1001
-      - title: hold (release)
+      - title: hold (released)
         conditions:
           - key: event
             value: 1003

@@ -7,9 +7,9 @@ conditions:
     value: scene
 buttons:
   - shape: rect
-    x: 16
-    y: 19
-    width: 214
+    x: 15
+    y: 14
+    width: 215
     height: 248
     conditions:
       - key: property_key
@@ -44,9 +44,9 @@ buttons:
           - key: value
             value: KeyReleased
   - shape: rect
-    x: 16
-    y: 286
-    width: 100
+    x: 14
+    y: 284
+    width: 101
     height: 90
     conditions:
       - key: property_key
@@ -81,9 +81,9 @@ buttons:
           - key: value
             value: KeyReleased
   - shape: rect
-    x: 130
-    y: 286
-    width: 100
+    x: 128
+    y: 284
+    width: 101
     height: 90
     conditions:
       - key: property_key
@@ -118,9 +118,9 @@ buttons:
           - key: value
             value: KeyReleased
   - shape: rect
-    x: 130
-    y: 400
-    width: 100
+    x: 128
+    y: 388
+    width: 101
     height: 90
     conditions:
       - key: property_key
@@ -155,9 +155,9 @@ buttons:
           - key: value
             value: KeyReleased
   - shape: rect
-    x: 16
-    y: 400
-    width: 100
+    x: 14
+    y: 388
+    width: 101
     height: 90
     conditions:
       - key: property_key

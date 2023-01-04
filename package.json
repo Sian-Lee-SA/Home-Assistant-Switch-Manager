@@ -5,7 +5,7 @@
   "scripts": {
     "build": "rollup -c",
     "watch": "rollup -c --watch",
-    "release": "release-it"
+    "release": "rollup -c && git add custom_components/switch_manager/assets/switch_manager_panel.js && git commit -m 'Pre-Release' && release-it"
   },
   "keywords": [],
   "author": "Sian",
@@ -245,6 +245,5 @@
     "lit-html": "2.1.2",
     "lit-element": "3.1.2",
     "@lit/reactive-element": "1.2.1"
-  },
-  "version": "0.3.3"
+  }
 }

@@ -265,6 +265,7 @@ class SwitchManagerSwitchEditor extends LitElement
                     opacity: 0.4;
                 }
             }
+            
             @keyframes pressed {
                 to {
                     fill: #3ff17975;

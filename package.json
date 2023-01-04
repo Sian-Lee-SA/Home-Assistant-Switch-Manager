@@ -4,7 +4,8 @@
   "description": "Home Assistant Frontend for Switch Manager",
   "scripts": {
     "build": "rollup -c",
-    "watch": "rollup -c --watch"
+    "watch": "rollup -c --watch",
+    "release": "release-it --dry-run"
   },
   "keywords": [],
   "author": "Sian",

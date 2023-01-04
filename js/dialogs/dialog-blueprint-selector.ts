@@ -73,7 +73,9 @@ class SwitchManagerBlueprintSelector extends LitElement
     static get styles() 
     {
         return [haStyleDialog, haStyleScrollbar, css`
-
+            :host {
+                --input-fill-color: transparent;
+            }
             mwc-list-item {
                 min-width: 470px;
                 height: 90px;

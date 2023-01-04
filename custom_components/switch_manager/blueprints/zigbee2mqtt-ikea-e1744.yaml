@@ -6,6 +6,18 @@ buttons:
   - d: "M 164 18 A 1 1 0 0 0 193 377 C 343 374 407 47 164 18"
     shape: path
     actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: play_pause
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: skip_forward
+      - title: press 3x
+        conditions:
+          - key: payload
+            value: skip_backward
       - title: rotate left
         conditions:
           - key: payload
@@ -18,15 +30,3 @@ buttons:
         conditions:
           - key: payload
             value: rotate_stop
-      - title: click
-        conditions:
-          - key: payload
-            value: play_pause
-      - title: double click
-        conditions:
-          - key: payload
-            value: skip_forward
-      - title: triple click
-        conditions:
-          - key: payload
-            value: skip_backward

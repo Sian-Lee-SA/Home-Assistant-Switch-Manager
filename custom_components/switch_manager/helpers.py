@@ -53,10 +53,13 @@ def load_blueprints( hass ):
 def format_mqtt_message( message: ReceiveMessage):
     try:
         data = json.loads(message.payload)
-        data['topic'] = message.topic
     except ValueError as e:
         data = {
-            "topic": message.topic,
             "payload": message.payload
         }
+
+    data.update({
+        'topic': message.topic,
+        'sub_topic': message.topic.split('/')[-1]
+    })
     return data

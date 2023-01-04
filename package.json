@@ -5,7 +5,7 @@
   "scripts": {
     "build": "rollup -c",
     "watch": "rollup -c --watch",
-    "release": "release-it --dry-run"
+    "release": "release-it"
   },
   "keywords": [],
   "author": "Sian",

@@ -7,10 +7,10 @@ conditions:
     value: scene
 buttons:
   - shape: rect
-    x: 26
-    y: 32
-    width: 343
-    height: 395
+    x: 16
+    y: 19
+    width: 214
+    height: 248
     conditions:
       - key: property_key
         value: '005'
@@ -44,10 +44,10 @@ buttons:
           - key: value
             value: KeyReleased
   - shape: rect
-    x: 26
-    y: 463
-    width: 160
-    height: 144
+    x: 16
+    y: 286
+    width: 100
+    height: 90
     conditions:
       - key: property_key
         value: '001'
@@ -81,10 +81,10 @@ buttons:
           - key: value
             value: KeyReleased
   - shape: rect
-    x: 208
-    y: 463
-    width: 160
-    height: 144
+    x: 130
+    y: 286
+    width: 100
+    height: 90
     conditions:
       - key: property_key
         value: '002'
@@ -118,10 +118,10 @@ buttons:
           - key: value
             value: KeyReleased
   - shape: rect
-    x: 208
-    y: 629
-    width: 160
-    height: 144
+    x: 130
+    y: 400
+    width: 100
+    height: 90
     conditions:
       - key: property_key
         value: '004'
@@ -155,10 +155,10 @@ buttons:
           - key: value
             value: KeyReleased
   - shape: rect
-    x: 26
-    y: 629
-    width: 160
-    height: 144
+    x: 16
+    y: 400
+    width: 100
+    height: 90
     conditions:
       - key: property_key
         value: '003'

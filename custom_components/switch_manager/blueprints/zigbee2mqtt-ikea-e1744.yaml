@@ -1,4 +1,4 @@
-name: Ikea E1744
+name: Ikea SYMFONISK Sound remote (E1744)
 service: Zigbee2MQTT
 event_type: mqtt
 mqtt_topic_format: zigbee2mqtt/+/action
@@ -26,7 +26,7 @@ buttons:
         conditions:
           - key: payload
             value: rotate_right
-      - title: rotate stop
+      - title: rotate (stopped)
         conditions:
           - key: payload
             value: rotate_stop

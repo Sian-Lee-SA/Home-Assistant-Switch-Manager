@@ -5,3 +5,4 @@
 **/@eaDir
 **/Thumbs.db
 **/__pycache__/
+.release-it.json

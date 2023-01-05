@@ -73,7 +73,7 @@ class ManagedSwitchConfigButtonAction:
     def _check_conditions( self, data ) -> bool:
         if not self.active:
             return False
-        return check_conditions( self._hass, self.conditions, data )
+        return check_conditions( self._hass, self.conditions, { "data": data } )
 
     async def run( self, data, context ):
         if not self.script:
@@ -124,7 +124,7 @@ class ManagedSwitchConfigButton:
     def _check_conditions( self, data ):
         if not self.active:
             return False
-        return check_conditions( self._hass, self.conditions, data )
+        return check_conditions( self._hass, self.conditions, { "data": data } )
 
     # home assistant json
     def as_dict(self):
@@ -248,7 +248,7 @@ class ManagedSwitchConfig:
         if self.blueprint.event_type != 'mqtt':
             if str(data.get(self.blueprint.identifier_key)) != str(self.identifier):
                 return False
-        return check_conditions( self._hass, self.conditions, data )
+        return check_conditions( self._hass, self.conditions, { "data": data } )
 
     def _setError( self, error_message ):
         self._error = error_message

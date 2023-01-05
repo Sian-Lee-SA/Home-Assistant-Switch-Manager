@@ -131,13 +131,13 @@ Conditions will traverse down the switch from root -> button -> action. The proc
 
 #### Template
 
-You can use Home Assistant generic condition template to validate a condition https://www.home-assistant.io/docs/configuration/templating/. Define the property `conditions` as a string instead of an array. Lists are still preferred as rendering templates takes extra processing times. The event or mqtt data are passed in as variables.
+You can use Home Assistant generic condition template to validate a condition https://www.home-assistant.io/docs/configuration/templating/. Define the property `conditions` as a string instead of an array. Lists are still preferred as rendering templates takes extra processing times. The event or mqtt data are passed in on the data variable.
 
 > **Important**: You will not get any feedback on the UI (green flash) when using templates as this is processed via backend
 
 ##### template example
 ```yaml
-conditions: "{{ value == 'KeyPressed' && group == 1 }}"
+conditions: "{{ data.value == 'KeyPressed' and data.sub_topic == 'left_button' }}"
 ```
 
 #### List

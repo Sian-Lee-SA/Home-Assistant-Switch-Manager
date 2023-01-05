@@ -1,0 +1,137 @@
+name: Philips Hue Dimmer
+service: ZHA
+event_type: zha_event
+identifier_key: device_id
+buttons:
+  - x: 2
+    y: 2
+    width: 189
+    height: 159
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: on_press
+      - title: press 2x
+        conditions:
+          - key: command
+            value: on_double_press
+      - title: press 3x
+        conditions:
+          - key: command
+            value: on_triple_press
+      - title: press 4x
+        conditions:
+          - key: command
+            value: on_quadruple_press
+      - title: press 5x
+        conditions:
+          - key: command
+            value: on_quintuple_press
+      - title: hold
+        conditions:
+          - key: command
+            value: on_hold
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: on_long_release
+  - x: 2
+    y: 161
+    width: 189
+    height: 90
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: up_press
+      - title: press 2x
+        conditions:
+          - key: command
+            value: up_double_press
+      - title: press 3x
+        conditions:
+          - key: command
+            value: up_triple_press
+      - title: press 4x
+        conditions:
+          - key: command
+            value: up_quadruple_press
+      - title: press 5x
+        conditions:
+          - key: command
+            value: up_quintuple_press
+      - title: hold
+        conditions:
+          - key: command
+            value: up_hold
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: up_long_release
+  - x: 2
+    y: 251
+    width: 189
+    height: 90
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: down_press
+      - title: press 2x
+        conditions:
+          - key: command
+            value: down_double_press
+      - title: press 3x
+        conditions:
+          - key: command
+            value: down_triple_press
+      - title: press 4x
+        conditions:
+          - key: command
+            value: down_quadruple_press
+      - title: press 5x
+        conditions:
+          - key: command
+            value: down_quintuple_press
+      - title: hold
+        conditions:
+          - key: command
+            value: down_hold
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: down_long_release
+  - x: 2
+    y: 341
+    width: 189
+    height: 159
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: off_press
+      - title: press 2x
+        conditions:
+          - key: command
+            value: off_double_press
+      - title: press 3x
+        conditions:
+          - key: command
+            value: off_triple_press
+      - title: press 4x
+        conditions:
+          - key: command
+            value: off_quadruple_press
+      - title: press 5x
+        conditions:
+          - key: command
+            value: off_quintuple_press
+      - title: hold
+        conditions:
+          - key: command
+            value: off_hold
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: off_long_release

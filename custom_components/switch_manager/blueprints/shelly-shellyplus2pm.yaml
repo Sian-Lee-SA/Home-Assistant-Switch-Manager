@@ -7,33 +7,32 @@ buttons:
     y: 123
     width: 66
     height: 66
+    conditions:
+      - key: channel
+        value: 1
     actions:
       - title: tap
         conditions:
           - key: click_type
             value: single_push
-            key: channel
-            value: 1
       - title: hold
         conditions:
           - key: click_type
             value: long_push
-            key: channel
-            value: 1
+
   - x: 110
     y: 241
     width: 66
     height: 66
+    conditions:
+      - key: channel
+        value: 2
     actions:
       - title: tap
         conditions:
           - key: click_type
             value: single_push
-            key: channel
-            value: 2
       - title: hold
         conditions:
           - key: click_type
             value: long_push
-            key: channel
-            value: 2

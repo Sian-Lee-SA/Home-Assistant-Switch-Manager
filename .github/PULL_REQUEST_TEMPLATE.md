@@ -11,6 +11,7 @@
 - [ ] Image backgrounds are transparent and is cropped to the device boundries
 - [ ] Images has a maximum width of 800px and maximum height of 500px
 - [ ] There are no missing buttons or actions
+- [ ] Your integration/service is running on the latest version
 - [ ] You have tested your blueprints and made sure each button and action works
 
 <!--

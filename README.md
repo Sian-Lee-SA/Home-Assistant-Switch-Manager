@@ -129,25 +129,16 @@ conditions      | `list` [Condition](#condition) \| `string` [Template](https://
 
 Conditions will traverse down the switch from root -> button -> action. The process of the heirachy will stop if the condition fails. Please use list over templates.
 
-##### list example
-```yaml
-conditions:
-  - key: value
-    value: KeyPressed
-  - key: group
-    value: 1
-```
-
-##### template example
-```yaml
-conditions: "{{ value == 'KeyPressed' && group == 1 }}"
-```
-
 #### Template
 
 You can use Home Assistant generic condition template to validate a condition https://www.home-assistant.io/docs/configuration/templating/. Define the property `conditions` as a string instead of an array. Lists are still preferred as rendering templates takes extra processing times. The event or mqtt data are passed in as variables.
 
 > **Important**: You will not get any feedback on the UI (green flash) when using templates as this is processed via backend
+
+##### template example
+```yaml
+conditions: "{{ value == 'KeyPressed' && group == 1 }}"
+```
 
 #### List
 
@@ -157,6 +148,15 @@ Option          | Values       | Required | Details
 --              | -            | -        | -
 key             | `string`     | *        | The key to match in the event data or mqtt payload
 value           | `string`     | *        | The value to match for the key
+
+##### list example
+```yaml
+conditions:
+  - key: value
+    value: KeyPressed
+  - key: group
+    value: 1
+```
 
 ### MQTT
 

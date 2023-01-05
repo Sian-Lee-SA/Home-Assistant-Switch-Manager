@@ -3,10 +3,20 @@ from .const import DOMAIN, LOGGER
 from .helpers import format_mqtt_message
 from homeassistant.core import HomeAssistant, Context, callback
 from homeassistant.helpers.script import Script
+from homeassistant.helpers.condition import async_template as template_condition
+from homeassistant.helpers.template import Template
 from homeassistant.components.mqtt.client import async_subscribe as mqtt_subscribe
 from homeassistant.components.mqtt.models import ReceiveMessage
 from homeassistant.exceptions import HomeAssistantError
 import homeassistant.helpers.config_validation as cv
+
+def check_conditions( hass: HomeAssistant, conditions, data ) -> bool:
+    if isinstance(conditions, Template):
+        return template_condition(hass, conditions, data, False)
+    for condition in conditions:
+        if condition.get('key') not in data or str(data.get(condition.get('key'))) != str(condition.get('value')):
+            return False
+    return True
 
 class Blueprint:
     
@@ -43,6 +53,11 @@ class ManagedSwitchConfigButtonAction:
         self.sequence = config.get('sequence')
         self.mode = config.get('mode')
         self.blueprint = blueprint_action
+
+        self.conditions = self.blueprint.get('conditions', [])
+        if isinstance(self.conditions, str):
+            self.conditions = Template(self.conditions, hass)
+
         self.script: Script = None
         self.active = bool(self.sequence)
         if self.active:
@@ -58,11 +73,7 @@ class ManagedSwitchConfigButtonAction:
     def _check_conditions( self, data ) -> bool:
         if not self.active:
             return False
-
-        for condition in self.blueprint.get('conditions', []):
-            if condition.get('key') not in data or str(data.get(condition.get('key'))) != str(condition.get('value')):
-                return False
-        return True
+        return check_conditions( self._hass, self.conditions, data )
 
     async def run( self, data, context ):
         if not self.script:
@@ -91,6 +102,11 @@ class ManagedSwitchConfigButton:
         self.index = index
         self.actions: list[ManagedSwitchConfigButtonAction] = []
         self.blueprint = blueprint_button
+
+        self.conditions = self.blueprint.get('conditions', [])
+        if isinstance(self.conditions, str):
+            self.conditions = Template(self.conditions, hass)
+
         self.active: bool = False
         for i in range(len(config.get('actions'))):
             action = ManagedSwitchConfigButtonAction( 
@@ -108,12 +124,7 @@ class ManagedSwitchConfigButton:
     def _check_conditions( self, data ):
         if not self.active:
             return False
-
-        for condition in self.blueprint.get('conditions', []):
-            if condition.get('key') not in data or str(data.get(condition.get('key'))) != str(condition.get('value')):
-                return False
-
-        return True
+        return check_conditions( self._hass, self.conditions, data )
 
     # home assistant json
     def as_dict(self):
@@ -136,6 +147,7 @@ class ManagedSwitchConfig:
         self.name = config.get('name')        
         self.identifier = config.get('identifier')
         self.blueprint: Blueprint
+        self.conditions = []
         self.valid_blueprint: bool
         self.buttons: list[ManagedSwitchConfigButton] = []
         self.enabled: bool = config.get('enabled', True)
@@ -156,6 +168,10 @@ class ManagedSwitchConfig:
         if not self.valid_blueprint:
             self._setError(f"Blueprint {self.blueprint} for {self.name} not loaded, check logs")
             return
+
+        self.conditions = self.blueprint.conditions
+        if isinstance(self.conditions, str):
+            self.conditions = Template(self.conditions, self._hass)
 
         if buttons_config:
             if len(buttons_config) != len(self.blueprint.buttons):
@@ -232,11 +248,7 @@ class ManagedSwitchConfig:
         if self.blueprint.event_type != 'mqtt':
             if str(data.get(self.blueprint.identifier_key)) != str(self.identifier):
                 return False
-
-        for condition in self.blueprint.conditions:
-            if condition.get('key') not in data or str(data.get(condition.get('key'))) != str(condition.get('value')):
-                return False
-        return True
+        return check_conditions( self._hass, self.conditions, data )
 
     def _setError( self, error_message ):
         self._error = error_message

@@ -73,7 +73,7 @@ event_type      | `string`     | *        | Must match the event type through th
 identifier_key  | `string`     | * If not mqtt       | The key in the event data that will uniquely identify a switch (user input from the switch editor will allow entering it's value).
 mqtt_topic_format| `string`    | -        | If event_type is mqtt, then this will give the user an understanding of what they should set their topic as. example: zigbee2mqtt/+/action. The MQTT topic here will also help with discovery (remember to use wilcard + where needed). **Make sure you set this to the standard topic if planning on sharing blueprint and not a topic that you have customised yourself through the integration**
 buttons         | `list` [Button](#button) | * | You will need to define a list of buttons even if the switch has only one or multiple. See [Button](#button) for details on defining a button
-conditions      | `list` [Condition](#condition)  | - | This optional list allows the switch to only accept these conditions within the event data or mqtt payload. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition
+conditions      | `list` [Condition](#condition)\| `string` [Template](https://www.home-assistant.io/docs/configuration/templating/) | - | This optional list or [Template](https://www.home-assistant.io/docs/configuration/templating/) allows the switch to only accept these conditions within the event data or mqtt payload. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition
 
 ### Button
 
@@ -98,7 +98,7 @@ height          | `int`px                       | -        | Only valid for shap
 d               | `string`                      | -        | Only valid if shape: path. Using svg path format
 shape           | `rect\|circle\|path`          | -        | Default is rect (rectangle). 
 actions         | `list` [Action](#action)      | *        | Each button will have atleast one action. Each action would be the result of a tap, double tap or hold etc depending on what the switch supports.
-conditions      | `list` [Condition](#condition)| -        | This optional list allows the button to only accept conditions within the event data or mqtt payload. This can help scope down to where the button was pressed. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition. 
+conditions      | `list` [Condition](#condition) \| `string` [Template](https://www.home-assistant.io/docs/configuration/templating/) | -        | This optional list or [Template](https://www.home-assistant.io/docs/configuration/templating/) allows the button to only accept conditions within the event data or mqtt payload. This can help scope down to where the button was pressed. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition. 
 
 ### Action
 
@@ -123,11 +123,35 @@ Actions should be ordered logically. This would be **press** -> **press 2x** -> 
 Option          | Values                          | Required | Details
 --              | -                               | -        | -
 title           | `string`                        | *        | Please read naming convention to better understand what title should be used
-conditions      | `list` [Condition](#condition)  | -        | This optional list allows the action to only accept conditions within the event data or mqtt payload. This can help scope down to the kind of action if the button has multiple. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition. 
+conditions      | `list` [Condition](#condition) \| `string` [Template](https://www.home-assistant.io/docs/configuration/templating/)  | -        | This optional list or [Template](https://www.home-assistant.io/docs/configuration/templating/) allows the action to only accept conditions within the event data or mqtt payload. This can help scope down to the kind of action if the button has multiple. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition. 
 
 ### Condition
 
-Conditions evaluate the event/mqtt data. If the key doesn't exist then it also evaluates to false. All conditions must be true to be valid
+Conditions will traverse down the switch from root -> button -> action. The process of the heirachy will stop if the condition fails. Please use list over templates.
+
+##### list example
+```yaml
+conditions:
+  - key: value
+    value: KeyPressed
+  - key: group
+    value: 1
+```
+
+##### template example
+```yaml
+conditions: "{{ value == 'KeyPressed' && group == 1 }}"
+```
+
+#### Template
+
+You can use Home Assistant generic condition template to validate a condition https://www.home-assistant.io/docs/configuration/templating/. Define the property `conditions` as a string instead of an array. Lists are still preferred as rendering templates takes extra processing times. The event or mqtt data are passed in as variables.
+
+> **Important**: You will not get any feedback on the UI (green flash) when using templates as this is processed via backend
+
+#### List
+
+Conditions defined as a list evaluates the event/mqtt data. If the key doesn't exist then it also evaluates to false. All conditions must be true to be valid
 
 Option          | Values       | Required | Details
 --              | -            | -        | -

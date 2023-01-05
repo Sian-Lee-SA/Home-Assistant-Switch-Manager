@@ -27,7 +27,7 @@ CONDITION_SCHEMA = vol.Schema({
 })
 BLUEPRINT_ACTION_SCHEMA = vol.Schema({
     vol.Required('title'): cv.string,
-    vol.Optional('conditions', default=[]): vol.All(cv.ensure_list, [CONDITION_SCHEMA])
+    vol.Optional('conditions', default=[]): vol.Any(cv.string, [CONDITION_SCHEMA])
 })
 SHAPE_CIRCLE_SCHEMA = vol.Schema({
     vol.Required('x'): cv.positive_int,
@@ -43,7 +43,7 @@ SHAPE_PATH_SCHEMA = vol.Schema({
 
 BLUEPRINT_BUTTON_SCHEMA = vol.Schema({
     vol.Required('actions'): vol.All(cv.ensure_list, [BLUEPRINT_ACTION_SCHEMA]),
-    vol.Optional('conditions', default=[]): vol.All(cv.ensure_list, [CONDITION_SCHEMA]),
+    vol.Optional('conditions', default=[]): vol.Any(cv.string, [CONDITION_SCHEMA]),
     vol.Optional('shape', default='rect'): vol.In(['rect','circle','path']),
 
     vol.Optional('x'): cv.positive_int,
@@ -57,7 +57,7 @@ BLUEPRINT_SCHEMA = vol.Schema({
     vol.Required('service'): cv.string,
     vol.Required('event_type'): cv.string,
     vol.Required('buttons'): vol.All(cv.ensure_list, [BLUEPRINT_BUTTON_SCHEMA]),
-    vol.Optional('conditions', default=[]): vol.All(cv.ensure_list, [CONDITION_SCHEMA])
+    vol.Optional('conditions', default=[]): vol.Any(cv.string, [CONDITION_SCHEMA])
 })
 BLUEPRINT_EVENT_SCHEMA = BLUEPRINT_SCHEMA.extend({
     vol.Required('identifier_key'): cv.string

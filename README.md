@@ -72,8 +72,8 @@ Option          | Values       | Required | Details
 name            | `string`     | *        | A friendly name for the switch
 service         | `string`     | *        | The service or integration that this switch relates to (matching services will be grouped when selecting a blueprint from gui)
 event_type      | `string`     | *        | Must match the event type through the event bus triggered by the switch (Monitor `*` events in developer tools if unsure of its value). Set this to mqtt if handling a mqtt message instead of an event (see [mqtt](#mqtt))
-identifier_key  | `string`     | * If not mqtt       | The key in the event data that will uniquely identify a switch (user input from the switch editor will allow entering it's value).
-mqtt_topic_format| `string`    | -        | If event_type is mqtt, then this will give the user an understanding of what they should set their topic as. example: zigbee2mqtt/+/action. The MQTT topic here will also help with discovery (remember to use wilcard + where needed). **Make sure you set this to the standard topic if planning on sharing blueprint and not a topic that you have customised yourself through the integration**
+identifier_key  | `string`     | * If not mqtt       | The key in the event data that will uniquely identify a switch.
+mqtt_topic_format| `string`    | -        | If event_type is mqtt, then this will give the user an understanding of what they should set their topic as. example: zigbee2mqtt/+/action. The MQTT topic here will also help with discovery (remember to use wildcard `+` where needed). **Make sure you set this to the standard topic if planning on sharing blueprint and not a topic that you have customised yourself through the integration**
 mqtt_sub_topics | `bool`       | -        | Along with the original topic, sub topics will also be listened to and passed in for condition checking etc. If enabled then make sure the original topic doesn't use `#` wildcards or `+` at the end. Default is false
 buttons         | `list` [Button](#button) | * | You will need to define a list of buttons even if the switch has only one or multiple. See [Button](#button) for details on defining a button
 conditions      | `list` [Condition](#condition) \| `string` [Template](https://www.home-assistant.io/docs/configuration/templating/) | - | This optional list or [Template](https://www.home-assistant.io/docs/configuration/templating/) allows the switch to only accept these conditions within the event data or mqtt payload. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition
@@ -140,7 +140,7 @@ You can use Home Assistant generic condition template to validate a condition ht
 
 ##### template example
 ```yaml
-conditions: "{{ data.value == 'KeyPressed' and data.sub_topic == 'left_button' }}"
+conditions: "{{ data.value == 'KeyPressed' and data.topic_basename == 'left_button' }}"
 ```
 
 #### List
@@ -163,7 +163,7 @@ conditions:
 
 ### MQTT
 
-MQTT is handled differently to events and the incoming data is that of a payload... If a payload is not json formatted then it will be passed in as the key `payload` containing the string. The payload itself is what the conditions will check against. Included in the data is topic and sub_topic as this can be useful for condtions where a topic is listened via # or +.
+MQTT is handled differently to events and the incoming data is that of a payload... If a payload is not json formatted then it will be passed in as the key `payload` containing the string. The payload itself is what the conditions will check against. Included in the data is topic and topic_basename as this can be useful for condtions where a topic is listened via # or +.
 
 To help discover a switch when trying to discover from GUI then use a format for the topic in `mqtt_topic_format` that will scope down to the best possibility. For zigbee2mqtt this is generally `zigbee2mqtt/+/action`. The `+` is a wild card saying to match a single level (so anything between the forward slash `/`). For more information visit [here](https://www.hivemq.com/blog/mqtt-essentials-part-5-mqtt-topics-best-practices/). Sharing blueprints should be set to the default topic of the integration and not one that you have changed to. 
 

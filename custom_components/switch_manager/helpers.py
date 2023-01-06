@@ -60,6 +60,6 @@ def format_mqtt_message( message: ReceiveMessage):
 
     data.update({
         'topic': message.topic,
-        'sub_topic': message.topic.split('/')[-1]
+        'topic_basename': message.topic.split('/')[-1]
     })
     return data

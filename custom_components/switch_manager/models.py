@@ -219,7 +219,7 @@ class ManagedSwitchConfig:
                 for action in button.actions:
                     if not action._check_conditions( data ):
                         continue
-                    self._hass.async_create_task( action.run( data=data, context=context ) )
+                    self._hass.async_create_task( action.run( data={ "data": data }, context=context ) )
 
         if self.blueprint.event_type == 'mqtt':
             try:

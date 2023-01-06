@@ -43,6 +43,8 @@ Navigation and usage should be pretty straight forward. Next you can start defin
 
 Once saved you can test to make sure all is working.
 
+> The event or mqtt data can be accessed inside your sequences via the data variable
+
 > Sometimes you may want certain buttons or actions handled by the devices default handler. For example, a Zigbee device may already be bound to a certain light which also imo has better response, reliability and stability. To remind you of this, you could add a stop action with a description of why the button shouldn't be changed and being handled somehwere else. Then for other actions that aren't handled else where then you can handle them with this component. It's also fine to allow an external handler to handle the button push aswell as this component so a button could turn on the light handled via Zigbee and the component could start playing music based on the same switch action.
 
 ## Blueprints

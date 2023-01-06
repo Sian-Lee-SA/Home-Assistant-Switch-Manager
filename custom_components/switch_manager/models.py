@@ -12,7 +12,7 @@ import homeassistant.helpers.config_validation as cv
 
 def check_conditions( hass: HomeAssistant, conditions, data ) -> bool:
     if isinstance(conditions, Template):
-        return template_condition(hass, conditions, data, False)
+        return template_condition(hass, conditions, { "data": data }, False)
     for condition in conditions:
         if condition.get('key') not in data or str(data.get(condition.get('key'))) != str(condition.get('value')):
             return False
@@ -28,6 +28,7 @@ class Blueprint:
       self.service = config.get('service')
       self.event_type = config.get('event_type')
       self.mqtt_topic_format = config.get('mqtt_topic_format', None)
+      self.mqtt_sub_topics = config.get('mqtt_sub_topics', False)
       self.identifier_key = config.get('identifier_key')
       self.buttons = config.get('buttons')
       self.conditions = config.get('conditions', [])
@@ -73,7 +74,7 @@ class ManagedSwitchConfigButtonAction:
     def _check_conditions( self, data ) -> bool:
         if not self.active:
             return False
-        return check_conditions( self._hass, self.conditions, { "data": data } )
+        return check_conditions( self._hass, self.conditions, data )
 
     async def run( self, data, context ):
         if not self.script:
@@ -124,7 +125,7 @@ class ManagedSwitchConfigButton:
     def _check_conditions( self, data ):
         if not self.active:
             return False
-        return check_conditions( self._hass, self.conditions, { "data": data } )
+        return check_conditions( self._hass, self.conditions, data )
 
     # home assistant json
     def as_dict(self):
@@ -141,7 +142,7 @@ class ManagedSwitchConfig:
     def __init__( self, hass: HomeAssistant, blueprint: Blueprint, _id, config ):
         """Initialize ManagedSwitch."""
         self._hass = hass
-        self._event_listener = None
+        self._event_listeners = []
         self._error = None
         self.id = str( _id ) # Ensute id is a string for future proofing
         self.name = config.get('name')        
@@ -197,7 +198,7 @@ class ManagedSwitchConfig:
     async def start(self): 
         # Reset state for new instances as this should also be called as a restart
         self.stop()
-        if self._event_listener or not self.valid_blueprint or not self.enabled:
+        if self._event_listeners or not self.valid_blueprint or not self.enabled:
             return
 
         @callback
@@ -223,17 +224,20 @@ class ManagedSwitchConfig:
 
         if self.blueprint.event_type == 'mqtt':
             try:
-                self._event_listener = await mqtt_subscribe(self._hass, self.identifier, _handleMQTT)
+                self._event_listeners.append( await mqtt_subscribe(self._hass, self.identifier, _handleMQTT) )
+                if self.blueprint.mqtt_sub_topics:
+                    self._event_listeners.append( await mqtt_subscribe(self._hass, f"{self.identifier}/#", _handleMQTT) )
             except HomeAssistantError:
                 LOGGER.error(f"Unable to handle switch: {self.name} as MQTT is not loaded")
         else:
-            self._event_listener = self._hass.bus.async_listen(self.blueprint.event_type, _handleEvent)
+            self._event_listeners.append( self._hass.bus.async_listen(self.blueprint.event_type, _handleEvent) )
 
     def stop(self):
         self.stop_running_scripts()
-        if self._event_listener:
-            self._event_listener()
-            self._event_listener = None
+        if self._event_listeners:
+            for listener in self._event_listeners:
+                listener()
+            self._event_listeners = []
 
     def stop_running_scripts( self ):
         for button in self.buttons:
@@ -248,7 +252,7 @@ class ManagedSwitchConfig:
         if self.blueprint.event_type != 'mqtt':
             if str(data.get(self.blueprint.identifier_key)) != str(self.identifier):
                 return False
-        return check_conditions( self._hass, self.conditions, { "data": data } )
+        return check_conditions( self._hass, self.conditions, data )
 
     def _setError( self, error_message ):
         self._error = error_message
@@ -260,7 +264,7 @@ class ManagedSwitchConfig:
     def as_dict(self):
         res = self.__dict__.copy()
         res.pop('_hass')
-        res.pop('_event_listener')
+        res.pop('_event_listeners')
         return res
 
     # attr dict

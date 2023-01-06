@@ -63,7 +63,8 @@ BLUEPRINT_EVENT_SCHEMA = BLUEPRINT_SCHEMA.extend({
     vol.Required('identifier_key'): cv.string
 })
 BLUEPRINT_MQTT_SCHEMA = BLUEPRINT_SCHEMA.extend({
-    vol.Optional('mqtt_topic_format'): cv.string
+    vol.Optional('mqtt_topic_format'): cv.string,
+    vol.Optional('mqtt_sub_topics', default=False): cv.boolean
 })
 SWITCH_MANAGER_CONFIG_ACTION_SCHEMA = vol.Schema({
     vol.Required('mode', default=DEFAULT_SCRIPT_MODE): vol.In(SCRIPT_MODE_CHOICES),

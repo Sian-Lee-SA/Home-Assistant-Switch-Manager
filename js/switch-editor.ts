@@ -57,7 +57,6 @@ class SwitchManagerSwitchEditor extends LitElement
 
     @property() disabled = false;
 
-    // @state() private _subscribed?: () => void;
     @state() private _subscribedMonitor?: () => void;
     @state() private _subscribedAutoDiscovery?: () => void;
     @state() private _reloadListener?: () => void;
@@ -486,8 +485,16 @@ class SwitchManagerSwitchEditor extends LitElement
             
             if( msg.event == 'action_triggered' )
             {
-                if( ! this.config?.identifier || this.blueprint?.buttons?.length == 1 )
+                if( ! this.config?.identifier )
                     return;
+                if( this.blueprint?.buttons?.length == 1 )
+                {
+                    showToast(this, {
+                        message: 'Button Pressed'
+                    });
+                    return;
+                }
+
                 const element = this.svg.querySelector(`[index="${msg.button}"]`);
                 element.removeAttribute('pressed');
                 element.setAttribute('pressed', '');

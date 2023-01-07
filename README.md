@@ -72,7 +72,9 @@ The following tables shows how to structure a blueprint yaml file
 
 #### Debug
 
-Once a switch is saved, you can enable debugging through the hamburger menu up in the top right. List conditions will use what ever is in the data object (you do not need to add data to your keys) while Template conditions will need to access the data variable (eg data.{some_key} )
+Once a switch is saved, you can enable debugging through the hamburger menu up in the top right. List conditions will use what ever is in the data object (you do not need to add data to your keys) while Template conditions will need to access the data variable (eg data.{some_key} ). Whatever is in data is available for conditions and sequences.
+
+Once enabled, open the browsers dev console to view debuggin output
 
 ### Root Structure
 

@@ -113,6 +113,7 @@ async def async_setup_connections( hass ):
         if msg['config'].get('id'):
             config = _get_switch_config( hass, msg['config'].get('id') )
             config.update( msg['config'] )
+            await config.start()
         else:
             config = ManagedSwitchConfig( 
                 hass, 

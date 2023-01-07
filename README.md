@@ -89,6 +89,8 @@ If there are more than 1 button on the switch then you should be using a png (ev
 
 If a switch supports multiple button presses (so two buttons are pushed at the same time) then add another button with circle shape centered between the two buttons to indicate they're linked. Within the actions, the title should prefix **both**. See [Xiaomi Double Key](https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager/blob/master/custom_components/switch_manager/blueprints/zigbee2mqtt-xiaomi-double-key-wxkg07lm.yaml) for an example.
 
+> You will need to save the button before feedback will be displayed on the UI, this is due to needing backend processing of a switch which isn't created until it's been saved
+
 > if you want more control on positioning and look then you can open the image up in inkscape (with matching width and height values for the viewBox) then draw the paths for each button and copy the d attribute of that path then paste in the d property for the button in yaml. You would also set the shape as path
 
 > Single buttons will not render a graphic so if you do add a shape etc for a single button, it won't be shown and end up being redundant
@@ -140,8 +142,6 @@ Conditions will traverse down the switch from root -> button -> action. The proc
 #### Template
 
 You can use Home Assistant generic condition template to validate a condition https://www.home-assistant.io/docs/configuration/templating/. Define the property `conditions` as a string instead of an array. Lists are still preferred as rendering templates takes extra processing times. The event or mqtt data are passed in on the data variable.
-
-> **Important**: You will not get any feedback on the UI (green flash) when using templates as this is processed via backend
 
 ##### template example
 ```yaml

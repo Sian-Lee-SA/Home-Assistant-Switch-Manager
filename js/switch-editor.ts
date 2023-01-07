@@ -12,7 +12,7 @@ import {
     mdiGestureTapButton,
     mdiEarHearing
 } from "@mdi/js";
-import { SwitchManagerBlueprint, SwitchManagerBlueprintCondition, SwitchManagerConfig, SwitchManagerConfigButton } from "./types";
+import { SwitchManagerBlueprint, SwitchManagerConfig, SwitchManagerConfigButton } from "./types";
 import { MODES } from "../ha-frontend/data/script";
 import { 
     buildAssetUrl, 
@@ -57,8 +57,9 @@ class SwitchManagerSwitchEditor extends LitElement
 
     @property() disabled = false;
 
-    @state() private _subscribed?: () => void;
-    @state() private _buttonListener?: () => void;
+    // @state() private _subscribed?: () => void;
+    @state() private _subscribedMonitor?: () => void;
+    @state() private _subscribedAutoDiscovery?: () => void;
     @state() private _reloadListener?: () => void;
 
     @state() private sequence: any[] = [];
@@ -155,11 +156,11 @@ class SwitchManagerSwitchEditor extends LitElement
                         ${this.blueprint?.event_type != 'mqtt' || this.blueprint?.mqtt_topic_format ? html`
                         <ha-icon-button
                             .path=${mdiEarHearing}
-                            ?listening=${(this._subscribed)}
-                            @click=${this._listenForEvent}>
+                            ?listening=${(this._subscribedAutoDiscovery)}
+                            @click=${this._toggleAutoDiscovery}>
                         </ha-icon-button>` : 
                             html`${this.blueprint.mqtt_topic_format ? html`<ha-alert alert-type="info">Format: ${this.blueprint.mqtt_topic_format}</ha-alert>` : ''}`}
-                        ${this._subscribed ? html`
+                        ${this._subscribedAutoDiscovery ? html`
                         <ha-alert alert-type="info">
                             Press a button on your switch
                         </ha-alert>` : ''}
@@ -410,21 +411,21 @@ class SwitchManagerSwitchEditor extends LitElement
     disconnectedCallback(): void 
     {
         super.disconnectedCallback();
-        if( this._reloadListener )
+
+        this._killListener( '_reloadListener' );
+        this._killListener( '_subscribedAutoDiscovery' );
+        this._killListener( '_subscribedMonitor' );
+    }
+
+    private _killListener( listener: string )
+    {
+        if( this[listener] )
         {
-            this._reloadListener();
-            this._reloadListener = undefined;
+            this[listener]();
+            this[listener] = undefined;
+            return true;
         }
-        if( this._subscribed )
-        {
-            this._subscribed();
-            this._subscribed = undefined;
-        }
-        if( this._buttonListener )
-        {
-            this._buttonListener();
-            this._buttonListener = undefined;
-        }
+        return false;
     }
     
     private async startListeners()
@@ -471,7 +472,30 @@ class SwitchManagerSwitchEditor extends LitElement
         }
         this._setBlueprint( config.blueprint )
         this._updateSequence();
-        this._listenForButtonPress();
+        this._monitor();
+    }
+
+    private async _monitor()
+    {
+        if( this.is_new )
+            return;
+
+        // Start fresh
+        this._killListener('_subscribedMonitor');
+        this._subscribedMonitor = await this.hass.connection.subscribeMessage((msg) => {
+            
+            if( msg.event == 'action_triggered' )
+            {
+                if( ! this.config?.identifier || this.blueprint?.buttons?.length == 1 )
+                    return;
+                const element = this.svg.querySelector(`[index="${msg.button}"]`);
+                element.removeAttribute('pressed');
+                element.setAttribute('pressed', '');
+                setTimeout(() => {
+                    element.removeAttribute('pressed');
+                }, 1000);
+            }
+        }, { type: buildWSPath('config/monitor'), config_id: this.config!.id });
     }
 
     private _setBlueprint( blueprint: SwitchManagerBlueprint )
@@ -574,7 +598,6 @@ class SwitchManagerSwitchEditor extends LitElement
         if( this._block_save || !this._validate() || !this.config )
             return;
 
-
         this._block_save = true;
         this._dirty = false;
 
@@ -587,6 +610,7 @@ class SwitchManagerSwitchEditor extends LitElement
                 this.is_new = false;
                 this.config!.id = r.config_id;
                 navigate( buildUrl(`edit/${r.config_id}`) )
+                this._monitor();
             }
             showToast(this, { message: 'Switch Saved' });
         }).catch(error => {
@@ -627,144 +651,22 @@ class SwitchManagerSwitchEditor extends LitElement
         this._dirty = true;
     }
 
-    private async _listenForEvent()
+    private async _toggleAutoDiscovery()
     {
         // Act as a toggle
-        if( this._subscribed )
-        {
-            this._subscribed();
-            this._subscribed = undefined;
+        if( this._killListener( '_subscribedAutoDiscovery' ) )
             return;
-        }
 
-        const __process_conditions = ( conditions: SwitchManagerBlueprintCondition[], data: any): boolean =>
-        {
-            if( ! conditions )
-                return true;
-
-            for( const condition of conditions )
-                if( !(condition.key in data) || String(condition.value) != String(data[condition.key]) )
-                    return false;
-                    
-            return true;
-        }
-
-        const __validate_data = ( data: any ): boolean => {
-            if( ! __process_conditions( this.blueprint!.conditions!, data ) )
-                return false;
-
-            for( const button of this.blueprint!.buttons )
-                if( __process_conditions(button.conditions!, data) )
-                    for( const action of button.actions )
-                        if( __process_conditions(action.conditions!, data) )
-                            return true;
-
-            return false;
-        }
-
-        const __handle_response = ( id: string, data: any ) => {
-            if( !__validate_data(data) )
-                return;
-
-            this.identifier_input.value = id;
+        this._subscribedAutoDiscovery = await this.hass.connection.subscribeMessage((msg) => {
+            this.identifier_input.value = msg.identifier;
+            this._killListener( '_subscribedAutoDiscovery' )
             this._identifierChanged();
-            this._subscribed!();
-            this._subscribed = undefined;
-        }
-
-        if( this.blueprint!.event_type == 'mqtt' && this.blueprint!.mqtt_topic_format )
-            this._subscribed = await this.hass.connection.subscribeMessage((message) => {
-                const data = typeof(message.payload) == 'string' ? { payload: message.payload } : message.payload;
-                __handle_response( message.topic, data );
-            }, {
-                type: "mqtt/subscribe",
-                topic: this.blueprint!.mqtt_topic_format,
-            });
-        else
-            this._subscribed = await this.hass!.connection.subscribeEvents( (event) => {
-                if( this.blueprint!.identifier_key! in event.data )
-                    __handle_response( event.data[this.blueprint!.identifier_key!], event.data );
-            }, this.blueprint!.event_type );
-    }
-
-    private async _listenForButtonPress()
-    {
-        if( this._buttonListener )
-        {
-            this._buttonListener();
-            this._buttonListener = undefined;
-        }
-
-        if( ! this.config?.identifier || this.blueprint?.buttons?.length == 1 )
-            return;
-
-        const __process_conditions = ( conditions: SwitchManagerBlueprintCondition[], data: any): boolean =>
-        {
-            if( ! conditions )
-                return true;
-
-            for( const condition of conditions )
-                if( !(condition.key in data) || String(condition.value) != String(data[condition.key]) )
-                    return false;
-                    
-            return true;
-        }
-
-        const __validate_data = ( data: any ): number => {
-            if( ! __process_conditions( this.blueprint!.conditions!, data ) )
-                return -1;
-
-            let i = 0;
-            for( const button of this.blueprint!.buttons )
-            {
-                if( __process_conditions(button.conditions!, data) )
-                    for( const action of button.actions )
-                        if( __process_conditions(action.conditions!, data) )
-                            return i;
-                
-                i++;
-            }
-
-            return -1;
-        }
-
-        const __handle_response = ( data: any ) => {
-            let button_index = __validate_data(data);
-            if( button_index == -1 )
-                return;
-
-            const element = this.svg.querySelector(`[index="${button_index}"]`);
-            element.removeAttribute('pressed');
-            element.setAttribute('pressed', '');
-            setTimeout(() => {
-                element.removeAttribute('pressed');
-            }, 1000);            
-        }
-
-        if( this.blueprint!.event_type == 'mqtt' && this.blueprint!.mqtt_topic_format )
-        {
-            this._buttonListener = await this.hass.connection.subscribeMessage((message) => {
-                const data = typeof(message.payload) == 'string' ? { payload: message.payload } : message.payload;
-                __handle_response( data );
-            }, {
-                type: "mqtt/subscribe",
-                topic: this.config!.identifier
-            });
-        } else {
-            this._buttonListener = await this.hass!.connection.subscribeEvents( (event) => {
-                if( this.blueprint!.identifier_key! in event.data && event.data[this.blueprint!.identifier_key!] == this.config!.identifier )
-                {
-                    __handle_response( event.data );
-                }
-            }, this.blueprint!.event_type );
-        }
-        
+        }, { type: buildWSPath('blueprints/auto_discovery'), blueprint_id: this.blueprint!.id });
     }
 
     private _identifierChanged(ev?: CustomEvent)
     {
         this.config!.identifier = getValueById(this, 'identifier-input');
-        this._listenForButtonPress();
         this._dirty = true;
     }
 

@@ -10,7 +10,9 @@ import {
     mdiStopCircleOutline,
     mdiPlayCircleOutline,
     mdiGestureTapButton,
-    mdiEarHearing
+    mdiEarHearing,
+    mdiBug,
+    mdiCheck
 } from "@mdi/js";
 import { SwitchManagerBlueprint, SwitchManagerConfig, SwitchManagerConfigButton } from "./types";
 import { MODES } from "../ha-frontend/data/script";
@@ -68,6 +70,7 @@ class SwitchManagerSwitchEditor extends LitElement
     @state() private is_new: boolean = true;
 
     @state() private _dirty: boolean = false;
+    @state() private _debug: boolean = false;
     @state() private _block_save: boolean = false;
     @state() private _errors?: string;
 
@@ -121,6 +124,19 @@ class SwitchManagerSwitchEditor extends LitElement
                                         </ha-svg-icon>
                                 </mwc-list-item>
                                 
+                                <li divider role="separator"></li>
+                                
+                                <mwc-list-item
+                                    graphic="icon"
+                                    .disabled=${!this.config || this.is_new || !this.config?.valid_blueprint}
+                                    @click=${this._toggleDebug}>
+                                        Debug
+                                        <ha-svg-icon
+                                            slot="graphic"
+                                            .path=${this._debug ? mdiCheck : mdiBug}>
+                                        </ha-svg-icon>
+                                </mwc-list-item>
+
                                 <li divider role="separator"></li>
 
                                 <mwc-list-item
@@ -275,6 +291,9 @@ class SwitchManagerSwitchEditor extends LitElement
             :host {
                 --max-width: 1040px;
             }
+            mwc-list-item {
+                min-width: 165px;
+            }
             ha-card {
                 margin: 0 auto;
                 max-width: var(--max-width);
@@ -416,6 +435,7 @@ class SwitchManagerSwitchEditor extends LitElement
         this._killListener( '_subscribedMonitor' );
     }
 
+    // Can't pass by reference so use string to access propery (not ideal)
     private _killListener( listener: string )
     {
         if( this[listener] )
@@ -501,6 +521,11 @@ class SwitchManagerSwitchEditor extends LitElement
                 setTimeout(() => {
                     element.removeAttribute('pressed');
                 }, 1000);
+            }
+
+            if( ( msg.event == 'incoming' || msg.event =='action_triggered' ) && this._debug )
+            {
+                console.log( msg )
             }
         }, { type: buildWSPath('config/monitor'), config_id: this.config!.id });
     }
@@ -669,6 +694,14 @@ class SwitchManagerSwitchEditor extends LitElement
             this._killListener( '_subscribedAutoDiscovery' )
             this._identifierChanged();
         }, { type: buildWSPath('blueprints/auto_discovery'), blueprint_id: this.blueprint!.id });
+    }
+
+    private _toggleDebug()
+    {
+        this._debug = !this._debug;
+        showToast( this, {
+            message: `Debug ${this._debug ? 'Enabled. View dev console' : 'Disabled'}`
+        })
     }
 
     private _identifierChanged(ev?: CustomEvent)

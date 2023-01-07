@@ -70,6 +70,10 @@ Once a blueprint file or image file has been created or edited then you will nee
 
 The following tables shows how to structure a blueprint yaml file
 
+#### Debug
+
+Once a switch is saved, you can enable debugging through the hamburger menu up in the top right. List conditions will use what ever is in the data object (you do not need to add data to your keys) while Template conditions will need to access the data variable (eg data.{some_key} )
+
 ### Root Structure
 
 Option          | Values       | Required | Details

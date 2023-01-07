@@ -72,6 +72,15 @@ def format_mqtt_message( message: ReceiveMessage):
     })
     return data
 
+def get_val_from_str(_string, _dict):
+    keys = _string.split('.')
+    v = _dict
+    for key in keys:
+        if not key in v:
+            return None
+        v = v[key]
+    return v
+
 def _get_blueprint( hass: HomeAssistant, id: str ):
     return hass.data[DOMAIN][CONF_BLUEPRINTS].get(id, id)
 

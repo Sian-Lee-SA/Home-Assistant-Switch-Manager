@@ -1,5 +1,5 @@
 from .const import DOMAIN, LOGGER
-from .helpers import format_mqtt_message
+from .helpers import format_mqtt_message, get_val_from_str
 from homeassistant.core import HomeAssistant, Context, callback
 from homeassistant.helpers.script import Script
 from homeassistant.helpers.condition import async_template as template_condition
@@ -16,7 +16,8 @@ def check_conditions( hass: HomeAssistant, conditions, data ) -> bool:
     if isinstance(conditions, Template):
         return template_condition(hass, conditions, { "data": data }, False)
     for condition in conditions:
-        if condition.get('key') not in data or str(data.get(condition.get('key'))) != str(condition.get('value')):
+        value = get_val_from_str(condition.get('key'), data)
+        if value is None or str(value) != str(condition.get('value')):  # condition.get('key') not in data or str(data.get(condition.get('key'))) != str(condition.get('value')):
             return False
     return True
 

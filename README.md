@@ -89,7 +89,7 @@ If there are more than 1 button on the switch then you should be using a png (ev
 
 If a switch supports multiple button presses (so two buttons are pushed at the same time) then add another button with circle shape centered between the two buttons to indicate they're linked. Within the actions, the title should prefix **both**. See [Xiaomi Double Key](https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager/blob/master/custom_components/switch_manager/blueprints/zigbee2mqtt-xiaomi-double-key-wxkg07lm.yaml) for an example.
 
-> You will need to save the button before feedback will be displayed on the UI, this is due to needing backend processing of a switch which isn't created until it's been saved
+> You will need to save the switch before feedback will be displayed on the UI, this is due to needing backend processing of a switch which isn't created until it's been saved
 
 > if you want more control on positioning and look then you can open the image up in inkscape (with matching width and height values for the viewBox) then draw the paths for each button and copy the d attribute of that path then paste in the d property for the button in yaml. You would also set the shape as path
 
@@ -150,7 +150,7 @@ conditions: "{{ data.value == 'KeyPressed' and data.topic_basename == 'left_butt
 
 #### List
 
-Conditions defined as a list evaluates the event/mqtt data. If the key doesn't exist then it also evaluates to false. All conditions must be true to be valid
+Conditions defined as a list evaluates the event/mqtt data. If the key doesn't exist then it also evaluates to false. Use dot notation for the key to traverse nested dictionaries. **All conditions must be true to be valid**
 
 Option          | Values       | Required | Details
 --              | -            | -        | -

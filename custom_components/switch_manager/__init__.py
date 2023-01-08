@@ -45,7 +45,7 @@ async def async_setup( hass: HomeAssistant, config: Config ):
             hass.data[DOMAIN][CONF_MANAGED_SWITCHES][switch_id].stop()
         hass.data[DOMAIN][CONF_BLUEPRINTS] = {}
         hass.data[DOMAIN][CONF_MANAGED_SWITCHES] = {}
-        
+
         await hass.data[DOMAIN][CONF_STORE].load()
         await _init_blueprints(hass)
         await _init_switch_configs(hass)
@@ -89,7 +89,6 @@ async def _init_blueprints( hass: HomeAssistant ):
 
 async def _init_switch_configs( hass: HomeAssistant ):
     switches = await hass.data[DOMAIN][CONF_STORE].get_managed_switches()
-    LOGGER.error(switches)
     for _id in switches:
         switch = models.ManagedSwitchConfig( 
             hass, 

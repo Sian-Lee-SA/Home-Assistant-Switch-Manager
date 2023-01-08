@@ -69,7 +69,7 @@ class Blueprint:
             self.buttons.append( BlueprintButton( hass, config.get('buttons')[i], i ) )
 
     def check_conditions( self, data ):
-        if self.identifier_key and not self.identifier_key in data:
+        if self.identifier_key and self.identifier_key not in data:
             return False
         return check_conditions( self._hass, self.conditions, data )
 

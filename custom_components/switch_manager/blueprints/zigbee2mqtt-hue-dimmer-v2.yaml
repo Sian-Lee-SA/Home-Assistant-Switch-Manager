@@ -10,8 +10,9 @@ buttons:
     actions:
       - title: press
         conditions:
+          # Need to reference press release as on_press is fired even when being held
           - key: payload
-            value: on_press
+            value: on_press_release
       - title: hold
         conditions:
           - key: payload
@@ -28,7 +29,7 @@ buttons:
       - title: press
         conditions:
           - key: payload
-            value: up_press
+            value: up_press_release
       - title: hold
         conditions:
           - key: payload
@@ -45,7 +46,7 @@ buttons:
       - title: press
         conditions:
           - key: payload
-            value: down_press
+            value: down_press_release
       - title: hold
         conditions:
           - key: payload
@@ -62,7 +63,7 @@ buttons:
       - title: press
         conditions:
           - key: payload
-            value: off_press
+            value: off_press_release
       - title: hold
         conditions:
           - key: payload

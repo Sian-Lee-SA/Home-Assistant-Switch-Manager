@@ -107,6 +107,8 @@ class Blueprint:
     def as_dict(self):
         res = self.__dict__.copy()
         res.pop('_hass')
+        if isinstance(self.conditions, Template):
+            res['conditions'] = self.conditions.template
         return res
 
     def asdict(self):
@@ -140,6 +142,8 @@ class BlueprintButton:
         res = self.__dict__.copy()
         res.pop('_hass')
         res.pop('index')
+        if isinstance(self.conditions, Template):
+            res['conditions'] = self.conditions.template
         return res
 
     def asdict(self):
@@ -163,6 +167,8 @@ class BlueprintButtonAction:
         res = self.__dict__.copy()
         res.pop('_hass')
         res.pop('index')
+        if isinstance(self.conditions, Template):
+            res['conditions'] = self.conditions.template
         return res
 
     def asdict(self):

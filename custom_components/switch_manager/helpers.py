@@ -76,6 +76,12 @@ def get_val_from_str(_string, _dict):
     keys = _string.split('.')
     v = _dict
     for key in keys:
+        if isinstance(v, list):
+            index = int(key)
+            if index < len(v):
+                v = v[index]
+                continue
+            return None
         if not key in v:
             return None
         v = v[key]

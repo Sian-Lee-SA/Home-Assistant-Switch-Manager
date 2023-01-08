@@ -68,8 +68,6 @@ I tend to just google the device under the images tab. Next I will skim through 
 
 Once a blueprint file or image file has been created or edited then you will need to either call the switch_manager.reload service or restart Home Assistant for the changes to take effect.
 
-The following tables shows how to structure a blueprint yaml file
-
 #### Debug
 
 Once a switch is saved, you can enable debugging through the hamburger menu up in the top right. List conditions will use what ever is in the data object (you do not need to add data to your keys) while Template conditions and sequence templates will need to access the data variable (eg data.{event_key} ).
@@ -77,6 +75,8 @@ Once a switch is saved, you can enable debugging through the hamburger menu up i
 Once enabled, open your browser dev console to view debugging output
 
 ### Root Structure
+
+The following tables shows how to structure a blueprint yaml file
 
 Option          | Values       | Required | Details
 --              | -            | -        | -

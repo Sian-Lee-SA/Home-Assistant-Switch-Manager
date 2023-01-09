@@ -17,7 +17,7 @@ def check_conditions( hass: HomeAssistant, conditions, data ) -> bool:
         return template_condition(hass, conditions, { "data": data }, False)
     for condition in conditions:
         value = get_val_from_str(condition.get('key'), data)
-        if value is None or str(value) != str(condition.get('value')):  # condition.get('key') not in data or str(data.get(condition.get('key'))) != str(condition.get('value')):
+        if value is None or str(value) != str(condition.get('value')):
             return False
     return True
 
@@ -99,7 +99,6 @@ class Blueprint:
  
         listeners = await create_event_listeners( self._hass, self, self.mqtt_topic_format, _processIncoming )
         return remove_listener
-        
 
     def from_dict(cls, data):
         return cls(**data)
@@ -220,7 +219,6 @@ class ManagedSwitchConfigButtonAction:
     def asdict(self):
         return self.as_dict()
 
-
 class ManagedSwitchConfigButton:
 
     def __init__( self, hass: HomeAssistant, switch_id, index, blueprint_button, config ):
@@ -272,7 +270,6 @@ class ManagedSwitchConfig:
         self.name = config.get('name')        
         self.identifier = config.get('identifier')
         self.blueprint: Blueprint
-        self.conditions = []
         self.valid_blueprint: bool
         self.buttons: list[ManagedSwitchConfigButton] = []
         self.enabled: bool = config.get('enabled', True)
@@ -342,7 +339,6 @@ class ManagedSwitchConfig:
             if not self.enabled or not self._check_conditons( data ):
                 return
 
-            self.notify('incoming', { 'data': data })
             button_index = -1
             for button in self.buttons:
                 button_index += 1
@@ -378,14 +374,15 @@ class ManagedSwitchConfig:
         if not self.blueprint.is_mqtt:
             if str(data.get(self.blueprint.identifier_key)) != str(self.identifier):
                 return False
-        return check_conditions( self._hass, self.conditions, data )
+        
+        self.notify('incoming', { 'data': data })
+        return self.blueprint.check_conditions( data )
 
     def _setError( self, error_message ):
         self._error = error_message
         if self._error:
             LOGGER.error(self._error)
 
-    
     # home assistant json
     def as_dict(self):
         res = self.__dict__.copy()

@@ -151,7 +151,7 @@ Conditions will traverse down the switch from root -> button -> action. The proc
 
 #### Template
 
-You can use Home Assistant generic condition template to validate a condition https://www.home-assistant.io/docs/configuration/templating/. Define the property `conditions` as a string instead of an array. Lists are still preferred as rendering templates takes extra processing times. The event or mqtt data are passed in on the data variable. Switch defined variables can be accessed through the `data.variables` key.
+You can use Home Assistant generic condition template to validate a condition https://www.home-assistant.io/docs/configuration/templating/. Define the property `conditions` as a string instead of an array. Lists are still preferred as rendering templates takes extra processing times. The event or mqtt data are passed in on the data variable. Switch defined variables can be accessed through the `data.variables` object.
 
 ##### template example
 ```yaml
@@ -160,7 +160,7 @@ conditions: "{{ data.value == 'KeyPressed' and data.topic_basename == 'left_butt
 
 #### List
 
-Conditions defined as a list evaluates the event/mqtt data. If the key doesn't exist then it also evaluates to false. Use dot notation for the key to traverse nested dictionaries. Switch defined variables can accessed using the key `variables`. **All conditions must be true to be valid**
+Conditions defined as a list evaluates the event/mqtt data. If the key doesn't exist then it also evaluates to false. Use dot notation for the key to traverse nested dictionaries. Switch defined variables can be accessed using the `variables` key. **All conditions must be true to be valid**
 
 Option          | Values       | Required | Details
 --              | -            | -        | -

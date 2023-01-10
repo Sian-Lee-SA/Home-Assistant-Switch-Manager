@@ -21,7 +21,9 @@ class SwitchManagerDialogVariablesEditor extends LitElement
 
     @state() private _variables: any;
 
-    @state() private _valid: boolean = true
+    @state() private _valid: boolean = true;
+
+    @state() private _dirty: boolean = false;
 
     private _params!: any;
 
@@ -30,6 +32,8 @@ class SwitchManagerDialogVariablesEditor extends LitElement
         this._params = params;
         this._variables = params.config.variables;
         this._opened = true;
+        this._valid = true;
+        this._dirty = false;
     }
 
     public closeDialog(): void 
@@ -54,7 +58,8 @@ class SwitchManagerDialogVariablesEditor extends LitElement
                 @closed=${this.closeDialog}
                 .heading="${createCloseHeading(this.hass, 'Variables')}">
 
-                <div id="info">Use the yaml editor below to define your variables for this switch</div>
+                <div id="info">Use the yaml editor below to define your variables for this switch. The variables can be access through the blueprint conditions
+                or action sequences</div>
 
                 <ha-yaml-editor
                     .hass=${this.hass}
@@ -67,7 +72,7 @@ class SwitchManagerDialogVariablesEditor extends LitElement
                 <mwc-button @click=${this.closeDialog} slot="secondaryAction">
                     Cancel
                 </mwc-button>
-                <mwc-button @click=${this._save} slot="primaryAction" .disabled=${!this._valid}>
+                <mwc-button @click=${this._save} slot="primaryAction" .disabled=${!this._valid || !this._dirty}>
                     Update
                 </mwc-button>
             </ha-dialog>
@@ -83,11 +88,11 @@ class SwitchManagerDialogVariablesEditor extends LitElement
                 --mdc-dialog-min-width: 90vw;
                 --mdc-dialog-max-width: 90vw;
             }
-            @media screen and ( min-width: 1500px )
+            @media screen and ( min-width: 1150px )
             {
                 ha-dialog {
-                    --mdc-dialog-min-width: 1200px;
-                    --mdc-dialog-max-width: 1200px;
+                    --mdc-dialog-min-width: 1010px;
+                    --mdc-dialog-max-width: 1010px;
                 }
             }
             #info {
@@ -109,6 +114,7 @@ class SwitchManagerDialogVariablesEditor extends LitElement
           return;
         }
         this._variables = ev.detail.value;
+        this._dirty = true;
     }
 
     private _save()
@@ -117,6 +123,7 @@ class SwitchManagerDialogVariablesEditor extends LitElement
             ...this._params.config,
             variables: this._variables
         });
+        this._dirty = false;
         this.closeDialog();
     }
 }

@@ -3,9 +3,9 @@ service: Zigbee2MQTT
 event_type: mqtt
 mqtt_topic_format: zigbee2mqtt/+/action
 buttons:
-  - x: 310
-    y: 240
-    width: 150
+  - x: 192
+    y: 149
+    width: 93
     shape: circle
     actions:
       - title: press
@@ -20,9 +20,9 @@ buttons:
         conditions:
           - key: payload
             value: brightness_stop
-  - x: 310
-    y: 600
-    width: 150
+  - x: 192
+    y: 372
+    width: 93
     shape: circle
     actions:
       - title: press

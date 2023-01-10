@@ -1,5 +1,5 @@
 import { html, css, LitElement } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, query } from "lit/decorators.js";
 import { SwitchManagerBlueprintButtonAction, SwitchManagerConfigButtonAction } from "./types";
 import "@polymer/paper-tabs";
 
@@ -20,6 +20,8 @@ class SwitchManagerButtonActions extends LitElement
     
     @property({reflect: true}) index = 0;
 
+    @query('paper-tabs') tabs;
+
     render() 
     {
         if( !this.blueprint_actions || this.blueprint_actions.length == 1 )
@@ -29,7 +31,7 @@ class SwitchManagerButtonActions extends LitElement
                 <paper-tabs selected="${this.index}" @iron-select=${this._tab_changed}>
                     ${this.blueprint_actions.map((a, i) => 
                         html`
-                        <paper-tab>${a.title}
+                        <paper-tab index="${i}">${a.title}
                             ${this.config_actions[i].sequence.length ? html`<ha-chip>${this.config_actions[i].sequence.length}</ha-chip>`:''}
                         </paper-tab>`)}
                 </paper-tabs>
@@ -40,7 +42,13 @@ class SwitchManagerButtonActions extends LitElement
     _render
 
     static get styles() {
-        return css`
+        return css`        
+            @keyframes feedback {
+                to {
+                    border-color: #00e903;
+                    color: #00e903;
+                }
+            }
             :host {
                 display: flex;
                 justify-content: center;
@@ -59,6 +67,11 @@ class SwitchManagerButtonActions extends LitElement
                 box-sizing: border-box;
                 text-transform: uppercase;
             }
+            paper-tab[feedback] {
+                animation: 0.4s feedback;
+                animation-iteration-count: 2;
+                animation-direction: alternate;
+            }
             paper-tab.iron-selected {
                 border-bottom: 2px solid var(--primary-color);
                 color: var(--primary-color);
@@ -69,6 +82,16 @@ class SwitchManagerButtonActions extends LitElement
                 right: -32px;
             }
         `;
+    }
+
+    public flash( index )
+    {
+        const element = this.tabs.querySelector(`[index="${index}"]`);
+        element.removeAttribute('feedback');
+        element.setAttribute('feedback', '');
+        setTimeout(() => {
+            element.removeAttribute('feedback');
+        }, 1000);
     }
 
     _tab_changed(ev)

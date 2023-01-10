@@ -77,6 +77,7 @@ class SwitchManagerSwitchEditor extends LitElement
 
     @query('#switch-svg') svg;
     @query('#identifier-input') identifier_input;
+    @query('switch-manager-button-actions') button_actions;
 
     render() 
     {
@@ -519,6 +520,12 @@ class SwitchManagerSwitchEditor extends LitElement
             {
                 if( ! this.config?.identifier )
                     return;
+
+                if( msg.button == this.button_index && this.blueprint?.buttons[this.button_index].actions.length! > 1 )
+                {
+                    this.button_actions.flash(msg.action)
+                }
+
                 if( this.blueprint?.buttons?.length == 1 )
                 {
                     showToast(this, {

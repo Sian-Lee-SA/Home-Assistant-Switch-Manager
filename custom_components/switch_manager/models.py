@@ -271,6 +271,7 @@ class ManagedSwitchConfig:
         self.identifier = config.get('identifier')
         self.blueprint: Blueprint
         self.valid_blueprint: bool
+        self.variables: dict = config.get('variables')
         self.buttons: list[ManagedSwitchConfigButton] = []
         self.enabled: bool = config.get('enabled', True)
         
@@ -282,6 +283,7 @@ class ManagedSwitchConfig:
     def update( self, config ):
         self.name = config.get('name')
         self.identifier = config.get('identifier')
+        self.variables = config.get('variables')
         self.buttons = []
         
         self.buildButtons( config.get('buttons') )
@@ -336,6 +338,8 @@ class ManagedSwitchConfig:
             return
 
         def _processIncoming( data, context ):
+            data.update({'variables': self.variables})
+
             if not self.enabled or not self._check_conditons( data ):
                 return
 

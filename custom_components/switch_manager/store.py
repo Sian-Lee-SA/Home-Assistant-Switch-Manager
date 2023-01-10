@@ -14,6 +14,7 @@ class SwitchManagerManagedSwitchData:
     enabled = attr.ib(type=bool, default=True)
     blueprint = attr.ib(type=str, default=None)
     identifier = attr.ib(type=str, default=None)
+    variables = attr.ib(type=dict, default=None)
     buttons = attr.ib(type=list, default=[])
 
     def set_from_managed_switch_config( self, config: ManagedSwitchConfig ):

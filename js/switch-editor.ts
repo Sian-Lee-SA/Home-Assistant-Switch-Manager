@@ -12,7 +12,8 @@ import {
     mdiGestureTapButton,
     mdiEarHearing,
     mdiBug,
-    mdiCheck
+    mdiCheck,
+    mdiCodeBraces
 } from "@mdi/js";
 import { SwitchManagerBlueprint, SwitchManagerConfig, SwitchManagerConfigButton } from "./types";
 import { MODES } from "../ha-frontend/data/script";
@@ -113,6 +114,17 @@ class SwitchManagerSwitchEditor extends LitElement
                                         </ha-svg-icon>
                                 </mwc-list-item>
                                 
+                                <mwc-list-item
+                                    graphic="icon"
+                                    .disabled=${!this.config || !this.config?.valid_blueprint}
+                                    @click=${this._showVariablesEditorDialog}>
+                                        Variables
+                                        <ha-svg-icon
+                                            slot="graphic"
+                                            .path=${mdiCodeBraces}>
+                                        </ha-svg-icon>
+                                </mwc-list-item>
+
                                 <mwc-list-item
                                     graphic="icon"
                                     .disabled=${!this.config || this.is_new || !this.config?.valid_blueprint}
@@ -632,7 +644,6 @@ class SwitchManagerSwitchEditor extends LitElement
 
         this._block_save = true;
         this._dirty = false;
-
         this.hass.callWS({
             type: buildWSPath('config/save'), 
             config: {...this.config, blueprint: this.config.blueprint.id}
@@ -729,6 +740,23 @@ class SwitchManagerSwitchEditor extends LitElement
                 config: this.config,
                 update: (config) => {
                     this.config!.name = config.name;
+                    this._dirty = true;
+                    this.requestUpdate();
+                },
+                onClose: () => {}
+            },
+        });
+    }
+
+    private async _showVariablesEditorDialog(): Promise<void>
+    {
+        fireEvent(this, "show-dialog", {
+            dialogTag: "switch-manager-dialog-variables-editor",
+            dialogImport: () => import("./dialogs/dialog-variables-editor"),
+            dialogParams: {
+                config: this.config,
+                update: (config) => {
+                    this.config!.variables = config.variables;
                     this._dirty = true;
                     this.requestUpdate();
                 },

@@ -68,8 +68,6 @@ File names should be defined as {service-name}-{switch-name-or-type}.yaml and al
 
 I tend to just google the device under the images tab. Next I will skim through til I find an image that has a flat perspective (top down) and is above 800px or 500px depending on the switches ratio. Next I will open the image in photoshop then mask out the background area with the shape tool. I then control click the layer to make only the visible selected which I then crop. Lastly I resize the image to be either 800px width or 500px height depending on which one has a greater value but I do not upscale if the image is below those sizes.
 
-> View other blueprint files to get a grasp on how it's constructed if the following table is hard to understand.
-
 Once a blueprint file or image file has been created or edited then you will need to either call the switch_manager.reload service or restart Home Assistant for the changes to take effect.
 
 #### Debug
@@ -81,6 +79,7 @@ Once enabled, open your browser dev console to view debugging output
 ### Root Structure
 
 The following tables shows how to structure a blueprint yaml file
+> View other blueprint files to get a grasp on how it's constructed if the following table is hard to understand.
 
 Option          | Values       | Required | Details
 --              | -            | -        | -

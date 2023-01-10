@@ -77,7 +77,10 @@ def get_val_from_str(_string, _dict):
     v = _dict
     for key in keys:
         if isinstance(v, list):
-            index = int(key)
+            try:
+                index = int(key)
+            except ValueError:
+                return None
             if index < len(v):
                 v = v[index]
                 continue

@@ -3,8 +3,8 @@ service: Zigbee2MQTT
 event_type: mqtt
 mqtt_topic_format: zigbee2mqtt/+/action
 buttons:
-  - x: 28
-    y: 28
+  - x: 0
+    y: 0
     width: 190
     height: 385
     actions:
@@ -20,8 +20,8 @@ buttons:
         conditions:
           - key: payload
             value: 1_hold
-  - x: 218
-    y: 28
+  - x: 190
+    y: 0
     width: 190
     height: 385
     actions:

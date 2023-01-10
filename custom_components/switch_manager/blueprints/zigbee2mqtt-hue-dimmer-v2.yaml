@@ -1,4 +1,4 @@
-name: Philips Hue Dimmer
+name: Philips Hue Dimmer v1/v2
 service: Zigbee2MQTT
 event_type: mqtt
 mqtt_topic_format: zigbee2mqtt/+/action
@@ -10,6 +10,7 @@ buttons:
     actions:
       - title: press
         conditions:
+          # Need to reference press release as on_press is fired even when being held
           - key: payload
             value: on_press_release
       - title: hold

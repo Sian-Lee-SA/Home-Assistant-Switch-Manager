@@ -4,7 +4,8 @@
   "description": "Home Assistant Frontend for Switch Manager",
   "scripts": {
     "build": "rollup -c",
-    "watch": "rollup -c --watch"
+    "watch": "rollup -c --watch",
+    "release": "rollup -c && git add custom_components/switch_manager/assets/switch_manager_panel.js && release-it"
   },
   "keywords": [],
   "author": "Sian",
@@ -26,6 +27,7 @@
     "@octokit/auth-oauth-device": "^4.0.2",
     "@octokit/rest": "^19.0.4",
     "@open-wc/dev-server-hmr": "^0.0.2",
+    "@release-it/bumper": "^4.0.0",
     "@rollup/plugin-babel": "^5.2.1",
     "@rollup/plugin-commonjs": "^11.1.0",
     "@rollup/plugin-json": "^4.0.3",
@@ -86,6 +88,7 @@
     "open": "^7.0.4",
     "pinst": "^3.0.0",
     "prettier": "^2.4.1",
+    "release-it": "^15.6.0",
     "require-dir": "^1.2.0",
     "rollup": "^2.8.2",
     "rollup-plugin-cleanup": "^3.2.1",
@@ -242,5 +245,6 @@
     "lit-html": "2.1.2",
     "lit-element": "3.1.2",
     "@lit/reactive-element": "1.2.1"
-  }
+  },
+  "version": "0.4.1"
 }

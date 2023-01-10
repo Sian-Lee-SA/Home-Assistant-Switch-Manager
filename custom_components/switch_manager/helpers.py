@@ -1,7 +1,15 @@
 """Helpers for switch_manager integration."""
 import json, pathlib, os, shutil
+from homeassistant.core import HomeAssistant
 from homeassistant.util.yaml.loader import _find_files, load_yaml
-from .const import LOGGER, DOMAIN, BLUEPRINTS_FOLDER
+from .const import (
+    LOGGER, 
+    DOMAIN, 
+    BLUEPRINTS_FOLDER, 
+    CONF_BLUEPRINTS,
+    CONF_MANAGED_SWITCHES
+)
+from . import models
 from homeassistant.exceptions import HomeAssistantError
 from homeassistant.components.mqtt.models import ReceiveMessage
 
@@ -53,10 +61,42 @@ def load_blueprints( hass ):
 def format_mqtt_message( message: ReceiveMessage):
     try:
         data = json.loads(message.payload)
-        data['topic'] = message.topic
     except ValueError as e:
         data = {
-            "topic": message.topic,
             "payload": message.payload
         }
+
+    data.update({
+        'topic': message.topic,
+        'topic_basename': message.topic.split('/')[-1]
+    })
     return data
+
+def get_val_from_str(_string, _dict):
+    keys = _string.split('.')
+    v = _dict
+    for key in keys:
+        if isinstance(v, list):
+            index = int(key)
+            if index < len(v):
+                v = v[index]
+                continue
+            return None
+        if not key in v:
+            return None
+        v = v[key]
+    return v
+
+def _get_blueprint( hass: HomeAssistant, id: str ):
+    return hass.data[DOMAIN][CONF_BLUEPRINTS].get(id, id)
+
+async def _set_switch_config( hass: HomeAssistant, config ):
+    hass.data[DOMAIN][CONF_MANAGED_SWITCHES][config.id] = config
+    await config.start();
+
+def _get_switch_config( hass: HomeAssistant, _id: str ):
+    return hass.data[DOMAIN][CONF_MANAGED_SWITCHES].get(_id)
+
+async def _remove_switch_config( hass: HomeAssistant, _id: str ):
+    hass.data[DOMAIN][CONF_MANAGED_SWITCHES][_id].stop()
+    del hass.data[DOMAIN][CONF_MANAGED_SWITCHES][_id]

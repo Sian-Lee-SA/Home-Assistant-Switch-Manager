@@ -1,0 +1,49 @@
+name: Trust Remote Control (ZYCT-202)
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+buttons:
+  - x: 9
+    y: 8
+    width: 172
+    height: 120
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: "on"
+  - x: 9
+    y: 373
+    width: 172
+    height: 118
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: "off"
+  - x: 9
+    y: 128
+    width: 87
+    height: 123
+    actions:
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_move_up
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: brightness_stop
+  - x: 9
+    y: 251
+    width: 87
+    height: 122
+    actions:
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_move_down
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: brightness_stop

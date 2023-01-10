@@ -31,25 +31,39 @@ Once the integration has been loaded, a folder with blueprints will be created i
 
 In the side panel you goto Switch Manager. Next click `Add Switch` and select the switch blueprint for the service/integration it's on (If you can't find your service and switch then see [Blueprints](#blueprints) below). The same switch can be defined multiple times but not for different services as they differ their event data's from one another. 
 
-Once you've selected the blueprint, you will be taken to the switch editor view. There will be an identifier or mqtt topic input box up in the top left with a placeholder asking for the value for that key within the event data or mqtt topic. 
+Once you've selected the blueprint, you will be taken to the switch editor view. 
 
-You can either enter the identifier manually or use the button on the right then press a button on the switch to auto fill the value. There is a posibility that an identifier from some other device for the event to be discovered if that device sent an event before your button push. If this is the case and the button helper isn't getting the right identifier then follow the next step to discover it manually. 
+#### Identifier
 
-* If you do not know the event value then goto Developer Tools -> Events and start listening for events (use * if you're unsure of the event type for your switch). Once you've started listening for events, push a button on your switch then stop the listener. View the data and you will find the event related to your switch. Inside that data you will find the identifier's value. Copy this value to the identifier's textbox on the switch editor page to bind.
+There will be an identifier or mqtt topic input box up in the top left with a placeholder asking for the value for that key within the event data or mqtt topic. 
+
+You can either enter the identifier manually or use the button on the right then press a button on the switch to autofill the value. There is a posibility that an identifier from some other device for the event to be discovered if that device sent an event before your button push. If this is the case and the button helper isn't getting the right identifier then follow the next step to discover it manually. 
+
+**If you have changed the default MQTT base topic for a service/integration and using a blueprint provided by Switch Manager then you will need to enter that topic manually as discovery will not work!**
+
+##### Don't know event value
+
+If you do not know the event value then goto Developer Tools -> Events and start listening for events (use * if you're unsure of the event type for your switch). Once you've started listening for events, push a button on your switch then stop the listener. View the data and you will find the event related to your switch. Inside that data you will find the identifier's value. Copy this value to the identifier's textbox on the switch editor page to bind.
+
+##### Don't know MQTT topic
+
+If using a MQTT service then you can either download MQTT Explorer (preferred) or listen to all topics using the MQTT integration's listener. Goto Confiuration Menu -> Integrations -> MQTT -> Configure. Next listen to the topic `#` (which mean all topics), after pressing a button you will see a topic representing this, this would be your MQTT topic for Switch Manager (you can cross reference the blueprint file with the mqtt data if you want to be sure).
+
+#### Interacting with buttons
 
 Depending on the blueprint and the actions that your switch supports, you can select buttons by clicking on them from the image displayed and each button can have multiple actions eg tap, double tap and hold etc. 
 
-Navigation and usage should be pretty straight forward. Next you can start defining sequences for each of your buttons and actions. The sequence process is identical to making a script in Home Assistant and should be familiar. 
+Navigation and usage should be pretty straight forward.
 
-Once saved you can test to make sure all is working.
-
-> The event or mqtt data can be accessed inside your sequences via the data variable
+Remember to save before leaving the page when changes has been made! Once saved you can test to make sure all is working.
 
 > Sometimes you may want certain buttons or actions handled by the devices default handler. For example, a Zigbee device may already be bound to a certain light which also imo has better response, reliability and stability. To remind you of this, you could add a stop action with a description of why the button shouldn't be changed and being handled somehwere else. Then for other actions that aren't handled else where then you can handle them with this component. It's also fine to allow an external handler to handle the button push aswell as this component so a button could turn on the light handled via Zigbee and the component could start playing music based on the same switch action.
 
 #### Variables
 
-You can assign variables to the switch from the top right menu, these variables can be access through the blueprint conditions or action sequences
+You can assign variables to the switch from the top right menu, these variables can be access through the blueprint conditions or action sequences.
+
+The event or MQTT data can also be accessed inside your sequences via the data variable.
 
 ## Blueprints
 

@@ -25,7 +25,6 @@ SHAPE_PATH_SCHEMA = vol.Schema({
 BLUEPRINT_BUTTON_SCHEMA = vol.Schema({
     vol.Required('actions'): vol.All(cv.ensure_list, [BLUEPRINT_ACTION_SCHEMA]),
     vol.Optional('conditions', default=[]): vol.Any(cv.string, [CONDITION_SCHEMA]),
-    vol.Optional('shape', default='rect'): vol.In(['rect','circle','path']),
 
     vol.Optional('x'): cv.positive_int,
     vol.Optional('y'): cv.positive_int,

@@ -3,11 +3,7 @@ service: Zigbee2MQTT
 event_type: mqtt
 mqtt_topic_format: zigbee2mqtt/+/action
 buttons:
-  - x: 323
-    y: 278
-    width: 60
-    shape: circle
-    actions:
+  - actions:
       - title: press
         conditions:
           - key: payload

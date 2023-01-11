@@ -6,8 +6,7 @@ conditions:
   - key: property
     value: scene
 buttons:
-  - shape: rect
-    x: 24
+  - x: 24
     y: 24
     width: 200
     height: 218
@@ -39,8 +38,7 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
-  - shape: rect
-    x: 24
+  - x: 24
     y: 246
     width: 200
     height: 218

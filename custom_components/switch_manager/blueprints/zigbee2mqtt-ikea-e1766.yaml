@@ -7,7 +7,6 @@ buttons:
   - x: 182
     y: 90
     width: 65
-    shape: circle
     actions:
       - title: press
         conditions:
@@ -16,7 +15,6 @@ buttons:
   - x: 182
     y: 280
     width: 65
-    shape: circle
     actions:
       - title: press
         conditions:

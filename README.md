@@ -114,9 +114,9 @@ If a switch supports multiple button presses (so two buttons are pushed at the s
 
 > You will need to save the switch before feedback will be displayed on the UI, this is due to needing backend processing of a switch which isn't created until it's been saved
 
-> if you want more control on positioning and look then you can open the image up in inkscape (with matching width and height values for the viewBox) then draw the paths for each button and copy the d attribute of that path then paste in the d property for the button in yaml. You would also set the shape as path
+> if you want more control on positioning and look then you can open the image up in inkscape (with matching width and height values for the viewBox) then draw the paths for each button and copy the d attribute of that path then paste in the d property for the button in yaml.
 
-> Single buttons will not render a graphic so if you do add a shape etc for a single button, it won't be shown and end up being redundant
+> Single button switches must **not** contain shape properties
 
 * Shape `rect` uses x, y, width, height
 * Shape `circle` uses x, y, width
@@ -129,7 +129,6 @@ y               | `int`px                       | -        | The y (up, down) po
 width           | `int`px                       | -        | The width of the shape rect or circle. *not valid for shape: path
 height          | `int`px                       | -        | Only valid for shape: rect. The height you want the rectangle to be
 d               | `string`                      | -        | Only valid if shape: path. Using svg path format
-shape           | `rect\|circle\|path`          | -        | Default is rect (rectangle). 
 actions         | `list` [Action](#action)      | *        | Each button will have atleast one action. Each action would be the result of a tap, double tap or hold etc depending on what the switch supports.
 conditions      | `list` [Condition](#condition) \| `string` [Template](https://www.home-assistant.io/docs/configuration/templating/) | -        | This optional list or [Template](https://www.home-assistant.io/docs/configuration/templating/) allows the button to only accept conditions within the event data or mqtt payload. This can help scope down to where the button was pressed. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition. 
 
@@ -220,8 +219,7 @@ conditions:
   - key: property
     value: scene
 buttons:
-  - shape: path
-    d: m 45.944466,2.0341694 h 176.769524 v 219.3817306 h -219.1028571 l 0,-177.048398 a 42.333333,42.333333 135 0 1 42.3333331,-42.3333326 z
+  - d: m 45.944466,2.0341694 h 176.769524 v 219.3817306 h -219.1028571 l 0,-177.048398 a 42.333333,42.333333 135 0 1 42.3333331,-42.3333326 z
     conditions:
       - key: property_key
         value: '001'
@@ -234,8 +232,7 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
-  - shape: path
-    d: m 222.78056,2.0572453 h 176.76953 a 42.333333,42.333333 45 0 1 42.33333,42.3333327 v 177.048392 h -219.10286 z
+  - d: m 222.78056,2.0572453 h 176.76953 a 42.333333,42.333333 45 0 1 42.33333,42.3333327 v 177.048392 h -219.10286 z
     conditions:
       - key: property_key
         value: '002'
@@ -248,8 +245,7 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
-  - shape: path
-    d: m 3.4383569,221.24492 h 219.1028631 v 219.38173 h -176.76953 a 42.333333,42.333333 45 0 1 -42.3333331,-42.33333 z
+  - d: m 3.4383569,221.24492 h 219.1028631 v 219.38173 h -176.76953 a 42.333333,42.333333 45 0 1 -42.3333331,-42.33333 z
     conditions:
       - key: property_key
         value: '003'
@@ -262,8 +258,7 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
-  - shape: path
-    d: m 222.71397,221.28836 h 219.10286 v 177.0484 a 42.333333,42.333333 135 0 1 -42.33333,42.33333 l -176.76953,0 z
+  - d: m 222.71397,221.28836 h 219.10286 v 177.0484 a 42.333333,42.333333 135 0 1 -42.33333,42.33333 l -176.76953,0 z
     conditions:
       - key: property_key
         value: '004'

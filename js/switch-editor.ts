@@ -35,6 +35,8 @@ import "@polymer/app-layout/app-toolbar/app-toolbar";
 import "./button-actions";
 import "../ha-frontend/types";
 import "../ha-frontend/panels/config/automation/action/ha-automation-action";
+import { showConfirmationDialog } from "../ha-frontend/dialogs/generic/show-dialog-box";
+import { afterNextRender } from "../ha-frontend/common/util/render-status";
 import "../ha-frontend/components/ha-fab";
 import "../ha-frontend/components/ha-card";
 import "../ha-frontend/components/ha-button-menu";
@@ -94,7 +96,7 @@ class SwitchManagerSwitchEditor extends LitElement
                         </ha-menu-button>
                         <ha-icon-button
                             .path=${mdiArrowLeft}
-                            @click=${() => navigate(buildUrl())}>
+                            @click=${this._backTapped}>
                         </ha-icon-button>
                         <div main-title id="title-container">
                             <span>Switch Manager - ${this.config?.name}</span>
@@ -587,20 +589,22 @@ class SwitchManagerSwitchEditor extends LitElement
         {
             this.blueprint.buttons.forEach((button, index) => {
                 let svgshape: SVGCircleElement | SVGRectElement | SVGPathElement;
-                if( button.shape == 'circle' ) {
-                    svgshape = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-                    svgshape.setAttributeNS(null, 'cx', button.x.toString());
-                    svgshape.setAttributeNS(null, 'cy', button.y.toString());
-                    svgshape.setAttributeNS(null, 'r', button.width.toString());
-                } else if ( button.shape == 'path' ) { 
-                    svgshape = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-                    svgshape.setAttributeNS(null, 'd', button.d.toString());
-                } else {
+                if( button.x && button.y && button.width && button.height ) {
                     svgshape = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
                     svgshape.setAttributeNS(null, 'x', button.x.toString());
                     svgshape.setAttributeNS(null, 'y', button.y.toString());
                     svgshape.setAttributeNS(null, 'width', button.width.toString());
                     svgshape.setAttributeNS(null, 'height', button.height.toString());
+                } else if ( button.x && button.y && button.width ) {
+                    svgshape = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    svgshape.setAttributeNS(null, 'cx', button.x.toString());
+                    svgshape.setAttributeNS(null, 'cy', button.y.toString());
+                    svgshape.setAttributeNS(null, 'r', button.width.toString());
+                } else if ( button.d ) {
+                    svgshape = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                    svgshape.setAttributeNS(null, 'd', button.d.toString());
+                } else {
+                    return;
                 }
                 svgshape.setAttribute('class', 'button');
                 svgshape.setAttribute('index', index.toString());
@@ -821,5 +825,30 @@ class SwitchManagerSwitchEditor extends LitElement
             })
             navigate(buildUrl());
         });
+    }
+
+    private async confirmUnsavedChanged(): Promise<boolean> {
+        if (this._dirty) {
+            return showConfirmationDialog(this, {
+                title: this.hass!.localize(
+                    "ui.panel.config.automation.editor.unsaved_confirm_title"
+                ),
+                text: this.hass!.localize(
+                    "ui.panel.config.automation.editor.unsaved_confirm_text"
+                ),
+                confirmText: this.hass!.localize("ui.common.leave"),
+                dismissText: this.hass!.localize("ui.common.stay"),
+                destructive: true,
+            });
+        }
+        return true;
+    }
+    
+    private _backTapped = async () => 
+    {
+        const result = await this.confirmUnsavedChanged();
+        if (result) {
+            afterNextRender(() => navigate(buildUrl()));
+        }
     }
 }

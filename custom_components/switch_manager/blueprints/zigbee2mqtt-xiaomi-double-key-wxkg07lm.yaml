@@ -40,7 +40,6 @@ buttons:
   - x: 250
     y: 250
     width: 75
-    shape: circle
     actions:
       - title: both press
         conditions:

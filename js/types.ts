@@ -32,7 +32,6 @@ export interface SwitchManagerBlueprintButton
     d: string;
     width: number;
     height: number;
-    shape: string;
     conditions?: SwitchManagerBlueprintCondition[],
     actions: SwitchManagerBlueprintButtonAction[];
 }

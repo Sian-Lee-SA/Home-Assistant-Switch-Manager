@@ -3,11 +3,7 @@ service: deCONZ
 event_type: deconz_event
 identifier_key: device_id
 buttons:
-  - x: 250
-    y: 253
-    width: 100
-    shape: circle
-    actions:
+  - actions:
       - title: press
         conditions:
           - key: event

@@ -84,6 +84,11 @@ async def _init_blueprints( hass: HomeAssistant ):
         except vol.Invalid as ex:
             LOGGER.error(_format_config_error(ex, f"{DOMAIN} {CONF_BLUEPRINTS}({config.get('id')})", config))
             continue
+        if len(c_validated.get('buttons')) == 1:
+            button = c_validated.get('buttons')[0]
+            if button.get('x') or button.get('y') or button.get('width') or button.get('height') or button.get('d'):
+                LOGGER.error(f"{DOMAIN} {CONF_BLUEPRINTS}({config.get('id')}) Single button blueprints should not have x, y, width, height or d")
+                continue
         blueprints[config.get('id')] = models.Blueprint(hass, config.get('id'), c_validated, config.get('has_image'))
 
 

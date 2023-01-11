@@ -123,7 +123,6 @@ class BlueprintButton:
         self.d = config.get('d')
         self.width = config.get('width')
         self.height = config.get('height')
-        self.shape = config.get('shape')
         self.conditions = convert_conditions( hass, config.get('conditions', []) )
         self.index = index;
 

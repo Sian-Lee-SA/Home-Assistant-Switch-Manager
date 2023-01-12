@@ -69,11 +69,11 @@ The event or MQTT data can also be accessed inside your sequences via the data v
 
 This is a special variable that you can use in your template conditions etc. This is very handy if you want something like where you're holding a button then you're pressing another button which will execute a different action within your sequence.
 
-When the switch is updated or saved it will reset the states to null. But when you execute an action for a button this will be stored as a last state under the action sub key. **Remember that index's start from 0**. so if you want to check the last action from of the first button defined in the blueprint and see if it's last action was the second one then you would do `data.button_last_state[0].action == 1` with 1 being the action index of that button.
+When the switch is updated or saved it will reset the states to null. But when you execute an action for a button this will be stored as a last state under the action sub key. **Remember that index's start from 0**. So, if you want to check the last action from the first button defined in the blueprint and see if it's last action was the second one then you would do `data.button_last_state[0].action == 1` with 1 being the action index of that button.
 
 You can also access the unix timestamp that the action was executed by doing `data.button_last_state[0].timestamp`, this can allow you to determine which button and what action was last executed or calculate how long ago the same button and action was excecuted by also accessing `data.timestamp` which is the current timestamp for the current button and action.
 
-You could use a choose sequence action that checks whether any other button is held and handle an action for that. Be creative! Keep in mind that this is less usefull with press actions etc as they're resetted upon a switch reload/save where as a hold/rotate action is a then and now action.
+You could use a choose sequence action that checks whether any other button is held and handle an action for that. Be creative! Keep in mind that this is less usefull with press actions etc as they're resetted upon a switch reload/save where as a hold/rotate action is more usefull as they're called in an active state.
 
 Turn on debugging and open your dev console to see the button_last_state variable and it's values
 

@@ -77,6 +77,27 @@ You could use a choose sequence action that checks whether any other button is h
 
 Turn on debugging and open your dev console to see the button_last_state variable and it's values
 
+##### Example for Philips Hue Tap Dial
+
+Below is an example choose sequence action where if the 4th button is being held down while rotating the dial either clockwise or anti-clockwise then it will either increase or decrease the volume respectively on any playing speakers.
+
+```yaml
+# This being the clockwise rotation (change service media_player.volume_up to media_player.volume_down for anti-clockwise)
+choose:
+  - conditions:
+      - condition: template
+        value_template: "{{ data.button_last_state[3].action == 1 }}"
+    sequence:
+      - service: media_player.volume_up
+        data:
+          entity_id: >-
+            {{ ['media_player.study_monitor_speakers', 
+            'media_player.living_room_speakers', 
+            'media_player.kitchen_speaker',  'media_player.family_room_hub',
+            'media_player.master_bedroom_hub'] | select('is_state', 'playing') |
+            list }}
+```
+
 ## Blueprints
 
 Blueprints are the heart of this component, once a blueprint is defined for a switch then it can be reused for all switches for that specific service and type. All blueprints are yaml defined and needs to be placed inside the `config/blueprints/switch_manager` path eg `config/blueprints/switch_manager/philips-hue-tap.yaml`. For a more user friendly experience and for switches with multiple buttons then a png file should be placed with the same name (case sensitive) eg a philips-hue-tap.yaml blueprint image would be `config/blueprints/switch_manager/philips-hue-tap.png`.

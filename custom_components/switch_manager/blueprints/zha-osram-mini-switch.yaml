@@ -3,10 +3,10 @@ service: ZHA
 event_type: zha_event
 identifier_key: device_id
 buttons:
-  - x: 60
-    y: 80
-    width: 295
-    height: 185
+  - x: 31
+    y: 53
+    width: 197
+    height: 115
     actions:
       - title: press
         conditions:
@@ -22,31 +22,31 @@ buttons:
             value: stop
           - key: endpoint_id
             value: 1
-  - x: 137
-    y: 330
-    width: 140
-    height: 140
+  - x: 85
+    y: 206
+    width: 90
+    height: 90
     actions:
       - title: press
         conditions:
           - key: command
             value: move_to_level_with_on_off
-      - title: move to color temp
+      - title: press (delayed)
         conditions:
           - key: command
             value: move_to_color_temp
-      - title: move to saturation
+      - title: hold
         conditions:
           - key: command
             value: move_to_saturation
-      - title: move hue
-        conditions:
-          - key: command
-            value: move_hue
-  - x: 100
-    y: 585
-    width: 215
-    height: 140
+      - title: hold (1s)
+        conditions: "{{ data.command == 'move_hue' and data.params.move_mode == 1 }}"
+      - title: hold (released)
+        conditions: "{{ data.command == 'move_hue' and data.params.move_mode == 0 }}"
+  - x: 61
+    y: 370
+    width: 137
+    height: 85
     actions:
       - title: press
         conditions:

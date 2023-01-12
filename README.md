@@ -82,7 +82,8 @@ Turn on debugging and open your dev console to see the button_last_state variabl
 Below is an example choose sequence action where if the 4th button is being held down while rotating the dial either clockwise or anti-clockwise then it will either increase or decrease the volume respectively on any playing speakers.
 
 ```yaml
-# This being the clockwise rotation (change service media_player.volume_up to media_player.volume_down for anti-clockwise)
+# This being the clockwise rotation (change service media_player.volume_up 
+# to media_player.volume_down for anti-clockwise)
 choose:
   - conditions:
       - condition: template

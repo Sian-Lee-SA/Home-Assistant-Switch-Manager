@@ -155,7 +155,7 @@ If a switch supports multiple button presses (so two buttons are pushed at the s
 
 > Single button switches must **not** contain shape properties
 
-* Shape `rect` uses x, y, width, height
+* Shape `rectangle` uses x, y, width, height
 * Shape `circle` uses x, y, width
 * Shape `path` uses d
 
@@ -163,8 +163,8 @@ Option          | Values                        | Required | Details
 --              | -                             | -        | -
 x               | `int`px                       | -        | The x (left, right) position of the button from top left within the image. *not valid for shape: path
 y               | `int`px                       | -        | The y (up, down) position of the button from top left within the image. *not valid for shape: path
-width           | `int`px                       | -        | The width of the shape rect or circle. *not valid for shape: path
-height          | `int`px                       | -        | Only valid for shape: rect. The height you want the rectangle to be
+width           | `int`px                       | -        | The width of the shape rectangle or circle. *not valid for shape: path
+height          | `int`px                       | -        | Only valid for shape: rectangle. The height you want the rectangle to be
 d               | `string`                      | -        | Only valid if shape: path. Using svg path format
 actions         | `list` [Action](#action)      | *        | Each button will have atleast one action. Each action would be the result of a tap, double tap or hold etc depending on what the switch supports.
 conditions      | `list` [Condition](#condition) \| `string` [Template](https://www.home-assistant.io/docs/configuration/templating/) | -        | This optional list or [Template](https://www.home-assistant.io/docs/configuration/templating/) allows the button to only accept conditions within the event data or mqtt payload. This can help scope down to where the button was pressed. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition. 
@@ -243,7 +243,7 @@ Otherwise you will check against the payloads keys and values
 
 The follow example is a blueprint for a Wallmote Quad which has 4 buttons with each button having 2 actions (tap and hold). This blueprint is also designed for the Z-Wave JS Integration and handles the event type `zwave_js_value_notification`. With in that we set the identifier key to `node_id` as this key is a way to distinguish which switch the event refers to. Further along we check from the root condition whether the event data has `property: scene` otherwise the switch has no need to further proceed nor does the component process other child conditions. We do this again for the buttons and actions to scope down whether the incoming event should be handled by the switch and its buttons or actions.
 
-Each button has a shape of a path as it was traced through inkscape, drawing the shapes whether be rect, circle or path allows GUI representation and allows to select individual buttons within the GUI switch editor.
+Each button has a shape of a path as it was traced through inkscape, drawing the shapes whether be rectangle, circle or path allows GUI representation and allows to select individual buttons within the GUI switch editor.
 
 > You should wrap your conditon values in qoutes as 001 equates to an int which would end up being 1 and will not match a value of 001 within the event data.
 

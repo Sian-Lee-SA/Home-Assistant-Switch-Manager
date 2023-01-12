@@ -19,6 +19,7 @@ export interface SwitchManagerBlueprint
     service: string;
     event_type: string;
     identifier_key?: string;
+    info?: string;
     conditions?: SwitchManagerBlueprintCondition[],
     has_image: boolean;
     mqtt_topic_format?: string;

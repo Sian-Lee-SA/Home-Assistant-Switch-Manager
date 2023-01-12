@@ -62,6 +62,7 @@ class Blueprint:
         self.mqtt_topic_format = config.get('mqtt_topic_format', None)
         self.mqtt_sub_topics = config.get('mqtt_sub_topics', False)
         self.identifier_key = config.get('identifier_key')
+        self.info = config.get('info')
         self.conditions = convert_conditions( hass, config.get('conditions', []) )
 
         self.buttons = [] # config.get('buttons')
@@ -197,9 +198,7 @@ class ManagedSwitchConfigButtonAction:
                     script_mode=self.mode
                 )
 
-    def _check_conditions( self, data, monitored ) -> bool:
-        if not self.active and not monitored:
-            return False
+    def _check_conditions( self, data ) -> bool:
         return self.blueprint.check_conditions( data )
 
     async def run( self, data, context ):
@@ -243,9 +242,7 @@ class ManagedSwitchConfigButton:
             if action.active:
                 self.active = True
 
-    def _check_conditions( self, data, monitored: bool ):
-        if not self.active and not monitored:
-            return False
+    def _check_conditions( self, data ):
         return self.blueprint.check_conditions( data )
 
     # home assistant json
@@ -274,6 +271,7 @@ class ManagedSwitchConfig:
         self.buttons: list[ManagedSwitchConfigButton] = []
         self.enabled: bool = config.get('enabled', True)
         
+        self.button_last_state = []
         self.setBlueprint( blueprint, config.get('buttons') )
         self.buildButtons( config.get('buttons') )
 
@@ -314,6 +312,7 @@ class ManagedSwitchConfig:
             self.buttons.append(
                     ManagedSwitchConfigButton( self._hass, self.id, i, self.blueprint.buttons[i], buttons_config[i] )
                 )
+            self.button_last_state.append(None)
     
     def add_listener(self, callback):
         self.listeners.append(callback)
@@ -337,7 +336,7 @@ class ManagedSwitchConfig:
             return
 
         def _processIncoming( data, context ):
-            data.update({'variables': self.variables})
+            data.update({'variables': self.variables, 'buttons_last_state': self.button_last_state})
 
             if not self.enabled or not self._check_conditons( data ):
                 return
@@ -345,13 +344,14 @@ class ManagedSwitchConfig:
             button_index = -1
             for button in self.buttons:
                 button_index += 1
-                if not button._check_conditions( data, self.monitored() ):
+                if not button._check_conditions( data ):
                     continue
                 action_index = -1
                 for action in button.actions:
                     action_index += 1
-                    if not action._check_conditions( data, self.monitored() ):
+                    if not action._check_conditions( data ):
                         continue
+                    self.button_last_state[button_index] = action_index
                     self._hass.async_create_task( action.run( data={ "data": data }, context=context ) )
                     self.notify('action_triggered', { 'button': button_index, 'action': action_index, 'data': data })
 

@@ -37,7 +37,8 @@ BLUEPRINT_SCHEMA = vol.Schema({
     vol.Required('service'): cv.string,
     vol.Required('event_type'): cv.string,
     vol.Required('buttons'): vol.All(cv.ensure_list, [BLUEPRINT_BUTTON_SCHEMA]),
-    vol.Optional('conditions', default=[]): vol.Any(cv.string, [CONDITION_SCHEMA])
+    vol.Optional('conditions', default=[]): vol.Any(cv.string, [CONDITION_SCHEMA]),
+    vol.Optional('info'): cv.string
 })
 BLUEPRINT_EVENT_SCHEMA = BLUEPRINT_SCHEMA.extend({
     vol.Required('identifier_key'): cv.string

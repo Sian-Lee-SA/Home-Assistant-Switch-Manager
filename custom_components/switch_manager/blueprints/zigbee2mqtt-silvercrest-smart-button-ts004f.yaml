@@ -6,7 +6,6 @@ buttons:
   - x: 220
     y: 220
     width: 219
-    height: 219
     shape: circle
     actions:
       - title: press
@@ -19,17 +18,17 @@ buttons:
           - key: payload
             value: 'off'
 
-      - title: hold (4x brightness up)
+      - title: hold (brightness up)
         conditions:
           - key: payload
             value: brightness_step_up
 
-      - title: hold (after 4x up, 4x down)
+      - title: hold (brightness down)
         conditions:
           - key: payload
             value: brightness_step_down
 
-      - title: hold release
+      - title: hold (released)
         conditions:
           - key: payload
             value: brightness_stop

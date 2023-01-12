@@ -18,12 +18,12 @@ buttons:
           - key: payload
             value: 'off'
 
-      - title: hold (brightness up)
+      - title: hold (step up)
         conditions:
           - key: payload
             value: brightness_step_up
 
-      - title: hold (brightness down)
+      - title: hold (step down)
         conditions:
           - key: payload
             value: brightness_step_down

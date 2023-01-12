@@ -271,7 +271,7 @@ class ManagedSwitchConfig:
         self.buttons: list[ManagedSwitchConfigButton] = []
         self.enabled: bool = config.get('enabled', True)
         
-        self.button_last_state = []
+        self.button_last_state: list = []
         self.setBlueprint( blueprint, config.get('buttons') )
         self.buildButtons( config.get('buttons') )
 
@@ -282,6 +282,7 @@ class ManagedSwitchConfig:
         self.identifier = config.get('identifier')
         self.variables = config.get('variables')
         self.buttons = []
+        self.button_last_state = []
         
         self.buildButtons( config.get('buttons') )
         

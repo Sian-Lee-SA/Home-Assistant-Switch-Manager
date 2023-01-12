@@ -69,7 +69,9 @@ The event or MQTT data can also be accessed inside your sequences via the data v
 
 This is a special variable that you can use in your template conditions etc. This is very handy if you want something like where you're holding a button then you're pressing another button which will execute a different action within your sequence.
 
-When the switch is updated or saved it will reset the states to null. But when you execute an action for a button this will be stored as a last state. **Remember that index's start from 0**. so if you want to check the last action from of the first button defined in the blueprint and see if it's last action was the second one then you would do `data.button_last_state[0] == 1` with 1 being the action index of that button.
+When the switch is updated or saved it will reset the states to null. But when you execute an action for a button this will be stored as a last state under the action sub key. **Remember that index's start from 0**. so if you want to check the last action from of the first button defined in the blueprint and see if it's last action was the second one then you would do `data.button_last_state[0].action == 1` with 1 being the action index of that button.
+
+You can also access the unix timestamp that the action was executed by doing `data.button_last_state[0].timestamp`, this can allow you to determine which button and what action was last executed or calculate how long ago the same button and action was excecuted by also accessing `data.timestamp` which is the current timestamp for the current button and action.
 
 You could use a choose sequence action that checks whether any other button is held and handle an action for that. Be creative! Keep in mind that this is less usefull with press actions etc as they're resetted upon a switch reload/save where as a hold/rotate action is a then and now action.
 
@@ -113,7 +115,7 @@ event_type      | `string`     | *        | Must match the event type through th
 identifier_key  | `string`     | * If not mqtt       | The key in the event data that will uniquely identify a switch.
 mqtt_topic_format| `string`    | -        | If event_type is mqtt, then this will give the user an understanding of what they should set their topic as. example: zigbee2mqtt/+/action. The MQTT topic here will also help with discovery (remember to use wildcard `+` where needed). **Make sure you set this to the standard topic if planning on sharing blueprint and not a topic that you have customised yourself through the integration**
 mqtt_sub_topics | `bool`       | -        | Along with the original topic, sub topics will also be listened to and passed in for condition checking etc. If enabled then make sure the original topic doesn't use `#` wildcards or `+` at the end. Default is false
-info            | `string`     | -        | You can add any additional information needed to the blueprint for users to read that wouldn't understand how it operates.
+info            | `string`     | -        | You can add any additional information needed for the blueprint for users to read that wouldn't understand how it operates or has some **noteworthy** information
 buttons         | `list` [Button](#button) | * | You will need to define a list of buttons even if the switch has only one or multiple. See [Button](#button) for details on defining a button
 conditions      | `list` [Condition](#condition) \| `string` [Template](https://www.home-assistant.io/docs/configuration/templating/) | - | This optional list or [Template](https://www.home-assistant.io/docs/configuration/templating/) allows the switch to only accept these conditions within the event data or mqtt payload. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition
 

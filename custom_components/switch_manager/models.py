@@ -1,3 +1,4 @@
+import time
 from .const import DOMAIN, LOGGER
 from .helpers import format_mqtt_message, get_val_from_str
 from homeassistant.core import HomeAssistant, Context, callback
@@ -337,8 +338,8 @@ class ManagedSwitchConfig:
             return
 
         def _processIncoming( data, context ):
-            data.update({'variables': self.variables, 'button_last_state': self.button_last_state})
 
+            data.update({'variables': self.variables, 'button_last_state': self.button_last_state.copy(), 'timestamp': time.time() })
             if not self.enabled or not self._check_conditons( data ):
                 return
 
@@ -352,8 +353,11 @@ class ManagedSwitchConfig:
                     action_index += 1
                     if not action._check_conditions( data ):
                         continue
-                    self.button_last_state[button_index] = action_index
                     self._hass.async_create_task( action.run( data={ "data": data }, context=context ) )
+                    self.button_last_state[button_index] = {
+                        "action": action_index,
+                        "timestamp": data['timestamp']
+                    }
                     self.notify('action_triggered', { 'button': button_index, 'action': action_index, 'data': data })
 
         self._event_listeners = await create_event_listeners( self._hass, self.blueprint, self.identifier, _processIncoming )

@@ -337,7 +337,7 @@ class ManagedSwitchConfig:
             return
 
         def _processIncoming( data, context ):
-            data.update({'variables': self.variables, 'buttons_last_state': self.button_last_state})
+            data.update({'variables': self.variables, 'button_last_state': self.button_last_state})
 
             if not self.enabled or not self._check_conditons( data ):
                 return

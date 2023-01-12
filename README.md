@@ -65,6 +65,16 @@ You can assign variables to the switch from the top right menu, these variables 
 
 The event or MQTT data can also be accessed inside your sequences via the data variable.
 
+#### button_last_state Variable
+
+This is a special variable that you can use in your template conditions etc. This is very handy if you want something like where you're holding a button then you're pressing another button which will execute a different action within your sequence.
+
+When the switch is updated or saved it will reset the states to null. But when you execute an action for a button this will be stored as a last state. **Remember that index's start from 0**. so if you want to check the last action from of the first button defined in the blueprint and see if it's last action was the second one then you would do `data.button_last_state[0] == 1` with 1 being the action index of that button.
+
+You could use a choose sequence action that checks whether any other button is held and handle an action for that. Be creative! Keep in mind that this is less usefull with press actions etc as they're resetted upon a switch reload/save where as a hold/rotate action is a then and now action.
+
+Turn on debugging and open your dev console to see the button_last_state variable and it's values
+
 ## Blueprints
 
 Blueprints are the heart of this component, once a blueprint is defined for a switch then it can be reused for all switches for that specific service and type. All blueprints are yaml defined and needs to be placed inside the `config/blueprints/switch_manager` path eg `config/blueprints/switch_manager/philips-hue-tap.yaml`. For a more user friendly experience and for switches with multiple buttons then a png file should be placed with the same name (case sensitive) eg a philips-hue-tap.yaml blueprint image would be `config/blueprints/switch_manager/philips-hue-tap.png`.

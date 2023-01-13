@@ -243,6 +243,12 @@ class ManagedSwitchConfigButton:
             if action.active:
                 self.active = True
 
+    def setInactive( self ):
+        self.active = False
+        for action in self.actions:
+            action.active = False
+            action.script = None
+
     def _check_conditions( self, data ):
         return self.blueprint.check_conditions( data )
 
@@ -291,7 +297,7 @@ class ManagedSwitchConfig:
         self.blueprint = blueprint
         self.valid_blueprint = type(blueprint) is Blueprint
         self._error = None
-        
+
         if not self.valid_blueprint:
             self._setError(f"Blueprint {self.blueprint} for {self.name} not loaded, check logs")
             return
@@ -309,13 +315,13 @@ class ManagedSwitchConfig:
 
     def buildButtons( self, buttons_config ):
         self.stop_running_scripts()
-        if not self.valid_blueprint:
-            return
 
         for i in range(len(buttons_config)):
             self.buttons.append(
                     ManagedSwitchConfigButton( self._hass, self.id, i, self.blueprint.buttons[i], buttons_config[i] )
                 )
+            if not self.valid_blueprint:
+                self.buttons[i].setInactive()
             self.button_last_state.append(None)
     
     def add_listener(self, callback):

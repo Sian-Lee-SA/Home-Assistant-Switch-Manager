@@ -7,6 +7,7 @@ from homeassistant.helpers import config_validation as cv
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.components import websocket_api
 from homeassistant.components.websocket_api import event_message
+from homeassistant.helpers import issue_registry as ir
 
 from .schema import SWITCH_MANAGER_CONFIG_SCHEMA
 from .helpers import _get_blueprint, _get_switch_config, _remove_switch_config, _set_switch_config
@@ -114,6 +115,7 @@ async def async_setup_connections( hass ):
             config = _get_switch_config( hass, msg['config'].get('id') )
             if msg['fix_mismatch']:
                 config.setBlueprint( config.blueprint, msg['config'].get('buttons') )
+                ir.async_delete_issue(hass, DOMAIN, f"switch_{config.id}_mismatch")
             config.update( msg['config'] )
             await config.start()
         else:

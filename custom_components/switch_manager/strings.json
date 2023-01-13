@@ -1,0 +1,9 @@
+{
+  "title": "Switch Manager",
+  "issues": {
+    "mismatch": {
+      "title": "Switch/Blueprint mismatch for",
+      "description": "This issue can't be fixed by a flow."
+    }
+  }
+}

@@ -43,11 +43,11 @@ You can either enter the identifier manually or use the auto discovery button th
 
 ##### Don't know event value
 
-If you do not know the event value then goto Developer Tools -> Events and start listening for events (use * if you're unsure of the event type for your switch). Once you've started listening for events, push a button on your switch then stop the listener. View the data and you will find the event related to your switch. Inside that data you will find the identifier's value. Copy this value to the identifier's textbox on the switch editor page to bind.
+If you do not know the event value then click the **Event Tool** link in the identifier dialog or goto Developer Tools -> Events and start listening for events (use * if you're unsure of the event type for your switch). Once you've started listening for events, push a button on your switch then stop the listener. View the data and you will find the event related to your switch. Inside that data you will find the identifier's value. Copy this value to the identifier's textbox on the switch editor page to bind.
 
 ##### Don't know MQTT topic
 
-If using a MQTT service then you can either download MQTT Explorer (preferred) or listen to all topics using the MQTT integration's listener. Goto Confiuration Menu -> Integrations -> MQTT -> Configure. Next listen to the topic `#` (which mean all topics), after pressing a button you will see a topic representing this, this would be your MQTT topic for Switch Manager (you can cross reference the blueprint file with the mqtt data if you want to be sure).
+If using a MQTT service then you can either download MQTT Explorer (preferred) or listen to all topics using the MQTT integration's listener. Click the **MQTT Tool** link in the identifier dialog or goto Configuration Menu -> Integrations -> MQTT -> Configure. Next listen to the topic `#` (which means all topics), after pressing a button you will see a topic representing this, this would be your MQTT topic for Switch Manager (you can cross reference the MQTT Discovery Topic and blueprint with the mqtt data if you want to be sure).
 
 #### Interacting with buttons
 

@@ -35,9 +35,9 @@ Once you've selected the blueprint, you will be taken to the switch editor view.
 
 #### Identifier
 
-There will be an identifier or mqtt topic input box up in the top left with a placeholder asking for the value for that key within the event data or mqtt topic. 
+There will be an identifier or mqtt topic input box within the identifier dialog which can be opened from the top right hamburger menu. 
 
-You can either enter the identifier manually or use the button on the right then press a button on the switch to autofill the value. There is a posibility that an identifier from some other device for the event to be discovered if that device sent an event before your button push. If this is the case and the button helper isn't getting the right identifier then follow the next step to discover it manually. 
+You can either enter the identifier manually or use the auto discovery button then press a button on the switch to autofill the value. There is a posibility that an identifier from some other device for the event to be discovered if that device sent an event before your button push. If this is the case and the button helper isn't getting the right identifier then you can manually find the information needed by clicking the Event|MQTT Tool link then listen for the event type needed or MQTT topic via `#`. 
 
 **If you have changed the default MQTT base topic for a service/integration and using a blueprint provided by Switch Manager then you will need to enter that topic manually as discovery will not work!**
 

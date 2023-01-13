@@ -58,6 +58,11 @@ class SwitchManagerDialogIdentifierAutoDiscovery extends LitElement
         this._opened = false;
     }
 
+    disconnectedCallback(): void {
+        this._stopListener();
+        super.disconnectedCallback();
+    }
+
     protected render(): TemplateResult 
     {
         if (!this._opened) {
@@ -71,7 +76,6 @@ class SwitchManagerDialogIdentifierAutoDiscovery extends LitElement
                 .heading="${createCloseHeading(this.hass, 'Identifier')}">
                 ${this._error ? html`<ha-alert alert-type="error">${this._error}</ha-alert>` : ""}
                 ${this._blueprint!.info ? html`<ha-alert alert-type="info">${this._blueprint!.info}</ha-alert>`: ''}
-
                 <ha-textfield 
                     id="identifier-input" 
                     type="text" 
@@ -85,16 +89,21 @@ class SwitchManagerDialogIdentifierAutoDiscovery extends LitElement
                         Press a button on your switch
                     </ha-alert>` : ''}
 
-                ${this._blueprint!.event_type != 'mqtt' || this._blueprint!.mqtt_topic_format ? html`
+                ${this._blueprint!.identifier_key || this._blueprint!.mqtt_topic_format ? html`
                 <mwc-button id="discovery-button" @click=${this._toggleAutoDiscovery}>
                     Auto Discover
                 </mwc-button>` : ''}
 
+                ${this._blueprint!.mqtt_topic_format ? 
+                    html`<div class="identifier-ref">MQTT Discovery Topic: <b>${this._blueprint!.mqtt_topic_format}</b> | <a href="/config/mqtt" target="_blank">MQTT Tool</a></div>` : ''}
+                ${this._blueprint!.identifier_key ? 
+                    html`<div class="identifier-ref">Event Type: <b>${this._blueprint!.event_type}</b> | <a href="/developer-tools/event" target="_blank">Event Tool</a></div>` : ''}
+
                 <mwc-button @click=${this.closeDialog} slot="secondaryAction">
                     Cancel
                 </mwc-button>
-                <mwc-button @click=${this._save} slot="primaryAction" .disabled=${this._error || ! this._identifier || ! this._dirty}>
-                    Update
+                <mwc-button @click=${this._save} slot="primaryAction" .disabled=${this._error || ! this._identifier || ! this._dirty || this._identifier == this._params.identifier}>
+                    Set
                 </mwc-button>
             </ha-dialog>
         `;
@@ -130,6 +139,10 @@ class SwitchManagerDialogIdentifierAutoDiscovery extends LitElement
                 --mdc-theme-primary: white;
                 display: flex;
                 margin: 5px auto;
+            }
+            .identifier-ref {
+                margin-top: 16px;
+                font-size: 0.9em;
             }
             :host([listening]) #discovery-button {
                 animation: 1s infinite alternate pulse;

@@ -268,8 +268,7 @@ class ManagedSwitchConfigButton:
 
 class ManagedSwitchConfig:
 
-    # Allow the switch to be created so it can be deleted via gui
-    # Otherwise there will be zombie stored data
+    # Allow the switch to be created so it can be deleted or fixed via GUI
     def __init__( self, hass: HomeAssistant, blueprint: Blueprint, _id, config ):
         """Initialize ManagedSwitch."""
         self._hass = hass
@@ -294,9 +293,7 @@ class ManagedSwitchConfig:
         self.name = config.get('name')
         self.identifier = config.get('identifier')
         self.variables = config.get('variables')
-        self.buttons = []
         self.button_last_state = []
-        
         self.buildButtons( config.get('buttons') )
         
     def setBlueprint( self, blueprint: Blueprint, buttons_config = None ):
@@ -322,6 +319,7 @@ class ManagedSwitchConfig:
 
     def buildButtons( self, buttons_config ):
         self.stop_running_scripts()
+        self.buttons = []
         # No blueprint was loaded and is a string
         if not self.valid_blueprint:
             return

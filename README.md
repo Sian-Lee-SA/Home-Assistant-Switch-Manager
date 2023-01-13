@@ -35,7 +35,7 @@ Once you've selected the blueprint, you will be taken to the switch editor view.
 
 #### Identifier
 
-There will be an identifier or mqtt topic input box within the identifier dialog which can be opened from the top right hamburger menu. 
+There will be an identifier or mqtt topic input box within the identifier dialog which can be opened from the top right menu. 
 
 You can either enter the identifier manually or use the auto discovery button then press a button on the switch to autofill the value. There is a posibility that an identifier from some other device for the event to be discovered if that device sent an event before your button push. If this is the case and the button helper isn't getting the right identifier then you can manually find the information needed by clicking the Event|MQTT Tool link then listen for the event type needed or MQTT topic via `#`. 
 
@@ -121,7 +121,7 @@ Once a blueprint file or image file has been created or edited then you will nee
 
 #### Debug
 
-Once a switch is saved, you can enable debugging through the hamburger menu up in the top right. List conditions will use what ever is in the data object (you do not need to add data to your keys) while Template conditions and sequence templates will need to access the data variable (eg data.{event_key} ).
+Once a switch is saved, you can enable debugging through the top right menu up in the top right. List conditions will use what ever is in the data object (you do not need to add data to your keys) while Template conditions and sequence templates will need to access the data variable (eg data.{event_key} ).
 
 Once enabled, open your browser dev console to view debugging output
 

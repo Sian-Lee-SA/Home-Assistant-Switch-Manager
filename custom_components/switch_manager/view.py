@@ -9,12 +9,7 @@ async def async_setup_view(hass: HomeAssistant):
         hass.config.path("custom_components/switch_manager/assets/switch_manager_panel.js"),
     )
 
-    for key in hass.data[DOMAIN].get(CONF_BLUEPRINTS):
-        if hass.data[DOMAIN].get(CONF_BLUEPRINTS)[key].has_image:
-            hass.http.register_static_path(
-                f'/assets/{DOMAIN}/{key}.png',
-                hass.config.path(f"{BLUEPRINTS_FOLDER}/{DOMAIN}/{key}.png"),
-            )
+    await async_bind_blueprint_images(hass)
 
     hass.components.frontend.async_register_built_in_panel(
         component_name="custom",
@@ -31,3 +26,11 @@ async def async_setup_view(hass: HomeAssistant):
             "version": VERSION
         },
     )
+
+async def async_bind_blueprint_images(hass: HomeAssistant):
+    for key in hass.data[DOMAIN].get(CONF_BLUEPRINTS):
+        if hass.data[DOMAIN].get(CONF_BLUEPRINTS)[key].has_image:
+            hass.http.register_static_path(
+                f'/assets/{DOMAIN}/{key}.png',
+                hass.config.path(f"{BLUEPRINTS_FOLDER}/{DOMAIN}/{key}.png"),
+            )

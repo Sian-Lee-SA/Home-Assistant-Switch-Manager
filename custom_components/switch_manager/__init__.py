@@ -11,7 +11,7 @@ from .const import (
 )
 from .store import SwitchManagerStore
 from .helpers import load_blueprints, VERSION, deploy_blueprints, check_blueprints_folder_exists, _get_blueprint, _set_switch_config
-from .view import async_setup_view
+from .view import async_setup_view, async_bind_blueprint_images
 from . import models
 from .schema import BLUEPRINT_MQTT_SCHEMA, BLUEPRINT_EVENT_SCHEMA
 from .connections import async_setup_connections
@@ -49,6 +49,7 @@ async def async_setup( hass: HomeAssistant, config: Config ):
         await hass.data[DOMAIN][CONF_STORE].load()
         await _init_blueprints(hass)
         await _init_switch_configs(hass)
+        await async_bind_blueprint_images(hass)
 
 
     await _init_blueprints(hass)

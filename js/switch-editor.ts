@@ -812,6 +812,7 @@ class SwitchManagerSwitchEditor extends LitElement
             fix_mismatch: true
         }).then(r => {
             this._loadConfig();
+            showToast(this, { message: 'Fixed, Now Double Check Your Config!' });
         }).catch(error => {
             showToast(this, { message: error.message });
         });

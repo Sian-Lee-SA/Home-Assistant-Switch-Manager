@@ -13,7 +13,8 @@ import {
     mdiEarHearing,
     mdiBug,
     mdiCheck,
-    mdiCodeBraces
+    mdiCodeBraces,
+    mdiBarcodeScan
 } from "@mdi/js";
 import { SwitchManagerBlueprint, SwitchManagerConfig, SwitchManagerConfigButton } from "./types";
 import { MODES } from "../ha-frontend/data/script";
@@ -63,7 +64,6 @@ class SwitchManagerSwitchEditor extends LitElement
     @property() disabled = false;
 
     @state() private _subscribedMonitor?: () => void;
-    @state() private _subscribedAutoDiscovery?: () => void;
     @state() private _reloadListener?: () => void;
 
     @state() private sequence: any[] = [];
@@ -78,7 +78,6 @@ class SwitchManagerSwitchEditor extends LitElement
     @state() private _errors?: string;
 
     @query('#switch-svg') svg;
-    @query('#identifier-input') identifier_input;
     @query('switch-manager-button-actions') button_actions;
 
     render() 
@@ -108,7 +107,16 @@ class SwitchManagerSwitchEditor extends LitElement
                                     .label=${this.hass.localize("ui.common.menu")}
                                     .path=${mdiDotsVertical}>
                                 </ha-icon-button>
-                                
+
+                                <mwc-list-item
+                                    graphic="icon"
+                                    .disabled=${!this.config || !this.config?.valid_blueprint}
+                                    @click=${this._showIdentifierAutoDiscoveryDialog}>
+                                        Identifier
+                                        <ha-svg-icon slot="graphic" .path=${mdiBarcodeScan}>
+                                        </ha-svg-icon>
+                                </mwc-list-item>
+
                                 <mwc-list-item
                                     graphic="icon"
                                     @click=${this._showRenameDialog}>
@@ -172,31 +180,10 @@ class SwitchManagerSwitchEditor extends LitElement
                 </app-header>
             </ha-app-layout>
             <hui-view>
-                <hui-panel-view>
+                <hui-panel-view>                 
                     ${this.config?.valid_blueprint ? html`
-                    <h3 id="blueprint-name">${this.blueprint?.service} / ${this.blueprint?.name}</h3>
-                    <span id="identifier">
-                        <ha-textfield 
-                            id="identifier-input" 
-                            type="text" 
-                            .value="${this.config?.identifier}" 
-                            required="true" 
-                            .label=${this.blueprint?.event_type == 'mqtt'? 'mqtt topic' : this.blueprint?.identifier_key}
-                            @input="${this._identifierChanged}"></ha-textfield>
-                        ${this.blueprint?.event_type != 'mqtt' || this.blueprint?.mqtt_topic_format ? html`
-                        <ha-icon-button
-                            .path=${mdiEarHearing}
-                            ?listening=${(this._subscribedAutoDiscovery)}
-                            @click=${this._toggleAutoDiscovery}>
-                        </ha-icon-button>` : 
-                            html`${this.blueprint.mqtt_topic_format ? html`<ha-alert alert-type="info">Format: ${this.blueprint.mqtt_topic_format}</ha-alert>` : ''}`}
-                        ${this._subscribedAutoDiscovery ? html`
-                        <ha-alert alert-type="info">
-                            Press a button on your switch
-                        </ha-alert>` : ''}
-                    </span>`:''}
-                    
-                
+                    <h3 id="blueprint-name">${this.blueprint?.service} / ${this.blueprint?.name}</h3>`:''}
+
                     <div id="switch-image">
                     ${this.blueprint && !this.blueprint?.has_image ?
                         html`<ha-svg-icon .path=${mdiGestureTapButton}></ha-svg-icon>` :
@@ -288,15 +275,6 @@ class SwitchManagerSwitchEditor extends LitElement
             haStyle,
             fabStyle,
             css`
-            @keyframes pulse {
-                from {
-                    opacity: 1;
-                }
-                to {
-                    opacity: 0.4;
-                }
-            }
-            
             @keyframes pressed {
                 to {
                     fill: #3ff17975;
@@ -318,44 +296,10 @@ class SwitchManagerSwitchEditor extends LitElement
                 max-width: var(--max-width);
                 margin: 0 auto;
             }
-            h3, #identifier {
+            h3 {
                 padding-left: 25px;
             }
-            #identifier {
-                position: relative;
-            }
-            #identifier-input {
-                width: 300px;
-                --text-field-padding: 0 36px 0 12px;
-            }
-            #identifier ha-icon-button {
-                vertical-align: middle;
-                background: var(--mdc-text-field-fill-color);
-                border-radius: 50%;
-                color: var(--mdc-text-field-ink-color);
-                margn-top: -10px;
-                margin-top: -14px;
-                margin-left: -34px;
-                position: relative;
-                --mdc-icon-button-size: 54px;
-                box-shadow: -5px 1px 8px -6px;
-            }
-            #identifier ha-icon-button[listening] {
-                animation: 1s infinite alternate pulse;
-            }
-            #identifier ha-alert {
-                display: block;
-                width: 300px;
-                position: absolute;
-                margin-left: 25px;
-            }
-            @media screen and ( max-width: 690px )
-            {
-                #identifier-input, #identifier ha-alert {
-                    width: 90%;
-                    position: relative;
-                }
-            }
+
             hui-view {
                 height: calc(100vh - var(--header-height));
                 display: block;
@@ -382,12 +326,6 @@ class SwitchManagerSwitchEditor extends LitElement
                 display: flex;
                 margin: 1em;
                 justify-content: center;
-            }           
-            @media screen and ( min-width: 1500px )
-            {
-                #switch-image {
-                    margin-top: -65px;
-                }
             }
             #sequence-container {
                 padding: 28px 20px 0;
@@ -446,7 +384,6 @@ class SwitchManagerSwitchEditor extends LitElement
         super.disconnectedCallback();
 
         this._killListener( '_reloadListener' );
-        this._killListener( '_subscribedAutoDiscovery' );
         this._killListener( '_subscribedMonitor' );
     }
 
@@ -637,12 +574,9 @@ class SwitchManagerSwitchEditor extends LitElement
     private _validate(): boolean
     {
         this._errors = undefined;
-        this.identifier_input.invalid = false;
-        if( !this.config?.identifier )
+        if( ! this.config?.identifier )
         {
-            this._errors = 'Identifier must not be empty';
-            this.identifier_input.invalid = true;
-            this.identifier_input.errorMessage = 'Identifier required';
+            this._showIdentifierAutoDiscoveryDialog();
             return false;
         }
         return true;
@@ -705,31 +639,12 @@ class SwitchManagerSwitchEditor extends LitElement
         this._dirty = true;
     }
 
-    private async _toggleAutoDiscovery()
-    {
-        // Act as a toggle
-        if( this._killListener( '_subscribedAutoDiscovery' ) )
-            return;
-
-        this._subscribedAutoDiscovery = await this.hass.connection.subscribeMessage((msg) => {
-            this.identifier_input.value = msg.identifier;
-            this._killListener( '_subscribedAutoDiscovery' )
-            this._identifierChanged();
-        }, { type: buildWSPath('blueprints/auto_discovery'), blueprint_id: this.blueprint!.id });
-    }
-
     private _toggleDebug()
     {
         this._debug = !this._debug;
         showToast( this, {
             message: `Debug ${this._debug ? 'Enabled. View dev console' : 'Disabled'}`
         })
-    }
-
-    private _identifierChanged(ev?: CustomEvent)
-    {
-        this.config!.identifier = getValueById(this, 'identifier-input');
-        this._dirty = true;
     }
 
     private _modeValueChanged(ev: CustomEvent)
@@ -740,6 +655,24 @@ class SwitchManagerSwitchEditor extends LitElement
         this.config!.buttons[this.button_index].actions[this.action_index].mode = ev.detail.value;
         this.requestUpdate('config');
         this._dirty = true;
+    }
+
+    private async _showIdentifierAutoDiscoveryDialog(): Promise<void>
+    {
+        fireEvent(this, "show-dialog", {
+            dialogTag: "switch-manager-dialog-identifier-auto-discovery",
+            dialogImport: () => import("./dialogs/dialog-identifier-auto-discovery"),
+            dialogParams: {
+                identifier: this.config!.identifier,
+                blueprint: this.blueprint,
+                update: (params) => {
+                    this.config!.identifier = params.identifier;
+                    this._dirty = true;
+                    this.requestUpdate();
+                },
+                onClose: () => {}
+            },
+        });        
     }
 
     private async _showRenameDialog(): Promise<void>
@@ -754,7 +687,10 @@ class SwitchManagerSwitchEditor extends LitElement
                     this._dirty = true;
                     this.requestUpdate();
                 },
-                onClose: () => {}
+                onClose: () => {
+                    if( this.is_new )
+                        this._showIdentifierAutoDiscoveryDialog();
+                }
             },
         });
     }

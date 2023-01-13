@@ -526,13 +526,13 @@ class SwitchManagerSwitchEditor extends LitElement
         {
             this.blueprint.buttons.forEach((button, index) => {
                 let svgshape: SVGCircleElement | SVGRectElement | SVGPathElement;
-                if( button.x && button.y && button.width && button.height ) {
+                if( button.x > -1 && button.y > -1 && button.width > 0 && button.height > 0 ) {
                     svgshape = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
                     svgshape.setAttributeNS(null, 'x', button.x.toString());
                     svgshape.setAttributeNS(null, 'y', button.y.toString());
                     svgshape.setAttributeNS(null, 'width', button.width.toString());
                     svgshape.setAttributeNS(null, 'height', button.height.toString());
-                } else if ( button.x && button.y && button.width ) {
+                } else if ( button.x > -1 && button.y > -1 && button.width > 0 ) {
                     svgshape = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
                     svgshape.setAttributeNS(null, 'cx', button.x.toString());
                     svgshape.setAttributeNS(null, 'cy', button.y.toString());

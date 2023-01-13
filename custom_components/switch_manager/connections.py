@@ -172,7 +172,9 @@ async def async_setup_connections( hass ):
 
         await _remove_switch_config( hass, msg['config_id'] )    
         await store.delete_managed_switch( msg['config_id'] )
-        
+
+        ir.async_delete_issue(hass, DOMAIN, f"switch_{msg['config_id']}_mismatch")
+
         connection.send_result( msg['id'], {
             "deleted": msg['config_id']
         })

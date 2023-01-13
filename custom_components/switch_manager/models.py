@@ -231,12 +231,18 @@ class ManagedSwitchConfigButton:
 
         self.active = False
         for i in range(len(config.get('actions'))):
+            # Way to handle blueprint mismatch
+            try:
+                blueprint_action = self.blueprint.actions[i]
+            except IndexError:
+                blueprint_action = BlueprintButtonAction(hass, { 'mode': 'single', 'sequence': [] }, i)
+
             action = ManagedSwitchConfigButtonAction( 
                         hass,
                         switch_id,
                         index,
                         i,
-                        self.blueprint.actions[i], 
+                        blueprint_action, 
                         config.get('actions')[i] 
                     )
             self.actions.append(action)
@@ -274,10 +280,10 @@ class ManagedSwitchConfig:
         self.identifier = config.get('identifier')
         self.blueprint: Blueprint
         self.valid_blueprint: bool
+        self.is_mismatch: bool
         self.variables: dict = config.get('variables')
         self.buttons: list[ManagedSwitchConfigButton] = []
         self.enabled: bool = config.get('enabled', True)
-        
         self.button_last_state: list = []
         self.setBlueprint( blueprint, config.get('buttons') )
         self.buildButtons( config.get('buttons') )
@@ -296,6 +302,7 @@ class ManagedSwitchConfig:
     def setBlueprint( self, blueprint: Blueprint, buttons_config = None ):
         self.blueprint = blueprint
         self.valid_blueprint = type(blueprint) is Blueprint
+        self.is_mismatch = False
         self._error = None
 
         if not self.valid_blueprint:
@@ -305,22 +312,31 @@ class ManagedSwitchConfig:
         if buttons_config:
             if len(buttons_config) != len(self.blueprint.buttons):
                 self._setError(f"Blueprint {self.blueprint.id} mismatch for buttons on {self.name}")
-                self.valid_blueprint = False
+                self.is_mismatch = True
                 return
             for i in range(len(buttons_config)):
                 if len(buttons_config[i].get('actions')) != len(self.blueprint.buttons[i].actions):
                     self._setError(f"Blueprint {self.blueprint.id} mismatch for actions on {self.name}")
-                    self.valid_blueprint = False
+                    self.is_mismatch = True
                     return
 
     def buildButtons( self, buttons_config ):
         self.stop_running_scripts()
+        # No blueprint was loaded and is a string
+        if not self.valid_blueprint:
+            return
 
         for i in range(len(buttons_config)):
+            # Way to handle blueprint mismatch
+            try:
+                blueprint_button = self.blueprint.buttons[i]
+            except IndexError:
+                blueprint_button = BlueprintButton(self._hass, { 'actions': [] }, i)
+
             self.buttons.append(
-                    ManagedSwitchConfigButton( self._hass, self.id, i, self.blueprint.buttons[i], buttons_config[i] )
+                    ManagedSwitchConfigButton( self._hass, self.id, i, blueprint_button, buttons_config[i] )
                 )
-            if not self.valid_blueprint:
+            if self.is_mismatch:
                 self.buttons[i].setInactive()
             self.button_last_state.append(None)
     
@@ -342,7 +358,7 @@ class ManagedSwitchConfig:
     async def start(self): 
         # Reset state for new instances as this should also be called as a restart
         self.stop()
-        if self._event_listeners or not self.valid_blueprint or not self.enabled:
+        if self._event_listeners or self._error or not self.enabled:
             return
 
         def _processIncoming( data, context ):

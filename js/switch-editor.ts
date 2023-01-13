@@ -108,7 +108,7 @@ class SwitchManagerSwitchEditor extends LitElement
 
                                 <mwc-list-item
                                     graphic="icon"
-                                    .disabled=${!this.config || !this.config?.valid_blueprint}
+                                    .disabled=${!this.config || this.config?._error}
                                     @click=${this._showIdentifierAutoDiscoveryDialog}>
                                         Identifier
                                         <ha-svg-icon slot="graphic" .path=${mdiBarcodeScan}>
@@ -125,7 +125,7 @@ class SwitchManagerSwitchEditor extends LitElement
                                 
                                 <mwc-list-item
                                     graphic="icon"
-                                    .disabled=${!this.config || !this.config?.valid_blueprint}
+                                    .disabled=${!this.config || this.config?._error}
                                     @click=${this._showVariablesEditorDialog}>
                                         Variables
                                         <ha-svg-icon
@@ -136,7 +136,7 @@ class SwitchManagerSwitchEditor extends LitElement
 
                                 <mwc-list-item
                                     graphic="icon"
-                                    .disabled=${!this.config || this.is_new || !this.config?.valid_blueprint}
+                                    .disabled=${!this.config || this.is_new || this.config?._error}
                                     @click=${this._toggleEnabled}>
                                         ${!this.config?.enabled ? 'Enable' : 'Disable'}
                                         <ha-svg-icon
@@ -149,7 +149,7 @@ class SwitchManagerSwitchEditor extends LitElement
                                 
                                 <mwc-list-item
                                     graphic="icon"
-                                    .disabled=${!this.config || this.is_new || !this.config?.valid_blueprint}
+                                    .disabled=${!this.config || this.is_new || this.config?._error}
                                     @click=${this._toggleDebug}>
                                         Debug
                                         <ha-svg-icon
@@ -179,7 +179,7 @@ class SwitchManagerSwitchEditor extends LitElement
             </ha-app-layout>
             <hui-view>
                 <hui-panel-view>                 
-                    ${this.config?.valid_blueprint ? html`
+                    ${!this.config?._error ? html`
                     <h3 id="blueprint-name">${this.blueprint?.service} / ${this.blueprint?.name}</h3>`:''}
 
                     <div id="switch-image">
@@ -188,7 +188,7 @@ class SwitchManagerSwitchEditor extends LitElement
                         html`<svg id="switch-svg"></svg>`}
                     </div>
 
-                    ${this.config?.valid_blueprint ? html`
+                    ${!this.config?._error ? html`
                     <switch-manager-button-actions
                         .hass=${this.hass}
                         .blueprint_actions=${this.blueprint?.buttons[this.button_index]?.actions}
@@ -203,7 +203,7 @@ class SwitchManagerSwitchEditor extends LitElement
                             ${this._errors ? html`
                             <ha-alert alert-type="error">
                                 ${this._errors}
-                                ${typeof this.blueprint != 'string' ? html`<mwc-button slot="action" @click=${this._fixMismatch}>Fix</mwc-button>` : ''}
+                                ${this.config.is_mismatch ? html`<mwc-button slot="action" @click=${this._fixMismatch}>Fix</mwc-button>` : ''}
                             </ha-alert>` : ''}
 
                             ${this.config && !this.config.enabled ? html`
@@ -213,7 +213,7 @@ class SwitchManagerSwitchEditor extends LitElement
                                     Enable
                                 </mwc-button>
                             </ha-alert>` : ''}
-                            ${this.config?.valid_blueprint ? html`
+                            ${!this.config?._error ? html`
                             <div id="sequence-container">
                                 <div class="header">
                                     <h2 id="sequence-heading" class="name">
@@ -250,7 +250,7 @@ class SwitchManagerSwitchEditor extends LitElement
                             </div>`:''}
                         </div>
                     </ha-card>
-                    ${this.config?.valid_blueprint ? html`
+                    ${!this.config?._error ? html`
                     <div class="fab-container">
                         <ha-fab
                             slot="fab"
@@ -584,7 +584,7 @@ class SwitchManagerSwitchEditor extends LitElement
 
     private _save()
     {
-        if( this._block_save || !this._validate() || !this.config )
+        if( this._block_save || !this._validate() || !this.config || this.config._error )
             return;
 
         this._block_save = true;
@@ -783,6 +783,9 @@ class SwitchManagerSwitchEditor extends LitElement
 
     private async _fixMismatch() 
     {
+        if( ! this.config!.is_mismatch )
+            return;
+
         let buttons = this.config!.buttons.slice(0, this.config!.blueprint.buttons.length);
         this.config!.blueprint.buttons.forEach((b, b_index) => {
             if( ! buttons[b_index] )

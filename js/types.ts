@@ -43,6 +43,7 @@ export interface SwitchManagerConfig
     name: string;
     enabled: boolean;
     identifier: string;
+    is_mismatch: boolean;
     blueprint: SwitchManagerBlueprint;
     valid_blueprint: boolean;
     variables?: any;

@@ -96,10 +96,10 @@ async def async_setup_connections( hass ):
         connection.subscriptions[msg["id"]] = close_connection
         connection.send_result(msg["id"])
 
-
     @websocket_api.websocket_command({
         vol.Required("type"): "switch_manager/config/save", 
-        vol.Required('config'): SWITCH_MANAGER_CONFIG_SCHEMA
+        vol.Required('config'): SWITCH_MANAGER_CONFIG_SCHEMA,
+        vol.Optional('fix_mismatch', default=False): bool
     })
     @websocket_api.async_response
     async def websocket_save_config(
@@ -112,6 +112,8 @@ async def async_setup_connections( hass ):
 
         if msg['config'].get('id'):
             config = _get_switch_config( hass, msg['config'].get('id') )
+            if msg['fix_mismatch']:
+                config.setBlueprint( config.blueprint, msg['config'].get('buttons') )
             config.update( msg['config'] )
             await config.start()
         else:

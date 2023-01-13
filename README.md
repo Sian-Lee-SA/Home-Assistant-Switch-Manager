@@ -109,7 +109,6 @@ Blueprints are the heart of this component, once a blueprint is defined for a sw
 
 File names should be defined as {service-name}-{switch-name-or-type}.yaml and all lower case. If you don't plan on posting your blueprint for others to use then it would be a good idea to prefix your file names with something unique like mycustom-{service-name}-{switch-name-or-type}.yaml. This way when you update the component with new blueprints then it won't overwrite your personal made ones if they happen to have the same file name.
 
-
 #### Images
 
 * Only PNG files are currently supported.
@@ -249,7 +248,7 @@ Each button has a shape of a path as it was traced through inkscape, drawing the
 
 ```yaml
 name: Wallmote Quad
-service: ZWave JS
+service: Z-Wave JS
 event_type: zwave_js_value_notification
 identifier_key: node_id
 conditions:
@@ -336,11 +335,11 @@ buttons:
 
 ## Troubleshoot
 
-#### Update broke my switch
+#### Update broke my switch causing blueprint mismatch
 
-If by chance your switches are invalid because of a blueprint change, then this would generally mean a blueprint has added either more buttons or extra actions. We try to avoid this and as this integration is still in it's infancy stages there will be changes from time to time and while these changes happen, so does the rules in adding a blueprint to this repo (this should hopefully iron out these issues in the future). For now, you have two options when there's a blueprint mismatch. First you could delete the invalid switch and create it again, or you can go into the .storage folder and edit switch_manager then add the missing actions or buttons manually to match the number of buttons and actions on the blueprint...
+If by chance your switches are invalid because of a blueprint change, then this would generally mean a blueprint has added either more buttons or extra actions. We try to avoid this and as this integration is still in it's infancy stages there will be changes from time to time and while these changes happen, so does the rules in adding a blueprint to this repo (this should hopefully iron out these issues in the future).
 
-I did contemplate updating the switches to match the buttons upon a migration method but found this to be dangerous as it would cause already set switches to call a sequence on the wrong button or action and I can not be sure someone hasn't hooked up a switch button to a bomb or who knows what ;). So for now I feel it's safer to invalidate a switch when there's a mismatch and hopefully this will not be a problem in the future when everything is set in stone.
+To fix this, edit the switch then click **fix**. Once the switch has been updated to match the blueprint, you'll want to ensure your actions and sequences are in the right spots! This is by design to have you manually click fix as to ensure you're aware of the changes and how your buttons and actions have changed.
 
 ## Donate
 

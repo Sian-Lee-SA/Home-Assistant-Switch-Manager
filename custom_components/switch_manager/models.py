@@ -290,6 +290,8 @@ class ManagedSwitchConfig:
     def setBlueprint( self, blueprint: Blueprint, buttons_config = None ):
         self.blueprint = blueprint
         self.valid_blueprint = type(blueprint) is Blueprint
+        self._error = None
+        
         if not self.valid_blueprint:
             self._setError(f"Blueprint {self.blueprint} for {self.name} not loaded, check logs")
             return

@@ -10,7 +10,6 @@ import {
     mdiStopCircleOutline,
     mdiPlayCircleOutline,
     mdiGestureTapButton,
-    mdiEarHearing,
     mdiBug,
     mdiCheck,
     mdiCodeBraces,
@@ -23,7 +22,6 @@ import {
     buildUrl, 
     buildWSPath, 
     createConfigFromBlueprint,
-    getValueById,
     showConfirmDialog
 } from "./helpers";
 import { navigate } from "../ha-frontend/common/navigate";
@@ -205,7 +203,9 @@ class SwitchManagerSwitchEditor extends LitElement
                             ${this._errors ? html`
                             <ha-alert alert-type="error">
                                 ${this._errors}
+                                ${typeof this.blueprint != 'string' ? html`<mwc-button slot="action" @click=${this._fixMismatch}>Fix</mwc-button>` : ''}
                             </ha-alert>` : ''}
+
                             ${this.config && !this.config.enabled ? html`
                             <ha-alert alert-type="info">
                                 Switch is disabled
@@ -763,7 +763,8 @@ class SwitchManagerSwitchEditor extends LitElement
         });
     }
 
-    private async confirmUnsavedChanged(): Promise<boolean> {
+    private async confirmUnsavedChanged(): Promise<boolean> 
+    {
         if (this._dirty) {
             return showConfirmationDialog(this, {
                 title: this.hass!.localize(
@@ -778,6 +779,42 @@ class SwitchManagerSwitchEditor extends LitElement
             });
         }
         return true;
+    }
+
+    private async _fixMismatch() 
+    {
+        let buttons = this.config!.buttons.slice(0, this.config!.blueprint.buttons.length);
+        this.config!.blueprint.buttons.forEach((b, b_index) => {
+            if( ! buttons[b_index] )
+            {
+                buttons[b_index] = {
+                    actions: []
+                }
+            }
+            buttons[b_index].actions = buttons[b_index].actions.slice(0, b.actions.length);
+            b.actions.forEach((a, a_index) => {
+                if( ! buttons[b_index].actions[a_index] )
+                {
+                    buttons[b_index].actions[a_index] = {
+                        mode: MODES[0],
+                        sequence: []
+                    }
+                }
+            });
+        });
+
+        this.config!.buttons = buttons;
+        this._errors = undefined;
+
+        this.hass.callWS({
+            type: buildWSPath('config/save'), 
+            config: {...this.config, blueprint: this.config!.blueprint.id},
+            fix_mismatch: true
+        }).then(r => {
+            this._loadConfig();
+        }).catch(error => {
+            showToast(this, { message: error.message });
+        });
     }
     
     private _backTapped = async () => 

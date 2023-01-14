@@ -410,10 +410,9 @@ class SwitchManagerSwitchEditor extends LitElement
 
     disconnectedCallback(): void 
     {
-        super.disconnectedCallback();
-
         this._killListener( '_reloadListener' );
         this._killListener( '_subscribedMonitor' );
+        super.disconnectedCallback();
     }
 
     // Can't pass by reference so use string to access propery (not ideal)

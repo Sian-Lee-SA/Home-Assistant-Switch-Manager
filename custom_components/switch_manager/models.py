@@ -31,11 +31,11 @@ async def create_event_listeners( hass: HomeAssistant, blueprint, mqtt_topic, _c
     @callback
     def _handleMQTT( message: ReceiveMessage ):
         data = format_mqtt_message(message)
-        _callback( data, Context() )
+        _callback( data.copy(), Context() )
     
     @callback
     def _handleEvent( event ):
-        _callback( event.data, event.context )
+        _callback( event.data.copy(), event.context )
 
     listeners = []
     if blueprint.is_mqtt:

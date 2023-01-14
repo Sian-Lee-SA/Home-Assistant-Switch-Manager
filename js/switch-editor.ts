@@ -663,8 +663,11 @@ class SwitchManagerSwitchEditor extends LitElement
 
     private _configSequenceChanged(ev: CustomEvent) 
     {   
-        if( this._is_yaml && ! ev.detail.value )
-            ev.detail.value = [];
+        if( this._is_yaml )
+        {
+            if( ! ev.detail.value || ! Array.isArray(ev.detail.value) )
+                ev.detail.value = [];
+        }
         this.requestUpdate('config');
         this._updateSequence(ev.detail.value);
         this._errors = undefined;

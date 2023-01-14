@@ -177,6 +177,7 @@ An action would be the result of a press/tap, whether its held down or if it was
 To unify switches added to Switch Manager, it makes sense to conform to a naming convention so the below dot points are some rules to go by
 
 * All characters should be lowercase
+* If a button has a initial press action (where it's always called before other actions) then this should be called **init**, this is usefull for setting timers and other initiating actions
 * If mechanical button then the action should be **press**
 * If touch button (as in there's no mechanical trigger) then the action should be **tap** (if unsure then resort to **press**)
 * If action is double press/tap or triple press/tap and so on then the action should be **press 2x** / **tap 2x** or **press 3x** / **tap 3x** and so on
@@ -186,7 +187,7 @@ To unify switches added to Switch Manager, it makes sense to conform to a naming
 
 #### Order convention
 
-Actions should be ordered logically. This would be **press** -> **press 2x** -> **press 3x** -> **hold** -> **hold (released)** -> Then anything that is more unique like **shake**, **viabrate** and so on.
+Actions should be ordered logically. This would be **init** -> **press** -> **press 2x** -> **press 3x** -> **hold** -> **hold (released)** -> Then anything that is more unique like **shake**, **viabrate** and so on.
 
 Option          | Values                          | Required | Details
 --              | -                               | -        | -

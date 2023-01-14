@@ -13,7 +13,9 @@ import {
     mdiBug,
     mdiCheck,
     mdiCodeBraces,
-    mdiBarcodeScan
+    mdiBarcodeScan,
+    mdiFileDocumentEditOutline,
+    mdiViewDashboardEditOutline
 } from "@mdi/js";
 import { SwitchManagerBlueprint, SwitchManagerConfig, SwitchManagerConfigButton } from "./types";
 import { MODES } from "../ha-frontend/data/script";
@@ -34,6 +36,8 @@ import "@polymer/app-layout/app-toolbar/app-toolbar";
 import "./button-actions";
 import "../ha-frontend/types";
 import "../ha-frontend/panels/config/automation/action/ha-automation-action";
+import "../ha-frontend/components/ha-yaml-editor";
+import type { HaYamlEditor } from "../ha-frontend/components/ha-yaml-editor";
 import { showConfirmationDialog } from "../ha-frontend/dialogs/generic/show-dialog-box";
 import { afterNextRender } from "../ha-frontend/common/util/render-status";
 import "../ha-frontend/components/ha-fab";
@@ -69,7 +73,7 @@ class SwitchManagerSwitchEditor extends LitElement
     @state() private action_index: number = 0;
 
     @state() private is_new: boolean = true;
-
+    @state() private _is_yaml: boolean = false;
     @state() private _dirty: boolean = false;
     @state() private _debug: boolean = false;
     @state() private _block_save: boolean = false;
@@ -77,6 +81,7 @@ class SwitchManagerSwitchEditor extends LitElement
 
     @query('#switch-svg') svg;
     @query('switch-manager-button-actions') button_actions;
+    @query("ha-yaml-editor") private _yamlEditor?: HaYamlEditor;
 
     render() 
     {
@@ -235,17 +240,41 @@ class SwitchManagerSwitchEditor extends LitElement
                                             @value-changed=${this._modeValueChanged}>
                                         </ha-selector-select>
                                     </h2>
+
+                                    <ha-button-menu corner="TOP_START" slot="toolbar-icon">
+                                        <ha-icon-button
+                                            slot="trigger"
+                                            .label=${this.hass.localize("ui.common.menu")}
+                                            .path=${mdiDotsVertical}>
+                                        </ha-icon-button>
+        
+                                        <mwc-list-item
+                                            graphic="icon"
+                                            @click=${this._toggleYaml}>
+                                                ${!this._is_yaml ? 'Yaml Editor' : 'Visual Editor'}
+                                                <ha-svg-icon slot="graphic" .path=${!this._is_yaml? mdiFileDocumentEditOutline : mdiViewDashboardEditOutline}>
+                                                </ha-svg-icon>
+                                        </mwc-list-item>
+                                    </ha-button-menu>
+
                                 </div>
-                        
+
+                                ${this._is_yaml ? html`
+                                <ha-yaml-editor
+                                    .hass=${this.hass}
+                                    .value=${this.sequence}
+                                    @value-changed=${this._configSequenceChanged}>
+                                </ha-yaml-editor>` 
+                                : html`
                                 <ha-automation-action
+                                    .hass=${this.hass}
                                     role="region"
                                     aria-labelledby="sequence-heading"
                                     .actions=${this.sequence}
                                     @value-changed=${this._configSequenceChanged}
-                                    .hass=${this.hass}
                                     .narrow=${this.narrow}
                                     .disabled=${this.disabled}>
-                                </ha-automation-action>
+                                </ha-automation-action>`}
 
                             </div>`:''}
                         </div>
@@ -629,6 +658,8 @@ class SwitchManagerSwitchEditor extends LitElement
     {
         this.action_index = index;
         this._updateSequence();
+        if( this._is_yaml )
+            this._yamlEditor?.setValue( this.sequence );
     }
 
     private _configSequenceChanged(ev: CustomEvent) 
@@ -645,6 +676,16 @@ class SwitchManagerSwitchEditor extends LitElement
         showToast( this, {
             message: `Debug ${this._debug ? 'Enabled. View dev console' : 'Disabled'}`
         })
+    }
+
+    private async _toggleYaml()
+    {
+        this._is_yaml = !this._is_yaml;
+
+        // Ensure Yaml Editor is in DOM
+        await this.updateComplete;
+        if( this._is_yaml )
+            this._yamlEditor?.setValue( this.sequence );
     }
 
     private _modeValueChanged(ev: CustomEvent)

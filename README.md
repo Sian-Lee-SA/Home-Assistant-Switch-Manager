@@ -73,7 +73,7 @@ When the switch is updated or saved it will reset the states to null. But when y
 
 You can also access the unix timestamp that the action was executed by doing `data.button_last_state[0].timestamp`, this can allow you to determine which button and what action was last executed or calculate how long ago the same button and action was excecuted by also accessing `data.timestamp` which is the current timestamp for the current button and action.
 
-You could use a choose sequence action that checks whether any other button is held and handle an action for that. Be creative! Keep in mind that this is less usefull with press actions etc as they're resetted upon a switch reload/save where as a hold/rotate action is more usefull as they're called in an active state.
+You could use a choose sequence action that checks whether any other button is held and handle an action for that. Be creative! Keep in mind that this is less useful with press actions etc as they're resetted upon a switch reload/save where as a hold/rotate action is more useful as they're called in an active state.
 
 Turn on debugging and open your dev console to see the button_last_state variable and it's values
 
@@ -177,7 +177,7 @@ An action would be the result of a press/tap, whether its held down or if it was
 To unify switches added to Switch Manager, it makes sense to conform to a naming convention so the below dot points are some rules to go by
 
 * All characters should be lowercase
-* If a button has a initial press action (where it's always called before other actions) then this should be called **init**, this is usefull for setting timers and other initiating actions
+* If a button has a initial press action (where it's always called before other actions) then this should be called **init**, this is useful for setting timers and other initiating actions
 * If mechanical button then the action should be **press**
 * If touch button (as in there's no mechanical trigger) then the action should be **tap** (if unsure then resort to **press**)
 * If action is double press/tap or triple press/tap and so on then the action should be **press 2x** / **tap 2x** or **press 3x** / **tap 3x** and so on

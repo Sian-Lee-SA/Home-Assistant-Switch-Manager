@@ -109,8 +109,8 @@ class SwitchManagerDialogVariablesEditor extends LitElement
     private _yamlChanged(ev: CustomEvent)
     {
         ev.stopPropagation();
-        this._valid = ev.detail.isValid;
-        if ( ! ev.detail.isValid ) {
+        this._valid = ev.detail.isValid && ! Array.isArray(ev.detail.value);
+        if ( ! this._valid ) {
           return;
         }
         this._variables = ev.detail.value;

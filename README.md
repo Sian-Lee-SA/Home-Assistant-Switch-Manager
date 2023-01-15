@@ -67,9 +67,9 @@ The event or MQTT data can also be accessed inside your sequences via the data v
 
 #### Service Set Switch Variables
 
-You can use the service `switch_manager.set_switch_variables` to dynamically set variables for a switch. You need to supply the switch id which can be found on the identifier dialog or through debugging. Set new or added variables through the code editor (yaml formatted). These variables will be reset on Home Assistant or Switch Manager restart.
+You can use the service `switch_manager.set_switch_variables` to dynamically set variables for a switch. You need to supply the switch id which can be found on the identifier dialog or through debugging. Add new or replace variables through the code editor (yaml formatted). These variables will be reset on save, Home Assistant restart or Switch Manager reload so it's ideal to be used for temporary references.
 
-If using the service within the switch itself, then you can just get the switch id by using `data.switch_id`
+If using the service within the switch itself, then you can just get the switch id by using `data.switch_id`.
 
 #### button_last_state Variable
 
@@ -77,11 +77,13 @@ This is a special variable that you can use in your template conditions etc. Thi
 
 When the switch is updated or saved it will reset the states to null. But when you execute an action for a button this will be stored as a last state under the action sub key. **Remember that index's start from 0**. So, if you want to check the last action from the first button defined in the blueprint and see if it's last action was the second one then you would do `data.button_last_state[0].action == 1` with 1 being the action index of that button.
 
-You can also access the unix timestamp that the action was executed by doing `data.button_last_state[0].timestamp`, this can allow you to determine which button and what action was last executed or calculate how long ago the same button and action was excecuted by also accessing `data.timestamp` which is the current timestamp for the current button and action.
+Alternatively you can test against the title of the action for better readability via the title key `data.button_last_state[0].title == 'hold'`. This method is case sensitive and needs to match the title in the blueprint which is normally all lower case to what's displayed in the editor.  
 
-You could use a choose sequence action that checks whether any other button is held and handle an action for that. Be creative! Keep in mind that this is less useful with press actions etc as they're resetted upon a switch reload/save where as a hold/rotate action is more useful as they're called in an active state.
+You can also access the unix timestamp that the action was executed by accessing `data.button_last_state[0].timestamp`, this can allow you to determine which button and what action was last executed or calculate how long ago the same button and action was excecuted by also accessing `data.timestamp` which is the current timestamp for the current button and action.
 
-Turn on debugging and open your dev console to see the button_last_state variable and it's values
+You could use a choose sequence action that checks whether any other button is held and handle an action for that. Be creative! Keep in mind that this is less useful with press actions etc as they're reset upon a switch reload/save where as a hold/rotate action is more useful as they're called in an active state.
+
+Turn on debugging and open your dev console to see the button_last_state variable and it's values.
 
 ##### Example for Philips Hue Tap Dial
 
@@ -105,7 +107,7 @@ choose:
             list }}
 ```
 
-Further more, you could also test which button was last pressed as to determine which lights to dim via the dial
+Further more, you could also test which button was last pressed as to determine which lights to dim via the dial.
 
 ## Blueprints
 
@@ -129,11 +131,11 @@ Once a blueprint file or image file has been created or edited then you will nee
 
 Once a switch is saved, you can enable debugging through the top right menu up in the top right. List conditions will use what ever is in the data object (you do not need to add data to your keys) while Template conditions and sequence templates will need to access the data variable (eg data.{event_key} ).
 
-Once enabled, open your browser dev console to view debugging output
+Once enabled, open your browser dev console to view debugging output.
 
 ### Root Structure
 
-The following tables shows how to structure a blueprint yaml file
+The following tables shows how to structure a blueprint yaml file.
 > View other blueprint files to get a grasp on how it's constructed if the following table is hard to understand.
 
 Option          | Values       | Required | Details
@@ -154,11 +156,11 @@ If there are more than 1 button on the switch then you should be using a png (ev
 
 If a switch supports multiple button presses (so two buttons are pushed at the same time) then add another button with circle shape centered between the two buttons to indicate they're linked. Within the actions, the title should prefix **both**. See [Xiaomi Double Key](https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager/blob/master/custom_components/switch_manager/blueprints/zigbee2mqtt-xiaomi-double-key-wxkg07lm.yaml) for an example.
 
-> You will need to save the switch before feedback will be displayed on the UI, this is due to needing backend processing of a switch which isn't created until it's been saved
+> You will need to save the switch before feedback will be displayed on the UI, this is due to needing backend processing of a switch which isn't created until it's been saved.
 
 > if you want more control on positioning and look then you can open the image up in inkscape (with matching width and height values for the viewBox) then draw the paths for each button and copy the d attribute of that path then paste in the d property for the button in yaml.
 
-> Single button switches must **not** contain shape properties
+> Single button switches must **not** contain shape properties.
 
 * Shape `rectangle` uses x, y, width, height
 * Shape `circle` uses x, y, width
@@ -180,7 +182,7 @@ An action would be the result of a press/tap, whether its held down or if it was
 
 #### Title naming convention
 
-To unify switches added to Switch Manager, it makes sense to conform to a naming convention so the below dot points are some rules to go by
+To unify switches added to Switch Manager, it makes sense to conform to a naming convention so the below dot points are some rules to go by.
 
 * All characters should be lowercase
 * If a button has a initial press action (where it's always called before other actions) then this should be called **init**, this is useful for setting timers and other initiating actions 
@@ -216,7 +218,7 @@ conditions: "{{ data.value == 'KeyPressed' and data.topic_basename == 'left_butt
 
 #### List
 
-Conditions defined as a list evaluates the event/mqtt data. If the key doesn't exist then it also evaluates to false. Use dot notation for the key to traverse nested dictionaries. Switch defined variables can be accessed using the `variables` key. **All conditions must be true to be valid**
+Conditions defined as a list evaluates the event/mqtt data. If the key doesn't exist then it also evaluates to false. Use dot notation for the key to traverse nested dictionaries. Switch defined variables can be accessed using the `variables` key. **All conditions must be true to be valid**.
 
 Option          | Values       | Required | Details
 --              | -            | -        | -
@@ -244,7 +246,7 @@ If you want a condition on a payload that isn't json formatted then you would do
   value: tap
 ```
 
-Otherwise you will check against the payloads keys and values
+Otherwise you will check against the payloads keys and values.
 
 ### Blueprint Examples
 

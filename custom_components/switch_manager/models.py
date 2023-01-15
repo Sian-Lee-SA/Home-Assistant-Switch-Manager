@@ -185,7 +185,7 @@ class ManagedSwitchConfigButtonAction:
         self.index = index
         self.sequence = config.get('sequence')
         self.mode = config.get('mode')
-        self.blueprint = blueprint_action
+        self.blueprint: BlueprintButtonAction = blueprint_action
 
         self.script: Script = None
         self.active = bool(self.sequence)
@@ -227,7 +227,7 @@ class ManagedSwitchConfigButton:
         self.switch_id = switch_id
         self.index = index
         self.actions: list[ManagedSwitchConfigButtonAction] = []
-        self.blueprint = blueprint_button
+        self.blueprint: BlueprintButton = blueprint_button
 
         self.active = False
         for i in range(len(config.get('actions'))):
@@ -381,6 +381,7 @@ class ManagedSwitchConfig:
                     self._hass.async_create_task( action.run( data={ "data": data }, context=context ) )
                     self.button_last_state[button_index] = {
                         "action": action_index,
+                        "title": action.blueprint.title,
                         "timestamp": data['timestamp']
                     }
                     self.notify('action_triggered', { 'button': button_index, 'action': action_index, 'data': data })

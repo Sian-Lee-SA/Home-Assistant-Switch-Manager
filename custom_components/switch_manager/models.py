@@ -317,6 +317,9 @@ class ManagedSwitchConfig:
                     self.is_mismatch = True
                     return
 
+    def mergeVariables( self, data ):
+        self.variables.update(data)
+
     def buildButtons( self, buttons_config ):
         self.stop_running_scripts()
         self.buttons = []
@@ -361,7 +364,7 @@ class ManagedSwitchConfig:
 
         def _processIncoming( data, context ):
 
-            data.update({'variables': self.variables, 'button_last_state': self.button_last_state.copy(), 'timestamp': time.time() })
+            data.update({'variables': self.variables, 'switch_id': self.id, 'button_last_state': self.button_last_state.copy(), 'timestamp': time.time() })
             if not self.enabled or not self._check_conditons( data ):
                 return
 

@@ -25,6 +25,8 @@ class SwitchManagerDialogIdentifierAutoDiscovery extends LitElement
 
     private _params!: any; 
 
+    @state() private _switch_id?: string;
+
     @state() private _identifier?: string;
 
     @state() private _blueprint?: SwitchManagerBlueprint;
@@ -43,6 +45,7 @@ class SwitchManagerDialogIdentifierAutoDiscovery extends LitElement
         this._error = undefined;
         this._params = params;
         this._dirty = false;
+        this._switch_id = params.switch_id;
         this._identifier = params.identifier;
         this._blueprint = params.blueprint;
     }
@@ -99,6 +102,8 @@ class SwitchManagerDialogIdentifierAutoDiscovery extends LitElement
                 ${this._blueprint!.identifier_key ? 
                     html`<div class="identifier-ref">Event Type: <b>${this._blueprint!.event_type}</b> | <a href="/developer-tools/event" target="_blank">Event Tool</a></div>` : ''}
 
+                ${this._switch_id ? html`<div class="switch-id">Switch ID: <b>${this._switch_id}</b></div>` : ''}
+
                 <mwc-button @click=${this.closeDialog} slot="secondaryAction">
                     Cancel
                 </mwc-button>
@@ -140,9 +145,11 @@ class SwitchManagerDialogIdentifierAutoDiscovery extends LitElement
                 display: flex;
                 margin: 5px auto;
             }
+            .identifier-ref, .switch-id {
+                font-size: 0.9em;
+            }
             .identifier-ref {
                 margin-top: 16px;
-                font-size: 0.9em;
             }
             :host([listening]) #discovery-button {
                 animation: 1s infinite alternate pulse;

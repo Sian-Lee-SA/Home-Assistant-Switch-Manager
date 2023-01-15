@@ -1,2 +1,20 @@
 reload:
-  description: "Reload blueprints and switches. This will also stop any running sequences"
+  name: Reload
+  description: Reload blueprints and switches. This will also stop any running sequences
+
+set_variables:
+  name: Set Switch Variables
+  description: Set switch variables dynamically
+  fields:
+    switch_id:
+      name: Switch ID
+      description: The id of the switch.
+      required: true
+      selector:
+        text:
+    variables:
+      name: Variables
+      description: YAML code of the variables
+      required: true
+      selector:
+        object:

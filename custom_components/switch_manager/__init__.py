@@ -10,10 +10,10 @@ from .const import (
     LOGGER    
 )
 from .store import SwitchManagerStore
-from .helpers import load_blueprints, VERSION, deploy_blueprints, check_blueprints_folder_exists, _get_blueprint, _set_switch_config
+from .helpers import load_blueprints, VERSION, deploy_blueprints, check_blueprints_folder_exists, _get_blueprint, _get_switch_config, _set_switch_config
 from .view import async_setup_view, async_bind_blueprint_images
 from . import models
-from .schema import BLUEPRINT_MQTT_SCHEMA, BLUEPRINT_EVENT_SCHEMA
+from .schema import BLUEPRINT_MQTT_SCHEMA, BLUEPRINT_EVENT_SCHEMA, SERVICE_SET_VARIABLES_SCHEMA
 from .connections import async_setup_connections
 from homeassistant.core import Config, HomeAssistant, callback
 from homeassistant.config import _format_config_error
@@ -51,11 +51,18 @@ async def async_setup( hass: HomeAssistant, config: Config ):
         await _init_switch_configs(hass)
         await async_bind_blueprint_images(hass)
 
+    @callback
+    async def switch_merge_variables( call ):
+        switch = _get_switch_config(hass, call.data.get('switch_id'))
+        if not switch:
+            return
+        switch.mergeVariables( call.data.get('variables') )
 
     await _init_blueprints(hass)
     await _init_switch_configs(hass)
 
     hass.async_add_executor_job( hass.services.register, DOMAIN, 'reload', reload_all )
+    hass.async_add_executor_job( hass.services.register, DOMAIN, 'set_variables', switch_merge_variables, SERVICE_SET_VARIABLES_SCHEMA )
 
     # Return boolean to indicate that initialization was successful.
     return True

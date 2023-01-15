@@ -708,6 +708,7 @@ class SwitchManagerSwitchEditor extends LitElement
             dialogTag: "switch-manager-dialog-identifier-auto-discovery",
             dialogImport: () => import("./dialogs/dialog-identifier-auto-discovery"),
             dialogParams: {
+                switch_id: this.config!.id,
                 identifier: this.config!.identifier,
                 blueprint: this.blueprint,
                 update: (params) => {

@@ -63,3 +63,8 @@ SWITCH_MANAGER_CONFIG_SCHEMA = vol.Schema({
     vol.Optional('variables'): vol.Any(None, dict),
     vol.Required('buttons'): vol.All(cv.ensure_list, [SWITCH_MANAGER_CONFIG_BUTTON_SCHEMA])
 }, extra=vol.ALLOW_EXTRA)
+
+SERVICE_SET_VARIABLES_SCHEMA = vol.Schema({
+    vol.Required('switch_id'): vol.Any(str, int),
+    vol.Required('variables'): dict,
+})

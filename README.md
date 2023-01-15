@@ -65,6 +65,10 @@ You can assign variables to the switch from the top right menu, these variables 
 
 The event or MQTT data can also be accessed inside your sequences via the data variable.
 
+#### Service Set Switch Variables
+
+You can use the service `switch_manager.set_switch_variables` to dynamically set variables for a switch. You need to supply the switch id which can be found on the identifier dialog or through debugging. Set new or added variables through the code editor (yaml formatted). These variables will be reset on Home Assistant or Switch Manager restart.
+
 #### button_last_state Variable
 
 This is a special variable that you can use in your template conditions etc. This is very handy if you want something like where you're holding a button then you're pressing another button which will execute a different action within your sequence.

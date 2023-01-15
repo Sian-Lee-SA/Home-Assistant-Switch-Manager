@@ -1,0 +1,89 @@
+name: Philips Hue Dimmer v1/v2
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+buttons:
+  - x: 2
+    y: 2
+    width: 189
+    height: 159
+    actions:
+      - title: init
+        conditions:
+          - key: payload
+            value: on_press
+      - title: press
+        conditions:
+          - key: payload
+            value: on_press_release
+      - title: hold
+        conditions:
+          - key: payload
+            value: on_hold
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: on_hold_release
+  - x: 2
+    y: 161
+    width: 189
+    height: 90
+    actions:
+      - title: init
+        conditions:
+          - key: payload
+            value: up_press
+      - title: press
+        conditions:
+          - key: payload
+            value: up_press_release
+      - title: hold
+        conditions:
+          - key: payload
+            value: up_hold
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: up_hold_release
+  - x: 2
+    y: 251
+    width: 189
+    height: 90
+    actions:
+      - title: init
+        conditions:
+          - key: payload
+            value: down_press
+      - title: press
+        conditions:
+          - key: payload
+            value: down_press_release
+      - title: hold
+        conditions:
+          - key: payload
+            value: down_hold
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: down_hold_release
+  - x: 2
+    y: 341
+    width: 189
+    height: 159
+    actions:
+      - title: init
+        conditions:
+          - key: payload
+            value: off_press
+      - title: press
+        conditions:
+          - key: payload
+            value: off_press_release
+      - title: hold
+        conditions:
+          - key: payload
+            value: off_hold
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: off_hold_release

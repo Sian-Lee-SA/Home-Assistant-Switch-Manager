@@ -11,6 +11,10 @@ buttons:
       - key: subtype
         value: 1
     actions:
+      - title: init
+        conditions:
+          - key: type
+            value: short
       - title: press
         conditions:
           - key: type
@@ -31,6 +35,10 @@ buttons:
       - key: subtype
         value: 2
     actions:
+      - title: init
+        conditions:
+          - key: type
+            value: short
       - title: press
         conditions:
           - key: type
@@ -51,6 +59,10 @@ buttons:
       - key: subtype
         value: 3
     actions:
+      - title: init
+        conditions:
+          - key: type
+            value: short
       - title: press
         conditions:
           - key: type
@@ -71,6 +83,10 @@ buttons:
       - key: subtype
         value: 4
     actions:
+      - title: init
+        conditions:
+          - key: type
+            value: short
       - title: press
         conditions:
           - key: type

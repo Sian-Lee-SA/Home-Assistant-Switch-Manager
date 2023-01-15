@@ -8,7 +8,8 @@ set_variables:
   fields:
     switch_id:
       name: Switch ID
-      description: The id of the switch.
+      description: The id of the switch. Can be found on the identifier dialog of the switch.
+      example: "{{ data.switch_id }}"
       required: true
       selector:
         text:

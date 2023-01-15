@@ -75,11 +75,17 @@ If using the service within the switch itself, then you can just get the switch 
 
 This is a special variable that you can use in your template conditions etc. This is very handy if you want something like where you're holding a button then you're pressing another button which will execute a different action within your sequence.
 
+##### action key
+
 When the switch is updated or saved it will reset the states to null. But when you execute an action for a button this will be stored as a last state under the action sub key. **Remember that index's start from 0**. So, if you want to check the last action from the first button defined in the blueprint and see if it's last action was the second one then you would do `data.button_last_state[0].action == 1` with 1 being the action index of that button.
+
+##### title key
 
 Alternatively you can test against the title of the action for better readability via the title key `data.button_last_state[0].title == 'hold'`. This method is case sensitive and needs to match the title in the blueprint which is normally all lower case to what's displayed in the editor.  
 
-You can also access the unix timestamp that the action was executed by accessing `data.button_last_state[0].timestamp`, this can allow you to determine which button and what action was last executed or calculate how long ago the same button and action was excecuted by also accessing `data.timestamp` which is the current timestamp for the current button and action.
+##### timestamp key
+
+You can also access the unix timestamp that the action was executed by accessing `data.button_last_state[0].timestamp`, this can allow you to determine which button and what action was last executed or calculate how long ago the same button and action was excecuted by also accessing `data.timestamp` which is the current timestamp for the current button and action. `data.timestamp - data.button_last_state[0].timestamp` will give how much time has passed in seconds and milliseconds via decimal point since the button action of the first button to the current button and action (referencing the same button and action will give the last time it was executed and not the current execution).
 
 You could use a choose sequence action that checks whether any other button is held and handle an action for that. Be creative! Keep in mind that this is less useful with press actions etc as they're reset upon a switch reload/save where as a hold/rotate action is more useful as they're called in an active state.
 

@@ -1,6 +1,9 @@
 import { html, css, LitElement } from "lit";
 import { customElement, property, query } from "lit/decorators.js";
 import { SwitchManagerBlueprintButtonAction, SwitchManagerConfigButtonAction } from "./types";
+import {
+    mdiPanHorizontal
+} from "@mdi/js";
 import "@polymer/paper-tabs";
 
 declare global {
@@ -33,8 +36,10 @@ class SwitchManagerButtonActions extends LitElement
                         html`
                         <paper-tab index="${i}">${a.title}
                             ${this.config_actions[i].sequence.length ? html`<ha-chip>${this.config_actions[i].sequence.length}</ha-chip>`:''}
-                        </paper-tab>`)}
+                        </paper-tab>
+                        ${a.title == 'init' ? html`<div id="init-suffix"><ha-svg-icon slot="graphic" .path=${mdiPanHorizontal}></ha-svg-icon></div>` : ''}`)}
                 </paper-tabs>
+                
             </div> 
         `;
     }
@@ -80,6 +85,10 @@ class SwitchManagerButtonActions extends LitElement
                 position: absolute;
                 top: 0;
                 right: -32px;
+            }
+            #init-suffix {
+                display: flex;
+                align-items: center;
             }
         `;
     }

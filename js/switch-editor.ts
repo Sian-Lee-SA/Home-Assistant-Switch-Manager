@@ -13,9 +13,9 @@ import {
     mdiBug,
     mdiCheck,
     mdiCodeBraces,
-    mdiBarcodeScan,
     mdiFileDocumentEditOutline,
-    mdiViewDashboardEditOutline
+    mdiViewDashboardEditOutline,
+    mdiIdentifier
 } from "@mdi/js";
 import { SwitchManagerBlueprint, SwitchManagerConfig, SwitchManagerConfigButton } from "./types";
 import { MODES } from "../ha-frontend/data/script";
@@ -116,7 +116,7 @@ class SwitchManagerSwitchEditor extends LitElement
                                     .disabled=${!this.config || this.config?._error}
                                     @click=${this._showIdentifierAutoDiscoveryDialog}>
                                         Identifier
-                                        <ha-svg-icon slot="graphic" .path=${mdiBarcodeScan}>
+                                        <ha-svg-icon slot="graphic" .path=${mdiIdentifier}>
                                         </ha-svg-icon>
                                 </mwc-list-item>
 

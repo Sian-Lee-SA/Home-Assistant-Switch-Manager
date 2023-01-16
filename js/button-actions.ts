@@ -31,7 +31,7 @@ class SwitchManagerButtonActions extends LitElement
             return '';
         return html`
             <div id="tabbar" .hass=${this.hass}>
-                <paper-tabs selected="${this.index}" @iron-select=${this._tab_changed}>
+                <paper-tabs selected="${this.index}" @iron-select=${this._tab_changed} scrollable>
                     ${this.blueprint_actions.map((a, i) => 
                         html`
                         <paper-tab index="${i}">${a.title}
@@ -60,7 +60,9 @@ class SwitchManagerButtonActions extends LitElement
                 --paper-tab-ink: transparent;
                 --paper-tabs-selection-bar-color: transparent;
             }
-
+            #tabbar {
+                width: 100%;
+            }
             paper-tabs {
                 display: flex;
                 justify-content: center;

@@ -196,7 +196,7 @@ To unify switches added to Switch Manager, it makes sense to conform to a naming
 * If touch button (as in there's no mechanical trigger) then the action should be **tap** (if unsure then resort to **press**)
 * If action is double press/tap or triple press/tap and so on then the action should be **press 2x** / **tap 2x** or **press 3x** / **tap 3x** and so on
 * If the button supports a hold/long and hold/long release then there should be an action for both **hold** and **hold (released)** do **NOT** use the wording **long**
-* Do **NOT** use **short** or **short release** as this is generally a generic **press**
+* Do **NOT** use **short** or **short release** as this is generally a generic **init** or **press**
 * In the case where a switch allows multiple buttons to be pushed then you can prefix each action with **both** so a dual button press would be **both press** and **both press 2x** etc. This makes it clear to a user that the button they have selected is actually for multiple buttons. See [Xiaomi Double Key](https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager/blob/master/custom_components/switch_manager/blueprints/zigbee2mqtt-xiaomi-double-key-wxkg07lm.yaml) for an example
 
 

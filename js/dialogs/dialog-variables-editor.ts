@@ -84,11 +84,7 @@ class SwitchManagerDialogVariablesEditor extends LitElement
             haStyle,
             haStyleDialog,
             css`
-            ha-dialog {
-                --mdc-dialog-min-width: 90vw;
-                --mdc-dialog-max-width: 90vw;
-            }
-            @media screen and ( min-width: 1150px )
+            @media screen and ( min-width: 1010px )
             {
                 ha-dialog {
                     --mdc-dialog-min-width: 1010px;

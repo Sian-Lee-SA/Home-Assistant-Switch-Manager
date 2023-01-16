@@ -127,9 +127,12 @@ class SwitchManagerDialogIdentifierAutoDiscovery extends LitElement
                     opacity: 0.4;
                 }
             }
-            ha-dialog {
-                --mdc-dialog-min-width: 600px;
-                --mdc-dialog-max-width: 600px;
+            @media screen and ( min-width: 600px )
+            {
+                ha-dialog {
+                    --mdc-dialog-min-width: 600px;
+                    --mdc-dialog-max-width: 600px;
+                }
             }
             ha-textfield,
             ha-textarea {

@@ -2,6 +2,7 @@ name: Xiaomi Double Key (WXKG07LM)
 service: Zigbee2MQTT
 event_type: mqtt
 mqtt_topic_format: zigbee2mqtt/+/action
+info: Ensure legacy is off
 buttons:
   - x: 12
     y: 12
@@ -11,15 +12,15 @@ buttons:
       - title: press
         conditions:
           - key: payload
-            value: left
+            value: single_left
       - title: press 2x
         conditions:
           - key: payload
-            value: left_double
+            value: double_left
       - title: hold
         conditions:
           - key: payload
-            value: left_long
+            value: hold_left
   - x: 250
     y: 12
     width: 238
@@ -28,15 +29,15 @@ buttons:
       - title: press
         conditions:
           - key: payload
-            value: right
+            value: single_right
       - title: press 2x
         conditions:
           - key: payload
-            value: right_double
+            value: double_right
       - title: hold
         conditions:
           - key: payload
-            value: right_long
+            value: hold_right
   - x: 250
     y: 250
     width: 75
@@ -44,12 +45,12 @@ buttons:
       - title: both press
         conditions:
           - key: payload
-            value: both
+            value: single_both
       - title: both press 2x
         conditions:
           - key: payload
-            value: both_double
+            value: double_both
       - title: both hold
         conditions:
           - key: payload
-            value: both_long
+            value: hold_both

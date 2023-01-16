@@ -1,7 +1,7 @@
 {
   "domain": "switch_manager",
   "name": "Switch Manager",
-  "version": "0.7.3",
+  "version": "0.7.5",
   "documentation": "https://github.com/Sian-Lee-SA/switch_manager",
   "dependencies": [
     "panel_custom",

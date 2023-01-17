@@ -91,8 +91,22 @@ class SwitchManagerButtonActions extends LitElement
                 right: -32px;
             }
             #init-suffix {
-                display: flex;
-                align-items: center;
+                display: var(--layout-inline_-_display);
+                -ms-flex-align: var(--layout-center_-_-ms-flex-align);
+                -webkit-align-items: var(--layout-center_-_-webkit-align-items);
+                align-items: var(--layout-center_-_align-items);
+                -ms-flex-pack: var(--layout-center-justified_-_-ms-flex-pack);
+                -webkit-justify-content: var(--layout-center-justified_-_-webkit-justify-content);
+                justify-content: var(--layout-center-justified_-_justify-content);
+                -ms-flex: var(--layout-flex-auto_-_-ms-flex);
+                -webkit-flex: var(--layout-flex-auto_-_-webkit-flex);
+                flex: var(--layout-flex-auto_-_flex);
+                position: relative;
+                padding: 0 12px;
+                overflow: hidden;
+                vertical-align: middle;
+                font-family: var(--paper-font-common-base_-_font-family);
+                -webkit-font-smoothing: var(--paper-font-common-base_-_-webkit-font-smoothing);
             }
         `;
     }

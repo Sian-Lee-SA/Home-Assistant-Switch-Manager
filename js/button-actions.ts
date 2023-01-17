@@ -23,14 +23,13 @@ class SwitchManagerButtonActions extends LitElement
     
     @property({reflect: true}) index = 0;
 
-    @query('paper-tabs') tabs;
+    @query('paper-tabs', true) tabs!: HTMLElement;
 
     render() 
     {
         if( !this.blueprint_actions || this.blueprint_actions.length == 1 )
             return '';
         return html`
-            <div id="tabbar" .hass=${this.hass}>
                 <paper-tabs selected="${this.index}" @iron-select=${this._tab_changed} scrollable>
                     ${this.blueprint_actions.map((a, i) => 
                         html`
@@ -39,8 +38,6 @@ class SwitchManagerButtonActions extends LitElement
                         </paper-tab>
                         ${a.title == 'init' ? html`<div id="init-suffix"><ha-svg-icon slot="graphic" .path=${mdiPanHorizontal}></ha-svg-icon></div>` : ''}`)}
                 </paper-tabs>
-                
-            </div> 
         `;
     }
 
@@ -63,11 +60,16 @@ class SwitchManagerButtonActions extends LitElement
             #tabbar {
                 width: 100%;
             }
+
             paper-tabs {
-                display: flex;
+                display: grid;
                 justify-content: center;
                 flex: 1 1 0%;
                 height: var(--header-height);
+                margin: 0 10px;
+            }
+            paper-tabs[scrollable] {
+                display: flex;
             }
             paper-tab {
                 padding: 0px 32px;
@@ -95,13 +97,25 @@ class SwitchManagerButtonActions extends LitElement
         `;
     }
 
+    protected firstUpdated(_changedProperties: Map<string | number | symbol, unknown>): void 
+    {
+        let width = 0;
+        Array.from(this.tabs.children).forEach((element: any) => {
+            width += element.offsetWidth;
+        });
+        if( width < this.tabs.offsetWidth )
+            this.tabs.removeAttribute('scrollable');
+    }
+
     public flash( index )
     {
         const element = this.tabs.querySelector(`[index="${index}"]`);
+        if( ! element )
+            return;
         element.removeAttribute('feedback');
         element.setAttribute('feedback', '');
         setTimeout(() => {
-            element.removeAttribute('feedback');
+            element!.removeAttribute('feedback');
         }, 1000);
     }
 

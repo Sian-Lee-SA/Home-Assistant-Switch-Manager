@@ -1,10 +1,11 @@
 import { html, css, LitElement } from "lit";
-import { customElement, property, query } from "lit/decorators.js";
+import { customElement, property, query, state } from "lit/decorators.js";
 import { SwitchManagerBlueprintButtonAction, SwitchManagerConfigButtonAction } from "./types";
 import {
     mdiPanHorizontal
 } from "@mdi/js";
 import "@polymer/paper-tabs";
+import { PaperTabsElement } from "@polymer/paper-tabs"
 
 declare global {
     interface HTMLElementTagNameMap {
@@ -23,14 +24,17 @@ class SwitchManagerButtonActions extends LitElement
     
     @property({reflect: true}) index = 0;
 
-    @query('paper-tabs', true) tabs!: HTMLElement;
+    @state() scrollable = true;
+
+    @query('paper-tabs', true) tabs!: PaperTabsElement;
+
 
     render() 
     {
         if( !this.blueprint_actions || this.blueprint_actions.length == 1 )
             return '';
         return html`
-                <paper-tabs selected="${this.index}" @iron-select=${this._tab_changed} scrollable>
+                <paper-tabs selected="${this.index}" @iron-select=${this._tab_changed} ?scrollable=${this.scrollable}>
                     ${this.blueprint_actions.map((a, i) => 
                         html`
                         <paper-tab index="${i}">${a.title}
@@ -40,8 +44,6 @@ class SwitchManagerButtonActions extends LitElement
                 </paper-tabs>
         `;
     }
-
-    _render
 
     static get styles() {
         return css`        
@@ -57,10 +59,6 @@ class SwitchManagerButtonActions extends LitElement
                 --paper-tab-ink: transparent;
                 --paper-tabs-selection-bar-color: transparent;
             }
-            #tabbar {
-                width: 100%;
-            }
-
             paper-tabs {
                 display: grid;
                 justify-content: center;
@@ -111,17 +109,23 @@ class SwitchManagerButtonActions extends LitElement
         `;
     }
 
-    protected firstUpdated(_changedProperties: Map<string | number | symbol, unknown>): void 
+    protected async updated(changedProperties: Map<string, any>) 
     {
-        let width = 0;
-        Array.from(this.tabs.children).forEach((element: any) => {
-            width += element.offsetWidth;
-        });
-        if( width < this.tabs.offsetWidth )
-            this.tabs.removeAttribute('scrollable');
+        if (changedProperties.has('config_actions')) {
+            // Set scrollable to get a proper width calculation
+            this.scrollable = true;
+            
+            await this.updateComplete;
+
+            let width = 0;
+            for (let element of this.tabs.children) {
+                width += (<HTMLElement>element).offsetWidth;
+            }
+            this.scrollable = width > this.tabs.offsetWidth;
+        }
     }
 
-    public flash( index )
+    public flash( index: number )
     {
         const element = this.tabs.querySelector(`[index="${index}"]`);
         if( ! element )
@@ -133,14 +137,13 @@ class SwitchManagerButtonActions extends LitElement
         }, 1000);
     }
 
-    _tab_changed(ev)
+    private _tab_changed( ev: CustomEvent )
     {
-      let event = new CustomEvent('changed', {
-        detail: {
-          index: ev.detail.item.parentNode.indexOf(ev.detail.item)
-        }
-      });
-      this.dispatchEvent(event);
+        let event = new CustomEvent('changed', {
+            detail: {
+                index: ev.detail.item.parentNode.indexOf(ev.detail.item)
+            }
+        });
+        this.dispatchEvent(event);
     }
-
 }

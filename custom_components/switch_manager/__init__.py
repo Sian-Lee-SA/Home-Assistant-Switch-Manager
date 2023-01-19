@@ -52,8 +52,8 @@ async def async_setup( hass: HomeAssistant, config: Config ):
         await async_bind_blueprint_images(hass)
 
     @callback
-    async def switch_merge_variables( call ):
-        switch = _get_switch_config(hass, call.data.get('switch_id'))
+    def switch_merge_variables( call ):
+        switch = _get_switch_config(hass, str(call.data.get('switch_id')))
         if not switch:
             return
         switch.mergeVariables( call.data.get('variables') )

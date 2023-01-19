@@ -34,14 +34,15 @@ class SwitchManagerButtonActions extends LitElement
         if( !this.blueprint_actions || this.blueprint_actions.length == 1 )
             return '';
         return html`
-                <paper-tabs selected="${this.index}" @iron-select=${this._tab_changed} ?scrollable=${this.scrollable}>
-                    ${this.blueprint_actions.map((a, i) => 
-                        html`
-                        <paper-tab index="${i}">${a.title}
-                            ${this.config_actions[i].sequence.length ? html`<ha-chip>${this.config_actions[i].sequence.length}</ha-chip>`:''}
-                        </paper-tab>
-                        ${a.title == 'init' ? html`<div id="init-suffix"><ha-svg-icon slot="graphic" .path=${mdiPanHorizontal}></ha-svg-icon></div>` : ''}`)}
-                </paper-tabs>
+            <paper-tabs selected="${this.index}" @iron-select=${this._tab_changed} ?scrollable=${this.scrollable}>
+                ${this.blueprint_actions.map((a, i) => 
+                    html`
+                    <paper-tab index="${i}">${a.title}
+                        ${this.config_actions[i].sequence.length ? html`<ha-chip>${this.config_actions[i].sequence.length}</ha-chip>`:''}
+                    </paper-tab>
+                    ${a.title == 'init' ? html`<div id="init-suffix"><ha-svg-icon slot="graphic" .path=${mdiPanHorizontal}></ha-svg-icon></div>` : ''}`
+                )}
+            </paper-tabs>
         `;
     }
 

@@ -292,7 +292,7 @@ class ManagedSwitchConfig:
     def update( self, config ):
         self.name = config.get('name')
         self.identifier = config.get('identifier')
-        self.variables = config.get('variables')
+        self.variables: dict = config.get('variables')
         self.button_last_state = []
         self.buildButtons( config.get('buttons') )
         
@@ -318,7 +318,10 @@ class ManagedSwitchConfig:
                     return
 
     def mergeVariables( self, data ):
-        self.variables.update(data)
+        if not self.variables:
+            self.variables = data
+        else:
+            self.variables.update(data)
 
     def buildButtons( self, buttons_config ):
         self.stop_running_scripts()

@@ -1,0 +1,43 @@
+name: Lutron PJ2-3BRL Pico Remote
+service: Lutron
+event_type: lutron_caseta_button_event
+identifier_key: device_id
+buttons:
+  - x: 19
+    y: 9
+    width: 78
+    height: 54
+    actions:
+      - title: press
+        conditions:
+          - key: button_number
+            value: 2 # 2 = on
+  - x: 19
+    y: 166
+    width: 78
+    height: 54
+    actions:
+      - title: press
+        conditions:
+          - key: button_number
+            value: 4 # 4 = off
+  - x: 58
+    y: 115
+    width: 18
+    actions:
+      - title: press
+        conditions:
+          - key: button_number
+            value: 3 # 3 = favorite/center
+  - d: "M 19.00,72.00 C 19.00,72.00 97.00,72.00 97.00,72.00 92.38,78.65 76.14,97.56 70.00,102.00 61.24,96.04 51.38,96.55 44.34,105.02 42.01,107.82 40.38,111.32 40.26,115.00 40.05,121.87 45.42,126.81 43.85,131.00 43.03,133.16 38.98,137.07 37.28,139.00 32.77,144.13 23.96,153.67 19.00,158.00 19.00,158.00 19.00,72.00 19.00,72.00 Z"
+    actions:
+      - title: press
+        conditions:
+          - key: button_number
+            value: 5 # 5 = up/raise
+  - d: "M 96.00,75.00 C 96.00,75.00 97.00,101.00 97.00,101.00 97.00,101.00 97.00,159.00 97.00,159.00 97.00,159.00 20.00,159.00 20.00,159.00 24.66,151.66 31.33,145.45 37.17,139.00 39.04,136.94 43.45,132.09 46.00,131.29 48.43,130.54 50.42,132.01 53.00,132.62 55.40,133.13 60.60,133.15 63.00,132.62 66.73,131.90 69.25,129.85 71.66,126.98 78.92,118.33 76.17,110.57 71.00,102.00 71.00,102.00 96.00,75.00 96.00,75.00 Z"
+    actions:
+      - title: press
+        conditions:
+          - key: button_number
+            value: 6 # 6 = down/lower

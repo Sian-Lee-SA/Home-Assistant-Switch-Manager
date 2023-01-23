@@ -59,7 +59,7 @@ Navigation and usage should be pretty straight forward.
 
 Remember to save before leaving the page when changes has been made! Once saved you can test to make sure all is working.
 
-> Sometimes you may want certain buttons or actions handled by the devices default handler. For example, a Zigbee device may already be bound to a certain light which also imo has better response, reliability and stability. To remind you of this, you could add a stop action with a description of why the button shouldn't be changed and being handled somehwere else. Then for other actions that aren't handled else where then you can handle them with this component. It's also fine to allow an external handler to handle the button push aswell as this component so a button could turn on the light handled via Zigbee and the component could start playing music based on the same switch action.
+> Sometimes you may want certain buttons or actions handled by the devices default handler. For example, a Zigbee device may already be bound to a certain light which also imo has better response, reliability and stability. To remind you of this, you could add a stop action with a description of why the button shouldn't be changed and being handled somewhere else. Then for other actions that aren't handled elsewhere then you can handle them with this component. It's also fine to allow an external handler to handle the button push aswell as this component so a button could turn on the light handled via Zigbee and the component could start playing music based on the same switch action.
 
 #### Variables
 
@@ -69,7 +69,7 @@ The event or MQTT data can also be accessed inside your sequences via the data v
 
 #### Service Set Switch Variables
 
-You can use the service `switch_manager.set_switch_variables` to dynamically set variables for a switch. You need to supply the switch id which can be found on the identifier dialog, url or through debugging. Add new or replace variables through the code editor (yaml formatted). These variables will be reset on save, Home Assistant restart or Switch Manager reload so it's ideal to be used for temporary references. **Note: Set Variables will be saved if the switch has been saved after using the service call**
+You can use the service `switch_manager.set_variables` to dynamically set variables for a switch. You need to supply the switch id which can be found on the identifier dialog, url or through debugging. Add new or replace variables through the code editor (yaml formatted). These variables will be reset on save, Home Assistant restart or Switch Manager reload so it's ideal to be used for temporary references. **Note: Set Variables will be saved if the switch has been saved after using the service call**
 
 If using the service within the switch itself, then you can just get the switch id by using `data.switch_id`.
 

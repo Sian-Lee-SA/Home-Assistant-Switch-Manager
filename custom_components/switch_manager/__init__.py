@@ -55,7 +55,7 @@ async def async_setup( hass: HomeAssistant, config: Config ):
     def switch_merge_variables( call ):
         switch = _get_switch_config(hass, str(call.data.get('switch_id')))
         if not switch:
-            return
+            raise ValueError(f"Switch id {call.data.get('switch_id')} does not exist")
         switch.mergeVariables( call.data.get('variables') )
 
     await _init_blueprints(hass)

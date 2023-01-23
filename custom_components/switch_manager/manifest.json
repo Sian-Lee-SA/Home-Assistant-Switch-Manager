@@ -1,14 +1,16 @@
 {
   "domain": "switch_manager",
   "name": "Switch Manager",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "documentation": "https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager",
   "dependencies": [
     "panel_custom",
     "websocket_api",
     "http",
     "frontend",
-    "script",
+    "script"
+  ],
+  "after_dependencies": [
     "mqtt"
   ],
   "requirements": [],

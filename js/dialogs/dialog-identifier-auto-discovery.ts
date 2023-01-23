@@ -77,8 +77,9 @@ class SwitchManagerDialogIdentifierAutoDiscovery extends LitElement
                 scrimClickAction
                 @closed=${this.closeDialog}
                 .heading="${createCloseHeading(this.hass, 'Identifier')}">
-                ${this._error ? html`<ha-alert alert-type="error">${this._error}</ha-alert>` : ""}
+                ${this._blueprint!.service == 'Zigbee2MQTT' ? html`<ha-alert alert-type="info">In Zigbee2MQTT ensure your device setting has legacy set to false/off</ha-alert>`: ''}
                 ${this._blueprint!.info ? html`<ha-alert alert-type="info">${this._blueprint!.info}</ha-alert>`: ''}
+                ${this._error ? html`<ha-alert alert-type="error">${this._error}</ha-alert>` : ""}
                 <ha-textfield 
                     id="identifier-input" 
                     type="text" 

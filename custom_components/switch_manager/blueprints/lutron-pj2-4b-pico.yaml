@@ -8,17 +8,16 @@ buttons:
     y: 16
     width: 173
     height: 116
+    conditions:
+      - key: button_number
+        value: 8
     actions:
       - title: init
         conditions:
-          - key: button_number
-            value: 8
           - key: action
             value: press
       - title: press
         conditions:
-          - key: button_number
-            value: 8
           - key: action
             value: release
 # 2
@@ -26,17 +25,16 @@ buttons:
     y: 133
     width: 173
     height: 116
+    conditions:
+      - key: button_number
+        value: 9
     actions:
       - title: init
         conditions:
-          - key: button_number
-            value: 9
           - key: action
             value: press
       - title: press
         conditions:
-          - key: button_number
-            value: 9
           - key: action
             value: release
 # 3
@@ -44,17 +42,16 @@ buttons:
     y: 250
     width: 173
     height: 116
+    conditions:
+      - key: button_number
+        value: 10
     actions:
       - title: init
         conditions:
-          - key: button_number
-            value: 10
           - key: action
             value: press
       - title: press
         conditions:
-          - key: button_number
-            value: 10
           - key: action
             value: release
 # 4 / Bottom
@@ -62,16 +59,15 @@ buttons:
     y: 367
     width: 173
     height: 116
+    conditions:
+      - key: button_number
+        value: 11
     actions:
       - title: init
         conditions:
-          - key: button_number
-            value: 11
           - key: action
             value: press
       - title: press
         conditions:
-          - key: button_number
-            value: 11
           - key: action
             value: release

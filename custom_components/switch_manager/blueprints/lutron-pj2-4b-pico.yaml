@@ -1,0 +1,77 @@
+name: Lutron PJ2-4B Pico Remote
+service: Lutron
+event_type: lutron_caseta_button_event
+identifier_key: device_id
+buttons:
+# 1 / Top
+  - x: 38
+    y: 16
+    width: 173
+    height: 116
+    actions:
+      - title: init
+        conditions:
+          - key: button_number
+            value: 8
+          - key: action
+            value: press
+      - title: press
+        conditions:
+          - key: button_number
+            value: 8
+          - key: action
+            value: release
+# 2
+  - x: 38
+    y: 133
+    width: 173
+    height: 116
+    actions:
+      - title: init
+        conditions:
+          - key: button_number
+            value: 9
+          - key: action
+            value: press
+      - title: press
+        conditions:
+          - key: button_number
+            value: 9
+          - key: action
+            value: release
+# 3
+  - x: 38
+    y: 250
+    width: 173
+    height: 116
+    actions:
+      - title: init
+        conditions:
+          - key: button_number
+            value: 10
+          - key: action
+            value: press
+      - title: press
+        conditions:
+          - key: button_number
+            value: 10
+          - key: action
+            value: release
+# 4 / Bottom
+  - x: 38
+    y: 367
+    width: 173
+    height: 116
+    actions:
+      - title: init
+        conditions:
+          - key: button_number
+            value: 11
+          - key: action
+            value: press
+      - title: press
+        conditions:
+          - key: button_number
+            value: 11
+          - key: action
+            value: release

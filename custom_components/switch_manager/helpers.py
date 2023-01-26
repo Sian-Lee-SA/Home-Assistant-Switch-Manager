@@ -9,7 +9,6 @@ from .const import (
     CONF_BLUEPRINTS,
     CONF_MANAGED_SWITCHES
 )
-from . import models
 from homeassistant.exceptions import HomeAssistantError
 from homeassistant.components.mqtt.models import ReceiveMessage
 

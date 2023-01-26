@@ -2,12 +2,14 @@ import { html, css, LitElement } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { SwitchManagerBlueprint, SwitchManagerConfig } from "./types";
 import memoizeOne from "memoize-one";
+import "@polymer/paper-tooltip/paper-tooltip";
 import {
     mdiPlus,
     mdiDelete,
     mdiPlayCircleOutline,
     mdiStopCircleOutline,
-    mdiGestureTapButton
+    mdiGestureTapButton,
+    mdiCancel
 } from "@mdi/js";
 import { 
     buildAssetUrl, 
@@ -28,6 +30,9 @@ import "../ha-frontend/components/ha-menu-button";
 import "../ha-frontend/components/ha-fab";
 import "../ha-frontend/components/ha-chip";
 import "../ha-frontend/components/ha-icon-overflow-menu";
+import type {
+    DataTableColumnContainer
+} from "../ha-frontend/components/data-table/ha-data-table";
 import "./components/sm-data-table";
 import "./dialogs/dialog-blueprint-selector";
 
@@ -42,7 +47,7 @@ class SwitchManagerIndex extends LitElement
 {
     @property() hass!: any;
 
-    @property() narrow;
+    @property({ type: Boolean }) public narrow!: boolean;
 
     @property() panel;
 
@@ -51,55 +56,70 @@ class SwitchManagerIndex extends LitElement
     @state() private _data: any[] = [];
 
     private _columns = memoizeOne(
-        () => ({
-            image: {
-                title: "",
-                sortable: false,
-                filterable: false,
-                grows: false,
-                width: '90px', 
-                template: (blueprint_id, data: any) => {
-                    if( ! data.switch.valid_blueprint )
-                        return '';
-                    if( ! data.switch.blueprint.has_image )
-                        return html`<ha-svg-icon style="fill: var(--primary-color); margin: 0 auto;display:block;height: 85%;
-                        width: 85%;" .path=${mdiGestureTapButton}></ha-svg-icon>`
-                    return html`<img style="max-width: 100%;max-height: 48px;display: block;margin:0 auto;" src="${buildAssetUrl(`${blueprint_id}.png`)}" />`;
-                }                
-            },
-            name: {
-                title: 'Name',
-                main: true,
-                direction: "asc",
-                sortable: true,
-                filterable: true,
-                grows: true,
-                template: (name, data: any) => data.error ? 
-                    html`<span style="color: red;">${name} (${data.error})</span>`
-                    : name
-            },
-            enabled: {
-                title: "",
-                width: "10%",
-                template: (enabled: boolean) => !enabled ? html`
-                        <ha-chip>
+        (narrow: boolean) => {
+            const columns: DataTableColumnContainer = {
+                image: {
+                    title: "",
+                    sortable: false,
+                    filterable: false,
+                    grows: false,
+                    width: '90px', 
+                    template: (blueprint_id, data: any) => {
+                        if( ! data.switch.valid_blueprint )
+                            return '';
+                        if( ! data.switch.blueprint.has_image )
+                            return html`<ha-svg-icon style="fill: var(--primary-color); margin: 0 auto;display:block;height: 85%;
+                            width: 85%;" .path=${mdiGestureTapButton}></ha-svg-icon>`
+                        return html`<img style="max-width: 100%;max-height: 48px;display: block;margin:0 auto;" src="${buildAssetUrl(`${blueprint_id}.png`)}" />`;
+                    }                
+                },
+                name: {
+                    title: 'Name',
+                    main: true,
+                    direction: "asc",
+                    sortable: true,
+                    filterable: true,
+                    grows: true,
+                    template: (name, data: any) => data.error ? 
+                        html`<span style="color: red;">${name} (${data.error})</span>`
+                        : name
+                }
+            }
+            if( narrow ) {
+                columns.enabled = {
+                    title: "",
+                    template: (enabled: boolean) => !enabled ? html`
+                        <paper-tooltip animation-delay="0" position="left">
                             Disabled
-                        </ha-chip>` : '',
-            },
-            service: {
-                title: 'Service',
-                sortable: true,
-                filterable: true,
-                width: '15%'
-            },
-            type: {
-                title: 'Type',
-                sortable: true,
-                filterable: true,
-                grows: false,
-                width: '15%'
-            },
-            actions: {
+                        </paper-tooltip>
+                        <ha-svg-icon
+                            .path=${mdiCancel}
+                            style="color: var(--secondary-text-color)"></ha-svg-icon>` : '',
+                };
+            } else {
+                columns.enabled = {
+                    title: "",
+                    width: "10%",
+                    template: (enabled: boolean) => !enabled ? html`
+                            <ha-chip>
+                                Disabled
+                            </ha-chip>` : '',
+                };
+                columns.service = {
+                    title: 'Service',
+                    sortable: true,
+                    filterable: true,
+                    width: '15%'
+                };
+                columns.type = {
+                    title: 'Type',
+                    sortable: true,
+                    filterable: true,
+                    grows: false,
+                    width: '15%'
+                };
+            }
+            columns.actions = {
                 title: "",
                 width: this.narrow ? undefined : "10%",
                 type: "overflow-menu",
@@ -117,14 +137,16 @@ class SwitchManagerIndex extends LitElement
                             },
                             {
                                 label: "Delete",
-                                  path: mdiDelete,
-                                  action: () => this._deleteConfirm(data),
-                                  warning: true,
+                                path: mdiDelete,
+                                action: () => this._deleteConfirm(data),
+                                warning: true,
                             }
                         ]}>
                         </ha-icon-overflow-menu>`
             }
-        })
+            
+            return columns;
+        }
     )
 
     render() 
@@ -146,7 +168,7 @@ class SwitchManagerIndex extends LitElement
                 <hui-panel-view>
                     <sm-data-table
                         .hass=${this.hass}
-                        .columns=${this._columns()}
+                        .columns=${this._columns(this.narrow)}
                         .data=${this._data}
                         noDataText="No Switches"
                         id="switch_id"

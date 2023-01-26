@@ -112,6 +112,8 @@ class SwitchManagerButtonActions extends LitElement
 
     protected async updated(changedProperties: Map<string, any>) 
     {
+        if( this.blueprint_actions.length == 1 )
+            return;
         if (changedProperties.has('config_actions')) {
             // Set scrollable to get a proper width calculation
             this.scrollable = true;

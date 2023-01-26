@@ -130,6 +130,8 @@ class SwitchManagerButtonActions extends LitElement
 
     public flash( index: number )
     {
+        if( this.blueprint_actions.length == 1 )
+            return;
         const element = this.tabs.querySelector(`[index="${index}"]`);
         if( ! element )
             return;

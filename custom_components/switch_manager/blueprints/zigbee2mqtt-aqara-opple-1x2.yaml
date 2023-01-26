@@ -6,7 +6,7 @@ buttons:
   - x: 69
     y: 63
     width: 157
-    height: 104
+    height: 327
     actions:
       - title: press
         conditions:
@@ -31,7 +31,7 @@ buttons:
   - x: 227
     y: 63
     width: 157
-    height: 104
+    height: 327
     actions:
       - title: press
         conditions:

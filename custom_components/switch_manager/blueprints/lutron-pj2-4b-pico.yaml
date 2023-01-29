@@ -7,7 +7,7 @@ buttons:
     y: 16
     width: 173
     height: 116
-    condition:
+    conditions:
       - key: button_number
         value: 8
     actions:
@@ -23,7 +23,7 @@ buttons:
     y: 133
     width: 173
     height: 116
-    condition:
+    conditions:
       - key: button_number
         value: 9
     actions:
@@ -39,7 +39,7 @@ buttons:
     y: 250
     width: 173
     height: 116
-    condition:
+    conditions:
       - key: button_number
         value: 10
     actions:
@@ -55,7 +55,7 @@ buttons:
     y: 367
     width: 173
     height: 116
-    condition:
+    conditions:
       - key: button_number
         value: 11
     actions:

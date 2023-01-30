@@ -1,7 +1,7 @@
 {
   "domain": "switch_manager",
   "name": "Switch Manager",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "documentation": "https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager",
   "dependencies": [
     "panel_custom",

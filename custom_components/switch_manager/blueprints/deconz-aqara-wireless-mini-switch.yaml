@@ -20,7 +20,7 @@ buttons:
         conditions:
           - key: event
             value: 1003
-      - title: viabrate
+      - title: shake
         conditions:
           - key: event
             value: 1007

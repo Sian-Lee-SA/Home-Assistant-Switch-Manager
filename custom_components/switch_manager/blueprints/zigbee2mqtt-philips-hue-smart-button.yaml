@@ -1,0 +1,26 @@
+name: Philips Hue Smart Button
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+buttons:
+  - actions:
+    - title: init
+      conditions:
+        - key: payload
+          value: press
+    - title: press
+      conditions:
+        - key: payload
+          value: release
+    - title: hold
+      conditions:
+        - key: payload
+          value: hold
+    - title: step down
+      conditions:
+        - key: payload
+          value: brightness_step_up
+    - title: step up
+      conditions:
+        - key: payload
+          value: brightness_step_down

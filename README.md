@@ -12,11 +12,9 @@ Switch manager is a centralised component to handle button pushes for your wirel
 You can view my Youtube demonstration [here](https://www.youtube.com/watch?v=m2Rlobvo5cI)
 [![YouTube Introduction](images/youtube-introduction.png)](https://www.youtube.com/watch?v=m2Rlobvo5cI)
 
-#### Switch editor page
-![Demo Switch Index](images/demo-2.png)
-
-#### Index page with blueprint selection
-![Demo Switch Editor](images/demo-3.png)
+#### Switch editor page and index page
+<img src="images/demo-2.png" width="49.5%" />
+<img src="images/demo-3.png" width="49.5%" />
 
 
 ## How to install

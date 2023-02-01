@@ -13,8 +13,10 @@ You can view my Youtube demonstration [here](https://www.youtube.com/watch?v=m2R
 [![YouTube Introduction](images/youtube-introduction.png)](https://www.youtube.com/watch?v=m2Rlobvo5cI)
 
 #### Switch editor page and index page
-<img src="images/demo-2.png" width="49.5%" />
-<img src="images/demo-3.png" width="49.5%" />
+<p float="left">
+  <img src="images/demo-2.png" width="49.5%" />
+  <img src="images/demo-3.png" width="49.5%" />
+</p>
 
 
 ## How to install

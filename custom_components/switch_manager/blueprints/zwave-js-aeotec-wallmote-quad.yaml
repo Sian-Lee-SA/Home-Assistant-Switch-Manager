@@ -19,6 +19,10 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
+      - title: hold (released)
+        conditions:
+          - key: value
+            value: KeyReleased
   - d: m 222.78056,2.0572453 h 176.76953 a 42.333333,42.333333 45 0 1 42.33333,42.3333327 v 177.048392 h -219.10286 z
     conditions:
       - key: property_key
@@ -32,6 +36,10 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
+      - title: hold (released)
+        conditions:
+          - key: value
+            value: KeyReleased
   - d: m 3.4383569,221.24492 h 219.1028631 v 219.38173 h -176.76953 a 42.333333,42.333333 45 0 1 -42.3333331,-42.33333 z
     conditions:
       - key: property_key
@@ -45,6 +53,10 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
+      - title: hold (released)
+        conditions:
+          - key: value
+            value: KeyReleased
   - d: m 222.71397,221.28836 h 219.10286 v 177.0484 a 42.333333,42.333333 135 0 1 -42.33333,42.33333 l -176.76953,0 z
     conditions:
       - key: property_key
@@ -58,3 +70,7 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
+      - title: hold (released)
+        conditions:
+          - key: value
+            value: KeyReleased

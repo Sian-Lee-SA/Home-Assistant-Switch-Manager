@@ -6,9 +6,9 @@ conditions: "{{ (data.old_state.state == 'off' and data.new_state.state == 'on')
 buttons:
   - actions:
       - title: toggle
-      - title: on
+      - title: 'on'
         conditions: "{{ data.old_state.state == 'off' and data.new_state.state == 'on' }}"
-      - title: off
+      - title: 'off'
         conditions: "{{ data.old_state.state == 'on' and data.new_state.state == 'off' }}"
 
 

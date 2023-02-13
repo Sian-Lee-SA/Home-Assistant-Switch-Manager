@@ -84,7 +84,10 @@ def get_val_from_str(_string, _dict):
                 return None
             if not key in v:
                 return None
-            v = v[key]
+            if hasattr(v[key], 'as_dict'):
+                v = v[key].as_dict()
+            else:
+                v = v[key]
         except ValueError:
             return None
     return v

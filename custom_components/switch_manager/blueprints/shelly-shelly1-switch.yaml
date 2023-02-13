@@ -5,10 +5,9 @@ identifier_key: entity_id
 conditions: "{{ (data.old_state.state == 'off' and data.new_state.state == 'on') or (data.old_state.state == 'on' and data.new_state.state == 'off')}}"
 buttons:
   - actions:
-      - title: toggle
+      - title: 'init'
       - title: 'on'
-        conditions: "{{ data.old_state.state == 'off' and data.new_state.state == 'on' }}"
+        conditions: "{{ data.new_state.state == 'on' }}"
       - title: 'off'
-        conditions: "{{ data.old_state.state == 'on' and data.new_state.state == 'off' }}"
-
+        conditions: "{{ data.new_state.state == 'off' }}"
 

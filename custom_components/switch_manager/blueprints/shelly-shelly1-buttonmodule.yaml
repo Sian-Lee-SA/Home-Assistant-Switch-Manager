@@ -1,4 +1,4 @@
-name: Shelly 1
+name: Shelly 1 (button)
 service: Shelly
 event_type: shelly.click
 identifier_key: device

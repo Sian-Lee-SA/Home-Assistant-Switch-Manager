@@ -1,0 +1,16 @@
+name: Shelly 1 (switch)
+service: Shelly
+event_type: state_changed
+identifier_key: entity_id
+conditions: "{{ (data.old_state.state == 'off' and data.new_state.state == 'on') or (data.old_state.state == 'on' and data.new_state.state == 'off')}}"
+buttons:
+  - actions:
+      - title: init
+      - title: 'on'
+        conditions: 
+          - key: new_state.state
+            value: 'on'
+      - title: 'off'
+        conditions: 
+          - key: new_state.state
+            value: 'off'

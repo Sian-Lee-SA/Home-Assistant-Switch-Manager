@@ -14,6 +14,9 @@
 - [ ] Your integration/service is running on the latest version
 - [ ] You have tested your blueprints and made sure each button and action works
 
+#### Zigbee2MQTT
+- [ ] You have ensured legacy is off/false for the device in the Z2M devices Settings (specific) page and that your actions matches those with legacy off?
+
 <!--
   It is important to have the naming conventions and action ordering conformed while also ensuring all buttons and actions are supplied because any future changes will invalidate any blueprint for a user who uses your blueprint
 

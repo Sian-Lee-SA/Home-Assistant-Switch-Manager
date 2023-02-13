@@ -1,7 +1,7 @@
 ## Blueprint Checklist
 
 <!--
-  Put an `x` in the boxes that apply. Checkboxes should be marked without spaces eg. [x] and not [ x] or [x ] as the markdown won't render the checkboxes correctly if there are space within the brackets. Alternatively you can check the boxes through the UI after making the PR. If you're unsure about any of them, don't hesitate to ask.
+  Put an `x` in the boxes that apply. Checkboxes should be marked without spaces eg. [x] and not [ x] or [x ] as the markdown won't render the checkboxes correctly if there are space within the brackets. Alternatively you can check the boxes through the UI after submitting the PR. If you're unsure about any of them, don't hesitate to ask.
 -->
 
 - [ ] You viewed the README and conformed to the [naming conventions](https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager#title-naming-convention)

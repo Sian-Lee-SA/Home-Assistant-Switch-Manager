@@ -1,0 +1,235 @@
+---
+name: "RGB Genie 5 Zone Remote and Dimmer"
+service: "Zigbee2MQTT"
+event_type: "mqtt"
+mqtt_topic_format: "zigbee2mqtt/+"
+info: >-
+  The center buttons on each row represent the hold release for both the on and
+  off buttons on the same row.  The main top on and off buttons send the on or
+  off action, respectively, for all of the buttons 1 through 5.
+buttons:
+  # 1 on
+  - x: 32
+    y: 145
+    width: 12
+    conditions:
+      - key: "action_group"
+        value: 6145
+    actions:
+      - title: "press"
+        conditions:
+          - key: "action"
+            value: "on"
+      - title: "hold"
+        conditions:
+          - key: "action"
+            value: "brightness_move_up"
+  # 1 off
+  - x: 96
+    y: 145
+    width: 12
+    conditions:
+      - key: "action_group"
+        value: 6145
+    actions:
+      - title: "press"
+        conditions:
+          - key: "action"
+            value: "off"
+      - title: "hold"
+        conditions:
+          - key: "action"
+            value: "brightness_move_down"
+  # 1 hold (released)
+  - x: 64
+    y: 145
+    width: 12
+    conditions:
+      - key: "action_group"
+        value: 6145
+    actions:
+      - title: "either hold (released)"
+        conditions:
+          - key: "action"
+            value: "brightness_stop"
+
+  # 2 on
+  - x: 32
+    y: 187
+    width: 12
+    conditions:
+      - key: "action_group"
+        value: 6146
+    actions:
+      - title: "press"
+        conditions:
+          - key: "action"
+            value: "on"
+      - title: "hold"
+        conditions:
+          - key: "action"
+            value: "brightness_move_up"
+  # 2 off
+  - x: 96
+    y: 187
+    width: 12
+    conditions:
+      - key: "action_group"
+        value: 6146
+    actions:
+      - title: "press"
+        conditions:
+          - key: "action"
+            value: "off"
+      - title: "hold"
+        conditions:
+          - key: "action"
+            value: "brightness_move_down"
+  # 2 hold (released)
+  - x: 64
+    y: 187
+    width: 12
+    conditions:
+      - key: "action_group"
+        value: 6146
+    actions:
+      - title: "either hold (released)"
+        conditions:
+          - key: "action"
+            value: "brightness_stop"
+
+  # 3 on
+  - x: 32
+    y: 230
+    width: 12
+    conditions:
+      - key: "action_group"
+        value: 6147
+    actions:
+      - title: "press"
+        conditions:
+          - key: "action"
+            value: "on"
+      - title: "hold"
+        conditions:
+          - key: "action"
+            value: "brightness_move_up"
+  # 3 off
+  - x: 96
+    y: 230
+    width: 12
+    conditions:
+      - key: "action_group"
+        value: 6147
+    actions:
+      - title: "press"
+        conditions:
+          - key: "action"
+            value: "off"
+      - title: "hold"
+        conditions:
+          - key: "action"
+            value: "brightness_move_down"
+  # 3 hold (released)
+  - x: 64
+    y: 230
+    width: 12
+    conditions:
+      - key: "action_group"
+        value: 6147
+    actions:
+      - title: "either hold (released)"
+        conditions:
+          - key: "action"
+            value: "brightness_stop"
+
+  # 4 on
+  - x: 32
+    y: 316
+    width: 12
+    conditions:
+      - key: "action_group"
+        value: 6148
+    actions:
+      - title: "press"
+        conditions:
+          - key: "action"
+            value: "on"
+      - title: "hold"
+        conditions:
+          - key: "action"
+            value: "brightness_move_up"
+  # 4 off
+  - x: 96
+    y: 316
+    width: 12
+    conditions:
+      - key: "action_group"
+        value: 6148
+    actions:
+      - title: "press"
+        conditions:
+          - key: "action"
+            value: "off"
+      - title: "hold"
+        conditions:
+          - key: "action"
+            value: "brightness_move_down"
+  # 4 hold (released)
+  - x: 64
+    y: 316
+    width: 12
+    conditions:
+      - key: "action_group"
+        value: 6148
+    actions:
+      - title: "either hold (released)"
+        conditions:
+          - key: "action"
+            value: "brightness_stop"
+
+  # 5 on
+  - x: 32
+    y: 273
+    width: 12
+    conditions:
+      - key: "action_group"
+        value: 6149
+    actions:
+      - title: "press"
+        conditions:
+          - key: "action"
+            value: "on"
+      - title: "hold"
+        conditions:
+          - key: "action"
+            value: "brightness_move_up"
+  # 5 off
+  - x: 96
+    y: 273
+    width: 12
+    conditions:
+      - key: "action_group"
+        value: 6149
+    actions:
+      - title: "press"
+        conditions:
+          - key: "action"
+            value: "off"
+      - title: "hold"
+        conditions:
+          - key: "action"
+            value: "brightness_move_down"
+  # 5 hold (released)
+  - x: 64
+    y: 273
+    width: 12
+    conditions:
+      - key: "action_group"
+        value: 6149
+    actions:
+      - title: "either hold (released)"
+        conditions:
+          - key: "action"
+            value: "brightness_stop"
+...

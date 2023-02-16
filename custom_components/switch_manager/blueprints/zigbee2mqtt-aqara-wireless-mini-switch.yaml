@@ -20,3 +20,7 @@ buttons:
         conditions:
           - key: payload
             value: release
+      - title: shake
+        conditions:
+          - key: payload
+            value: shake

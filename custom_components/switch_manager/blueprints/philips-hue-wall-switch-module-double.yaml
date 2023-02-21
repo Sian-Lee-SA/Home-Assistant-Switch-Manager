@@ -4,10 +4,10 @@ event_type: hue_event
 identifier_key: id
 info: Actions HOLD and HOLD (RELEASED) will only work in rocker mode.
 buttons:
-  - x: 62
-    y: 62
-    width: 189
-    height: 375
+  - x: 40
+    y: 40
+    width: 211
+    height: 421
     conditions:
       - key: subtype
         value: 1
@@ -29,9 +29,9 @@ buttons:
           - key: type
             value: long_release
   - x: 251
-    y: 63
-    width: 189
-    height: 375
+    y: 40
+    width: 210
+    height: 421
     conditions:
       - key: subtype
         value: 2

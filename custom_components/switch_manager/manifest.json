@@ -16,8 +16,8 @@
     "script"
   ],
   "documentation": "https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager",
-  "issue_tracker": "https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager/issues",
   "iot_class": "local_push",
+  "issue_tracker": "https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager/issues",
   "requirements": [],
   "version": "1.0.2"
 }

@@ -1,8 +1,11 @@
 {
-  "domain": "switch_manager",
-  "name": "Switch Manager",
-  "version": "1.0.2",
-  "documentation": "https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager",
+  "after_dependencies": [
+    "mqtt"
+  ],
+  "codeowners": [
+    "@Sian-Lee-SA"
+  ],
+  "config_flow": true,
   "dependencies": [
     "panel_custom",
     "websocket_api",
@@ -10,14 +13,11 @@
     "frontend",
     "script"
   ],
-  "after_dependencies": [
-    "mqtt"
-  ],
-  "requirements": [],
-  "codeowners": [
-    "@Sian-Lee-SA"
-  ],
+  "documentation": "https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager",
+  "domain": "switch_manager",
   "issue_tracker": "https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager/issues",
   "iot_class": "local_push",
-  "config_flow": true
+  "name": "Switch Manager",
+  "requirements": [],
+  "version": "1.0.2"
 }

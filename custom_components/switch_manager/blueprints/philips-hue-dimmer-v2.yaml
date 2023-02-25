@@ -12,9 +12,7 @@ buttons:
         value: 1
     actions:
       - title: init
-        conditions:
-          - key: type
-            value: short
+        conditions: "{{ data.type in ['short', 'initial_press'] }}"
       - title: press
         conditions:
           - key: type
@@ -36,9 +34,7 @@ buttons:
         value: 2
     actions:
       - title: init
-        conditions:
-          - key: type
-            value: short
+        conditions: "{{ data.type in ['short', 'initial_press'] }}"
       - title: press
         conditions:
           - key: type
@@ -60,9 +56,7 @@ buttons:
         value: 3
     actions:
       - title: init
-        conditions:
-          - key: type
-            value: short
+        conditions: "{{ data.type in ['short', 'initial_press'] }}"
       - title: press
         conditions:
           - key: type
@@ -84,9 +78,7 @@ buttons:
         value: 4
     actions:
       - title: init
-        conditions:
-          - key: type
-            value: short
+        conditions: "{{ data.type in ['short', 'initial_press'] }}"
       - title: press
         conditions:
           - key: type

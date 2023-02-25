@@ -1,0 +1,102 @@
+name: Philips Hue Dimmer v1
+service: Philips Hue
+event_type: hue_event
+identifier_key: id
+buttons:
+  - x: 2
+    y: 2
+    width: 189
+    height: 159
+    conditions:
+      - key: subtype
+        value: 1
+    actions:
+      - title: init
+        conditions:
+          - key: type
+            value: initial_press
+      - title: press
+        conditions:
+          - key: type
+            value: short_release
+      - title: hold
+        conditions:
+          - key: type
+            value: repeat
+      - title: hold (released)
+        conditions:
+          - key: type
+            value: long_release      
+  - x: 2
+    y: 161
+    width: 189
+    height: 90
+    conditions:
+      - key: subtype
+        value: 2
+    actions:
+      - title: init
+        conditions:
+          - key: type
+            value: initial_press
+      - title: press
+        conditions:
+          - key: type
+            value: short_release
+      - title: hold
+        conditions:
+          - key: type
+            value: repeat
+      - title: hold (released)
+        conditions:
+          - key: type
+            value: long_release
+  - x: 2
+    y: 251
+    width: 189
+    height: 90
+    conditions:
+      - key: subtype
+        value: 3
+    actions:
+      - title: init
+        conditions:
+          - key: type
+            value: initial_press
+      - title: press
+        conditions:
+          - key: type
+            value: short_release
+      - title: hold
+        conditions:
+          - key: type
+            value: repeat
+      - title: hold (released)
+        conditions:
+          - key: type
+            value: long_release
+  - x: 2
+    y: 341
+    width: 189
+    height: 159
+    conditions:
+      - key: subtype
+        value: 4
+    actions:
+      - title: init
+        conditions:
+          - key: type
+            value: initial_press
+      - title: press
+        conditions:
+          - key: type
+            value: short_release
+      - title: hold
+        conditions:
+          - key: type
+            value: repeat
+      - title: hold (released)
+        conditions:
+          - key: type
+            value: long_release
+

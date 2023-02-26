@@ -3,10 +3,10 @@ service: Zigbee2MQTT
 event_type: mqtt
 mqtt_topic_format: zigbee2mqtt/+/action
 buttons:
-  - x: 23
-    y: 23
-    width: 432
-    height: 50
+  - x: 80
+    y: 76
+    width: 341
+    height: 25
     actions:
       - title: press both
         conditions:
@@ -16,10 +16,10 @@ buttons:
         conditions:
           - key: payload
             value: release_1_and_3
-  - x: 23
-    y: 73
-    width: 216
-    height: 158
+  - x: 80 
+    y: 101
+    width: 168
+    height: 148
     actions:
       - title: press
         conditions:
@@ -29,10 +29,10 @@ buttons:
         conditions:
           - key: payload
             value: release_1
-  - x: 239
-    y: 73
-    width: 216
-    height: 158
+  - x: 253
+    y: 101
+    width: 168
+    height: 148
     actions:
       - title: press
         conditions:
@@ -42,10 +42,10 @@ buttons:
         conditions:
           - key: payload
             value: release_3
-  - x: 23
-    y: 231
-    width: 216
-    height: 158
+  - x: 80
+    y: 249
+    width: 168
+    height: 148
     actions:
       - title: press
         conditions:
@@ -55,10 +55,10 @@ buttons:
         conditions:
           - key: payload
             value: release_2
-  - x: 239
-    y: 231
-    width: 216
-    height: 158
+  - x: 253
+    y: 249
+    width: 168
+    height: 148
     actions:
       - title: press
         conditions:
@@ -68,10 +68,10 @@ buttons:
         conditions:
           - key: payload
             value: release_4
-  - x: 23
-    y: 389
-    width: 432
-    height: 50
+  - x: 80
+    y: 397
+    width: 341
+    height: 25
     actions:
       - title: press both
         conditions:

@@ -1,0 +1,81 @@
+name: EnOcean (PTM 215Z)
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+buttons:
+  - x: 79 
+    y: 76
+    width: 171
+    height: 173
+    actions:
+      - title: init
+        conditions:
+          - key: payload
+            value: press_1
+      - title: press
+        conditions:
+          - key: payload
+            value: release_1
+  - x: 250
+    y: 76
+    width: 171
+    height: 173
+    actions:
+      - title: init
+        conditions:
+          - key: payload
+            value: press_3
+      - title: press
+        conditions:
+          - key: payload
+            value: release_3
+  - x: 250
+    y: 162
+    width: 40
+    actions:
+      - title: both init
+        conditions:
+          - key: payload
+            value: press_1_and_3
+      - title: both press
+        conditions:
+          - key: payload
+            value: release_1_and_3
+  - x: 79
+    y: 249
+    width: 171
+    height: 173
+    actions:
+      - title: init
+        conditions:
+          - key: payload
+            value: press_2
+      - title: press
+        conditions:
+          - key: payload
+            value: release_2
+  - x: 250
+    y: 249
+    width: 171
+    height: 173
+    actions:
+      - title: init
+        conditions:
+          - key: payload
+            value: press_4
+      - title: press
+        conditions:
+          - key: payload
+            value: release_4
+  - x: 250
+    y: 336
+    width: 40
+    actions:
+      - title: both init
+        conditions:
+          - key: payload
+            value: press_2_and_4
+      - title: both press
+        conditions:
+          - key: payload
+            value: release_2_and_4

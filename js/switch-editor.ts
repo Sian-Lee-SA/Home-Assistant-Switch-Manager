@@ -279,6 +279,7 @@ class SwitchManagerSwitchEditor extends LitElement
                             </div>`:''}
                         </div>
                     </ha-card>
+                    
                     ${!this.config?._error ? html`
                     <div class="fab-container">
                         <ha-fab
@@ -312,6 +313,9 @@ class SwitchManagerSwitchEditor extends LitElement
             }
             :host {
                 --max-width: 1040px;
+            }
+            ha-app-layout {
+                z-index: 5;
             }
             mwc-list-item {
                 min-width: 165px;

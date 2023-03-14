@@ -1,0 +1,29 @@
+name: Tuya Zigbee Smart Rotary Knob
+service: ZHA
+event_type: zha_event
+identifier_key: device_id
+buttons:
+  - actions:
+      - title: press
+        conditions:
+          - key: command
+            value: toggle
+      - title: rotate left
+        conditions: >
+          {{ data.command == "step" and data.params.step_mode == 1 }}
+      - title: rotate right
+        conditions: >
+          {{ data.command == "step" and data.params.step_mode == 0 }}
+      - title: hold rotate left
+        conditions: >
+          {{ data.command == "step_color_temp" and data.params.step_mode == 3 }}
+      - title: hold rotate right
+        conditions: >
+          {{ data.command == "step_color_temp" and data.params.step_mode == 1 }}
+      - title: hold
+        conditions: >
+          {{ data.command == "move_hue" or data.command == "move_saturation" }}
+      - title: hold (released)
+        conditions: >
+          {{ data.command == 'stop_move_step'
+          and data.button_last_state[0].title == 'hold' }}

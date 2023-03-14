@@ -1,0 +1,110 @@
+name: Namron 4 button switch
+service: ZHA
+event_type: zha_event
+identifier_key: device_id
+buttons:
+  # Top left (endpoint 1 "ON")
+  - x: 118
+    y: 115
+    width: 165
+    height: 279
+    actions:
+      - title: press
+        conditions:
+          - key: endpoint_id
+            value: 1
+          - key: cluster_id
+            value: 6
+          - key: command
+            value: 'on'
+      - title: hold
+        conditions: >
+          {{ data.endpoint_id == 1
+          and data.cluster_id == 8
+          and data.command == 'move_with_on_off'
+          and data.params.move_mode == 0 }}
+      - title: hold (released)
+        conditions: >
+          {{ data.endpoint_id == 1
+          and data.cluster_id == 8
+          and data.command == 'stop_with_on_off'
+          and data.button_last_state[0].title == 'hold' }}
+  # Bottom left (endpoint 2 "ON")
+  - x: 118
+    y: 398
+    width: 165
+    height: 279
+    actions:
+      - title: press
+        conditions:
+          - key: endpoint_id
+            value: 2
+          - key: cluster_id
+            value: 6
+          - key: command
+            value: 'on'
+      - title: hold
+        conditions: >
+          {{ data.endpoint_id == 2
+          and data.cluster_id == 8
+          and data.command == 'move_with_on_off'
+          and data.params.move_mode == 0 }}
+      - title: hold (released)
+        conditions: >
+          {{ data.endpoint_id == 2
+          and data.cluster_id == 8
+          and data.command == 'stop_with_on_off'
+          and data.button_last_state[1].title == 'hold' }}
+
+  # Top right (endpoint 1 "OFF")
+  - x: 516
+    y: 115
+    width: 165
+    height: 279
+    actions:
+      - title: press
+        conditions:
+          - key: endpoint_id
+            value: 1
+          - key: cluster_id
+            value: 6
+          - key: command
+            value: 'off'
+      - title: hold
+        conditions: >
+          {{ data.endpoint_id == 1
+          and data.cluster_id == 8
+          and data.command == 'move_with_on_off'
+          and data.params.move_mode == 1 }}
+      - title: hold (released)
+        conditions: >
+          {{ data.endpoint_id == 1
+          and data.cluster_id == 8
+          and data.command == 'stop_with_on_off'
+          and data.button_last_state[2].title == 'hold' }}
+  # Bottom right (endpoint 2 "OFF")
+  - x: 516
+    y: 398
+    width: 165
+    height: 279
+    actions:
+      - title: press
+        conditions:
+          - key: endpoint_id
+            value: 2
+          - key: cluster_id
+            value: 6
+          - key: command
+            value: 'off'
+      - title: hold
+        conditions: >
+          {{ data.endpoint_id == 2
+          and data.cluster_id == 8
+          and data.command == 'move_with_on_off'
+          and data.params.move_mode == 1 }}
+      - title: hold (released)
+        conditions: >
+          {{ data.endpoint_id == 2
+          and data.cluster_id == 8
+          and data.command == 'stop_with_on_off'
+          and data.button_last_state[3].title == 'hold' }}

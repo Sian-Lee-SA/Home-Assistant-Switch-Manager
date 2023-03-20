@@ -1,0 +1,110 @@
+name: Fibaro Keyfob
+service: Z-Wave JS
+event_type: zwave_js_value_notification
+identifier_key: node_id
+conditions:
+  - key: property
+    value: scene
+buttons:
+  - d: m 227.6053,151.8623 a 24.735455,24.10573 0 0 1 -24.73546,24.10573 24.735455,24.10573 0 0 1 -24.73545,-24.10573 24.735455,24.10573 0 0 1 24.73545,-24.10573 24.735455,24.10573 0 0 1 24.73546,24.10573 z
+    conditions:
+      - key: property_key
+        value: '001'
+    actions:
+      - title: tap
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+      - title: released
+        conditions:
+          - key: value
+            value: KeyReleased
+  - d: m 316.77024,151.44249 a 24.740023,23.690483 0 0 1 -24.74003,23.69048 24.740023,23.690483 0 0 1 -24.74002,-23.69048 24.740023,23.690483 0 0 1 24.74002,-23.69048 24.740023,23.690483 0 0 1 24.74003,23.69048 z
+    conditions:
+      - key: property_key
+        value: '002'
+    actions:
+      - title: tap
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+      - title: released
+        conditions:
+          - key: value
+            value: KeyReleased
+  - d: m 232.46967,212.35097 a 24.740023,23.690483 0 0 1 -24.74003,23.69048 24.740023,23.690483 0 0 1 -24.74002,-23.69048 24.740023,23.690483 0 0 1 24.74002,-23.69049 24.740023,23.690483 0 0 1 24.74003,23.69049 z
+    conditions:
+      - key: property_key
+        value: '003'
+    actions:
+      - title: tap
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+      - title: released
+        conditions:
+          - key: value
+            value: KeyReleased
+  - d: m 311.30933,214.35097 a 24.740023,23.690483 0 0 1 -24.74002,23.69048 24.740023,23.690483 0 0 1 -24.74003,-23.69048 24.740023,23.690483 0 0 1 24.74003,-23.69049 24.740023,23.690483 0 0 1 24.74002,23.69049 z
+    conditions:
+      - key: property_key
+        value: '004'
+    actions:
+      - title: tap
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+      - title: released
+        conditions:
+          - key: value
+            value: KeyReleased
+  - d: m 238.42143,274.55917 a 24.735455,24.10573 0 0 1 -24.73546,24.10573 24.735455,24.10573 0 0 1 -24.73545,-24.10573 24.735455,24.10573 0 0 1 24.73545,-24.10573 24.735455,24.10573 0 0 1 24.73546,24.10573 z
+    conditions:
+      - key: property_key
+        value: '005'
+    actions:
+      - title: tap
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+      - title: released
+        conditions:
+          - key: value
+            value: KeyReleased
+  - d: M 306.0016,274.979 A 24.735455,24.10573 0 0 1 281.26614,299.08473 24.735455,24.10573 0 0 1 256.53069,274.979 24.735455,24.10573 0 0 1 281.26614,250.87327 24.735455,24.10573 0 0 1 306.0016,274.979 Z
+    conditions:
+      - key: property_key
+        value: '006'
+    actions:
+      - title: tap
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+      - title: released
+        conditions:
+          - key: value
+            value: KeyReleased

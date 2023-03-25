@@ -1,0 +1,37 @@
+name: Ikea On/Off Remote E1743
+service: ZHA
+event_type: zha_event
+identifier_key: device_id
+buttons:
+  - x: 256
+    y: 130
+    width: 100
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: "on"
+      - title: hold
+        conditions:
+          - key: command
+            value: move_with_on_off
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: stop_with_on_off
+  - x: 256
+    y: 380
+    width: 100
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: "off"
+      - title: hold
+        conditions:
+          - key: command
+            value: move
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: stop_with_on_off

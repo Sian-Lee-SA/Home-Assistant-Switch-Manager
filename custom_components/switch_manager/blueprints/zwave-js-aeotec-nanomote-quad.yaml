@@ -6,8 +6,7 @@ conditions:
   - key: property
     value: scene
 buttons:
-  - shape: path
-    d: "m43,142a100,100 0 0 1 100,-100l206,0a100,100 0 0 1 100,100l0,100l-118,0a85,85 0 1 0 -170,0l-118,0z"
+  - d: "m43,142a100,100 0 0 1 100,-100l206,0a100,100 0 0 1 100,100l0,100l-118,0a85,85 0 1 0 -170,0l-118,0z"
     conditions:
       - key: property_key
         value: '001'
@@ -20,8 +19,7 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
-  - shape: path
-    d: "m43,249l118,0a85,85 0 0 0 82,85l0,118l-100,0a100,100 0 0 1 -100,-100z"
+  - d: "m43,249l118,0a85,85 0 0 0 82,85l0,118l-100,0a100,100 0 0 1 -100,-100z"
     conditions:
       - key: property_key
         value: '002'
@@ -34,8 +32,7 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
-  - shape: path
-    d: "m448,249l0,103a100,100 0 0 1 -100,100l-100,0l0,-118a85,85 0 0 0 82,-85z"
+  - d: "m448,249l0,103a100,100 0 0 1 -100,100l-100,0l0,-118a85,85 0 0 0 82,-85z"
     conditions:
       - key: property_key
         value: '003'
@@ -48,8 +45,7 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
-  - shape: circle
-    x: 245
+  - x: 245
     y: 246
     width: 84
     conditions:

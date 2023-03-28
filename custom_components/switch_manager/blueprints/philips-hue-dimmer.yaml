@@ -11,6 +11,8 @@ buttons:
       - key: subtype
         value: 1
     actions:
+      - title: init
+        conditions: "{{ data.type in ['short', 'initial_press'] }}"
       - title: press
         conditions:
           - key: type
@@ -31,6 +33,8 @@ buttons:
       - key: subtype
         value: 2
     actions:
+      - title: init
+        conditions: "{{ data.type in ['short', 'initial_press'] }}"
       - title: press
         conditions:
           - key: type
@@ -51,6 +55,8 @@ buttons:
       - key: subtype
         value: 3
     actions:
+      - title: init
+        conditions: "{{ data.type in ['short', 'initial_press'] }}"
       - title: press
         conditions:
           - key: type
@@ -71,6 +77,8 @@ buttons:
       - key: subtype
         value: 4
     actions:
+      - title: init
+        conditions: "{{ data.type in ['short', 'initial_press'] }}"
       - title: press
         conditions:
           - key: type

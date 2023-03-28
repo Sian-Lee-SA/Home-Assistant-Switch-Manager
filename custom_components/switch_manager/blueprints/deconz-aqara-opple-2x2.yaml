@@ -3,8 +3,8 @@ service: deCONZ
 event_type: deconz_event
 identifier_key: device_id
 buttons:
-  - x: 93
-    y: 85
+  - x: 70
+    y: 63
     width: 157
     height: 160
     actions:
@@ -28,8 +28,8 @@ buttons:
         conditions:
           - key: event
             value: 1003
-  - x: 250
-    y: 85
+  - x: 228
+    y: 63
     width: 157
     height: 160
     actions:
@@ -53,8 +53,8 @@ buttons:
         conditions:
           - key: event
             value: 2003
-  - x: 93
-    y: 253
+  - x: 70
+    y: 231
     width: 157
     height: 160
     actions:
@@ -78,8 +78,8 @@ buttons:
         conditions:
           - key: event
             value: 3003
-  - x: 250
-    y: 253
+  - x: 228
+    y: 231
     width: 157
     height: 160
     actions:

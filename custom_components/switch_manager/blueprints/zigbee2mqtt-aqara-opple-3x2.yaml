@@ -1,0 +1,155 @@
+name: Aqara Opple 3x2
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+buttons:
+  - x: 69
+    y: 63
+    width: 157
+    height: 104
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: button_1_single
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: button_1_double
+      - title: press 3x
+        conditions:
+          - key: payload
+            value: button_1_triple
+      - title: hold
+        conditions:
+          - key: payload
+            value: button_1_hold
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: button_1_release
+  - x: 227
+    y: 63
+    width: 157
+    height: 104
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: button_2_single
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: button_2_double
+      - title: press 3x
+        conditions:
+          - key: payload
+            value: button_2_triple
+      - title: hold
+        conditions:
+          - key: payload
+            value: button_2_hold
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: button_2_release
+  - x: 69
+    y: 175
+    width: 157
+    height: 104
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: button_3_single
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: button_3_double
+      - title: press 3x
+        conditions:
+          - key: payload
+            value: button_3_triple
+      - title: hold
+        conditions:
+          - key: payload
+            value: button_3_hold
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: button_3_release
+  - x: 227
+    y: 175
+    width: 157
+    height: 104
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: button_4_single
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: button_4_double
+      - title: press 3x
+        conditions:
+          - key: payload
+            value: button_4_triple
+      - title: hold
+        conditions:
+          - key: payload
+            value: button_4_hold
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: button_4_release
+  - x: 69
+    y: 286
+    width: 157
+    height: 104
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: button_5_single
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: button_5_double
+      - title: press 3x
+        conditions:
+          - key: payload
+            value: button_5_triple
+      - title: hold
+        conditions:
+          - key: payload
+            value: button_5_hold
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: button_5_release
+  - x: 227
+    y: 286
+    width: 157
+    height: 104
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: button_6_single
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: button_6_double
+      - title: press 3x
+        conditions:
+          - key: payload
+            value: button_6_triple
+      - title: hold
+        conditions:
+          - key: payload
+            value: button_6_hold
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: button_6_release

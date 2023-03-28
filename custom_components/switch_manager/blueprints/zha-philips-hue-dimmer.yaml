@@ -1,4 +1,4 @@
-name: Philips Hue Dimmer
+name: Philips Hue Dimmer v1/v2
 service: ZHA
 event_type: zha_event
 identifier_key: device_id
@@ -8,10 +8,14 @@ buttons:
     width: 189
     height: 159
     actions:
-      - title: press
+      - title: init
         conditions:
           - key: command
             value: on_press
+      - title: press
+        conditions:
+          - key: command
+            value: on_short_release
       - title: press 2x
         conditions:
           - key: command
@@ -41,10 +45,14 @@ buttons:
     width: 189
     height: 90
     actions:
-      - title: press
+      - title: init
         conditions:
           - key: command
             value: up_press
+      - title: press
+        conditions:
+          - key: command
+            value: up_short_release
       - title: press 2x
         conditions:
           - key: command
@@ -74,10 +82,14 @@ buttons:
     width: 189
     height: 90
     actions:
-      - title: press
+      - title: init
         conditions:
           - key: command
             value: down_press
+      - title: press
+        conditions:
+          - key: command
+            value: down_short_release
       - title: press 2x
         conditions:
           - key: command
@@ -107,10 +119,14 @@ buttons:
     width: 189
     height: 159
     actions:
-      - title: press
+      - title: init
         conditions:
           - key: command
             value: off_press
+      - title: press
+        conditions:
+          - key: command
+            value: off_short_release
       - title: press 2x
         conditions:
           - key: command

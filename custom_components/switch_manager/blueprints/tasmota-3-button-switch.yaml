@@ -1,0 +1,92 @@
+name: Tasmota 3 Button Switch
+service: Tasmota
+event_type: mqtt
+mqtt_topic_format: stat/+/RESULT
+buttons:
+  - x: 112
+    y: 80
+    width: 88
+    height: 88
+    actions:
+      - title: press
+        conditions:
+          - key: Button1.Action
+            value: SINGLE
+      - title: press 2x
+        conditions:
+          - key: Button1.Action
+            value: DOUBLE
+      - title: press 3x
+        conditions:
+          - key: Button1.Action
+            value: TRIPLE
+      - title: press 4x
+        conditions:
+          - key: Button1.Action
+            value: QUAD
+      - title: press 5x
+        conditions:
+          - key: Button1.Action
+            value: PENTA
+      - title: hold
+        conditions:
+          - key: Button1.Action
+            value: HOLD
+  - x: 112
+    y: 204
+    width: 88
+    height: 88
+    actions:
+      - title: press
+        conditions:
+          - key: Button2.Action
+            value: SINGLE
+      - title: press 2x
+        conditions:
+          - key: Button2.Action
+            value: DOUBLE
+      - title: press 3x
+        conditions:
+          - key: Button2.Action
+            value: TRIPLE
+      - title: press 4x
+        conditions:
+          - key: Button2.Action
+            value: QUAD
+      - title: press 5x
+        conditions:
+          - key: Button2.Action
+            value: PENTA
+      - title: hold
+        conditions:
+          - key: Button2.Action
+            value: HOLD
+  - x: 112
+    y: 328
+    width: 88
+    height: 88
+    actions:
+      - title: press
+        conditions:
+          - key: Button3.Action
+            value: SINGLE
+      - title: press 2x
+        conditions:
+          - key: Button3.Action
+            value: DOUBLE
+      - title: press 3x
+        conditions:
+          - key: Button3.Action
+            value: TRIPLE
+      - title: press 4x
+        conditions:
+          - key: Button3.Action
+            value: QUAD
+      - title: press 5x
+        conditions:
+          - key: Button3.Action
+            value: PENTA
+      - title: hold
+        conditions:
+          - key: Button3.Action
+            value: HOLD

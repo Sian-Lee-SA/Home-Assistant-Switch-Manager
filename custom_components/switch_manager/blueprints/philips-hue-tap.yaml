@@ -1,0 +1,49 @@
+name: Philips Hue Tap
+service: Philips Hue
+event_type: hue_event
+identifier_key: id
+buttons:
+  - x: 174
+    y: 174
+    width: 161
+    conditions:
+      - key: subtype
+        value: 1
+    actions:
+      - title: tap
+        conditions:
+          - key: type
+            value: initial_press
+  - x: 87
+    y: 176
+    width: 46
+    conditions:
+      - key: subtype
+        value: 2
+    actions:
+      - title: tap
+        conditions:
+          - key: type
+            value: initial_press
+  - x: 178
+    y: 263
+    width: 46
+    conditions:
+      - key: subtype
+        value: 3
+    actions:
+      - title: tap
+        conditions:
+          - key: type
+            value: initial_press
+  - x: 265
+    y: 173
+    width: 46
+    conditions:
+      - key: subtype
+        value: 4
+    actions:
+      - title: tap
+        conditions:
+          - key: type
+            value: initial_press

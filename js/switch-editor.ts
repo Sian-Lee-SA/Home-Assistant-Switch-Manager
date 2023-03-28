@@ -10,16 +10,20 @@ import {
     mdiStopCircleOutline,
     mdiPlayCircleOutline,
     mdiGestureTapButton,
-    mdiEarHearing
+    mdiBug,
+    mdiCheck,
+    mdiCodeBraces,
+    mdiFileDocumentEditOutline,
+    mdiViewDashboardEditOutline,
+    mdiIdentifier
 } from "@mdi/js";
-import { SwitchManagerBlueprint, SwitchManagerBlueprintCondition, SwitchManagerConfig, SwitchManagerConfigButton } from "./types";
+import { SwitchManagerBlueprint, SwitchManagerConfig, SwitchManagerConfigButton } from "./types";
 import { MODES } from "../ha-frontend/data/script";
 import { 
     buildAssetUrl, 
     buildUrl, 
     buildWSPath, 
     createConfigFromBlueprint,
-    getValueById,
     showConfirmDialog
 } from "./helpers";
 import { navigate } from "../ha-frontend/common/navigate";
@@ -32,6 +36,10 @@ import "@polymer/app-layout/app-toolbar/app-toolbar";
 import "./button-actions";
 import "../ha-frontend/types";
 import "../ha-frontend/panels/config/automation/action/ha-automation-action";
+import "../ha-frontend/components/ha-yaml-editor";
+import type { HaYamlEditor } from "../ha-frontend/components/ha-yaml-editor";
+import { showConfirmationDialog } from "../ha-frontend/dialogs/generic/show-dialog-box";
+import { afterNextRender } from "../ha-frontend/common/util/render-status";
 import "../ha-frontend/components/ha-fab";
 import "../ha-frontend/components/ha-card";
 import "../ha-frontend/components/ha-button-menu";
@@ -57,8 +65,7 @@ class SwitchManagerSwitchEditor extends LitElement
 
     @property() disabled = false;
 
-    @state() private _subscribed?: () => void;
-    @state() private _buttonListener?: () => void;
+    @state() private _subscribedMonitor?: () => void;
     @state() private _reloadListener?: () => void;
 
     @state() private sequence: any[] = [];
@@ -66,13 +73,15 @@ class SwitchManagerSwitchEditor extends LitElement
     @state() private action_index: number = 0;
 
     @state() private is_new: boolean = true;
-
+    @state() private _is_yaml: boolean = false;
     @state() private _dirty: boolean = false;
+    @state() private _debug: boolean = false;
     @state() private _block_save: boolean = false;
     @state() private _errors?: string;
 
     @query('#switch-svg') svg;
-    @query('#identifier-input') identifier_input;
+    @query('switch-manager-button-actions') button_actions;
+    @query("ha-yaml-editor") private _yamlEditor?: HaYamlEditor;
 
     render() 
     {
@@ -89,7 +98,7 @@ class SwitchManagerSwitchEditor extends LitElement
                         </ha-menu-button>
                         <ha-icon-button
                             .path=${mdiArrowLeft}
-                            @click=${() => navigate(buildUrl())}>
+                            @click=${this._backTapped}>
                         </ha-icon-button>
                         <div main-title id="title-container">
                             <span>Switch Manager - ${this.config?.name}</span>
@@ -101,7 +110,16 @@ class SwitchManagerSwitchEditor extends LitElement
                                     .label=${this.hass.localize("ui.common.menu")}
                                     .path=${mdiDotsVertical}>
                                 </ha-icon-button>
-                                
+
+                                <mwc-list-item
+                                    graphic="icon"
+                                    .disabled=${!this.config || this.config?._error}
+                                    @click=${this._showIdentifierAutoDiscoveryDialog}>
+                                        Identifier
+                                        <ha-svg-icon slot="graphic" .path=${mdiIdentifier}>
+                                        </ha-svg-icon>
+                                </mwc-list-item>
+
                                 <mwc-list-item
                                     graphic="icon"
                                     @click=${this._showRenameDialog}>
@@ -112,7 +130,18 @@ class SwitchManagerSwitchEditor extends LitElement
                                 
                                 <mwc-list-item
                                     graphic="icon"
-                                    .disabled=${!this.config || this.is_new || !this.config?.valid_blueprint}
+                                    .disabled=${!this.config || this.config?._error}
+                                    @click=${this._showVariablesEditorDialog}>
+                                        Variables
+                                        <ha-svg-icon
+                                            slot="graphic"
+                                            .path=${mdiCodeBraces}>
+                                        </ha-svg-icon>
+                                </mwc-list-item>
+
+                                <mwc-list-item
+                                    graphic="icon"
+                                    .disabled=${!this.config || this.is_new || this.config?._error}
                                     @click=${this._toggleEnabled}>
                                         ${!this.config?.enabled ? 'Enable' : 'Disable'}
                                         <ha-svg-icon
@@ -121,6 +150,19 @@ class SwitchManagerSwitchEditor extends LitElement
                                         </ha-svg-icon>
                                 </mwc-list-item>
                                 
+                                <li divider role="separator"></li>
+                                
+                                <mwc-list-item
+                                    graphic="icon"
+                                    .disabled=${!this.config || this.is_new || this.config?._error}
+                                    @click=${this._toggleDebug}>
+                                        Debug
+                                        <ha-svg-icon
+                                            slot="graphic"
+                                            .path=${this._debug ? mdiCheck : mdiBug}>
+                                        </ha-svg-icon>
+                                </mwc-list-item>
+
                                 <li divider role="separator"></li>
 
                                 <mwc-list-item
@@ -141,38 +183,17 @@ class SwitchManagerSwitchEditor extends LitElement
                 </app-header>
             </ha-app-layout>
             <hui-view>
-                <hui-panel-view>
-                    ${this.config?.valid_blueprint ? html`
-                    <h3 id="blueprint-name">${this.blueprint?.service} / ${this.blueprint?.name}</h3>
-                    <span id="identifier">
-                        <ha-textfield 
-                            id="identifier-input" 
-                            type="text" 
-                            .value="${this.config?.identifier}" 
-                            required="true" 
-                            .label=${this.blueprint?.event_type == 'mqtt'? 'mqtt topic' : this.blueprint?.identifier_key}
-                            @input="${this._identifierChanged}"></ha-textfield>
-                        ${this.blueprint?.event_type != 'mqtt' || this.blueprint?.mqtt_topic_format ? html`
-                        <ha-icon-button
-                            .path=${mdiEarHearing}
-                            ?listening=${(this._subscribed)}
-                            @click=${this._listenForEvent}>
-                        </ha-icon-button>` : 
-                            html`${this.blueprint.mqtt_topic_format ? html`<ha-alert alert-type="info">Format: ${this.blueprint.mqtt_topic_format}</ha-alert>` : ''}`}
-                        ${this._subscribed ? html`
-                        <ha-alert alert-type="info">
-                            Press a button on your switch
-                        </ha-alert>` : ''}
-                    </span>`:''}
-                    
-                
+                <hui-panel-view>                 
+                    ${!this.config?._error ? html`
+                    <h3 id="blueprint-name">${this.blueprint?.service} / ${this.blueprint?.name}</h3>`:''}
+
                     <div id="switch-image">
                     ${this.blueprint && !this.blueprint?.has_image ?
                         html`<ha-svg-icon .path=${mdiGestureTapButton}></ha-svg-icon>` :
                         html`<svg id="switch-svg"></svg>`}
                     </div>
 
-                    ${this.config?.valid_blueprint ? html`
+                    ${!this.config?._error ? html`
                     <switch-manager-button-actions
                         .hass=${this.hass}
                         .blueprint_actions=${this.blueprint?.buttons[this.button_index]?.actions}
@@ -187,7 +208,9 @@ class SwitchManagerSwitchEditor extends LitElement
                             ${this._errors ? html`
                             <ha-alert alert-type="error">
                                 ${this._errors}
+                                ${this.config.is_mismatch ? html`<mwc-button slot="action" @click=${this._fixMismatch}>Fix</mwc-button>` : ''}
                             </ha-alert>` : ''}
+
                             ${this.config && !this.config.enabled ? html`
                             <ha-alert alert-type="info">
                                 Switch is disabled
@@ -195,7 +218,7 @@ class SwitchManagerSwitchEditor extends LitElement
                                     Enable
                                 </mwc-button>
                             </ha-alert>` : ''}
-                            ${this.config?.valid_blueprint ? html`
+                            ${!this.config?._error ? html`
                             <div id="sequence-container">
                                 <div class="header">
                                     <h2 id="sequence-heading" class="name">
@@ -217,22 +240,47 @@ class SwitchManagerSwitchEditor extends LitElement
                                             @value-changed=${this._modeValueChanged}>
                                         </ha-selector-select>
                                     </h2>
+
+                                    <ha-button-menu corner="TOP_START" slot="toolbar-icon">
+                                        <ha-icon-button
+                                            slot="trigger"
+                                            .label=${this.hass.localize("ui.common.menu")}
+                                            .path=${mdiDotsVertical}>
+                                        </ha-icon-button>
+        
+                                        <mwc-list-item
+                                            graphic="icon"
+                                            @click=${this._toggleYaml}>
+                                                ${!this._is_yaml ? 'Yaml Editor' : 'Visual Editor'}
+                                                <ha-svg-icon slot="graphic" .path=${!this._is_yaml? mdiFileDocumentEditOutline : mdiViewDashboardEditOutline}>
+                                                </ha-svg-icon>
+                                        </mwc-list-item>
+                                    </ha-button-menu>
+
                                 </div>
-                        
+
+                                ${this._is_yaml ? html`
+                                <ha-yaml-editor
+                                    .hass=${this.hass}
+                                    .value=${this.sequence}
+                                    @value-changed=${this._configSequenceChanged}>
+                                </ha-yaml-editor>` 
+                                : html`
                                 <ha-automation-action
+                                    .hass=${this.hass}
                                     role="region"
                                     aria-labelledby="sequence-heading"
                                     .actions=${this.sequence}
                                     @value-changed=${this._configSequenceChanged}
-                                    .hass=${this.hass}
                                     .narrow=${this.narrow}
                                     .disabled=${this.disabled}>
-                                </ha-automation-action>
+                                </ha-automation-action>`}
 
                             </div>`:''}
                         </div>
                     </ha-card>
-                    ${this.config?.valid_blueprint ? html`
+                    
+                    ${!this.config?._error ? html`
                     <div class="fab-container">
                         <ha-fab
                             slot="fab"
@@ -257,15 +305,6 @@ class SwitchManagerSwitchEditor extends LitElement
             haStyle,
             fabStyle,
             css`
-            @keyframes pulse {
-                from {
-                    opacity: 1;
-                }
-                to {
-                    opacity: 0.4;
-                }
-            }
-            
             @keyframes pressed {
                 to {
                     fill: #3ff17975;
@@ -274,6 +313,12 @@ class SwitchManagerSwitchEditor extends LitElement
             }
             :host {
                 --max-width: 1040px;
+            }
+            ha-app-layout {
+                z-index: 5;
+            }
+            mwc-list-item {
+                min-width: 165px;
             }
             ha-card {
                 margin: 0 auto;
@@ -284,44 +329,10 @@ class SwitchManagerSwitchEditor extends LitElement
                 max-width: var(--max-width);
                 margin: 0 auto;
             }
-            h3, #identifier {
+            h3 {
                 padding-left: 25px;
             }
-            #identifier {
-                position: relative;
-            }
-            #identifier-input {
-                width: 300px;
-                --text-field-padding: 0 36px 0 12px;
-            }
-            #identifier ha-icon-button {
-                vertical-align: middle;
-                background: var(--mdc-text-field-fill-color);
-                border-radius: 50%;
-                color: var(--mdc-text-field-ink-color);
-                margn-top: -10px;
-                margin-top: -14px;
-                margin-left: -34px;
-                position: relative;
-                --mdc-icon-button-size: 54px;
-                box-shadow: -5px 1px 8px -6px;
-            }
-            #identifier ha-icon-button[listening] {
-                animation: 1s infinite alternate pulse;
-            }
-            #identifier ha-alert {
-                display: block;
-                width: 300px;
-                position: absolute;
-                margin-left: 25px;
-            }
-            @media screen and ( max-width: 690px )
-            {
-                #identifier-input, #identifier ha-alert {
-                    width: 90%;
-                    position: relative;
-                }
-            }
+
             hui-view {
                 height: calc(100vh - var(--header-height));
                 display: block;
@@ -348,12 +359,6 @@ class SwitchManagerSwitchEditor extends LitElement
                 display: flex;
                 margin: 1em;
                 justify-content: center;
-            }           
-            @media screen and ( min-width: 1500px )
-            {
-                #switch-image {
-                    margin-top: -65px;
-                }
             }
             #sequence-container {
                 padding: 28px 20px 0;
@@ -409,22 +414,21 @@ class SwitchManagerSwitchEditor extends LitElement
 
     disconnectedCallback(): void 
     {
+        this._killListener( '_reloadListener' );
+        this._killListener( '_subscribedMonitor' );
         super.disconnectedCallback();
-        if( this._reloadListener )
+    }
+
+    // Can't pass by reference so use string to access propery (not ideal)
+    private _killListener( listener: string )
+    {
+        if( this[listener] )
         {
-            this._reloadListener();
-            this._reloadListener = undefined;
+            this[listener]();
+            this[listener] = undefined;
+            return true;
         }
-        if( this._subscribed )
-        {
-            this._subscribed();
-            this._subscribed = undefined;
-        }
-        if( this._buttonListener )
-        {
-            this._buttonListener();
-            this._buttonListener = undefined;
-        }
+        return false;
     }
     
     private async startListeners()
@@ -471,7 +475,49 @@ class SwitchManagerSwitchEditor extends LitElement
         }
         this._setBlueprint( config.blueprint )
         this._updateSequence();
-        this._listenForButtonPress();
+        this._monitor();
+    }
+
+    private async _monitor()
+    {
+        if( this.is_new )
+            return;
+
+        // Start fresh
+        this._killListener('_subscribedMonitor');
+        this._subscribedMonitor = await this.hass.connection.subscribeMessage((msg) => {
+            
+            if( msg.event == 'action_triggered' )
+            {
+                if( ! this.config?.identifier )
+                    return;
+
+                if( msg.button == this.button_index && this.blueprint?.buttons[this.button_index].actions.length! > 1 )
+                {
+                    this.button_actions.flash(msg.action)
+                }
+
+                if( this.blueprint?.buttons?.length == 1 )
+                {
+                    showToast(this, {
+                        message: 'Button Pressed'
+                    });
+                    return;
+                }
+
+                const element = this.svg.querySelector(`[index="${msg.button}"]`);
+                element.removeAttribute('pressed');
+                element.setAttribute('pressed', '');
+                setTimeout(() => {
+                    element.removeAttribute('pressed');
+                }, 1000);
+            }
+
+            if( ( msg.event == 'incoming' || msg.event =='action_triggered' ) && this._debug )
+            {
+                console.log( msg )
+            }
+        }, { type: buildWSPath('config/monitor'), config_id: this.config!.id });
     }
 
     private _setBlueprint( blueprint: SwitchManagerBlueprint )
@@ -512,20 +558,22 @@ class SwitchManagerSwitchEditor extends LitElement
         {
             this.blueprint.buttons.forEach((button, index) => {
                 let svgshape: SVGCircleElement | SVGRectElement | SVGPathElement;
-                if( button.shape == 'circle' ) {
-                    svgshape = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-                    svgshape.setAttributeNS(null, 'cx', button.x.toString());
-                    svgshape.setAttributeNS(null, 'cy', button.y.toString());
-                    svgshape.setAttributeNS(null, 'r', button.width.toString());
-                } else if ( button.shape == 'path' ) { 
-                    svgshape = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-                    svgshape.setAttributeNS(null, 'd', button.d.toString());
-                } else {
+                if( button.x > -1 && button.y > -1 && button.width > 0 && button.height > 0 ) {
                     svgshape = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
                     svgshape.setAttributeNS(null, 'x', button.x.toString());
                     svgshape.setAttributeNS(null, 'y', button.y.toString());
                     svgshape.setAttributeNS(null, 'width', button.width.toString());
                     svgshape.setAttributeNS(null, 'height', button.height.toString());
+                } else if ( button.x > -1 && button.y > -1 && button.width > 0 ) {
+                    svgshape = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    svgshape.setAttributeNS(null, 'cx', button.x.toString());
+                    svgshape.setAttributeNS(null, 'cy', button.y.toString());
+                    svgshape.setAttributeNS(null, 'r', button.width.toString());
+                } else if ( button.d ) {
+                    svgshape = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                    svgshape.setAttributeNS(null, 'd', button.d.toString());
+                } else {
+                    return;
                 }
                 svgshape.setAttribute('class', 'button');
                 svgshape.setAttribute('index', index.toString());
@@ -558,12 +606,9 @@ class SwitchManagerSwitchEditor extends LitElement
     private _validate(): boolean
     {
         this._errors = undefined;
-        this.identifier_input.invalid = false;
-        if( !this.config?.identifier )
+        if( ! this.config?.identifier )
         {
-            this._errors = 'Identifier must not be empty';
-            this.identifier_input.invalid = true;
-            this.identifier_input.errorMessage = 'Identifier required';
+            this._showIdentifierAutoDiscoveryDialog();
             return false;
         }
         return true;
@@ -571,13 +616,11 @@ class SwitchManagerSwitchEditor extends LitElement
 
     private _save()
     {
-        if( this._block_save || !this._validate() || !this.config )
+        if( this._block_save || !this._validate() || !this.config || this.config._error )
             return;
-
 
         this._block_save = true;
         this._dirty = false;
-
         this.hass.callWS({
             type: buildWSPath('config/save'), 
             config: {...this.config, blueprint: this.config.blueprint.id}
@@ -587,6 +630,7 @@ class SwitchManagerSwitchEditor extends LitElement
                 this.is_new = false;
                 this.config!.id = r.config_id;
                 navigate( buildUrl(`edit/${r.config_id}`) )
+                this._monitor();
             }
             showToast(this, { message: 'Switch Saved' });
         }).catch(error => {
@@ -617,155 +661,39 @@ class SwitchManagerSwitchEditor extends LitElement
     {
         this.action_index = index;
         this._updateSequence();
+        if( this._is_yaml )
+            this._yamlEditor?.setValue( this.sequence );
     }
 
     private _configSequenceChanged(ev: CustomEvent) 
-    {        
+    {   
+        if( this._is_yaml )
+        {
+            if( ! ev.detail.value || ! Array.isArray(ev.detail.value) )
+                ev.detail.value = [];
+        }
         this.requestUpdate('config');
         this._updateSequence(ev.detail.value);
         this._errors = undefined;
         this._dirty = true;
     }
 
-    private async _listenForEvent()
+    private _toggleDebug()
     {
-        // Act as a toggle
-        if( this._subscribed )
-        {
-            this._subscribed();
-            this._subscribed = undefined;
-            return;
-        }
-
-        const __process_conditions = ( conditions: SwitchManagerBlueprintCondition[], data: any): boolean =>
-        {
-            if( ! conditions )
-                return true;
-
-            for( const condition of conditions )
-                if( !(condition.key in data) || String(condition.value) != String(data[condition.key]) )
-                    return false;
-                    
-            return true;
-        }
-
-        const __validate_data = ( data: any ): boolean => {
-            if( ! __process_conditions( this.blueprint!.conditions!, data ) )
-                return false;
-
-            for( const button of this.blueprint!.buttons )
-                if( __process_conditions(button.conditions!, data) )
-                    for( const action of button.actions )
-                        if( __process_conditions(action.conditions!, data) )
-                            return true;
-
-            return false;
-        }
-
-        const __handle_response = ( id: string, data: any ) => {
-            if( !__validate_data(data) )
-                return;
-
-            this.identifier_input.value = id;
-            this._identifierChanged();
-            this._subscribed!();
-            this._subscribed = undefined;
-        }
-
-        if( this.blueprint!.event_type == 'mqtt' && this.blueprint!.mqtt_topic_format )
-            this._subscribed = await this.hass.connection.subscribeMessage((message) => {
-                const data = typeof(message.payload) == 'string' ? { payload: message.payload } : message.payload;
-                __handle_response( message.topic, data );
-            }, {
-                type: "mqtt/subscribe",
-                topic: this.blueprint!.mqtt_topic_format,
-            });
-        else
-            this._subscribed = await this.hass!.connection.subscribeEvents( (event) => {
-                if( this.blueprint!.identifier_key! in event.data )
-                    __handle_response( event.data[this.blueprint!.identifier_key!], event.data );
-            }, this.blueprint!.event_type );
+        this._debug = !this._debug;
+        showToast( this, {
+            message: `Debug ${this._debug ? 'Enabled. View dev console' : 'Disabled'}`
+        })
     }
 
-    private async _listenForButtonPress()
+    private async _toggleYaml()
     {
-        if( this._buttonListener )
-        {
-            this._buttonListener();
-            this._buttonListener = undefined;
-        }
+        this._is_yaml = !this._is_yaml;
 
-        if( ! this.config?.identifier || this.blueprint?.buttons?.length == 1 )
-            return;
-
-        const __process_conditions = ( conditions: SwitchManagerBlueprintCondition[], data: any): boolean =>
-        {
-            if( ! conditions )
-                return true;
-
-            for( const condition of conditions )
-                if( !(condition.key in data) || String(condition.value) != String(data[condition.key]) )
-                    return false;
-                    
-            return true;
-        }
-
-        const __validate_data = ( data: any ): number => {
-            if( ! __process_conditions( this.blueprint!.conditions!, data ) )
-                return -1;
-
-            let i = 0;
-            for( const button of this.blueprint!.buttons )
-            {
-                if( __process_conditions(button.conditions!, data) )
-                    for( const action of button.actions )
-                        if( __process_conditions(action.conditions!, data) )
-                            return i;
-                
-                i++;
-            }
-
-            return -1;
-        }
-
-        const __handle_response = ( data: any ) => {
-            let button_index = __validate_data(data);
-            if( button_index == -1 )
-                return;
-
-            const element = this.svg.querySelector(`[index="${button_index}"]`);
-            element.removeAttribute('pressed');
-            element.setAttribute('pressed', '');
-            setTimeout(() => {
-                element.removeAttribute('pressed');
-            }, 1000);            
-        }
-
-        if( this.blueprint!.event_type == 'mqtt' && this.blueprint!.mqtt_topic_format )
-        {
-            this._buttonListener = await this.hass.connection.subscribeMessage((message) => {
-                const data = typeof(message.payload) == 'string' ? { payload: message.payload } : message.payload;
-                __handle_response( data );
-            }, {
-                type: "mqtt/subscribe",
-                topic: this.config!.identifier
-            });
-        } else {
-            this._buttonListener = await this.hass!.connection.subscribeEvents( (event) => {
-                if( this.blueprint!.identifier_key! in event.data && event.data[this.blueprint!.identifier_key!] == this.config!.identifier )
-                {
-                    __handle_response( event.data );
-                }
-            }, this.blueprint!.event_type );
-        }
-        
-    }
-
-    private _identifierChanged(ev?: CustomEvent)
-    {
-        this.config!.identifier = getValueById(this, 'identifier-input');
-        this._listenForButtonPress();
-        this._dirty = true;
+        // Ensure Yaml Editor is in DOM
+        await this.updateComplete;
+        if( this._is_yaml )
+            this._yamlEditor?.setValue( this.sequence );
     }
 
     private _modeValueChanged(ev: CustomEvent)
@@ -778,6 +706,25 @@ class SwitchManagerSwitchEditor extends LitElement
         this._dirty = true;
     }
 
+    private async _showIdentifierAutoDiscoveryDialog(): Promise<void>
+    {
+        fireEvent(this, "show-dialog", {
+            dialogTag: "switch-manager-dialog-identifier-auto-discovery",
+            dialogImport: () => import("./dialogs/dialog-identifier-auto-discovery"),
+            dialogParams: {
+                switch_id: this.config!.id,
+                identifier: this.config!.identifier,
+                blueprint: this.blueprint,
+                update: (params) => {
+                    this.config!.identifier = params.identifier;
+                    this._dirty = true;
+                    this.requestUpdate();
+                },
+                onClose: () => {}
+            },
+        });        
+    }
+
     private async _showRenameDialog(): Promise<void>
     {        
         fireEvent(this, "show-dialog", {
@@ -787,6 +734,26 @@ class SwitchManagerSwitchEditor extends LitElement
                 config: this.config,
                 update: (config) => {
                     this.config!.name = config.name;
+                    this._dirty = true;
+                    this.requestUpdate();
+                },
+                onClose: () => {
+                    if( this.is_new )
+                        this._showIdentifierAutoDiscoveryDialog();
+                }
+            },
+        });
+    }
+
+    private async _showVariablesEditorDialog(): Promise<void>
+    {
+        fireEvent(this, "show-dialog", {
+            dialogTag: "switch-manager-dialog-variables-editor",
+            dialogImport: () => import("./dialogs/dialog-variables-editor"),
+            dialogParams: {
+                config: this.config,
+                update: (config) => {
+                    this.config!.variables = config.variables;
                     this._dirty = true;
                     this.requestUpdate();
                 },
@@ -844,5 +811,71 @@ class SwitchManagerSwitchEditor extends LitElement
             })
             navigate(buildUrl());
         });
+    }
+
+    private async confirmUnsavedChanged(): Promise<boolean> 
+    {
+        if (this._dirty) {
+            return showConfirmationDialog(this, {
+                title: this.hass!.localize(
+                    "ui.panel.config.automation.editor.unsaved_confirm_title"
+                ),
+                text: this.hass!.localize(
+                    "ui.panel.config.automation.editor.unsaved_confirm_text"
+                ),
+                confirmText: this.hass!.localize("ui.common.leave"),
+                dismissText: this.hass!.localize("ui.common.stay"),
+                destructive: true,
+            });
+        }
+        return true;
+    }
+
+    private async _fixMismatch() 
+    {
+        if( ! this.config!.is_mismatch )
+            return;
+
+        let buttons = this.config!.buttons.slice(0, this.config!.blueprint.buttons.length);
+        this.config!.blueprint.buttons.forEach((b, b_index) => {
+            if( ! buttons[b_index] )
+            {
+                buttons[b_index] = {
+                    actions: []
+                }
+            }
+            buttons[b_index].actions = buttons[b_index].actions.slice(0, b.actions.length);
+            b.actions.forEach((a, a_index) => {
+                if( ! buttons[b_index].actions[a_index] )
+                {
+                    buttons[b_index].actions[a_index] = {
+                        mode: MODES[0],
+                        sequence: []
+                    }
+                }
+            });
+        });
+
+        this.config!.buttons = buttons;
+        this._errors = undefined;
+
+        this.hass.callWS({
+            type: buildWSPath('config/save'), 
+            config: {...this.config, blueprint: this.config!.blueprint.id},
+            fix_mismatch: true
+        }).then(r => {
+            this._loadConfig();
+            showToast(this, { message: 'Fixed, Now Double Check Your Config!' });
+        }).catch(error => {
+            showToast(this, { message: error.message });
+        });
+    }
+    
+    private _backTapped = async () => 
+    {
+        const result = await this.confirmUnsavedChanged();
+        if (result) {
+            afterNextRender(() => navigate(buildUrl()));
+        }
     }
 }

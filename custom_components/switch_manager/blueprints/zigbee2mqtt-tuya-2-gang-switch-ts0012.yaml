@@ -1,0 +1,26 @@
+name: TuYa 2 Gang Switch (TS0012)
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+info: You must enable state_action in Zigbee2MQTT "Settings (specific)" for device to use this blueprint
+buttons:
+  - d: "M 4.0119862,362.79818 13.755381,29.230185 c 0,0 0.573141,-13.18224 11.462818,-13.18224 10.889677,0 131.822401,-5.731409 131.822401,-5.731409 0,0 -20.05993,256.767114 -14.90166,389.735804 L 11.462818,375.40728 c 0,0 -8.5971136,-5.15827 -7.4508318,-12.6091 z"
+    actions:
+      - title: "on"
+        conditions:
+          - key: payload
+            value: on_left
+      - title: "off"
+        conditions:
+          - key: payload
+            value: off_left
+  - d: "M 322.10518,424.12426 341.01883,14.328522 c 0,0 2.8657,-10.8896766 -9.17026,-10.8896766 -7.45083,0 -174.80797,6.8776906 -174.80797,6.8776906 0,0 -20.05993,256.767114 -14.90166,389.735804 l 165.63772,33.24217 c 0,0 12.03596,1.14628 14.32852,-9.17025 z"
+    actions:
+      - title: "on"
+        conditions:
+          - key: payload
+            value: on_right
+      - title: "off"
+        conditions:
+          - key: payload
+            value: off_right

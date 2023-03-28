@@ -6,8 +6,7 @@ conditions:
   - key: property
     value: scene
 buttons:
-  - shape: rect
-    x: 38
+  - x: 38
     y: 38
     width: 326
     height: 348
@@ -39,8 +38,11 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
-  - shape: rect
-    x: 38
+      - title: hold (released)
+        conditions:
+          - key: value
+            value: KeyReleased
+  - x: 38
     y: 388
     width: 326
     height: 338
@@ -72,3 +74,7 @@ buttons:
         conditions:
           - key: value
             value: KeyHeldDown
+      - title: hold (released)
+        conditions:
+          - key: value
+            value: KeyReleased

@@ -8,6 +8,10 @@ buttons:
         conditions:
           - key: payload
             value: 'on'
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: 'off'
       - title: hold
         conditions:
           - key: payload

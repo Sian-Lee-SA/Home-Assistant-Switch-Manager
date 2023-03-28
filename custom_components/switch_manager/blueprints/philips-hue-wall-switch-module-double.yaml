@@ -1,0 +1,54 @@
+name: Philips Hue Wall Switch Module (double)
+service: Philips Hue
+event_type: hue_event
+identifier_key: id
+info: Actions HOLD and HOLD (RELEASED) will only work in rocker mode.
+buttons:
+  - x: 112
+    y: 140
+    width: 88
+    height: 88
+    conditions:
+      - key: subtype
+        value: 1
+    actions:
+      - title: init
+        conditions:
+          - key: type
+            value: initial_press
+      - title: press
+        conditions:
+          - key: type
+            value: short_release
+      - title: hold
+        conditions:
+          - key: type
+            value: repeat
+      - title: hold (released)
+        conditions:
+          - key: type
+            value: long_release
+  - x: 112
+    y: 270
+    width: 88
+    height: 88
+    conditions:
+      - key: subtype
+        value: 2
+    actions:
+      - title: init
+        conditions:
+          - key: type
+            value: initial_press
+      - title: press
+        conditions:
+          - key: type
+            value: short_release
+      - title: hold
+        conditions:
+          - key: type
+            value: repeat
+      - title: hold (released)
+        conditions:
+          - key: type
+            value: long_release

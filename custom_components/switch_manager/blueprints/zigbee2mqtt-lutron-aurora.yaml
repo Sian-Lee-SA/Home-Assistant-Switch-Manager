@@ -1,0 +1,18 @@
+name: Lutron Aurora Dimmer
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+
+info: Make sure to set your MQTT topic to not include "/action" at the end. These dimmer switches only send one kind of command, so they are best set up only to control light(s) with a "Press" sending a toggle service and a "Rotate" sending an on service using "{{ data.action_level }}" to set brightness level between 0 and 255. They can  also be used as a simple single-press button with another function assigned to any rotation (non-directional).
+conditions:
+  - key: action
+    value: 'brightness_move_to_level'
+buttons:
+  - actions:
+      - title: press
+        conditions:
+          - key: action_transition_time
+            value: 0.07
+      - title: rotate
+        conditions:
+          - key: action_transition_time
+            value: 0.02

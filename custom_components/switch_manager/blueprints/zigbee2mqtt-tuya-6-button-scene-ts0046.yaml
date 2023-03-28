@@ -1,0 +1,101 @@
+name: TuYa 6 Button Scene (TS0046)
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+buttons:
+  - x: 167
+    y: 143
+    width: 42
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: 1_single
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: 1_double
+      - title: hold
+        conditions:
+          - key: payload
+            value: 1_hold
+  - x: 332
+    y: 143
+    width: 42
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: 2_single
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: 2_double
+      - title: hold
+        conditions:
+          - key: payload
+            value: 2_hold
+  - x: 167
+    y: 253
+    width: 42
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: 3_single
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: 3_double
+      - title: hold
+        conditions:
+          - key: payload
+            value: 3_hold
+  - x: 332
+    y: 252
+    width: 42
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: 4_single
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: 4_double
+      - title: hold
+        conditions:
+          - key: payload
+            value: 4_hold
+  - x: 167
+    y: 358
+    width: 42
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: 5_single
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: 5_double
+      - title: hold
+        conditions:
+          - key: payload
+            value: 5_hold
+  - x: 332
+    y: 358
+    width: 42
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: 6_single
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: 6_double
+      - title: hold
+        conditions:
+          - key: payload
+            value: 6_hold

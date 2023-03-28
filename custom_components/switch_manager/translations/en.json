@@ -1,0 +1,8 @@
+{
+  "issues": {
+    "mismatch": {
+      "title": "Switch/Blueprint mismatch for {name}",
+      "description": "This issue can't be fixed by a flow. Click learn more to go directly to the edit page to fix"
+    }
+  }
+}

@@ -1,7 +1,14 @@
 """Helpers for switch_manager integration."""
 import json, pathlib, os, shutil
+from homeassistant.core import HomeAssistant
 from homeassistant.util.yaml.loader import _find_files, load_yaml
-from .const import LOGGER, DOMAIN, BLUEPRINTS_FOLDER
+from .const import (
+    LOGGER, 
+    DOMAIN, 
+    BLUEPRINTS_FOLDER, 
+    CONF_BLUEPRINTS,
+    CONF_MANAGED_SWITCHES
+)
 from homeassistant.exceptions import HomeAssistantError
 from homeassistant.components.mqtt.models import ReceiveMessage
 
@@ -63,3 +70,38 @@ def format_mqtt_message( message: ReceiveMessage):
         'topic_basename': message.topic.split('/')[-1]
     })
     return data
+
+def get_val_from_str(_string, _dict):
+    keys = _string.split('.')
+    v = _dict
+    for key in keys:
+        try:
+            if isinstance(v, list):
+                index = int(key)
+                if index < len(v):
+                    v = v[index]
+                    continue
+                return None
+            if not key in v:
+                return None
+            if hasattr(v[key], 'as_dict'):
+                v = v[key].as_dict()
+            else:
+                v = v[key]
+        except ValueError:
+            return None
+    return v
+
+def _get_blueprint( hass: HomeAssistant, id: str ):
+    return hass.data[DOMAIN][CONF_BLUEPRINTS].get(id, id)
+
+async def _set_switch_config( hass: HomeAssistant, config ):
+    hass.data[DOMAIN][CONF_MANAGED_SWITCHES][config.id] = config
+    await config.start();
+
+def _get_switch_config( hass: HomeAssistant, _id: str ):
+    return hass.data[DOMAIN][CONF_MANAGED_SWITCHES].get(_id)
+
+async def _remove_switch_config( hass: HomeAssistant, _id: str ):
+    hass.data[DOMAIN][CONF_MANAGED_SWITCHES][_id].stop()
+    del hass.data[DOMAIN][CONF_MANAGED_SWITCHES][_id]

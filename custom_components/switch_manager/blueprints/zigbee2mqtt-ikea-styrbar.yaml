@@ -7,7 +7,6 @@ buttons:
   - x: 247
     y: 61
     width: 50
-    shape: circle
     actions:
       - title: press
         conditions:
@@ -20,7 +19,6 @@ buttons:
   - x: 442
     y: 248
     width: 50
-    shape: circle
     actions:
       - title: press
         conditions:
@@ -37,7 +35,6 @@ buttons:
   - x: 245
     y: 434
     width: 50
-    shape: circle
     actions:
       - title: press
         conditions:
@@ -50,7 +47,6 @@ buttons:
   - x: 52
     y: 248
     width: 50
-    shape: circle
     actions:
       - title: press
         conditions:

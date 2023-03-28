@@ -1,0 +1,111 @@
+name: Philips Hue Tap Dial
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+info: |
+    Action rotate will execute on any step, slow or fast so be aware if using rotate with another action for the dial as it will execute twice.
+buttons:
+  - d: M 197.73633 25.056641 C 102.18018 25.056637 24.716794 102.52002 24.716797 198.07617 L 197.73633 198.07617 L 197.73633 25.056641 z 
+    actions:
+      - title: init
+        conditions:
+          - key: payload
+            value: button_1_press
+      - title: press
+        conditions:
+          - key: payload
+            value: button_1_press_release
+      - title: hold
+        conditions:
+          - key: payload
+            value: button_1_hold
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: button_1_hold_release
+  - d: M 197.73633 25.056641 L 197.73633 198.07617 L 370.75586 198.07617 C 370.75586 102.52002 293.29248 25.056641 197.73633 25.056641 z 
+    actions:
+      - title: init
+        conditions:
+          - key: payload
+            value: button_2_press
+      - title: press
+        conditions:
+          - key: payload
+            value: button_2_press_release
+      - title: hold
+        conditions:
+          - key: payload
+            value: button_2_hold
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: button_2_hold_release
+  - d: M 24.716797 198.07617 C 24.716797 293.63232 102.18018 371.0957 197.73633 371.0957 L 197.73633 198.07617 L 24.716797 198.07617 z 
+    actions:
+      - title: init
+        conditions:
+          - key: payload
+            value: button_3_press
+      - title: press
+        conditions:
+          - key: payload
+            value: button_3_press_release
+      - title: hold
+        conditions:
+          - key: payload
+            value: button_3_hold
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: button_3_hold_release
+  - d: M 197.73633 198.07617 L 197.73633 371.0957 C 293.29248 371.0957 370.75586 293.63232 370.75586 198.07617 L 197.73633 198.07617 z 
+    actions:
+      - title: init
+        conditions:
+          - key: payload
+            value: button_4_press
+      - title: press
+        conditions:
+          - key: payload
+            value: button_4_press_release
+      - title: hold
+        conditions:
+          - key: payload
+            value: button_4_hold
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: button_4_hold_release
+  - d: m 165.19952,2.8730351 7.18258,22.6216279 c -53.59056,7.618284 -114.08318,44.680474 -139.646757,114.768697 l -15.124512,13.25479 -8.0340474,-17.04898 c 15.9137504,-58.746693 81.4964934,-123.438422 155.6227364,-133.5961349 z
+    actions:
+      - title: rotate
+        conditions: "{{ data.payload in ['dial_rotate_left_step', 'dial_rotate_left_slow', 'dial_rotate_left_fast'] }}"
+      - title: step
+        conditions:
+          - key: payload
+            value: dial_rotate_left_step
+      - title: slow
+        conditions:
+          - key: payload
+            value: dial_rotate_left_slow
+      - title: fast
+        conditions:
+          - key: payload
+            value: dial_rotate_left_fast
+  - d: m 230.80048,2.8730351 -7.18258,22.6216279 c 53.59056,7.618284 114.08318,44.680474 139.64676,114.768697 l 15.12451,13.25479 8.03405,-17.04898 c -15.91375,-58.746693 -81.4965,-123.438422 -155.62274,-133.5961349 z
+    actions:
+      - title: rotate
+        conditions: "{{ data.payload in ['dial_rotate_right_step', 'dial_rotate_right_slow', 'dial_rotate_right_fast'] }}"
+      - title: step
+        conditions:
+          - key: payload
+            value: dial_rotate_right_step
+      - title: slow
+        conditions:
+          - key: payload
+            value: dial_rotate_right_slow
+      - title: fast
+        conditions:
+          - key: payload
+            value: dial_rotate_right_fast

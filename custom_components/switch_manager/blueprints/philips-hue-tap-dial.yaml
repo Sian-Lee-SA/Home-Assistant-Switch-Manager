@@ -1,0 +1,120 @@
+name: Philips Hue Tap Dial
+service: Philips Hue
+event_type: hue_event
+# id is not sent for rotation so we will use device_id
+identifier_key: device_id
+info: |
+  This integration sends a start and repeat for rotation of the dial. To capture either then it's recommended to just use rotate
+buttons:
+  - d: M 197.73633 25.056641 C 102.18018 25.056637 24.716794 102.52002 24.716797 198.07617 L 197.73633 198.07617 L 197.73633 25.056641 z 
+    conditions:
+      - key: subtype
+        value: 1
+    actions:
+      - title: init
+        conditions:
+          - key: type
+            value: initial_press
+      - title: press
+        conditions:
+          - key: type
+            value: short_release
+      - title: hold
+        conditions:
+          - key: type
+            value: repeat
+      - title: hold (released)
+        conditions:
+          - key: type
+            value: long_release      
+  - d: M 197.73633 25.056641 L 197.73633 198.07617 L 370.75586 198.07617 C 370.75586 102.52002 293.29248 25.056641 197.73633 25.056641 z 
+    conditions:
+      - key: subtype
+        value: 2
+    actions:
+      - title: init
+        conditions:
+          - key: type
+            value: initial_press
+      - title: press
+        conditions:
+          - key: type
+            value: short_release
+      - title: hold
+        conditions:
+          - key: type
+            value: repeat
+      - title: hold (released)
+        conditions:
+          - key: type
+            value: long_release
+  - d: M 24.716797 198.07617 C 24.716797 293.63232 102.18018 371.0957 197.73633 371.0957 L 197.73633 198.07617 L 24.716797 198.07617 z 
+    conditions:
+      - key: subtype
+        value: 3
+    actions:
+      - title: init
+        conditions:
+          - key: type
+            value: initial_press
+      - title: press
+        conditions:
+          - key: type
+            value: short_release
+      - title: hold
+        conditions:
+          - key: type
+            value: repeat
+      - title: hold (released)
+        conditions:
+          - key: type
+            value: long_release
+  - d: M 197.73633 198.07617 L 197.73633 371.0957 C 293.29248 371.0957 370.75586 293.63232 370.75586 198.07617 L 197.73633 198.07617 z 
+    conditions:
+      - key: subtype
+        value: 4
+    actions:
+      - title: init
+        conditions:
+          - key: type
+            value: initial_press
+      - title: press
+        conditions:
+          - key: type
+            value: short_release
+      - title: hold
+        conditions:
+          - key: type
+            value: repeat
+      - title: hold (released)
+        conditions:
+          - key: type
+            value: long_release
+  - d: m 165.19952,2.8730351 7.18258,22.6216279 c -53.59056,7.618284 -114.08318,44.680474 -139.646757,114.768697 l -15.124512,13.25479 -8.0340474,-17.04898 c 15.9137504,-58.746693 81.4964934,-123.438422 155.6227364,-133.5961349 z
+    conditions:
+      - key: subtype
+        value: counter_clock_wise
+    actions:
+      - title: rotate
+      - title: start
+        conditions:
+          - key: type
+            value: start
+      - title: repeat
+        conditions:
+          - key: type
+            value: repeat
+  - d: m 230.80048,2.8730351 -7.18258,22.6216279 c 53.59056,7.618284 114.08318,44.680474 139.64676,114.768697 l 15.12451,13.25479 8.03405,-17.04898 c -15.91375,-58.746693 -81.4965,-123.438422 -155.62274,-133.5961349 z
+    conditions:
+      - key: subtype
+        value: clock_wise
+    actions:
+      - title: rotate
+      - title: start
+        conditions:
+          - key: type
+            value: start
+      - title: repeat
+        conditions:
+          - key: type
+            value: repeat

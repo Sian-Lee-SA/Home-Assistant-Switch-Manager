@@ -1,0 +1,40 @@
+name: GoControl 2 Button
+service: Z-Wave JS
+event_type: zwave_js_value_notification
+identifier_key: node_id
+conditions:
+  - key: property
+    value: scene
+buttons:
+  - x: 120
+    y: 180
+    width: 88
+    height: 92
+    conditions:
+      - key: property_key
+        value: '001'
+    actions:
+      - title: press
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+  - x: 120
+    y: 286
+    width: 88
+    height: 92
+    conditions:
+      - key: property_key
+        value: '002'
+    actions:
+      - title: press
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown

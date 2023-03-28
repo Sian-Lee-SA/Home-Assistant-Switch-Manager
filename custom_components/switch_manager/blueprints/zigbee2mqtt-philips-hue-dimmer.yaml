@@ -8,10 +8,14 @@ buttons:
     width: 189
     height: 159
     actions:
-      - title: press
+      - title: init
         conditions:
           - key: payload
             value: on_press
+      - title: press
+        conditions:
+          - key: payload
+            value: on_press_release
       - title: hold
         conditions:
           - key: payload
@@ -25,10 +29,14 @@ buttons:
     width: 189
     height: 90
     actions:
-      - title: press
+      - title: init
         conditions:
           - key: payload
             value: up_press
+      - title: press
+        conditions:
+          - key: payload
+            value: up_press_release
       - title: hold
         conditions:
           - key: payload
@@ -42,10 +50,14 @@ buttons:
     width: 189
     height: 90
     actions:
-      - title: press
+      - title: init
         conditions:
           - key: payload
             value: down_press
+      - title: press
+        conditions:
+          - key: payload
+            value: down_press_release
       - title: hold
         conditions:
           - key: payload
@@ -59,10 +71,14 @@ buttons:
     width: 189
     height: 159
     actions:
-      - title: press
+      - title: init
         conditions:
           - key: payload
             value: off_press
+      - title: press
+        conditions:
+          - key: payload
+            value: off_press_release
       - title: hold
         conditions:
           - key: payload

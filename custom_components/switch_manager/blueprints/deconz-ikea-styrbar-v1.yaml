@@ -1,0 +1,73 @@
+name: Ikea Styrbar
+service: deCONZ
+event_type: deconz_event
+identifier_key: id
+buttons:
+  - x: 247
+    y: 61
+    width: 50
+    height: 50
+    actions:
+      - title: press
+        conditions:
+          - key: event
+            value: 1002
+      - title: hold
+        conditions:
+          - key: event
+            value: 1001
+      - title:  hold (released)
+        conditions:
+          - key: event
+            value: 1003
+  - x: 442
+    y: 248
+    width: 50
+    height: 50
+    actions:
+      - title: press
+        conditions:
+          - key: event
+            value: 4002
+      - title: hold
+        conditions:
+          - key: event
+            value: 4001
+      - title:  hold (released)
+        conditions:
+          - key: event
+            value: 4003
+  - x: 245
+    y: 434
+    width: 50
+    height: 50
+    actions:
+      - title: press
+        conditions:
+          - key: event
+            value: 2002
+      - title: hold
+        conditions:
+          - key: event
+            value: 2001
+      - title:  hold (released)
+        conditions:
+          - key: event
+            value: 2003
+  - x: 52
+    y: 248
+    width: 50
+    height: 50
+    actions:
+      - title: press
+        conditions:
+          - key: event
+            value: 3002
+      - title: hold
+        conditions:
+          - key: event
+            value: 3001
+      - title:  hold (released)
+        conditions:
+          - key: event
+            value: 3003

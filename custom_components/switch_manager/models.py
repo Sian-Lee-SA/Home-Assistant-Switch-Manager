@@ -281,6 +281,7 @@ class ManagedSwitchConfig:
         self.valid_blueprint: bool
         self.is_mismatch: bool
         self.variables: dict = config.get('variables')
+        self.rotate: int = config.get('rotate', 0)
         self.buttons: list[ManagedSwitchConfigButton] = []
         self.enabled: bool = config.get('enabled', True)
         self.button_last_state: list = []
@@ -293,6 +294,7 @@ class ManagedSwitchConfig:
         self.name = config.get('name')
         self.identifier = config.get('identifier')
         self.variables: dict = config.get('variables')
+        self.rotate: int = config.get('rotate', 0)
         self.button_last_state = []
         self.buildButtons( config.get('buttons') )
         

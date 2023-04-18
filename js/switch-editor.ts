@@ -15,7 +15,8 @@ import {
     mdiCodeBraces,
     mdiFileDocumentEditOutline,
     mdiViewDashboardEditOutline,
-    mdiIdentifier
+    mdiIdentifier,
+    mdiRotateRight
 } from "@mdi/js";
 import { SwitchManagerBlueprint, SwitchManagerConfig, SwitchManagerConfigButton } from "./types";
 import { MODES } from "../ha-frontend/data/script";
@@ -127,7 +128,15 @@ class SwitchManagerSwitchEditor extends LitElement
                                         <ha-svg-icon slot="graphic" .path=${mdiRenameBox}>
                                         </ha-svg-icon>
                                 </mwc-list-item>
-                                
+
+                                <mwc-list-item
+                                    graphic="icon"
+                                    @click=${this._rotate}>
+                                        Rotate
+                                        <ha-svg-icon slot="graphic" .path=${mdiRotateRight}>
+                                        </ha-svg-icon>
+                                </mwc-list-item>
+
                                 <mwc-list-item
                                     graphic="icon"
                                     .disabled=${!this.config || this.config?._error}
@@ -187,7 +196,7 @@ class SwitchManagerSwitchEditor extends LitElement
                     ${!this.config?._error ? html`
                     <h3 id="blueprint-name">${this.blueprint?.service} / ${this.blueprint?.name}</h3>`:''}
 
-                    <div id="switch-image">
+                    <div id="switch-image" rotate="${this.config.rotate}">
                     ${this.blueprint && !this.blueprint?.has_image ?
                         html`<ha-svg-icon .path=${mdiGestureTapButton}></ha-svg-icon>` :
                         html`<svg id="switch-svg"></svg>`}
@@ -359,6 +368,17 @@ class SwitchManagerSwitchEditor extends LitElement
                 display: flex;
                 margin: 1em;
                 justify-content: center;
+            }
+            #switch-image[rotate="1"] svg {
+                rotate: 90deg;
+                max-width: 380px;
+            }
+            #switch-image[rotate="2"] svg {
+                rotate: 180deg;
+            }
+            #switch-image[rotate="3"] svg {
+                rotate: 270deg;
+                max-width: 380px;
             }
             #sequence-container {
                 padding: 28px 20px 0;
@@ -675,6 +695,13 @@ class SwitchManagerSwitchEditor extends LitElement
         this.requestUpdate('config');
         this._updateSequence(ev.detail.value);
         this._errors = undefined;
+        this._dirty = true;
+    }
+
+    private _rotate()
+    {
+        this.config!.rotate = (this.config!.rotate >= 3) ? 0 : this.config!.rotate + 1;
+        this.requestUpdate('config');
         this._dirty = true;
     }
 

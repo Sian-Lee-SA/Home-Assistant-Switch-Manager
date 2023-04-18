@@ -47,6 +47,7 @@ export interface SwitchManagerConfig
     blueprint: SwitchManagerBlueprint;
     valid_blueprint: boolean;
     variables?: any;
+    rotate: number;
     buttons: SwitchManagerConfigButton[];
     _error?: string;
 }

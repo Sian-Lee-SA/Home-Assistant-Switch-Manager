@@ -1,0 +1,115 @@
+name: Yphix 2 Channel
+service: ZHA
+event_type: zha_event
+identifier_key: device_id
+buttons:
+
+# top left ( I )
+  - x: 86
+    y: 86
+    width: 127
+    height: 214
+    actions:
+      - title: press
+        conditions:
+          - key: endpoint_id
+            value: 1
+          - key: cluster_id
+            value: 6
+          - key: command
+            value: 'on'
+      - title: hold
+        conditions: >
+          {{ data.endpoint_id == 1
+          and data.cluster_id == 8
+          and data.command == 'move_with_on_off'
+          and data.params.move_mode == 0 }}
+      - title: hold (released)
+        conditions: >
+          {{ data.endpoint_id == 1
+          and data.cluster_id == 8
+          and data.command == 'stop_with_on_off'
+          and data.button_last_state[0].title == 'hold' }}
+          
+# top right ( O )
+  - x: 390
+    y: 86
+    width: 127
+    height: 214
+    actions:
+      - title: press
+        conditions:
+          - key: endpoint_id
+            value: 1
+          - key: cluster_id
+            value: 6
+          - key: command
+            value: 'off'
+      - title: hold
+        conditions: >
+          {{ data.endpoint_id == 1
+          and data.cluster_id == 8
+          and data.command == 'move_with_on_off'
+          and data.params.move_mode == 1 }}
+      - title: hold (released)
+        conditions: >
+          {{ data.endpoint_id == 1
+          and data.cluster_id == 8
+          and data.command == 'stop_with_on_off'
+          and data.button_last_state[1].title == 'hold' }}            
+            
+            
+# bottom left ( I )
+  - x: 86
+    y: 300
+    width: 127
+    height: 214
+    actions:
+      - title: press
+        conditions:
+          - key: endpoint_id
+            value: 2
+          - key: cluster_id
+            value: 6
+          - key: command
+            value: 'on'
+      - title: hold
+        conditions: >
+          {{ data.endpoint_id == 2
+          and data.cluster_id == 8
+          and data.command == 'move_with_on_off'
+          and data.params.move_mode == 0 }}
+      - title: hold (released)
+        conditions: >
+          {{ data.endpoint_id == 2
+          and data.cluster_id == 8
+          and data.command == 'stop_with_on_off'
+          and data.button_last_state[2].title == 'hold' }}            
+            
+            
+# bottom right ( O )
+  - x: 390
+    y: 300
+    width: 127
+    height: 214
+    actions:
+      - title: press
+        conditions:
+          - key: endpoint_id
+            value: 2
+          - key: cluster_id
+            value: 6
+          - key: command
+            value: 'off'
+      - title: hold
+        conditions: >
+          {{ data.endpoint_id == 2
+          and data.cluster_id == 8
+          and data.command == 'move_with_on_off'
+          and data.params.move_mode == 1 }}
+      - title: hold (released)
+        conditions: >
+          {{ data.endpoint_id == 2
+          and data.cluster_id == 8
+          and data.command == 'stop_with_on_off'
+          and data.button_last_state[3].title == 'hold' }}

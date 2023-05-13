@@ -25,11 +25,13 @@ buttons:
           and data.command == 'move_with_on_off'
           and data.params.move_mode == 0 }}
       - title: hold (released)
-        conditions: >
-          {{ data.cluster_id == 8
-          and data.command == 'stop_with_on_off'
-          and data.button_last_state[0].title == 'hold' }}
-          
+        conditions:
+          - key: cluster_id
+            value: 8
+          - key: command
+            value: stop_with_on_off
+          - key: button_last_state.0.title
+            value: hold          
 # top right ( O )
   - x: 390
     y: 86
@@ -51,10 +53,13 @@ buttons:
           and data.command == 'move_with_on_off'
           and data.params.move_mode == 1 }}
       - title: hold (released)
-        conditions: >
-          {{ data.cluster_id == 8
-          and data.command == 'stop_with_on_off'
-          and data.button_last_state[1].title == 'hold' }}            
+        conditions:
+          - key: cluster_id
+            value: 8
+          - key: command
+            value: stop_with_on_off
+          - key: button_last_state.1.title
+            value: hold        
             
             
 # bottom left ( I )
@@ -78,10 +83,13 @@ buttons:
           and data.command == 'move_with_on_off'
           and data.params.move_mode == 0 }}
       - title: hold (released)
-        conditions: >
-          {{ data.cluster_id == 8
-          and data.command == 'stop_with_on_off'
-          and data.button_last_state[2].title == 'hold' }}            
+        conditions:
+          - key: cluster_id
+            value: 8
+          - key: command
+            value: stop_with_on_off
+          - key: button_last_state.2.title
+            value: hold        
             
             
 # bottom right ( O )
@@ -105,7 +113,10 @@ buttons:
           and data.command == 'move_with_on_off'
           and data.params.move_mode == 1 }}
       - title: hold (released)
-        conditions: >
-          {{ data.cluster_id == 8
-          and data.command == 'stop_with_on_off'
-          and data.button_last_state[3].title == 'hold' }}
+        conditions:
+          - key: cluster_id
+            value: 8
+          - key: command
+            value: stop_with_on_off
+          - key: button_last_state.3.title
+            value: hold

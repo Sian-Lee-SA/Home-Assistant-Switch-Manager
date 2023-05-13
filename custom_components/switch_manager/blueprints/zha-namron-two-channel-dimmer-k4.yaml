@@ -20,21 +20,15 @@ buttons:
           - key: command
             value: 'on'
       - title: hold
-        conditions:
-          - key: cluster_id
-            value: 8
-          - key: command
-            value: 'move_with_on_off'
-          - key: params.move_mode
-            value: 0
+        conditions: >
+          {{ data.cluster_id == 8
+          and data.command == 'move_with_on_off'
+          and data.params.move_mode == 0 }}
       - title: hold (released)
-        conditions:
-          - key: cluster_id
-            value: 8
-          - key: command
-            value: stop_with_on_off
-          - key: button_last_state.0.title
-            value: hold
+        conditions: >
+          {{ data.cluster_id == 8
+          and data.command == 'stop_with_on_off'
+          and data.button_last_state[0].title == 'hold' }}
           
 # top right ( O )
   - x: 390
@@ -52,21 +46,15 @@ buttons:
           - key: command
             value: 'off'
       - title: hold
-        conditions:
-          - key: cluster_id
-            value: 8
-          - key: command
-            value: 'move_with_on_off'
-          - key: params.move_mode
-            value: 1
+        conditions: >
+          {{ data.cluster_id == 8
+          and data.command == 'move_with_on_off'
+          and data.params.move_mode == 1 }}
       - title: hold (released)
-        conditions:
-          - key: cluster_id
-            value: 8
-          - key: command
-            value: stop_with_on_off
-          - key: button_last_state.1.title
-            value: hold         
+        conditions: >
+          {{ data.cluster_id == 8
+          and data.command == 'stop_with_on_off'
+          and data.button_last_state[1].title == 'hold' }}            
             
             
 # bottom left ( I )
@@ -85,22 +73,17 @@ buttons:
           - key: command
             value: 'on'
       - title: hold
-        conditions:
-          - key: cluster_id
-            value: 8
-          - key: command
-            value: 'move_with_on_off'
-          - key: params.move_mode
-            value: 0
+        conditions: >
+          {{ data.cluster_id == 8
+          and data.command == 'move_with_on_off'
+          and data.params.move_mode == 0 }}
       - title: hold (released)
-        conditions:
-          - key: cluster_id
-            value: 8
-          - key: command
-            value: stop_with_on_off
-          - key: button_last_state.2.title
-            value: hold           
-
+        conditions: >
+          {{ data.cluster_id == 8
+          and data.command == 'stop_with_on_off'
+          and data.button_last_state[2].title == 'hold' }}            
+            
+            
 # bottom right ( O )
   - x: 390
     y: 300
@@ -117,18 +100,12 @@ buttons:
           - key: command
             value: 'off'
       - title: hold
-        conditions:
-          - key: cluster_id
-            value: 8
-          - key: command
-            value: 'move_with_on_off'
-          - key: params.move_mode
-            value: 1
+        conditions: >
+          {{ data.cluster_id == 8
+          and data.command == 'move_with_on_off'
+          and data.params.move_mode == 1 }}
       - title: hold (released)
-        conditions:
-          - key: cluster_id
-            value: 8
-          - key: command
-            value: stop_with_on_off
-          - key: button_last_state.3.title
-            value: hold
+        conditions: >
+          {{ data.cluster_id == 8
+          and data.command == 'stop_with_on_off'
+          and data.button_last_state[3].title == 'hold' }}

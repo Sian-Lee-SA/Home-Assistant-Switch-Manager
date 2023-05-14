@@ -1,0 +1,122 @@
+name: Namron 2 Channel Dimmer K4
+service: ZHA
+event_type: zha_event
+identifier_key: device_id
+buttons:
+
+# top left ( I )
+  - x: 86
+    y: 86
+    width: 127
+    height: 214
+    conditions:
+      - key: endpoint_id
+        value: 1
+    actions:
+      - title: press
+        conditions:
+          - key: cluster_id
+            value: 6
+          - key: command
+            value: 'on'
+      - title: hold
+        conditions: >
+          {{ data.cluster_id == 8
+          and data.command == 'move_with_on_off'
+          and data.params.move_mode == 0 }}
+      - title: hold (released)
+        conditions:
+          - key: cluster_id
+            value: 8
+          - key: command
+            value: stop_with_on_off
+          - key: button_last_state.0.title
+            value: hold          
+# top right ( O )
+  - x: 390
+    y: 86
+    width: 127
+    height: 214
+    conditions:
+      - key: endpoint_id
+        value: 1
+    actions:
+      - title: press
+        conditions:
+          - key: cluster_id
+            value: 6
+          - key: command
+            value: 'off'
+      - title: hold
+        conditions: >
+          {{ data.cluster_id == 8
+          and data.command == 'move_with_on_off'
+          and data.params.move_mode == 1 }}
+      - title: hold (released)
+        conditions:
+          - key: cluster_id
+            value: 8
+          - key: command
+            value: stop_with_on_off
+          - key: button_last_state.1.title
+            value: hold        
+            
+            
+# bottom left ( I )
+  - x: 86
+    y: 300
+    width: 127
+    height: 214
+    conditions:
+      - key: endpoint_id
+        value: 2
+    actions:
+      - title: press
+        conditions:
+          - key: cluster_id
+            value: 6
+          - key: command
+            value: 'on'
+      - title: hold
+        conditions: >
+          {{ data.cluster_id == 8
+          and data.command == 'move_with_on_off'
+          and data.params.move_mode == 0 }}
+      - title: hold (released)
+        conditions:
+          - key: cluster_id
+            value: 8
+          - key: command
+            value: stop_with_on_off
+          - key: button_last_state.2.title
+            value: hold        
+            
+            
+# bottom right ( O )
+  - x: 390
+    y: 300
+    width: 127
+    height: 214
+    conditions:
+      - key: endpoint_id
+        value: 2
+    actions:
+      - title: press
+        conditions:
+          - key: cluster_id
+            value: 6
+          - key: command
+            value: 'off'
+      - title: hold
+        conditions: >
+          {{ data.cluster_id == 8
+          and data.command == 'move_with_on_off'
+          and data.params.move_mode == 1 }}
+      - title: hold (released)
+        conditions:
+          - key: cluster_id
+            value: 8
+          - key: command
+            value: stop_with_on_off
+          - key: button_last_state.3.title
+            value: hold

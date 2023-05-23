@@ -4,6 +4,7 @@ import { classMap } from "lit/directives/class-map.js";
 import {
     mdiContentSave,
     mdiArrowLeft,
+    mdiContentCopy,
     mdiRenameBox,
     mdiDotsVertical,
     mdiDelete,
@@ -148,6 +149,17 @@ class SwitchManagerSwitchEditor extends LitElement
                                         </ha-svg-icon>
                                 </mwc-list-item>
 
+                                <mwc-list-item
+                                    graphic="icon"
+                                    .disabled=${!this.config || this.config?._error}
+                                    @click=${this._showCopyFromDialog}>
+                                        Copy From
+                                        <ha-svg-icon
+                                            slot="graphic"
+                                            .path=${mdiContentCopy}>
+                                        </ha-svg-icon>
+                                </mwc-list-item>
+                                
                                 <mwc-list-item
                                     graphic="icon"
                                     .disabled=${!this.config || this.is_new || this.config?._error}
@@ -713,14 +725,16 @@ class SwitchManagerSwitchEditor extends LitElement
         })
     }
 
-    private async _toggleYaml()
+    private _toggleYaml()
     {
         this._is_yaml = !this._is_yaml;
 
         // Ensure Yaml Editor is in DOM
-        await this.updateComplete;
-        if( this._is_yaml )
-            this._yamlEditor?.setValue( this.sequence );
+        // await this.updateComplete;
+        this.updateComplete.then(() => {
+            if( this._is_yaml )
+                this._yamlEditor?.setValue( this.sequence );
+        });
     }
 
     private _modeValueChanged(ev: CustomEvent)
@@ -768,6 +782,28 @@ class SwitchManagerSwitchEditor extends LitElement
                     if( this.is_new )
                         this._showIdentifierAutoDiscoveryDialog();
                 }
+            },
+        });
+    }
+
+    private async _showCopyFromDialog(): Promise<void>
+    {
+        fireEvent(this, "show-dialog", {
+            dialogTag: "switch-manager-dialog-copy-from",
+            dialogImport: () => import("./dialogs/dialog-copy-from"),
+            dialogParams: {
+                blueprint_id: this.config!.blueprint.id,
+                current_switch_id: this.config!.id,
+                update: (config) => {
+                    console.dir( config );
+                    this.config!.buttons = config.buttons;
+                    if( config.variables !== false )
+                        this.config!.variables = config.variables;
+                    this._dirty = true;
+                    this._updateSequence();
+                    this._drawSVG();
+                },
+                onClose: () => {}
             },
         });
     }

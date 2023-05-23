@@ -179,6 +179,25 @@ async def async_setup_connections( hass ):
             "deleted": msg['config_id']
         })
 
+    @websocket_api.websocket_command({
+        vol.Required("type"): "switch_manager/copy_from_list", 
+        vol.Required("blueprint_id"): cv.string,
+        vol.Optional("skip_config_id"): cv.string
+    })
+    @websocket_api.async_response
+    async def websocket_copy_from_list(
+        hass: HomeAssistant,
+        connection: websocket_api.ActiveConnection,
+        msg: dict[str, Any],
+    ) -> None:
+        if 'skip_config_id' not in msg:
+            msg['skip_config_id'] = '';
+        data = [s for s in hass.data[DOMAIN][CONF_MANAGED_SWITCHES].values() if s.blueprint.id == msg['blueprint_id'] and s.id != msg['skip_config_id']];
+
+        connection.send_result( msg['id'], {
+            "switches": data
+        })
+
     websocket_api.async_register_command(hass, websocket_configs)
     websocket_api.async_register_command(hass, websocket_blueprints)
     websocket_api.async_register_command(hass, websocket_blueprint_auto_discovery)
@@ -186,3 +205,4 @@ async def async_setup_connections( hass ):
     websocket_api.async_register_command(hass, websocket_save_config)
     websocket_api.async_register_command(hass, websocket_toggle_config_enabled)
     websocket_api.async_register_command(hass, websocket_delete_config)
+    websocket_api.async_register_command(hass, websocket_copy_from_list)

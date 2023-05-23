@@ -90,7 +90,7 @@ class SwitchManagerDialogRenameSwitch extends LitElement
             }
           `,
         ];
-      }
+    }
 
     private _valueChanged(ev: CustomEvent)
     {

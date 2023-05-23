@@ -12,29 +12,14 @@ buttons:
         conditions:
           - key: command
             value: left_single
-        default_sequence:
-          - service: "linus.press_light_switch"
-            data:
-              area: ""
-              action: "single"
       - title: double press
         conditions:
           - key: command
             value: left_double
-        default_sequence:
-          - service: "linus.press_light_switch"
-            data:
-              area: ""
-              action: "double"
       - title: long
         conditions:
           - key: command
             value: left_long press
-        default_sequence:
-          - service: "linus.press_light_switch"
-            data:
-              area: ""
-              action: "long"
   - x: 190
     y: 0
     width: 190
@@ -44,26 +29,11 @@ buttons:
         conditions:
           - key: command
             value: right_single
-        default_sequence:
-          - service: "linus.press_light_switch"
-            data:
-              area: ""
-              action: "single"
       - title: double press
         conditions:
           - key: command
             value: right_double
-        default_sequence:
-          - service: "linus.press_light_switch"
-            data:
-              area: ""
-              action: "double"
       - title: long
         conditions:
           - key: command
             value: right_long press
-        default_sequence:
-          - service: "linus.press_light_switch"
-            data:
-              area: ""
-              action: "long"

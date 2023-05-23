@@ -93,6 +93,7 @@ class SwitchManagerDialogCopyFrom extends LitElement
                     .hass=${this.hass}
                     label="${this._switches.length ? 'Switch' : 'No Valid Switches!'}"
                     .selector=${this._buildSelector()}
+                    .disabled=${!this._switches.length}
                     @value-changed=${this._switchValueChanged}>
                 </ha-selector-select>
 
@@ -100,6 +101,7 @@ class SwitchManagerDialogCopyFrom extends LitElement
                     .label="${'Include Variables'}">
                     <ha-checkbox
                         .checked=${this._copyVariables}
+                        .disabled=${!this._switches.length}
                         @change=${() => this._copyVariables = !this._copyVariables}></ha-checkbox>
                 </ha-formfield>
 

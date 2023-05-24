@@ -1,0 +1,39 @@
+name: Aqara 2 Gang Remote
+service: ZHA
+event_type: zha_event
+identifier_key: device_id
+buttons:
+  - x: 0
+    y: 0
+    width: 190
+    height: 385
+    actions:
+      - title: single press
+        conditions:
+          - key: command
+            value: left_single
+      - title: double press
+        conditions:
+          - key: command
+            value: left_double
+      - title: long
+        conditions:
+          - key: command
+            value: left_long press
+  - x: 190
+    y: 0
+    width: 190
+    height: 385
+    actions:
+      - title: single press
+        conditions:
+          - key: command
+            value: right_single
+      - title: double press
+        conditions:
+          - key: command
+            value: right_double
+      - title: long
+        conditions:
+          - key: command
+            value: right_long press

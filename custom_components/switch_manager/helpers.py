@@ -61,6 +61,9 @@ def format_mqtt_message( message: ReceiveMessage):
     try:
         data = json.loads(message.payload)
     except ValueError as e:
+        data = message.payload
+        
+    if not isinstance(data, dict):
         data = {
             "payload": message.payload
         }

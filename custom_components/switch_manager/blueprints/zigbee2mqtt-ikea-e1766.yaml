@@ -4,17 +4,13 @@ event_type: mqtt
 mqtt_topic_format: zigbee2mqtt/+/action
 buttons:
   ## Those buttons only accept single tap actions
-  - x: 182
-    y: 90
-    width: 65
+  - d: "M 3 135 c 0 0 5 -150 140 -140 l 190 0 c 0 0 145 0 145 145 l 0 94 l -475 0 Z"
     actions:
       - title: press
         conditions:
           - key: payload
             value: open
-  - x: 182
-    y: 280
-    width: 65
+  - d: "M 3 236 L3 340 c 0 0 5 135 135 135 l 195 0 c 0 0 145 0 145 -145 l 0 -94 Z"
     actions:
       - title: press
         conditions:

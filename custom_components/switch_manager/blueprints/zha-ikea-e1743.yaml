@@ -3,9 +3,7 @@ service: ZHA
 event_type: zha_event
 identifier_key: device_id
 buttons:
-  - x: 256
-    y: 130
-    width: 100
+  - d: "M 0 150 c 0 0 5 -145 145 -145 l 195 0 c 0 0 145 0 145 145 l 0 94 l -485 0 Z"
     actions:
       - title: press
         conditions:
@@ -19,9 +17,9 @@ buttons:
         conditions:
           - key: command
             value: stop_with_on_off
-  - x: 256
-    y: 380
-    width: 100
+          - key: button_last_state.0.title
+            value: hold
+  - d: "M 0 245 L0,348 c 0 0 5 135 135 135 l 205 0 c 0 0 145 0 145 -145 l 0 -94 Z"
     actions:
       - title: press
         conditions:
@@ -35,3 +33,5 @@ buttons:
         conditions:
           - key: command
             value: stop_with_on_off
+          - key: button_last_state.1.title
+            value: hold

@@ -7,7 +7,7 @@ buttons:
       - title: press
         conditions:
           - key: command
-            value: press
+            value: single
       - title: press 2x
         conditions:
           - key: command

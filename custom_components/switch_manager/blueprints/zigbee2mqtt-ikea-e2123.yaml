@@ -93,3 +93,7 @@ buttons:
         conditions:
           - key: payload
             value: play_pause
+      - title: press
+        conditions:
+          - key: payload
+            value: toggle

@@ -1,0 +1,34 @@
+name: Wallmote Duo
+service: Z-Wave JS
+event_type: zwave_js_value_notification
+identifier_key: node_id
+conditions:
+  - key: property
+    value: scene
+buttons:
+  - d: M 388.82236,3.1936128 H 77.44511 L 59.88024,5.5888224 43.113772,13.572854 28.742515,23.153693 19.161677,33.532934 12.774451,47.105788 6.3872255,61.477046 5.5888224,87.824351 V 724.9501 l 3.9920159,18.36327 7.1856287,17.56487 15.169661,15.16966 9.580838,6.38723 10.379242,7.18563 9.580838,3.19361 17.56487,3.19361 310.578844,-0.7984 z
+    conditions:
+      - key: property_key
+        value: '001'
+    actions:
+      - title: tap
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+  - d: m 410.37924,5.5888224 316.16767,-1.5968064 30.33932,8.782435 22.35529,18.363274 11.97605,20.758483 5.58882,22.355289 0.7984,653.892213 -5.58882,19.16168 -7.98403,15.16966 -11.97605,11.17764 -10.37924,10.37925 -15.96807,7.18563 -18.36327,2.3952 -27.14571,1.59681 -289.02196,-1.59681 z
+    conditions:
+      - key: property_key
+        value: '002'
+    actions:
+      - title: tap
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown

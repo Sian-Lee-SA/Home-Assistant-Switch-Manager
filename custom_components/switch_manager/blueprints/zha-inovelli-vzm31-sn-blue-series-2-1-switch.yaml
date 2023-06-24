@@ -3,25 +3,25 @@ service: ZHA
 event_type: zha_event
 identifier_key: device_id
 buttons:
-  - d: "M 315 206 H 470 V 388 H 315"
+  - d: "M 197 129 H 294 V 241 H 197 V 129"
     actions: # Up
-      - title: 1x press
+      - title: press 1x
         conditions:
           - key: command
             value: button_2_press
-      - title: 2x press
+      - title: press 2x
         conditions:
           - key: command
             value: button_2_double
-      - title: 3x press
+      - title: press 3x
         conditions:
           - key: command
             value: button_2_triple
-      - title: 4x press
+      - title: press 4x
         conditions:
           - key: command
             value: button_2_quadruple
-      - title: 5x press
+      - title: press 5x
         conditions:
           - key: command
             value: button_2_quintuple
@@ -33,25 +33,25 @@ buttons:
         conditions:
           - key: command
             value: button_2_release
-  - d: "M 315 389 H 470 V 572 H 315"
+  - d: "M 197 242 H 294 V 357 H 197 V 242"
     actions: # Down
-      - title: 1x press
+      - title: press 1x
         conditions:
           - key: command
             value: button_1_press
-      - title: 2x press
+      - title: press 2x
         conditions:
           - key: command
             value: button_1_double
-      - title: 3x press
+      - title: press 3x
         conditions:
           - key: command
             value: button_1_triple
-      - title: 4x press
+      - title: press 4x
         conditions:
           - key: command
             value: button_1_quadruple
-      - title: 5x press
+      - title: press 5x
         conditions:
           - key: command
             value: button_1_quintuple
@@ -63,25 +63,25 @@ buttons:
         conditions:
           - key: command
             value: button_1_release
-  - d: "M 481 205 H 491 V 279 H 481"
+  - d: "M 300 127 H 308 V 175 H 300 V 127"
     actions: # Config
-      - title: 1x press
+      - title: press 1x
         conditions:
           - key: command
             value: button_3_press
-      - title: 2x press
+      - title: press 2x
         conditions:
           - key: command
             value: button_3_double
-      - title: 3x press
+      - title: press 3x
         conditions:
           - key: command
             value: button_3_triple
-      - title: 4x press
+      - title: press 4x
         conditions:
           - key: command
             value: button_3_quadruple
-      - title: 5x press
+      - title: press 5x
         conditions:
           - key: command
             value: button_3_quintuple

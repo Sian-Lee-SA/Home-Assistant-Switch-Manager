@@ -3,7 +3,7 @@ service: ZHA
 event_type: zha_event
 identifier_key: device_id
 buttons:
-  - d: "M 197 129 H 294 V 241 H 197 V 129"
+  - d: "M 91 117 H 203 V 247 H 91 V 117"
     actions: # Up
       - title: press 1x
         conditions:
@@ -33,7 +33,7 @@ buttons:
         conditions:
           - key: command
             value: button_2_release
-  - d: "M 197 242 H 294 V 357 H 197 V 242"
+  - d: "M 91 248 H 203 V 380 H 91 V 248"
     actions: # Down
       - title: press 1x
         conditions:
@@ -63,7 +63,7 @@ buttons:
         conditions:
           - key: command
             value: button_1_release
-  - d: "M 300 127 H 308 V 175 H 300 V 127"
+  - d: "M 210 116 H 219 V 170 H 210 V 116"
     actions: # Config
       - title: press 1x
         conditions:

@@ -40,7 +40,7 @@ buttons:
         conditions:
           - key: payload
             value: dots_2_long_press
-      - title: release
+      - title: hold (released)
         conditions:
           - key: payload
             value: dots_2_long_release
@@ -74,7 +74,7 @@ buttons:
         conditions:
           - key: payload
             value: dots_1_long_press
-      - title: release
+      - title: hold (released)
         conditions:
           - key: payload
             value: dots_1_long_release

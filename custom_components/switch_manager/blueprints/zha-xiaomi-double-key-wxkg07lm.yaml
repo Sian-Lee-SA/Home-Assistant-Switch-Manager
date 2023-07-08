@@ -1,0 +1,55 @@
+name: Xiaomi Double Key
+service: ZHA
+event_type: zha_event
+identifier_key: device_id
+buttons:
+  - x: 12
+    y: 12
+    width: 238
+    height: 475
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: left_single
+      - title: press 2x
+        conditions:
+          - key: command
+            value: left_double
+      - title: hold
+        conditions:
+          - key: command
+            value: left_long press
+  - x: 250
+    y: 12
+    width: 238
+    height: 475
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: right_single
+      - title: press 2x
+        conditions:
+          - key: command
+            value: right_double
+      - title: hold
+        conditions:
+          - key: command
+            value: right_long press
+  - x: 250
+    y: 250
+    width: 75
+    actions:
+      - title: both press
+        conditions:
+          - key: command
+            value: both_single
+      - title: both press 2x
+        conditions:
+          - key: command
+            value: both_double
+      - title: both hold
+        conditions:
+          - key: command
+            value: both_long press

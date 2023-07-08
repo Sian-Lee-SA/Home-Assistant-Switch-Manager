@@ -24,7 +24,7 @@ buttons:
             value: 8
           - key: endpoint_id
             value: 1
-      - title: release
+      - title: hold (released)
         conditions:
           - key: command
             value: "stop_with_on_off"
@@ -47,7 +47,7 @@ buttons:
             value: 1
           - key: args
             value: '[256, 13, 0]'
-      - title: hold
+      - title: hold (released)
         conditions:
           - key: command
             value: "hold"
@@ -72,7 +72,7 @@ buttons:
             value: 6
           - key: endpoint_id
             value: 1
-      - title: hold
+      - title: hold (released)
         conditions:
           - key: command
             value: "move"
@@ -103,7 +103,7 @@ buttons:
             value: 1
           - key: args
             value: '[257, 13, 0]'
-      - title: hold
+      - title: hold (released)
         conditions:
           - key: command
             value: "hold"

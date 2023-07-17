@@ -1,0 +1,117 @@
+name: Ikea Styrbar
+service: ZHA
+event_type: zha_event
+identifier_key: device_id
+buttons:
+  - x: 208
+    y: 20
+    width: 80
+    height: 80
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: "on"
+          - key: cluster_id
+            value: 6
+          - key: endpoint_id
+            value: 1
+      - title: hold
+        conditions:
+          - key: command
+            value: "move_with_on_off"
+          - key: cluster_id
+            value: 8
+          - key: endpoint_id
+            value: 1
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: "stop_with_on_off"
+          - key: cluster_id
+            value: 8
+          - key: endpoint_id
+            value: 1
+  - x: 405
+    y: 208
+    width: 80
+    height: 80
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: "press"
+          - key: cluster_id
+            value: 5
+          - key: endpoint_id
+            value: 1
+          - key: args
+            value: '[256, 13, 0]'
+      - title: hold
+        conditions:
+          - key: command
+            value: "hold"
+          - key: cluster_id
+            value: 5
+          - key: endpoint_id
+            value: 1
+          - key: args
+            value: '[3328, 0]'
+      - title: hold (released)
+        conditions: "{{ data.command == 'release' and data.cluster_id == 5 and data.endpoint_id == 1 and data.args[0] != 0 }}"
+  - x: 208
+    y: 395
+    width: 80
+    height: 80
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: "off"
+          - key: cluster_id
+            value: 6
+          - key: endpoint_id
+            value: 1
+      - title: hold
+        conditions:
+          - key: command
+            value: "move"
+          - key: cluster_id
+            value: 8
+          - key: endpoint_id
+            value: 1
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: "stop_with_on_off"
+          - key: cluster_id
+            value: 8
+          - key: endpoint_id
+            value: 1
+  - x: 10
+    y: 208
+    width: 80
+    height: 80
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: "press"
+          - key: cluster_id
+            value: 5
+          - key: endpoint_id
+            value: 1
+          - key: args
+            value: '[257, 13, 0]'
+      - title: hold
+        conditions:
+          - key: command
+            value: "hold"
+          - key: cluster_id
+            value: 5
+          - key: endpoint_id
+            value: 1
+          - key: args
+            value: '[3329, 0]'
+      - title: hold (released)
+        conditions: "{{ data.command == 'release' and data.cluster_id == 5 and data.endpoint_id == 1 and data.args[0] != 0 }}"

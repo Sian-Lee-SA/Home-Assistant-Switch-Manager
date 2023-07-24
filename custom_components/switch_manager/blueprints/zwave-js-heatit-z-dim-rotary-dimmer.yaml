@@ -1,0 +1,28 @@
+name: Heatit Z-Dim Rotary Dimmer
+service: Z-Wave JS
+event_type: zwave_js_value_notification
+identifier_key: node_id
+conditions:
+  - key: property
+    value: scene
+buttons:
+    conditions:
+      - key: property_key
+        value: '001'
+    actions:
+      - title: press 2x
+        conditions:
+          - key: value
+            value: KeyPressed2x
+      - title: press 3x
+        conditions:
+          - key: value
+            value: KeyPressed3x
+      - title: press 4x
+        conditions:
+          - key: value
+            value: KeyPressed4x
+      - title: press 5x
+        conditions:
+          - key: value
+            value: KeyPressed5x

@@ -1,0 +1,109 @@
+name: Homematic 8 Buttons
+service: Homematic
+event_type: homematic.keypress
+identifier_key: device_id
+buttons:
+  - d: "M22,147.5c-5.2,0-9.5-4.3-9.5-9.5V22c0-5.2,4.3-9.5,9.5-9.5h73.1c5.2,0,9.5,4.3,9.5,9.5v116 c0,5.2-4.3,9.5-9.5,9.5H22z"
+    conditions:
+      - key: subtype
+        value: 1
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: press_short
+      - title: hold
+        conditions:
+          - key: type
+            value: press_long
+  - d: "M119.6,147.5c-5.2,0-9.5-4.3-9.5-9.5V22c0-5.2,4.3-9.5,9.5-9.5h73.1c5.2,0,9.5,4.3,9.5,9.5v116 c0,5.2-4.3,9.5-9.5,9.5H119.6z"
+    conditions:
+      - key: subtype
+        value: 2
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: press_short
+      - title: hold
+        conditions:
+          - key: type
+            value: press_long
+  - d: M217.1,147.5c-5.2,0-9.5-4.3-9.5-9.5V22c0-5.2,4.3-9.5,9.5-9.5h73.1c5.2,0,9.5,4.3,9.5,9.5v116 c0,5.2-4.3,9.5-9.5,9.5H217.1z
+    conditions:
+      - key: subtype
+        value: 3
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: press_short
+      - title: hold
+        conditions:
+          - key: type
+            value: press_long
+  - d: "M314.7,147.5c-5.2,0-9.5-4.3-9.5-9.5V22c0-5.2,4.3-9.5,9.5-9.5h73.1c5.2,0,9.5,4.3,9.5,9.5v116 c0,5.2-4.3,9.5-9.5,9.5H314.7z"
+    conditions:
+      - key: subtype
+        value: 4
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: press_short
+      - title: hold
+        conditions:
+          - key: type
+            value: press_long      
+  - d: "M412.2,147.5c-5.2,0-9.5-4.3-9.5-9.5V22c0-5.2,4.3-9.5,9.5-9.5h73.1c5.2,0,9.5,4.3,9.5,9.5v116 c0,5.2-4.3,9.5-9.5,9.5H412.2z"
+    conditions:
+      - key: subtype
+        value: 5
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: press_short
+      - title: hold
+        conditions:
+          - key: type
+            value: press_long          
+  - d: "M509.8,147.5c-5.2,0-9.5-4.3-9.5-9.5V22c0-5.2,4.3-9.5,9.5-9.5h73.1c5.2,0,9.5,4.3,9.5,9.5v116 c0,5.2-4.3,9.5-9.5,9.5H509.8z"
+    conditions:
+      - key: subtype
+        value: 6
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: press_short
+      - title: hold
+        conditions:
+          - key: type
+            value: press_long
+  - d: "M607.3,147.5c-5.2,0-9.5-4.3-9.5-9.5V22c0-5.2,4.3-9.5,9.5-9.5h73.1c5.2,0,9.5,4.3,9.5,9.5v116 c0,5.2-4.3,9.5-9.5,9.5H607.3z"
+    conditions:
+      - key: subtype
+        value: 7
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: press_short
+      - title: hold
+        conditions:
+          - key: type
+            value: press_long
+  - d: "M704.9,147.5c-5.2,0-9.5-4.3-9.5-9.5V22c0-5.2,4.3-9.5,9.5-9.5H778c5.2,0,9.5,4.3,9.5,9.5v116 c0,5.2-4.3,9.5-9.5,9.5H704.9z"
+    conditions:
+      - key: subtype
+        value: 8
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: press_short
+      - title: hold
+        conditions:
+          - key: type
+            value: press_long

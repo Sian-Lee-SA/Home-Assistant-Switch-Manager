@@ -1,0 +1,34 @@
+name: Xiaomi Smart Wireless Switch
+service: ZHA
+event_type: zha_event
+identifier_key: device_id
+buttons:
+  - actions:
+      - title: press
+        conditions:
+          - key: args.click_type
+            value: single
+      - title: press 2x
+        conditions:
+          - key: args.click_type
+            value: double
+      - title: press 3x
+        conditions:
+          - key: args.click_type
+            value: triple
+      - title: press 4x
+        conditions:
+          - key: args.click_type
+            value: quadruple
+      - title: press >4x
+        conditions:
+          - key: args.click_type
+            value: furious
+      - title: hold
+        conditions:
+          - key: command
+            value: hold
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: release

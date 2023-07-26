@@ -1,0 +1,168 @@
+name: Sunricher and various (K8)
+service: Z-wave JS
+event_type: zwave_js_value_notification
+identifier_key: node_id
+conditions:
+  - key: property
+    value: scene
+buttons:
+  - x: 78
+    y: 80
+    width: 95
+    height: 75
+    conditions:
+      - key: property_key
+        value: '001'
+    actions:
+      - title: press
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+      - title: hold (released)
+        conditions:
+          - key: value
+            value: KeyReleased
+  - x: 327
+    y: 80
+    width: 95
+    height: 75
+    conditions:
+      - key: property_key
+        value: '002'
+    actions:
+      - title: press
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+      - title: hold (released)
+        conditions:
+          - key: value
+            value: KeyReleased
+  - x: 78
+    y: 167
+    width: 95
+    height: 75
+    conditions:
+      - key: property_key
+        value: '003'
+    actions:
+      - title: press
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+      - title: hold (released)
+        conditions:
+          - key: value
+            value: KeyReleased
+  - x: 327
+    y: 167
+    width: 95
+    height: 75
+    conditions:
+      - key: property_key
+        value: '004'
+    actions:
+      - title: press
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+      - title: hold (released)
+        conditions:
+          - key: value
+            value: KeyReleased
+  - x: 78
+    y: 256
+    width: 95
+    height: 75
+    conditions:
+      - key: property_key
+        value: '005'
+    actions:
+      - title: press
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+      - title: hold (released)
+        conditions:
+          - key: value
+            value: KeyReleased
+  - x: 327
+    y: 256
+    width: 95
+    height: 75
+    conditions:
+      - key: property_key
+        value: '006'
+    actions:
+      - title: press
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+      - title: hold (released)
+        conditions:
+          - key: value
+            value: KeyReleased
+  - x: 78
+    y: 346
+    width: 95
+    height: 75
+    conditions:
+      - key: property_key
+        value: '007'
+    actions:
+      - title: press
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+      - title: hold (released)
+        conditions:
+          - key: value
+            value: KeyReleased
+  - x: 327
+    y: 346
+    width: 95
+    height: 75
+    conditions:
+      - key: property_key
+        value: '008'
+    actions:
+      - title: press
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+      - title: hold (released)
+        conditions:
+          - key: value
+            value: KeyReleased

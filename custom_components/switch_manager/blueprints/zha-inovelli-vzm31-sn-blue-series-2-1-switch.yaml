@@ -1,0 +1,95 @@
+name: Inovelli VZM31-SN Blue Series 2-1 Switch
+service: ZHA
+event_type: zha_event
+identifier_key: device_id
+buttons:
+  - d: "M 91 117 H 203 V 247 H 91 V 117"
+    actions: # Up
+      - title: press
+        conditions:
+          - key: command
+            value: button_2_press
+      - title: press 2x
+        conditions:
+          - key: command
+            value: button_2_double
+      - title: press 3x
+        conditions:
+          - key: command
+            value: button_2_triple
+      - title: press 4x
+        conditions:
+          - key: command
+            value: button_2_quadruple
+      - title: press 5x
+        conditions:
+          - key: command
+            value: button_2_quintuple
+      - title: hold
+        conditions:
+          - key: command
+            value: button_2_hold
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: button_2_release
+  - d: "M 91 248 H 203 V 380 H 91 V 248"
+    actions: # Down
+      - title: press
+        conditions:
+          - key: command
+            value: button_1_press
+      - title: press 2x
+        conditions:
+          - key: command
+            value: button_1_double
+      - title: press 3x
+        conditions:
+          - key: command
+            value: button_1_triple
+      - title: press 4x
+        conditions:
+          - key: command
+            value: button_1_quadruple
+      - title: press 5x
+        conditions:
+          - key: command
+            value: button_1_quintuple
+      - title: hold
+        conditions:
+          - key: command
+            value: button_1_hold
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: button_1_release
+  - d: "M 210 116 H 219 V 170 H 210 V 116"
+    actions: # Config
+      - title: press
+        conditions:
+          - key: command
+            value: button_3_press
+      - title: press 2x
+        conditions:
+          - key: command
+            value: button_3_double
+      - title: press 3x
+        conditions:
+          - key: command
+            value: button_3_triple
+      - title: press 4x
+        conditions:
+          - key: command
+            value: button_3_quadruple
+      - title: press 5x
+        conditions:
+          - key: command
+            value: button_3_quintuple
+      - title: hold
+        conditions:
+          - key: command
+            value: button_3_hold
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: button_3_release

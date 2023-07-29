@@ -1,0 +1,38 @@
+name: Aqara Smart Light Switch (Double Rocker, with Neutral)
+service: ZHA
+event_type: zha_event
+identifier_key: device_id
+buttons:
+  - d: M 118 140 H 255 C 259 140 260 143 260 144 V 297 H 113 V 144 C 114 140 118 140 118 140
+    actions: # Top Button
+      - title: press
+        conditions:
+          - key: command
+            value: 41_single
+      - title: press 2x
+        conditions:
+          - key: command
+            value: 42_double
+  - d: M 113 297 H 260 V 451 C 260 453 257 455 256 455 H 117 C 114 455 113 452 113 451 V 297
+    actions: # Bottom Button
+      - title: press
+        conditions:
+          - key: command
+            value: 42_single
+      - title: press 2x
+        conditions:
+          - key: command
+            value: 42_double
+  # - d: M 135 157 H 272 C 276 157 277 160 277 161 V 468 C 277 470 274 472 273 472 H 135 C 132 472 130 469 130 468 V 161 C 131 157 135 157 135 157
+  - x: 183
+    y: 298
+    width: 45
+    actions: # Both Buttons
+      - title: both press
+        conditions:
+          - key: command
+            value: 51_single
+      - title: either hold
+        conditions:
+          - key: command
+            value: 1_hold

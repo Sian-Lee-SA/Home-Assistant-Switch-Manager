@@ -1,0 +1,47 @@
+name: IKEA TRÅDFRI Remote
+service: ZHA
+event_type: zha_event
+identifier_key: device_id
+buttons:
+  - d: "m 117.3978 311.9315 c -14.579 -22.6964 -22.329 -49.1038 -22.329 -76.0792 c 0.0512 -26.9598 7.843 -53.3385 22.4489 -75.9998 l 3.2262 -4.917 c 26.337 -37.4943 69.2751 -59.8234 115.0941 -59.8559 c 45.8021 0.068 88.7076 22.415 115.0186 59.9067 l 3.4215 4.7856 c 14.5802 22.6965 22.3316 49.1038 22.3316 76.0792 c -0.052 26.9598 -7.8445 53.3385 -22.4515 75.9985 l -3.2262 4.9174 c -26.3383 37.493 -69.2751 59.8221 -115.0941 59.8533 c -45.8008 -0.068 -88.705 -22.415 -115.016 -59.9054 z"
+    actions: # Power
+      - title: press
+        conditions:
+          - key: command
+            value: toggle
+      - title: hold
+        conditions:
+          - key: command
+            value: move_to_level_with_on_off
+  - d: "M 235.838 9.1208 A 226.7172 226.7172 0 0 0 49.6172 106.9753 l 66.8881 44.9669 a 145.9589 145.9589 0 0 1 119.3366 -62.0619 a 145.9589 145.9589 0 0 1 119.2584 62.1153 l 67.1304 -45.1323 A 226.7172 226.7172 0 0 0 235.8406 9.1208 Z"
+    actions: # Brightness up
+      - title: press
+        conditions:
+          - key: command
+            value: step_with_on_off
+      - title: hold
+        conditions:
+          - key: command
+            value: move_with_on_off
+  - d: "M 116.5769 319.7494 L 49.4439 364.8817 A 226.7172 226.7172 0 0 0 235.8341 462.6242 A 226.7172 226.7172 0 0 0 422.0548 364.7697 L 355.1668 319.8028 A 145.9589 145.9589 0 0 1 235.8302 381.8621 A 145.9589 145.9589 0 0 1 116.5743 319.7494 Z"
+    actions: # Brightness down
+      - title: press
+        conditions:
+          - key: command
+            value: step
+      - title: hold
+        conditions:
+          - key: command
+            value: move
+  - d: "m 46.0653 111.9253 a 226.7172 226.7172 0 0 0 -36.9484 123.9048 a 226.7172 226.7172 0 0 0 37.0422 123.841 l 66.8724 -44.9577 a 145.9589 145.9589 0 0 1 -23.1525 -78.8846 a 145.9589 145.9589 0 0 1 23.2763 -78.8011 z"
+    actions: # Arrow left
+      - title: press
+        conditions: "{{ data.command == 'press' and data.args == [257,13,0] }}"
+      - title: hold
+        conditions: "{{ data.command == 'hold' and data.args == [3329,0] }}"
+  - d: "m 425.5116 112.0556 l -66.8725 44.9565 a 145.9589 145.9589 0 0 1 23.1551 78.8845 a 145.9589 145.9589 0 0 1 -23.2789 78.8012 l 67.09 45.1036 a 226.7172 226.7172 0 0 0 36.9484 -123.9048 a 226.7172 226.7172 0 0 0 -37.0422 -123.841 z"
+    actions: # Arrow right
+      - title: press
+        conditions: "{{ data.command == 'press' and data.args == [256,13,0] }}"
+      - title: hold
+        conditions: "{{ data.command == 'hold' and data.args == [3328,0] }}"

@@ -16,6 +16,10 @@ buttons:
         conditions:
           - key: payload
             value: brightness_move_up
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: brightness_stop_up
   - x: 168
     y: 434
     width: 50
@@ -28,3 +32,7 @@ buttons:
         conditions:
           - key: payload
             value: brightness_move_down
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: brightness_stop_down

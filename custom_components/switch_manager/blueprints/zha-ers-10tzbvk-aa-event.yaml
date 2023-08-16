@@ -1,0 +1,18 @@
+# Event Mode triggering
+# https://www.zigbee2mqtt.io/devices/ERS-10TZBVK-AA.html
+
+name: ERS-10TZBVK-AA TS004F - Event setting
+service: ZHA
+event_type: zha_event
+identifier_key: device_id
+buttons:
+  - actions:
+      - title: press
+        conditions:
+          - key: command
+            value: toggle
+      - title: rotate left
+        conditions: "{{ data.command == 'step' and data.params.step_mode == 1 }}"
+      - title: rotate right
+        conditions: "{{ data.command == 'step' and data.params.step_mode == 0 }}"
+

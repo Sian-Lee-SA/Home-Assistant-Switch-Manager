@@ -90,6 +90,9 @@ def get_val_from_str(_string, _dict):
                 return None
             if hasattr(v[key], 'as_dict'):
                 v = v[key].as_dict()
+            # Handle enums
+            if hasattr(v[key], 'value'):
+                v = v[key].value
             else:
                 v = v[key]
         except ValueError:

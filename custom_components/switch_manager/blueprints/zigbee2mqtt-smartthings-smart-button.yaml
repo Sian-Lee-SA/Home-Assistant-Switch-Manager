@@ -1,0 +1,18 @@
+name: SmartThings Smart Button
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+buttons:
+  - actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: single
+      - title: double press
+        conditions:
+          - key: payload
+            value: double
+      - title: hold
+        conditions:
+          - key: payload
+            value: hold

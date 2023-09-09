@@ -1,5 +1,5 @@
 """Helpers for switch_manager integration."""
-import json, pathlib, os, shutil
+import json, pathlib, os, shutil, enum
 from homeassistant.core import HomeAssistant
 from homeassistant.util.yaml.loader import _find_files, load_yaml
 from .const import (
@@ -94,6 +94,8 @@ def get_val_from_str(_string, _dict):
                 v = v[key]
         except ValueError:
             return None
+    if isinstance(v, enum.Enum):
+        return v.value
     return v
 
 def _get_blueprint( hass: HomeAssistant, id: str ):

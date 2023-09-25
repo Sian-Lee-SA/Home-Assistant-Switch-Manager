@@ -1,5 +1,5 @@
 name: Sunricher and various (K8)
-service: Z-wave JS
+service: Z-Wave JS
 event_type: zwave_js_value_notification
 identifier_key: node_id
 conditions:

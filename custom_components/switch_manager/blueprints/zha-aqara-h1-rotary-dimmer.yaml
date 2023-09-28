@@ -3,8 +3,7 @@ service: ZHA
 event_type: zha_event
 identifier_key: device_id
 buttons:
-  - d: "M 118 213 A 1 1 0 0 0 307 213 A 1 1 0 0 0 118 213"
-    actions: # Button
+  - actions:
       - title: press
         conditions:
           - key: command

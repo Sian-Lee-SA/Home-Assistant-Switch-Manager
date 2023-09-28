@@ -1,8 +1,8 @@
-import time
+import time, asyncio
 from .const import DOMAIN, LOGGER
 from .helpers import format_mqtt_message, get_val_from_str
 from homeassistant.core import HomeAssistant, Context, callback
-from homeassistant.helpers.script import Script
+from homeassistant.helpers.script import Script, async_validate_actions_config
 from homeassistant.helpers.condition import async_template as template_condition
 from homeassistant.helpers.template import Template
 from homeassistant.components.mqtt.client import async_subscribe as mqtt_subscribe
@@ -189,19 +189,25 @@ class ManagedSwitchConfigButtonAction:
 
         self.script: Script = None
         self.active = bool(self.sequence)
-        if self.active:
-            self.script = Script(
-                    hass=self._hass, 
-                    sequence=cv.SCRIPT_SCHEMA(self.sequence),
-                    name=f"{DOMAIN}_{switch_id}_{button_index}_{index}",
-                    domain=DOMAIN,
-                    logger=LOGGER,
-                    script_mode=self.mode
-                )
+        asyncio.create_task( self.init_script() )
 
     def _check_conditions( self, data ) -> bool:
         return self.blueprint.check_conditions( data )
 
+    async def init_script( self ):
+        if self.active:
+            sequence = await async_validate_actions_config(
+                self._hass, cv.SCRIPT_SCHEMA(self.sequence)
+            )
+            self.script = Script(
+                    hass=self._hass, 
+                    sequence=sequence,
+                    name=f"{DOMAIN}_{self.switch_id}_{self.button_index}_{self.index}",
+                    domain=DOMAIN,
+                    logger=LOGGER,
+                    script_mode=self.mode
+                )
+            
     async def run( self, data, context ):
         if not self.script:
             LOGGER.debug(f'No sequence assigned for switch:{self.switch_id} button:{self.button_index} action:{self.index}')

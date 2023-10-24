@@ -1,0 +1,10 @@
+name: Lidl (HG06668)
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+buttons:
+  - actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: pressed

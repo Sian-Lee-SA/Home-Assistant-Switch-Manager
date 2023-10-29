@@ -1,0 +1,41 @@
+name: Philips Hue Wall Switch Module
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+info: Actions HOLD and HOLD (RELEASED) will only work in rocker mode.
+buttons:
+  - x: 112
+    y: 140
+    width: 88
+    height: 88
+    actions:
+      - title: init
+        conditions:
+          - key: payload
+            value: left_press
+      - title: press
+        conditions:
+          - key: payload
+            value: left_press_release
+      - title: hold
+        conditions:
+          - key: payload
+            value: left_hold
+
+  - x: 112
+    y: 270
+    width: 88
+    height: 88
+    actions:
+      - title: init
+        conditions:
+          - key: payload
+            value: right_press
+      - title: press
+        conditions:
+          - key: payload
+            value: right_press_release
+      - title: hold
+        conditions:
+          - key: payload
+            value: right_hold

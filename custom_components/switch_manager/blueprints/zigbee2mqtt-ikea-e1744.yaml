@@ -7,24 +7,24 @@ buttons:
       - title: press
         conditions:
           - key: payload
-            value: play_pause
+            value: toggle
       - title: press 2x
         conditions:
           - key: payload
-            value: skip_forward
+            value: brightness_step_up
       - title: press 3x
         conditions:
           - key: payload
-            value: skip_backward
+            value: brightness_step_down
       - title: rotate left
         conditions:
           - key: payload
-            value: rotate_left
+            value: brightness_move_down
       - title: rotate right
         conditions:
           - key: payload
-            value: rotate_right
+            value: brightness_move_up
       - title: rotate (stopped)
         conditions:
           - key: payload
-            value: rotate_stop
+            value: brightness_stop

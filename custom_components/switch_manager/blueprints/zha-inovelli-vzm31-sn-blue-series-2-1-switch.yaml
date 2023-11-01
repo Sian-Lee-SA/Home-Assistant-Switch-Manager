@@ -1,4 +1,4 @@
-name: Inovelli VZM31-SN Blue Series 2-1 Switch
+name: Inovelli VZM31-SN or VZM35-SN Blue Series 2-1 Switch
 service: ZHA
 event_type: zha_event
 identifier_key: device_id

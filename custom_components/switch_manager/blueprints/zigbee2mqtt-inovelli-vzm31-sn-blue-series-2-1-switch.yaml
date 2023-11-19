@@ -1,4 +1,4 @@
-name: Inovelli VZM31-SN Blue Series 2-1 Switch
+name: Inovelli VZM31-SN or VZM35-SN Blue Series 2-1 Switch
 service: Zigbee2MQTT
 event_type: mqtt
 mqtt_topic_format: zigbee2mqtt/+/action

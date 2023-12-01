@@ -90,7 +90,7 @@ async def _init_blueprints( hass: HomeAssistant ):
         try:
             c_validated = BLUEPRINT_MQTT_SCHEMA(config.get('data')) if config.get('data').get('event_type') == 'mqtt' else BLUEPRINT_EVENT_SCHEMA(config.get('data'))
         except vol.Invalid as ex:
-            LOGGER.error(format_schema_error(ex, f"{DOMAIN} {CONF_BLUEPRINTS}({config.get('id')})", config))
+            LOGGER.error(format_schema_error(hass, ex, f"{DOMAIN} {CONF_BLUEPRINTS}({config.get('id')})", config))
             continue
         if len(c_validated.get('buttons')) == 1:
             button = c_validated.get('buttons')[0]

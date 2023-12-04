@@ -1,0 +1,126 @@
+name: Busch-Jaeger 673x Wall Switch series
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+info: Top row will not work if connected to BJ 6711U/6715U elements.
+buttons:
+  - x: 0
+    y: 0
+    width: 250
+    height: 125
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: off_row_1
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_step_down_row_1
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: brightness_stop_row_1
+  - x: 250
+    y: 0
+    width: 250
+    height: 125
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: on_row_1
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_step_up_row_1
+  - x: 0
+    y: 125
+    width: 250
+    height: 125
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: off_row_2
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_step_down_row_2
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: brightness_stop_row_2
+  - x: 250
+    y: 125
+    width: 250
+    height: 125
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: on_row_2
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_step_up_row_2
+  - x: 0
+    y: 250
+    width: 250
+    height: 125
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: off_row_3
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_step_down_row_3
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: brightness_stop_row_3
+  - x: 250
+    y: 250
+    width: 250
+    height: 125
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: on_row_3
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_step_up_row_3
+  - x: 0
+    y: 375
+    width: 250
+    height: 125
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: off_row_4
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_step_down_row_4
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: brightness_stop_row_4
+  - x: 250
+    y: 375
+    width: 250
+    height: 125
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: on_row_4
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_step_up_row_4

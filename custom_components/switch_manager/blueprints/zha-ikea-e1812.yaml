@@ -1,0 +1,38 @@
+name: Ikea Shortcut E1812
+service: ZHA
+event_type: zha_event
+identifier_key: device_id
+buttons:
+  - actions:
+      - title: press
+        conditions:
+          - key: command
+            value: "on"
+          - key: cluster_id
+            value: 6
+          - key: endpoint_id
+            value: 1
+      - title: press 2x
+        conditions:
+          - key: command
+            value: "off"
+          - key: cluster_id
+            value: 6
+          - key: endpoint_id
+            value: 1
+      - title: hold
+        conditions:
+          - key: command
+            value: "move_with_on_off"
+          - key: cluster_id
+            value: 8
+          - key: endpoint_id
+            value: 1
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: "stop_with_on_off"
+          - key: cluster_id
+            value: 8
+          - key: endpoint_id
+            value: 1

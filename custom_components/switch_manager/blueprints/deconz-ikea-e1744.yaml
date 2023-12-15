@@ -1,0 +1,34 @@
+name: Ikea SYMFONISK Sound remote (E1744)
+service: deCONZ
+event_type: deconz_event
+identifier_key: id
+buttons:
+  - actions:
+      - title: press
+        conditions:
+          - key: event
+            value: 1002
+      - title: press 2x
+        conditions:
+          - key: event
+            value: 1004
+      - title: press 3x
+        conditions:
+          - key: event
+            value: 1005
+      - title: rotate clockwise start
+        conditions:
+          - key: event
+            value: 2001
+      - title: rotate clockwise stop
+        conditions:
+          - key: event
+            value: 2003
+      - title: rotate anti-clockwise start
+        conditions:
+          - key: event
+            value: 3001
+      - title: rotate anti-clockwise stop
+        conditions:
+          - key: event
+            value: 3003

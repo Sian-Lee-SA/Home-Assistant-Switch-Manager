@@ -1,0 +1,38 @@
+name: Ikea Rodret
+service: deCONZ
+event_type: deconz_event
+identifier_key: id
+buttons:
+  ## Not sure why the buttons are back to front and illogical by their numbers??
+  - x: 168
+    y: 61
+    width: 50
+    actions:
+      - title: press
+        conditions:
+          - key: event
+            value: 1002
+      - title: hold
+        conditions:
+          - key: event
+            value: 1001
+      - title:  hold (released)
+        conditions:
+          - key: event
+            value: 1003
+  - x: 168
+    y: 434
+    width: 50
+    actions:
+      - title: press
+        conditions:
+          - key: event
+            value: 2002
+      - title: hold
+        conditions:
+          - key: event
+            value: 2001
+      - title:  hold (released)
+        conditions:
+          - key: event
+            value: 2003

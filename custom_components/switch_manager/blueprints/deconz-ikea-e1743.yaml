@@ -1,0 +1,33 @@
+name: Ikea On/Off Remote E1743
+service: deCONZ
+event_type: deconz_event
+identifier_key: device_id
+buttons:
+  - d: "M 0 150 c 0 0 5 -145 145 -145 l 195 0 c 0 0 145 0 145 145 l 0 94 l -485 0 Z"
+    actions:
+      - title: press
+        conditions:
+          - key: event
+            value: 1002
+      - title: hold
+        conditions:
+          - key: event
+            value: 1001
+      - title:  hold (released)
+        conditions:
+          - key: event
+            value: 1003
+  - d: "M 0 245 L0,348 c 0 0 5 135 135 135 l 205 0 c 0 0 145 0 145 -145 l 0 -94 Z"
+    actions:
+      - title: press
+        conditions:
+          - key: event
+            value: 2002
+      - title: hold
+        conditions:
+          - key: event
+            value: 2001
+      - title:  hold (released)
+        conditions:
+          - key: event
+            value: 2003

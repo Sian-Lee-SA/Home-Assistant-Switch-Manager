@@ -16,7 +16,7 @@ from . import models
 from .schema import BLUEPRINT_MQTT_SCHEMA, BLUEPRINT_EVENT_SCHEMA, SERVICE_SET_VARIABLES_SCHEMA
 from .connections import async_setup_connections
 from homeassistant.core import Config, HomeAssistant, callback
-from homeassistant.config import _format_config_error
+from homeassistant.config import format_schema_error
 from homeassistant.helpers import issue_registry as ir
 
 async def async_setup( hass: HomeAssistant, config: Config ):
@@ -90,7 +90,7 @@ async def _init_blueprints( hass: HomeAssistant ):
         try:
             c_validated = BLUEPRINT_MQTT_SCHEMA(config.get('data')) if config.get('data').get('event_type') == 'mqtt' else BLUEPRINT_EVENT_SCHEMA(config.get('data'))
         except vol.Invalid as ex:
-            LOGGER.error(_format_config_error(ex, f"{DOMAIN} {CONF_BLUEPRINTS}({config.get('id')})", config))
+            LOGGER.error(format_schema_error(hass, ex, f"{DOMAIN} {CONF_BLUEPRINTS}({config.get('id')})", config))
             continue
         if len(c_validated.get('buttons')) == 1:
             button = c_validated.get('buttons')[0]

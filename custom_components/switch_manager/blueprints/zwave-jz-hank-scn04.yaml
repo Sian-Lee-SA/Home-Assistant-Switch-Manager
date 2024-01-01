@@ -1,0 +1,76 @@
+name: HANK SCN04
+service: Z-Wave JS
+event_type: zwave_js_value_notification
+identifier_key: node_id
+conditions:
+  - key: property
+    value: scene
+buttons:
+  - d: "m33,172c-16.58-28.99-18.71-64.59-4-95,16.6-34.32,52.24-56.7,92-57l1,50c-19.34-.17-37.07,10.32-46,27-8.37,15.64-7.9,34.59,1,50l-44,25Z"
+    conditions:
+      - key: property_key
+        value: '001'
+    actions:
+      - title: press
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+      - title: hold (released)
+        conditions:
+          - key: value
+            value: KeyReleased
+  - d: "m123,19c36.23,1.35,69.27,21.43,87,53,17.37,30.93,17.69,68.69,1,100l-44-25c7.97-15.77,7.68-34.55-1-50-8.97-15.98-25.66-26.17-44-27l1-51Z"
+    conditions:
+      - key: property_key
+        value: '002'
+    actions:
+      - title: press
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+      - title: hold (released)
+        conditions:
+          - key: value
+            value: KeyReleased
+  - d: "m121,70c28.17,0,51,22.83,51,51s-22.83,51-51,51-51-22.83-51-51,22.83-51,51-51Z"
+    conditions:
+      - key: property_key
+        value: '003'
+    actions:
+      - title: press
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+      - title: hold (released)
+        conditions:
+          - key: value
+            value: KeyReleased
+  - d: "m34,174c19.3,31.96,54.17,51.07,91,50,34.96-1.02,66.95-20.05,85-50l-43-26c-9.46,15.33-26.67,25.55-46,25-17.67-.51-33.79-10.05-43-25l-44,26Z"
+    conditions:
+      - key: property_key
+        value: '004'
+    actions:
+      - title: press
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+      - title: hold (released)
+        conditions:
+          - key: value
+            value: KeyReleased

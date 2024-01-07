@@ -1,0 +1,29 @@
+name: IKEA RODRET wireless dimmer
+service: ZHA
+event_type: zha_event
+identifier_key: device_id
+buttons:
+  - x: 168
+    y: 61
+    width: 50
+    actions: # Up
+      - title: press
+        conditions:
+          - key: command
+            value: "on"
+      - title: hold
+        conditions:
+          - key: command
+            value: "move_with_on_off"
+  - x: 168
+    y: 434
+    width: 50
+    actions: # Down
+      - title: press
+        conditions:
+          - key: command
+            value: "off"
+      - title: hold
+        conditions:
+          - key: command
+            value: "move"

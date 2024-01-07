@@ -3,7 +3,9 @@ service: ZHA
 event_type: zha_event
 identifier_key: device_id
 buttons:
-  - d: "M 226 50 A 1 1 0 0 0 233 126 A 1 1 0 0 0 224 50"
+  - x: 168
+    y: 61
+    width: 50
     actions: # Up
       - title: press
         conditions:
@@ -13,7 +15,9 @@ buttons:
         conditions:
           - key: command
             value: "move_with_on_off"
-  - d: "M 226 390 A 1 1 0 0 0 233 466 A 1 1 0 0 0 224 390"
+  - x: 168
+    y: 434
+    width: 50
     actions: # Down
       - title: press
         conditions:

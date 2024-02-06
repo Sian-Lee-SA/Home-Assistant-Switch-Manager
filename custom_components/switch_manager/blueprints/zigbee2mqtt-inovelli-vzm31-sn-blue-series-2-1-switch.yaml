@@ -7,89 +7,89 @@ buttons:
     actions: # Up
       - title: press
         conditions:
-          - key: command
+          - key: payload
             value: up_single
       - title: press 2x
         conditions:
-          - key: command
+          - key: payload
             value: up_double
       - title: press 3x
         conditions:
-          - key: command
+          - key: payload
             value: up_triple
       - title: press 4x
         conditions:
-          - key: command
+          - key: payload
             value: up_quadruple
       - title: press 5x
         conditions:
-          - key: command
+          - key: payload
             value: up_quintuple
       - title: hold
         conditions:
-          - key: command
+          - key: payload
             value: up_held
       - title: hold (released)
         conditions:
-          - key: command
+          - key: payload
             value: up_release
   - d: "M 91 248 H 203 V 380 H 91 V 248"
     actions: # Down
       - title: press
         conditions:
-          - key: command
+          - key: payload
             value: down_single
       - title: press 2x
         conditions:
-          - key: command
+          - key: payload
             value: down_double
       - title: press 3x
         conditions:
-          - key: command
+          - key: payload
             value: down_triple
       - title: press 4x
         conditions:
-          - key: command
+          - key: payload
             value: down_quadruple
       - title: press 5x
         conditions:
-          - key: command
+          - key: payload
             value: down_quintuple
       - title: hold
         conditions:
-          - key: command
+          - key: payload
             value: down_held
       - title: hold (released)
         conditions:
-          - key: command
+          - key: payload
             value: down_release
   - d: "M 210 116 H 219 V 170 H 210 V 116"
     actions: # Config
       - title: press
         conditions:
-          - key: command
+          - key: payload
             value: config_single
       - title: press 2x
         conditions:
-          - key: command
+          - key: payload
             value: config_double
       - title: press 3x
         conditions:
-          - key: command
+          - key: payload
             value: config_triple
       - title: press 4x
         conditions:
-          - key: command
+          - key: payload
             value: config_quadruple
       - title: press 5x
         conditions:
-          - key: command
+          - key: payload
             value: config_quintuple
       - title: hold
         conditions:
-          - key: command
+          - key: payload
             value: config_held
       - title: hold (released)
         conditions:
-          - key: command
+          - key: payload
             value: config_release

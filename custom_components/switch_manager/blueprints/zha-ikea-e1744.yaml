@@ -1,0 +1,22 @@
+name: Ikea SYMFONISK Sound remote (E1744)
+service: ZHA
+event_type: zha_event
+identifier_key: device_id
+buttons:
+  - actions:
+      - title: press
+        conditions:
+          - key: command
+            value: toggle
+      - title: press 2x
+        conditions: "{{ data.command == 'step' and data.params.step_mode == 0}}"
+      - title: press 3x
+        conditions: "{{ data.command == 'step' and data.params.step_mode == 1}}"
+      - title: rotate left
+        conditions: "{{ data.command == 'move' and data.params.move_mode == 1 }}"
+      - title: rotate right
+        conditions: "{{ data.command == 'move' and data.params.move_mode == 0 }}"
+      - title: rotate (stopped)
+        conditions:
+          - key: command
+            value: stop

@@ -11,15 +11,15 @@ buttons:
       - key: endpoint_id
         value: 1
     actions:
-      - title: single press
+      - title: press
         conditions:
           - key: command
             value: remote_button_short_press
-      - title: double press
+      - title: press x2
         conditions:
           - key: command
             value: remote_button_double_press
-      - title: long press
+      - title: hold
         conditions:
           - key: command
             value: remote_button_long_press
@@ -31,15 +31,15 @@ buttons:
       - key: endpoint_id
         value: 2
     actions:
-      - title: single press
+      - title: press
         conditions:
           - key: command
             value: remote_button_short_press
-      - title: double press
+      - title: press x2
         conditions:
           - key: command
             value: remote_button_double_press
-      - title: long press
+      - title: hold
         conditions:
           - key: command
             value: remote_button_long_press

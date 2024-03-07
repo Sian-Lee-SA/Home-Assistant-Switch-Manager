@@ -8,7 +8,7 @@ buttons:
         conditions:
           - key: command
             value: remote_button_short_press
-      - title: press 2x
+      - title: press x2
         conditions:
           - key: command
             value: remote_button_double_press

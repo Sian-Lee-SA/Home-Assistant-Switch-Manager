@@ -4,15 +4,15 @@ event_type: zha_event
 identifier_key: device_id
 buttons:
   - actions:
-      - title: single press
+      - title: press
         conditions:
           - key: command
             value: remote_button_short_press
-      - title: double press
+      - title: press 2x
         conditions:
           - key: command
             value: remote_button_double_press
-      - title: long press
+      - title: hold
         conditions:
           - key: command
             value: remote_button_long_press

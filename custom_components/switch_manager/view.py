@@ -1,6 +1,7 @@
 from .const import DOMAIN, CONF_BLUEPRINTS, BLUEPRINTS_FOLDER, PANEL_URL, NAME
 from .helpers import VERSION
 from homeassistant.core import HomeAssistant
+from homeassistant.components.frontend import async_register_built_in_panel
 
 async def async_setup_view(hass: HomeAssistant):
 
@@ -11,7 +12,7 @@ async def async_setup_view(hass: HomeAssistant):
 
     await async_bind_blueprint_images(hass)
 
-    hass.components.frontend.async_register_built_in_panel(
+    async_register_built_in_panel(hass,
         component_name="custom",
         sidebar_title=NAME,
         sidebar_icon="mdi:light-switch-off",

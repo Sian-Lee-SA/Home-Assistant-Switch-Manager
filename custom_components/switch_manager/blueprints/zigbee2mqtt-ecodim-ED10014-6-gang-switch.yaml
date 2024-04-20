@@ -1,0 +1,146 @@
+name: EcoDim ED10014 6 gang switch
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+buttons:
+    ##Row 1
+  - x: 110
+    y: 110
+    width: 150
+    height: 125
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: on_1
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_move_up_1
+      - title: release
+        conditions:
+          - key: payload
+            value: brightness_stop_1
+  - x: 460
+    y: 110
+    width: 150
+    height: 125
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: off_1
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_move_down_1
+      - title: release
+        conditions:
+          - key: payload
+            value: brightness_stop_1            
+    ##Row 2
+  - x: 110
+    y: 230
+    width: 150
+    height: 125
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: on_2
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_move_up_2
+      - title: release
+        conditions:
+          - key: payload
+            value: brightness_stop_2
+  - x: 460
+    y: 230
+    width: 150
+    height: 125
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: off_2
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_move_down_2
+      - title: release
+        conditions:
+          - key: payload
+            value: brightness_stop_2       
+    ##Row 3
+  - x: 110
+    y: 355
+    width: 150
+    height: 125
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: on_3
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_move_up_3
+      - title: release
+        conditions:
+          - key: payload
+            value: brightness_stop_3
+  - x: 460
+    y: 355
+    width: 150
+    height: 125
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: off_3
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_move_down_3
+      - title: release
+        conditions:
+          - key: payload
+            value: brightness_stop_3
+    ##Row 4
+  - x: 110
+    y: 480
+    width: 150
+    height: 125
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: on_4
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_move_up_4
+      - title: release
+        conditions:
+          - key: payload
+            value: brightness_stop_4
+  - x: 460
+    y: 480
+    width: 150
+    height: 125
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: off_4
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_move_down_4
+      - title: release
+        conditions:
+          - key: payload
+            value: brightness_stop_4
+            

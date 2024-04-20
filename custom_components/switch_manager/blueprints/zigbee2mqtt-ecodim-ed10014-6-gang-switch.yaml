@@ -4,10 +4,10 @@ event_type: mqtt
 mqtt_topic_format: zigbee2mqtt/+/action
 buttons:
     ##Row 1
-  - x: 110
-    y: 110
-    width: 150
-    height: 125
+  - x: 75
+    y: 75
+    width: 105
+    height: 85
     actions:
       - title: press
         conditions:
@@ -21,10 +21,10 @@ buttons:
         conditions:
           - key: payload
             value: brightness_stop_1
-  - x: 460
-    y: 110
-    width: 150
-    height: 125
+  - x: 320
+    y: 75
+    width: 105
+    height: 85
     actions:
       - title: press
         conditions:
@@ -39,10 +39,10 @@ buttons:
           - key: payload
             value: brightness_stop_1            
     ##Row 2
-  - x: 110
-    y: 230
-    width: 150
-    height: 125
+  - x: 75
+    y: 163
+    width: 105
+    height: 85
     actions:
       - title: press
         conditions:
@@ -56,10 +56,10 @@ buttons:
         conditions:
           - key: payload
             value: brightness_stop_2
-  - x: 460
-    y: 230
-    width: 150
-    height: 125
+  - x: 320
+    y: 163
+    width: 105
+    height: 85
     actions:
       - title: press
         conditions:
@@ -74,10 +74,10 @@ buttons:
           - key: payload
             value: brightness_stop_2       
     ##Row 3
-  - x: 110
-    y: 355
-    width: 150
-    height: 125
+  - x: 75
+    y: 250
+    width: 105
+    height: 85
     actions:
       - title: press
         conditions:
@@ -91,10 +91,10 @@ buttons:
         conditions:
           - key: payload
             value: brightness_stop_3
-  - x: 460
-    y: 355
-    width: 150
-    height: 125
+  - x: 320
+    y: 250
+    width: 105
+    height: 85
     actions:
       - title: press
         conditions:
@@ -109,10 +109,10 @@ buttons:
           - key: payload
             value: brightness_stop_3
     ##Row 4
-  - x: 110
-    y: 480
-    width: 150
-    height: 125
+  - x: 75
+    y: 337
+    width: 105
+    height: 85
     actions:
       - title: press
         conditions:
@@ -126,10 +126,10 @@ buttons:
         conditions:
           - key: payload
             value: brightness_stop_4
-  - x: 460
-    y: 480
-    width: 150
-    height: 125
+  - x: 320
+    y: 337
+    width: 105
+    height: 85
     actions:
       - title: press
         conditions:

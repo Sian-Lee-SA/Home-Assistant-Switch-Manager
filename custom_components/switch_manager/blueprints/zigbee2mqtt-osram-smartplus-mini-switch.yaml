@@ -8,7 +8,7 @@ buttons:
     width: 79
     height: 79
     actions:
-      - title: click
+      - title: press
         conditions:
           - key: payload
             value: circle_click
@@ -16,7 +16,7 @@ buttons:
         conditions:
           - key: payload
             value: circle_hold
-      - title: release
+      - title: hold (released)
         conditions:
           - key: payload
             value: circle_release
@@ -25,7 +25,7 @@ buttons:
     width: 159
     height: 115
     actions:
-      - title: click
+      - title: press
         conditions:
           - key: payload
             value: up
@@ -33,7 +33,7 @@ buttons:
         conditions:
           - key: payload
             value: up_hold
-      - title: release
+      - title: hold (released)
         conditions:
           - key: payload
             value: up_release
@@ -42,7 +42,7 @@ buttons:
     width: 99
     height: 85
     actions:
-      - title: click
+      - title: press
         conditions:
           - key: payload
             value: down
@@ -50,7 +50,7 @@ buttons:
         conditions:
           - key: payload
             value: down_hold
-      - title: release
+      - title: hold (released)
         conditions:
           - key: payload
             value: down_release

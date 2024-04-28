@@ -1,0 +1,56 @@
+name: OSRAM Smart+ Mini Switch
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+buttons:
+  - x: 90
+    y: 212
+    width: 79
+    height: 79
+    actions:
+      - title: click
+        conditions:
+          - key: payload
+            value: circle_click
+      - title: hold
+        conditions:
+          - key: payload
+            value: circle_hold
+      - title: release
+        conditions:
+          - key: payload
+            value: circle_release
+  - x: 50
+    y: 57
+    width: 159
+    height: 115
+    actions:
+      - title: click
+        conditions:
+          - key: payload
+            value: up
+      - title: hold
+        conditions:
+          - key: payload
+            value: up_hold
+      - title: release
+        conditions:
+          - key: payload
+            value: up_release
+  - x: 80
+    y: 369
+    width: 99
+    height: 85
+    actions:
+      - title: click
+        conditions:
+          - key: payload
+            value: down
+      - title: hold
+        conditions:
+          - key: payload
+            value: down_hold
+      - title: release
+        conditions:
+          - key: payload
+            value: down_release

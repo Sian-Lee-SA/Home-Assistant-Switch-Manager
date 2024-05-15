@@ -17,7 +17,7 @@ buttons:
         conditions:
           - key: payload
             value: brightness_move_down
-      - title: release
+      - title: hold (released)
         conditions:
           - key: payload
             value: brightness_stop
@@ -34,7 +34,7 @@ buttons:
         conditions:
           - key: payload
             value: brightness_move_up
-      - title: release
+      - title: hold (released)
         conditions:
           - key: payload
             value: brightness_stop

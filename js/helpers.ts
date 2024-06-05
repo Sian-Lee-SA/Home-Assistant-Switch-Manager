@@ -38,9 +38,7 @@ export const createConfigFromBlueprint = ( blueprint: SwitchManagerBlueprint ): 
         identifier: '',
         blueprint: blueprint,
         valid_blueprint: true,
-        buttons: [],
-        is_mismatch: false,
-        rotate: 0
+        buttons: []
     };
 
     blueprint.buttons.forEach((button, i) => {

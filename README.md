@@ -54,7 +54,7 @@ If using a MQTT service then you can either download MQTT Explorer (preferred) o
 
 #### Interacting with buttons
 
-Depending on the blueprint and the actions that your switch supports, you can select buttons by clicking on them from the image displayed and each button can have multiple actions eg tap, double tap and hold etc. 
+Depending on the blueprint and the actions that your switch supports, you can select buttons by clicking on them from the image displayed and each button can have multiple actions eg press, double press and hold etc. 
 
 Navigation and usage should be pretty straight forward.
 
@@ -116,7 +116,7 @@ choose:
             list }}
 ```
 
-Further more, you could also test which button was last pressed as to determine which lights to dim via the dial.
+Furthermore, you could also test which button was last pressed as to determine which lights to dim via the dial.
 
 ## Blueprints
 
@@ -183,12 +183,12 @@ y               | `int`px                       | -        | The y (up, down) po
 width           | `int`px                       | -        | The width of the shape rectangle or circle. *not valid for shape: path
 height          | `int`px                       | -        | Only valid for shape: rectangle. The height you want the rectangle to be
 d               | `string`                      | -        | Only valid if shape: path. Using svg path format
-actions         | `list` [Action](#action)      | *        | Each button will have atleast one action. Each action would be the result of a tap, double tap or hold etc depending on what the switch supports.
+actions         | `list` [Action](#action)      | *        | Each button will have atleast one action. Each action would be the result of a press, double press or hold etc depending on what the switch supports.
 conditions      | `list` [Condition](#condition) \| `string` [Template](https://www.home-assistant.io/docs/configuration/templating/) | -        | This optional list or [Template](https://www.home-assistant.io/docs/configuration/templating/) allows the button to only accept conditions within the event data or mqtt payload. This can help scope down to where the button was pressed. All conditions must evaluate to true to be valid. See [Condition](#condition) for details on defining a condition. 
 
 ### Action
 
-An action would be the result of a press/tap, whether its held down or if it was pressed twice etc (all depending on what the device and/or service supports). An action must contain a title at minimum. Conditions should be used to differentiate the actions for any button.
+An action would be the result of a press, whether its held down or if it was pressed twice etc (all depending on what the device and/or service supports). An action must contain a title at minimum. Conditions should be used to differentiate the actions for any button.
 
 #### Title naming convention
 
@@ -196,9 +196,8 @@ To unify switches added to Switch Manager, it makes sense to conform to a naming
 
 * All characters should be lowercase
 * If a button has a initial press action (where it's always called before other actions) then this should be called **init**, this is useful for setting timers and other initiating actions 
-* If mechanical button then the action should be **press**. This is generally the release of a short press and **not** the moment the button was pressed as this would generally be **init**
-* If touch button (as in there's no mechanical trigger) then the action should be **tap** (if unsure then resort to **press**)
-* If action is double press/tap or triple press/tap and so on then the action should be **press 2x** / **tap 2x** or **press 3x** / **tap 3x** and so on
+* If button then the action should be **press**. This is generally the release of a short press and **not** the moment the button was pressed as this would generally be **init**
+* If action is double press or triple press and so on then the action should be **press 2x** or **press 3x** and so on
 * If the button supports a hold/long and hold/long release then there should be an action for both **hold** and **hold (released)** do **NOT** use the wording **long**
 * Do **NOT** use **short** or **short release** as this is generally a generic **init** or **press**
 * In the case where a switch allows multiple buttons to be pushed then you can prefix each action with **both** so a dual button press would be **both press** and **both press 2x** etc. This makes it clear to a user that the button they have selected is actually for multiple buttons. See [Xiaomi Double Key](https://github.com/Sian-Lee-SA/Home-Assistant-Switch-Manager/blob/master/custom_components/switch_manager/blueprints/zigbee2mqtt-xiaomi-double-key-wxkg07lm.yaml) for an example
@@ -260,7 +259,7 @@ Otherwise you will check against the payloads keys and values.
 
 ### Blueprint Examples
 
-The follow example is a blueprint for a Wallmote Quad which has 4 buttons with each button having 2 actions (tap and hold). This blueprint is also designed for the Z-Wave JS Integration and handles the event type `zwave_js_value_notification`. With in that we set the identifier key to `node_id` as this key is a way to distinguish which switch the event refers to. Further along we check from the root condition whether the event data has `property: scene` otherwise the switch has no need to further proceed nor does the component process other child conditions. We do this again for the buttons and actions to scope down whether the incoming event should be handled by the switch and its buttons or actions.
+The follow example is a blueprint for a Wallmote Quad which has 4 buttons with each button having 2 actions (press and hold). This blueprint is also designed for the Z-Wave JS Integration and handles the event type `zwave_js_value_notification`. With in that we set the identifier key to `node_id` as this key is a way to distinguish which switch the event refers to. Further along we check from the root condition whether the event data has `property: scene` otherwise the switch has no need to further proceed nor does the component process other child conditions. We do this again for the buttons and actions to scope down whether the incoming event should be handled by the switch and its buttons or actions.
 
 Each button has a shape of a path as it was traced through inkscape, drawing the shapes whether be rectangle, circle or path allows GUI representation and allows to select individual buttons within the GUI switch editor.
 
@@ -280,7 +279,7 @@ buttons:
       - key: property_key
         value: '001'
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: value
             value: KeyPressed
@@ -293,7 +292,7 @@ buttons:
       - key: property_key
         value: '002'
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: value
             value: KeyPressed
@@ -306,7 +305,7 @@ buttons:
       - key: property_key
         value: '003'
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: value
             value: KeyPressed
@@ -319,7 +318,7 @@ buttons:
       - key: property_key
         value: '004'
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: value
             value: KeyPressed

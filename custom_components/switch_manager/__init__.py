@@ -75,6 +75,7 @@ async def async_setup_entry( hass, config_entry ):
 
 async def async_migrate( hass, in_dev ):
     store = hass.data[DOMAIN][CONF_STORE]
+
     version_update = not store.compare_version( VERSION )
     if in_dev or version_update or not await check_blueprints_folder_exists( hass ):
         LOGGER.debug('Migrating blueprints')
@@ -85,7 +86,7 @@ async def async_migrate( hass, in_dev ):
 async def _init_blueprints( hass: HomeAssistant ):
     # Ensure blueprints empty for clean state
     blueprints = hass.data[DOMAIN][CONF_BLUEPRINTS] = {}
-    for config in load_blueprints(hass):
+    for config in await load_blueprints(hass):
         try:
             c_validated = BLUEPRINT_MQTT_SCHEMA(config.get('data')) if config.get('data').get('event_type') == 'mqtt' else BLUEPRINT_EVENT_SCHEMA(config.get('data'))
         except vol.Invalid as ex:

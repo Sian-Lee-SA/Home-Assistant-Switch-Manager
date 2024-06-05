@@ -20,7 +20,6 @@ MANIFEST = json.load(
     
 VERSION = MANIFEST['version']
 
-
 async def check_blueprints_folder_exists( hass ):
     dest_folder = pathlib.Path(hass.config.path(BLUEPRINTS_FOLDER, DOMAIN))
     return os.path.exists( dest_folder )
@@ -32,19 +31,27 @@ async def deploy_blueprints( hass ):
     
     component_blueprints_path = os.path.join( COMPONENT_PATH, 'blueprints' )
     files = os.listdir(component_blueprints_path)
-    for file in files:
-        if os.path.isfile( os.path.join( component_blueprints_path, file )):
-            shutil.copy( 
-                os.path.join( component_blueprints_path, file ),
-                dest_folder
-            )
 
-def load_blueprints( hass ):
+    def doFiles():
+        for file in files:
+            if os.path.isfile( os.path.join( component_blueprints_path, file )):
+                shutil.copy( 
+                    os.path.join( component_blueprints_path, file ),
+                    dest_folder
+                )
+
+    await hass.async_add_executor_job(doFiles)
+
+async def load_blueprints( hass ):
     folder = pathlib.Path(hass.config.path(BLUEPRINTS_FOLDER, DOMAIN))
     results = [];
     for f in _find_files(folder, "*.yaml"):
         try:
-            data = load_yaml(f)
+            data = await hass.loop.run_in_executor(
+                None,
+                load_yaml,
+                f
+            )
         except HomeAssistantError as ex:
             LOGGER.error(str(ex))
             continue

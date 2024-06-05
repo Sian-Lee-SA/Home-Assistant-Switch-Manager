@@ -48,6 +48,7 @@ class SwitchManagerStore:
     
     def __init__(self, hass):
         self.store = Store(hass, STORAGE_VERSION, STORAGE_ID)
+        
         self.data = None
         self.dirty = False
 

@@ -75,7 +75,6 @@ async def async_setup_entry( hass, config_entry ):
 
 async def async_migrate( hass, in_dev ):
     store = hass.data[DOMAIN][CONF_STORE]
-
     version_update = not store.compare_version( VERSION )
     if in_dev or version_update or not await check_blueprints_folder_exists( hass ):
         LOGGER.debug('Migrating blueprints')

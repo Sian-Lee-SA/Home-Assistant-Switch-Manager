@@ -10,7 +10,7 @@ buttons:
       - key: subtype
         value: 1
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: type
             value: initial_press
@@ -21,7 +21,7 @@ buttons:
       - key: subtype
         value: 2
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: type
             value: initial_press
@@ -32,7 +32,7 @@ buttons:
       - key: subtype
         value: 3
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: type
             value: initial_press
@@ -43,7 +43,7 @@ buttons:
       - key: subtype
         value: 4
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: type
             value: initial_press

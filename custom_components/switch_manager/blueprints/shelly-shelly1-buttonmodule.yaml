@@ -4,7 +4,7 @@ event_type: shelly.click
 identifier_key: device
 buttons:
   - actions:
-      - title: tap
+      - title: press
         conditions:
           - key: click_type
             value: single

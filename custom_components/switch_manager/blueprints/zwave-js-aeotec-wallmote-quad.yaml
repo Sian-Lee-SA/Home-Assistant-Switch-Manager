@@ -11,7 +11,7 @@ buttons:
       - key: property_key
         value: '001'
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: value
             value: KeyPressed
@@ -28,7 +28,7 @@ buttons:
       - key: property_key
         value: '002'
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: value
             value: KeyPressed
@@ -45,7 +45,7 @@ buttons:
       - key: property_key
         value: '003'
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: value
             value: KeyPressed
@@ -62,7 +62,7 @@ buttons:
       - key: property_key
         value: '004'
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: value
             value: KeyPressed

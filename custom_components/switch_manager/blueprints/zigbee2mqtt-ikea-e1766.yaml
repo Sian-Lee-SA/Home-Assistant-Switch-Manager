@@ -3,7 +3,7 @@ service: Zigbee2MQTT
 event_type: mqtt
 mqtt_topic_format: zigbee2mqtt/+/action
 buttons:
-  ## Those buttons only accept single tap actions
+  ## Those buttons only accept single press actions
   - d: "M 3 135 c 0 0 5 -150 140 -140 l 190 0 c 0 0 145 0 145 145 l 0 94 l -475 0 Z"
     actions:
       - title: press

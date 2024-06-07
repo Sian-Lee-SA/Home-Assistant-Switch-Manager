@@ -4,11 +4,11 @@ event_type: shelly.click
 identifier_key: device_id
 buttons:
   - actions:
-      - title: tap
+      - title: press
         conditions:
           - key: click_type
             value: single_push
-      - title: tap 2x
+      - title: press 2x
         conditions:
           - key: click_type
             value: double_push

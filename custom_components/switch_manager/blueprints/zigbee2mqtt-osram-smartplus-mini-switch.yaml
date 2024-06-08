@@ -11,15 +11,15 @@ buttons:
       - title: press
         conditions:
           - key: payload
-            value: circle_click
+            value: brightness_move_to_level
       - title: hold
         conditions:
           - key: payload
-            value: circle_hold
+            value: move_to_saturation
       - title: hold (released)
         conditions:
           - key: payload
-            value: circle_release
+            value: hue_stop
   - x: 50
     y: 57
     width: 159
@@ -28,15 +28,15 @@ buttons:
       - title: press
         conditions:
           - key: payload
-            value: up
+            value: on
       - title: hold
         conditions:
           - key: payload
-            value: up_hold
+            value: brightness_move_up
       - title: hold (released)
         conditions:
           - key: payload
-            value: up_release
+            value: brightness_stop
   - x: 80
     y: 369
     width: 99
@@ -45,12 +45,12 @@ buttons:
       - title: press
         conditions:
           - key: payload
-            value: down
+            value: off
       - title: hold
         conditions:
           - key: payload
-            value: down_hold
+            value: brightness_move_down
       - title: hold (released)
         conditions:
           - key: payload
-            value: down_release
+            value: brightness_stop

@@ -28,7 +28,7 @@ buttons:
       - title: press
         conditions:
           - key: payload
-            value: on
+            value: 'on'
       - title: hold
         conditions:
           - key: payload
@@ -45,7 +45,7 @@ buttons:
       - title: press
         conditions:
           - key: payload
-            value: off
+            value: 'off'
       - title: hold
         conditions:
           - key: payload

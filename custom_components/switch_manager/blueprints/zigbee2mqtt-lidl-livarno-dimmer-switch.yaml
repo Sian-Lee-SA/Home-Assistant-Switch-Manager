@@ -1,0 +1,61 @@
+name: Lidl Livarno Dimmer Switch (FB21-001)
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+buttons:
+  - x: 0
+    y: 0
+    width: 150
+    height: 124
+    actions:
+      - title: init
+        conditions:
+          - key: payload
+            value: 'on'
+      - title: press
+        conditions:
+          - key: payload
+            value: switch_scene
+  - x: 0
+    y: 125
+    width: 75
+    height: 158
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: brightness_step_up
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_move_up
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: brightness_stop
+  - x: 75
+    y: 125
+    width: 75
+    height: 158
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: brightness_step_down
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_move_down
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: brightness_stop
+  - x: 0
+    y: 284
+    width: 150
+    height: 125
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: 'off'

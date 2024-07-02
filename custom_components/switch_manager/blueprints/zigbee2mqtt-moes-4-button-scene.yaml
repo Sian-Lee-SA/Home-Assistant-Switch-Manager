@@ -1,0 +1,74 @@
+name: Moes 4 Button Scene (TS0044)
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+buttons:
+  ## Not sure why the buttons are back to front and illogical by their numbers??  --- Looks like Moes fixes this for me.  I've cloned this from TuYa 4 Button Scene (TS0044) and just fixed the numbering.  
+  - x: 23
+    y: 23
+    width: 216
+    height: 208
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: 1_single
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: 1_double
+      - title: hold
+        conditions:
+          - key: payload
+            value: 1_hold
+  - x: 239
+    y: 23
+    width: 216
+    height: 208
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: 2_single
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: 2_double
+      - title: hold
+        conditions:
+          - key: payload
+            value: 2_hold
+  - x: 23
+    y: 231
+    width: 216
+    height: 208
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: 3_single
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: 3_double
+      - title: hold
+        conditions:
+          - key: payload
+            value: 3_hold
+  - x: 239
+    y: 231
+    width: 216
+    height: 208
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: 4_single
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: 4_double
+      - title: hold
+        conditions:
+          - key: payload
+            value: 4_hold

@@ -1,0 +1,37 @@
+name: Philips Hue Tap
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+buttons:
+  - x: 174
+    y: 174
+    width: 161
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: press_1
+  - x: 87
+    y: 176
+    width: 46
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: press_2
+  - x: 178
+    y: 263
+    width: 46
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: press_3
+  - x: 265
+    y: 173
+    width: 46
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: press_4

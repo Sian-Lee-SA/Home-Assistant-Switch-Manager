@@ -1,0 +1,22 @@
+name: Aqara E1 Wireless Mini Switch
+service: ZHA
+event_type: zha_event
+identifier_key: device_id
+buttons:
+  - actions:
+      - title: press
+        conditions:
+          - key: command
+            value: button_single_press
+      - title: press 2x
+        conditions:
+          - key: command
+            value: button_double_press
+      - title: hold
+        conditions:
+          - key: command
+            value: button_long_press
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: button_released

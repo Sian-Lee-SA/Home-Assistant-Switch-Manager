@@ -1,0 +1,22 @@
+name: ThirdReality - Smart Button 
+service: ZHA
+event_type: zha_event
+identifier_key: device_id
+buttons:
+  - actions:
+      - title: press
+        conditions:
+          - key: command
+            value: single
+      - title: press 2x
+        conditions:
+          - key: command
+            value: double
+      - title: hold
+        conditions:
+          - key: command
+            value: hold
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: release

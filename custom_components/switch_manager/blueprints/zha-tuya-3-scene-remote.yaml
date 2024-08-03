@@ -1,0 +1,65 @@
+name: TuYa 3 Button Scene
+service: ZHA
+event_type: zha_event
+identifier_key: device_id
+buttons:
+  - x: 0
+    y: 0
+    width: 125
+    height: 382
+    conditions:
+      - key: endpoint_id
+        value: 1
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: remote_button_short_press
+      - title: press 2x
+        conditions:
+          - key: command
+            value: remote_button_double_press
+      - title: hold
+        conditions:
+          - key: command
+            value: remote_button_long_press
+  - x: 125
+    y: 0
+    width: 125
+    height: 382
+    conditions:
+      - key: endpoint_id
+        value: 2
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: remote_button_short_press
+      - title: press 2x
+        conditions:
+          - key: command
+            value: remote_button_double_press
+      - title: hold
+        conditions:
+          - key: command
+            value: remote_button_long_press
+  - x: 250
+    y: 0
+    width: 127
+    height: 382
+    conditions:
+      - key: endpoint_id
+        value: 3
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: remote_button_short_press
+      - title: press 2x
+        conditions:
+          - key: command
+            value: remote_button_double_press
+      - title: hold
+        conditions:
+          - key: command
+            value: remote_button_long_press

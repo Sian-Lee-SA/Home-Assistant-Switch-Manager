@@ -2,13 +2,12 @@ from .const import DOMAIN, CONF_BLUEPRINTS, BLUEPRINTS_FOLDER, PANEL_URL, NAME
 from .helpers import VERSION
 from homeassistant.core import HomeAssistant
 from homeassistant.components.frontend import async_register_built_in_panel
+from homeassistant.components.http import StaticPathConfig
 
 async def async_setup_view(hass: HomeAssistant):
-
-    hass.http.register_static_path(
-        PANEL_URL,
-        hass.config.path("custom_components/switch_manager/assets/switch_manager_panel.js"),
-    )
+    await hass.http.async_register_static_paths([
+        StaticPathConfig(PANEL_URL, hass.config.path("custom_components/switch_manager/assets/switch_manager_panel.js"), True)
+    ])
 
     await async_bind_blueprint_images(hass)
 
@@ -29,9 +28,16 @@ async def async_setup_view(hass: HomeAssistant):
     )
 
 async def async_bind_blueprint_images(hass: HomeAssistant):
+    static_paths = []
+    
     for key in hass.data[DOMAIN].get(CONF_BLUEPRINTS):
         if hass.data[DOMAIN].get(CONF_BLUEPRINTS)[key].has_image:
-            hass.http.register_static_path(
-                f'/assets/{DOMAIN}/{key}.png',
-                hass.config.path(f"{BLUEPRINTS_FOLDER}/{DOMAIN}/{key}.png"),
+            static_paths.append(
+                StaticPathConfig(
+                    f'/assets/{DOMAIN}/{key}.png',
+                    hass.config.path(f"{BLUEPRINTS_FOLDER}/{DOMAIN}/{key}.png"),
+                    True
+                )
             )
+            
+    await hass.http.async_register_static_paths(static_paths)

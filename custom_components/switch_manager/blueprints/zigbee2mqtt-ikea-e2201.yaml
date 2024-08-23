@@ -18,7 +18,7 @@ buttons:
       - title: hold (released)
         conditions:
           - key: payload
-            value: brightness_stop_up
+            value: brightness_stop
   - x: 143
     y: 436
     width: 42
@@ -34,4 +34,4 @@ buttons:
       - title: hold (released)
         conditions:
           - key: payload
-            value: brightness_stop_down
+            value: brightness_stop

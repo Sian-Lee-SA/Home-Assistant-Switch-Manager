@@ -2,6 +2,8 @@ name: Ikea Rodret
 service: Zigbee2MQTT
 event_type: mqtt
 mqtt_topic_format: zigbee2mqtt/+/action
+info: |
+  Hold (released) for both buttons receives the same action event
 buttons:
   - x: 143
     y: 76

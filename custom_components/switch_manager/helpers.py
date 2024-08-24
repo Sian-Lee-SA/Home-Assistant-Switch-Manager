@@ -1,5 +1,5 @@
 """Helpers for switch_manager integration."""
-import json, pathlib, os, shutil, enum
+import json, pathlib, os, shutil, enum, asyncio
 from homeassistant.core import HomeAssistant
 from homeassistant.util.yaml.loader import _find_files, load_yaml
 from .const import (
@@ -30,7 +30,11 @@ async def deploy_blueprints( hass ):
         os.makedirs( dest_folder )
     
     component_blueprints_path = os.path.join( COMPONENT_PATH, 'blueprints' )
-    files = os.listdir(component_blueprints_path)
+    files = await hass.loop.run_in_executor(
+            None,
+            os.listdir,
+            component_blueprints_path
+        )
 
     def doFiles():
         for file in files:
@@ -44,24 +48,25 @@ async def deploy_blueprints( hass ):
 
 async def load_blueprints( hass ):
     folder = pathlib.Path(hass.config.path(BLUEPRINTS_FOLDER, DOMAIN))
-    results = [];
-    for f in _find_files(folder, "*.yaml"):
-        try:
-            data = await hass.loop.run_in_executor(
-                None,
-                load_yaml,
-                f
-            )
-        except HomeAssistantError as ex:
-            LOGGER.error(str(ex))
-            continue
-        results.append({
-            'id': os.path.splitext(os.path.basename(f))[0],
-            'has_image': os.path.exists(
-                os.path.join(folder, os.path.splitext(os.path.basename(f))[0] + '.png')
-            ),
-            'data': data        
-        })
+    files = await hass.loop.run_in_executor(None, _find_files, folder, "*.yaml")
+
+    results = []
+    def doFiles():
+        for f in files:
+            try:
+                data = load_yaml(f)
+            except HomeAssistantError as ex:
+                LOGGER.error(str(ex))
+                continue
+            results.append({
+                'id': os.path.splitext(os.path.basename(f))[0],
+                'has_image': os.path.exists(
+                    os.path.join(folder, os.path.splitext(os.path.basename(f))[0] + '.png')
+                ),
+                'data': data        
+            })
+    
+    await hass.async_add_executor_job(doFiles)
     return results
 
 def format_mqtt_message( message: ReceiveMessage):

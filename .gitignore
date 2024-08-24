@@ -1,9 +1,4 @@
-/homeassistant
-/homeassistant-frontend
-/ha-frontend
-**/node_modules
 **/@eaDir
 **/Thumbs.db
 **/__pycache__/
-.release-it.json
 .vscode

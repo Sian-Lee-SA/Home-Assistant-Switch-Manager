@@ -1,0 +1,18 @@
+name: TuYa Round Button Switch
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+buttons:
+  - actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: single
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: double
+      - title: hold
+        conditions:
+          - key: payload
+            value: hold

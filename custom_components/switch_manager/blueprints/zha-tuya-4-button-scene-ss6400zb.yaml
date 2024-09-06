@@ -1,0 +1,81 @@
+name: TuYa 4 Button Scene (SS5300ZB)
+service: ZHA
+event_type: zha_event
+identifier_key: device_id
+buttons:
+  - x: 66
+    y: 102
+    width: 32
+    conditions:
+      - key: endpoint_id
+        value: 1
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: remote_button_short_press
+      - title: press 2x
+        conditions:
+          - key: command
+            value: remote_button_double_press
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: remote_button_long_press
+  - x: 66
+    y: 204
+    width: 32
+    conditions:
+      - key: endpoint_id
+        value: 2
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: remote_button_short_press
+      - title: press 2x
+        conditions:
+          - key: command
+            value: remote_button_double_press
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: remote_button_long_press
+  - x: 66
+    y: 302
+    width: 32
+    conditions:
+      - key: endpoint_id
+        value: 3
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: remote_button_short_press
+      - title: press 2x
+        conditions:
+          - key: command
+            value: remote_button_double_press
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: remote_button_long_press
+  - x: 66
+    y: 405
+    width: 32
+    conditions:
+      - key: endpoint_id
+        value: 4
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: remote_button_short_press
+      - title: press 2x
+        conditions:
+          - key: command
+            value: remote_button_double_press
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: remote_button_long_press

@@ -1,0 +1,93 @@
+name: Senic Friends of Hue Switch
+service: Philips Hue
+event_type: hue_event
+identifier_key: id
+buttons:
+  - x: 70
+    y: 72
+    width: 156
+    height: 154
+    conditions:
+      - key: subtype
+        value: 1
+    actions:
+      - title: init
+        conditions: "{{ data.type in ['short', 'initial_press'] }}"
+      - title: press
+        conditions:
+          - key: type
+            value: short_release
+      - title: hold
+        conditions:
+          - key: type
+            value: repeat
+      - title: hold (released)
+        conditions:
+          - key: type
+            value: long_release
+  - x: 70
+    y: 226
+    width: 156
+    height: 154
+    conditions:
+      - key: subtype
+        value: 2
+    actions:
+      - title: init
+        conditions: "{{ data.type in ['short', 'initial_press'] }}"
+      - title: press
+        conditions:
+          - key: type
+            value: short_release
+      - title: hold
+        conditions:
+          - key: type
+            value: repeat
+      - title: hold (released)
+        conditions:
+          - key: type
+            value: long_release
+  - x: 230
+    y: 72
+    width: 156
+    height: 154
+    conditions:
+      - key: subtype
+        value: 3
+    actions:
+      - title: init
+        conditions: "{{ data.type in ['short', 'initial_press'] }}"
+      - title: press
+        conditions:
+          - key: type
+            value: short_release
+      - title: hold
+        conditions:
+          - key: type
+            value: repeat
+      - title: hold (released)
+        conditions:
+          - key: type
+            value: long_release
+  - x: 230
+    y: 226
+    width: 156
+    height: 154
+    conditions:
+      - key: subtype
+        value: 4
+    actions:
+      - title: init
+        conditions: "{{ data.type in ['short', 'initial_press'] }}"
+      - title: press
+        conditions:
+          - key: type
+            value: short_release
+      - title: hold
+        conditions:
+          - key: type
+            value: repeat
+      - title: hold (released)
+        conditions:
+          - key: type
+            value: long_release

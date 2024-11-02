@@ -6,9 +6,9 @@ conditions:
   - key: property
     value: scene
 buttons:
-  - x: 225
+  - x: 226
     y: 0
-    width: 55
+    width: 56
     height: 240
     conditions:
       - key: property_key
@@ -18,21 +18,21 @@ buttons:
         conditions:
           - key: value
             value: KeyPressed
-      - title: release
+      - title: press 2x
         conditions:
           - key: value
-            value: KeyReleased
+            value: KeyPressed2x
       - title: hold
         conditions:
           - key: value
             value: KeyHeldDown
-      - title: press2x
+      - title: hold (released)
         conditions:
           - key: value
-            value: KeyPressed2x
+            value: KeyReleased
   - x: 170
     y: 0
-    width: 55
+    width: 56
     height: 240
     conditions:
       - key: property_key
@@ -42,21 +42,21 @@ buttons:
         conditions:
           - key: value
             value: KeyPressed
-      - title: release
+      - title: press 2x
         conditions:
           - key: value
-            value: KeyReleased
+            value: KeyPressed2x
       - title: hold
         conditions:
           - key: value
             value: KeyHeldDown
-      - title: press2x
+      - title: hold (released)
         conditions:
           - key: value
-            value: KeyPressed2x
-  - x: 115
+            value: KeyReleased
+  - x: 114
     y: 0
-    width: 55
+    width: 56
     height: 240
     conditions:
       - key: property_key
@@ -66,21 +66,21 @@ buttons:
         conditions:
           - key: value
             value: KeyPressed
-      - title: release
+      - title: press 2x
         conditions:
           - key: value
-            value: KeyReleased
+            value: KeyPressed2x
       - title: hold
         conditions:
           - key: value
             value: KeyHeldDown
-      - title: press2x
+      - title: hold (released)
         conditions:
           - key: value
-            value: KeyPressed2x
-  - x: 60
+            value: KeyReleased
+  - x: 58
     y: 0
-    width: 55
+    width: 56
     height: 240
     conditions:
       - key: property_key
@@ -90,15 +90,15 @@ buttons:
         conditions:
           - key: value
             value: KeyPressed
-      - title: release
+      - title: press 2x
         conditions:
           - key: value
-            value: KeyReleased
+            value: KeyPressed2x
       - title: hold
         conditions:
           - key: value
             value: KeyHeldDown
-      - title: press2x
+      - title: hold (released)
         conditions:
           - key: value
-            value: KeyPressed2x
+            value: KeyReleased

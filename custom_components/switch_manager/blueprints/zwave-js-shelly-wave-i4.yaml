@@ -1,0 +1,104 @@
+name: Shelly Wave I4
+service: Z-Wave JS
+event_type: zwave_js_value_notification
+identifier_key: node_id
+conditions:
+  - key: property
+    value: scene
+buttons:
+  - x: 225
+    y: 0
+    width: 55
+    height: 240
+    conditions:
+      - key: property_key
+        value: '001'
+    actions:
+      - title: press
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: release
+        conditions:
+          - key: value
+            value: KeyReleased
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+      - title: press2x
+        conditions:
+          - key: value
+            value: KeyPressed2x
+  - x: 170
+    y: 0
+    width: 55
+    height: 240
+    conditions:
+      - key: property_key
+        value: '002'
+    actions:
+      - title: press
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: release
+        conditions:
+          - key: value
+            value: KeyReleased
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+      - title: press2x
+        conditions:
+          - key: value
+            value: KeyPressed2x
+  - x: 115
+    y: 0
+    width: 55
+    height: 240
+    conditions:
+      - key: property_key
+        value: '003'
+    actions:
+      - title: press
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: release
+        conditions:
+          - key: value
+            value: KeyReleased
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+      - title: press2x
+        conditions:
+          - key: value
+            value: KeyPressed2x
+  - x: 60
+    y: 0
+    width: 55
+    height: 240
+    conditions:
+      - key: property_key
+        value: '004'
+    actions:
+      - title: press
+        conditions:
+          - key: value
+            value: KeyPressed
+      - title: release
+        conditions:
+          - key: value
+            value: KeyReleased
+      - title: hold
+        conditions:
+          - key: value
+            value: KeyHeldDown
+      - title: press2x
+        conditions:
+          - key: value
+            value: KeyPressed2x

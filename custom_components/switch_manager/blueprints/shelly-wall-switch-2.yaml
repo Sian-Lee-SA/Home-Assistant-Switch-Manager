@@ -1,0 +1,70 @@
+name: Shelly Wall Switch (2 Buttons)
+service: Shelly
+event_type: shelly.click
+identifier_key: device
+buttons:
+  - x: 32
+    y: 34
+    width: 169
+    height: 343
+    conditions:
+      - key: channel
+        value: 1
+    actions:
+      - title: init
+        conditions:
+          - key: click_type
+            value: btn_down
+      - title: press
+        conditions:
+          - key: click_type
+            value: single_push
+      - title: press 2x
+        conditions:
+          - key: click_type
+            value: double_push
+      - title: press 3x
+        conditions:
+          - key: click_type
+            value: triple_push
+      - title: hold
+        conditions:
+          - key: click_type
+            value: long_push
+      - title: released
+        conditions:
+          - key: click_type
+            value: btn_up
+
+  - x: 210
+    y: 34
+    width: 169
+    height: 343
+    conditions:
+      - key: channel
+        value: 2
+    actions:
+      - title: init
+        conditions:
+          - key: click_type
+            value: btn_down
+      - title: press
+        conditions:
+          - key: click_type
+            value: single_push
+      - title: press 2x
+        conditions:
+          - key: click_type
+            value: double_push
+      - title: press 3x
+        conditions:
+          - key: click_type
+            value: triple_push
+      - title: hold
+        conditions:
+          - key: click_type
+            value: long_push
+      - title: released
+        conditions:
+          - key: click_type
+            value: btn_up

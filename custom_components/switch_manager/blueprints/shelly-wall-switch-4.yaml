@@ -1,4 +1,4 @@
-name: Shelly Plus i4
+name: Shelly Wall Switch (4 Buttons)/Shelly Plus i4
 service: Shelly
 event_type: shelly.click
 identifier_key: device

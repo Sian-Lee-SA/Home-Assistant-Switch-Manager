@@ -3,14 +3,7 @@ service: Shelly
 event_type: shelly.click
 identifier_key: device
 buttons:
-  - x: 34
-    y: 34
-    width: 324
-    height: 324
-    conditions:
-      - key: channel
-        value: 1
-    actions:
+  - actions:
       - title: press
         conditions:
           - key: click_type

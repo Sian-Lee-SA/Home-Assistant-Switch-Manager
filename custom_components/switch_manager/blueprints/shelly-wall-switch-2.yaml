@@ -11,6 +11,10 @@ buttons:
       - key: channel
         value: 1
     actions:
+      - title: init
+        conditions:
+          - key: click_type
+            value: btn_down
       - title: press
         conditions:
           - key: click_type
@@ -27,11 +31,7 @@ buttons:
         conditions:
           - key: click_type
             value: long_push
-      - title: button down
-        conditions:
-          - key: click_type
-            value: btn_down
-      - title: button up
+      - title: released
         conditions:
           - key: click_type
             value: btn_up
@@ -44,6 +44,10 @@ buttons:
       - key: channel
         value: 2
     actions:
+      - title: init
+        conditions:
+          - key: click_type
+            value: btn_down
       - title: press
         conditions:
           - key: click_type
@@ -60,11 +64,7 @@ buttons:
         conditions:
           - key: click_type
             value: long_push
-      - title: button down
-        conditions:
-          - key: click_type
-            value: btn_down
-      - title: button up
+      - title: released
         conditions:
           - key: click_type
             value: btn_up

@@ -16,6 +16,9 @@ Switch manager is a centralised component to handle button pushes for your wirel
 #### Youtube demonstration
 [![YouTube Introduction](images/youtube-introduction.png)](https://www.youtube.com/watch?v=m2Rlobvo5cI)
 
+Demonstration in german:
+[Home Assistant Switch Manager - So genial@smart-live.net](https://www.youtube.com/watch?v=EEFMxeXMd1Q)
+
 #### Switch editor page and index page
 <p float="left">
   <img src="images/demo-2.png" width="49.5%" />

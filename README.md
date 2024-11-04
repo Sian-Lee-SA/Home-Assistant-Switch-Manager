@@ -9,7 +9,7 @@
 Switch manager is a centralised component to handle button pushes for your wireless switches. This includes anything passed through the event bus or MQTT. The component relies on switch blueprints which is easily made to allow GUI configuration of your switches and their button pushes. This helps remove clutter from the automations view as they will be handled independently by this component.
 
 > [!WARNING]
-> The device sequence action is currently unsupported, use service/action calls instead as this should be used thoughout Home Assistant anyway. You can read more on why you shoudn't use it [here](https://community.home-assistant.io/t/why-and-how-to-avoid-device-ids-in-automations-and-scripts/605517)
+> The device sequence action is currently unsupported, use service/action calls instead as this should be used thoughout Home Assistant anyway. You can read more on why you shoudn't use it [here](https://community.home-assistant.io/t/why-and-how-to-avoid-device-ids-in-automations-and-scripts/605517) ![Don't use device action](images/no-device-actions.png)
 
 > I am happy to accept any pull requests for anyone who wishes to submit missing blueprint for switches from this repository as to help eliminate other users from having to build their own.
 

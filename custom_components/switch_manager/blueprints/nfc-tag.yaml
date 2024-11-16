@@ -1,0 +1,7 @@
+name: NFC Tag
+service: NFC
+event_type: tag_scanned
+identifier_key: tag_id
+buttons:
+  - actions:
+      - title: scan

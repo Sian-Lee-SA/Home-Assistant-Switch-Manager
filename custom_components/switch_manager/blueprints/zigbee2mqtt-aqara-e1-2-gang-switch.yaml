@@ -10,11 +10,11 @@ buttons:
     actions:
       - title: press
         conditions:
-          - key: command
+          - key: payload
             value: single_left
       - title: press 2x
         conditions:
-          - key: command
+          - key: payload
             value: double_left
   - x: 185
     y: 12
@@ -23,11 +23,11 @@ buttons:
     actions:
       - title: press
         conditions:
-          - key: command
+          - key: payload
             value: single_right
       - title: press 2x
         conditions:
-          - key: command
+          - key: payload
             value: double_right
   - x: 182
     y: 183

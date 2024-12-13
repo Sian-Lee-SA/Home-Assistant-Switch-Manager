@@ -1,7 +1,7 @@
 name: Müller-Licht Tint Remote (404049)
 service: Zigbee2MQTT
 event_type: mqtt
-mqtt_topic_format: zigbee2mqtt/+/
+mqtt_topic_format: zigbee2mqtt/+
 info: The four color wheel buttons are sending one indistinguishable button event. Also the remote saves xy color values that are changed by those buttons. Access those values via "{{ data.action_color.x|float }}". You won't be moving from the current color, but will be able to set the color via remote.
 buttons:
 

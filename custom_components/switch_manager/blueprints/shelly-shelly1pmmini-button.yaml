@@ -12,7 +12,15 @@ buttons:
         conditions:
           - key: click_type
             value: double_push
+      - title: press 3x
+        conditions:
+          - key: click_type
+            value: triple_push
       - title: hold
         conditions:
           - key: click_type
             value: long_push
+      - title: released
+        conditions:
+          - key: click_type
+            value: btn_up

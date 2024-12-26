@@ -1,0 +1,73 @@
+name: Paulmann 50134 2x2
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+buttons:
+  - x: 60
+    y: 60
+    width: 85
+    height: 140
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: on_1
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_move_up_1
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: brightness_stop_1
+  - x: 60
+    y: 200
+    width: 85
+    height: 140
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: off_1
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_move_down_1
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: brightness_stop_1
+  - x: 255
+    y: 60
+    width: 85
+    height: 140
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: on_2
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_move_up_2
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: brightness_stop_2
+  - x: 255
+    y: 200
+    width: 85
+    height: 140
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: off_2
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_move_down_2
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: brightness_stop_2

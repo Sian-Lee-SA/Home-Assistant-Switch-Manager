@@ -1,0 +1,73 @@
+name: Tuya 4-button Scene Switch (TS0044)
+service: deCONZ
+event_type: deconz_event
+identifier_key: device_id
+buttons:
+  - x: 1
+    y: 1
+    width: 221
+    height: 220
+    actions:
+      - title: press
+        conditions:
+          - key: event
+            value: 1002
+      - title: press 2x
+        conditions:
+          - key: event
+            value: 1004
+      - title: hold
+        conditions:
+          - key: event
+            value: 1003
+  - x: 222
+    y: 1
+    width: 221
+    height: 220
+    actions:
+      - title: press
+        conditions:
+          - key: event
+            value: 2002
+      - title: press 2x
+        conditions:
+          - key: event
+            value: 2004
+      - title: hold
+        conditions:
+          - key: event
+            value: 2003
+  - x: 2
+    y: 223
+    width: 221
+    height: 220
+    actions:
+      - title: press
+        conditions:
+          - key: event
+            value: 3002
+      - title: press 2x
+        conditions:
+          - key: event
+            value: 3004
+      - title: hold
+        conditions:
+          - key: event
+            value: 3003
+  - x: 223
+    y: 223
+    width: 221
+    height: 220
+    actions:
+      - title: press
+        conditions:
+          - key: event
+            value: 4002
+      - title: press 2x
+        conditions:
+          - key: event
+            value: 4004
+      - title: hold
+        conditions:
+          - key: event
+            value: 4003

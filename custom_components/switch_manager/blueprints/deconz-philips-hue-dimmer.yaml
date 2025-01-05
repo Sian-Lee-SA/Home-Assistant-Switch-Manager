@@ -1,0 +1,89 @@
+name: Philips Hue Dimmer v1/v2
+service: deCONZ
+event_type: deconz_event
+identifier_key: device_id
+buttons:
+  - x: 2
+    y: 2
+    width: 189
+    height: 159
+    actions:
+      - title: init
+        conditions:
+          - key: event
+            value: 1000
+      - title: press
+        conditions:
+          - key: event
+            value: 1002
+      - title: hold
+        conditions:
+          - key: event
+            value: 1001
+      - title: hold (released)
+        conditions:
+          - key: event
+            value: 1003
+  - x: 2
+    y: 161
+    width: 189
+    height: 90
+    actions:
+      - title: init
+        conditions:
+          - key: event
+            value: 2000
+      - title: press
+        conditions:
+          - key: event
+            value: 2002
+      - title: hold
+        conditions:
+          - key: event
+            value: 2001
+      - title: hold (released)
+        conditions:
+          - key: event
+            value: 2003
+  - x: 2
+    y: 251
+    width: 189
+    height: 90
+    actions:
+      - title: init
+        conditions:
+          - key: event
+            value: 3000
+      - title: press
+        conditions:
+          - key: event
+            value: 3002
+      - title: hold
+        conditions:
+          - key: event
+            value: 3001
+      - title: hold (released)
+        conditions:
+          - key: event
+            value: 3003
+  - x: 2
+    y: 341
+    width: 189
+    height: 159
+    actions:
+      - title: init
+        conditions:
+          - key: event
+            value: 4000
+      - title: press
+        conditions:
+          - key: event
+            value: 4002
+      - title: hold
+        conditions:
+          - key: event
+            value: 4001
+      - title: hold (released)
+        conditions:
+          - key: event
+            value: 4003

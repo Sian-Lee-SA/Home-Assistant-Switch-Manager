@@ -15,4 +15,4 @@ buttons:
       - title: hold (released)
         conditions:
           - key: event
-            value: 1003			
+            value: 1003

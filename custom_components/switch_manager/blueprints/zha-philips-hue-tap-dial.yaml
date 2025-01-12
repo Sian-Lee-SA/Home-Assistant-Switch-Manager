@@ -128,3 +128,21 @@ buttons:
         conditions:
           - key: command
             value: button_4_long_release
+  #turn left
+  - d: M 198 0 Q 113 0 58 58 L 74 74 Q 27 121 23 198 H 0 Q 0 283 58 338 L 76 324 Q 122 372 198 372 V 396 Q 111 396 58 338 L 78 345 76 324 Q 24 274 23 198 L 12 215 0 198 Q 0 125 58 58 L 53 80 74 74 Q 123 26 198 23 V 0
+    actions:
+      - title: turn_left
+        conditions:
+          - key: command
+            value: step_with_on_off
+          - key: params.step_mode
+            value: 1
+  #turn right
+  - d: M 198 0 Q 283 0 338 58 L 322 74 Q 369 121 373 198 H 396 Q 396 283 338 338 L 320 324 Q 274 372 198 372 V 396 Q 285 396 338 338 L 318 345 L 320 324 Q 372 274 373 198 L 384 215 L 396 198 Q 396 125 338 58 L 343 80 L 322 74 Q 273 26 198 23 V 0 z
+    actions:
+      - title: turn_right
+        conditions:
+          - key: command
+            value: step_with_on_off
+          - key: params.step_mode
+            value: 0

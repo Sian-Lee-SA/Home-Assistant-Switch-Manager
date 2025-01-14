@@ -27,7 +27,7 @@ buttons:
         conditions:
           - key: command
             value: button_1_quintuple_press
-      - title: hold / 0,8s
+      - title: hold
         conditions:
           - key: command
             value: "button_1_hold"
@@ -58,7 +58,7 @@ buttons:
         conditions:
           - key: command
             value: button_2_quintuple_press
-      - title: hold / 0,8s
+      - title: hold
         conditions:
           - key: command
             value: button_2_hold
@@ -89,7 +89,7 @@ buttons:
         conditions:
           - key: command
             value: button_3_quintuple_press
-      - title: hold / 0,8s
+      - title: hold
         conditions:
           - key: command
             value: button_3_hold
@@ -120,7 +120,7 @@ buttons:
         conditions:
           - key: command
             value: button_4_quintuple_press
-      - title: hold / 0,8s
+      - title: hold
         conditions:
           - key: command
             value: button_4_hold
@@ -129,18 +129,18 @@ buttons:
           - key: command
             value: button_4_long_release
   #turn left
-  - d: M 198 0 Q 113 0 58 58 L 74 74 Q 27 121 23 198 H 0 Q 0 283 58 338 L 76 324 Q 122 372 198 372 V 396 Q 111 396 58 338 L 78 345 76 324 Q 24 274 23 198 L 12 215 0 198 Q 0 125 58 58 L 53 80 74 74 Q 123 26 198 23 V 0
+  - d: m198,0 -16,12 16,11 V0 a198,198 0 0 0 0,396 v-23 a175,175 0 0 1 0,-350 M58,58 l16,16 -19,5 3,-21 M0,198 h23 l-11,17 -12,-17 m58,140 18,-14 2,21 -20,-7
     actions:
-      - title: turn_left
+      - title: rotate
         conditions:
           - key: command
             value: step_with_on_off
           - key: params.step_mode
             value: 1
   #turn right
-  - d: M 198 0 Q 283 0 338 58 L 322 74 Q 369 121 373 198 H 396 Q 396 283 338 338 L 320 324 Q 274 372 198 372 V 396 Q 285 396 338 338 L 318 345 L 320 324 Q 372 274 373 198 L 384 215 L 396 198 Q 396 125 338 58 L 343 80 L 322 74 Q 273 26 198 23 V 0 z
+  - d: m198,0 16,12 -16,11 V0 a198,198 0 0 1 0,396 v-23 a175,175 0 0 0 0,-350 m139,34 5,22 -21,-6 16-16 m59,141 -12,17 -11,-17 h23 m-58,140 -18,-14 -3,21 20,-7
     actions:
-      - title: turn_right
+      - title: rotate
         conditions:
           - key: command
             value: step_with_on_off

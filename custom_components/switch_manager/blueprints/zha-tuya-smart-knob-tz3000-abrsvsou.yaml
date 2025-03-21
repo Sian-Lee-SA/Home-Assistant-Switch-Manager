@@ -1,0 +1,42 @@
+# Configuration for ZHA Tuya Smart Knob (_TZ3000_abrsvsou)
+# commonly found on AliExpress and other online retailers.
+
+# Following commands are supported:
+# - press
+# - double press
+# - long press
+# - rotate left
+# - rotate right
+
+name: TuYa 4 Button Scene
+service: ZHA
+event_type: zha_event
+identifier_key: device_id
+buttons:
+
+name: TuYa Smart Knob (_TZ3000_abrsvsou/TS004F)
+service: ZHA
+event_type: zha_event
+identifier_key: device_id
+buttons:
+  - actions:
+      - title: press
+        conditions:
+          - key: command
+            value: toggle
+      - title: double press
+        conditions:
+          - key: command
+            value: "on"
+      - title: long press
+        conditions:
+          - key: command
+            value: "off"
+      - title: rotate left
+        conditions:
+          - key: command
+            value: left
+      - title: rotate right
+        conditions:
+          - key: command
+            value: right

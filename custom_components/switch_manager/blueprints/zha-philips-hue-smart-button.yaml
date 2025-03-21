@@ -1,0 +1,38 @@
+name: Philips Hue Smart Button
+service: ZHA
+event_type: zha_event
+identifier_key: device_id
+buttons:
+  - actions:
+    - title: init
+      conditions:
+        - key: command
+          value: on_press
+    - title: press
+      conditions:
+        - key: command
+          value: on_short_release
+    - title: press 2x
+      conditions:
+        - key: command
+          value: on_double_press
+    - title: press 3x
+      conditions:
+        - key: command
+          value: on_triple_press
+    - title: press 4x
+      conditions:
+        - key: command
+          value: on_quadruple_press
+    - title: press 5x
+      conditions:
+        - key: command
+          value: on_quintuple_press
+    - title: hold
+      conditions:
+        - key: command
+          value: on_hold
+    - title: hold (released)
+      conditions:
+        - key: command
+          value: on_long_release

@@ -1,0 +1,18 @@
+name: Tuya Smart Button (MINI-ZSB)
+service: deCONZ
+event_type: deconz_event
+identifier_key: device_id
+buttons:
+  - actions:
+      - title: press
+        conditions:
+          - key: event
+            value: 1002
+      - title: press 2x
+        conditions:
+          - key: event
+            value: 1004
+      - title: hold (released)
+        conditions:
+          - key: event
+            value: 1003

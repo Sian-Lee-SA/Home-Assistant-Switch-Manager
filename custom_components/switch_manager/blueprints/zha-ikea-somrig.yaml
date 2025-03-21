@@ -1,0 +1,59 @@
+name: Ikea Somrig
+service: ZHA
+event_type: zha_event
+identifier_key: device_id
+buttons:
+  - x: 143
+    y: 76
+    width: 42
+    conditions:
+      - key: endpoint_id
+        value: 1
+    actions:
+      - title: init
+        conditions:
+          - key: command
+            value: initial_press
+      - title: press
+        conditions:
+          - key: command
+            value: short_release
+      - title: press 2x
+        conditions:
+          - key: command
+            value: multi_press_complete
+      - title: hold
+        conditions:
+          - key: command
+            value: long_press
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: long_release
+  - x: 143
+    y: 436
+    width: 42
+    conditions:
+      - key: endpoint_id
+        value: 2
+    actions:
+      - title: init
+        conditions:
+          - key: command
+            value: initial_press
+      - title: press
+        conditions:
+          - key: command
+            value: short_release
+      - title: press 2x
+        conditions:
+          - key: command
+            value: multi_press_complete
+      - title: hold
+        conditions:
+          - key: command
+            value: long_press
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: long_release

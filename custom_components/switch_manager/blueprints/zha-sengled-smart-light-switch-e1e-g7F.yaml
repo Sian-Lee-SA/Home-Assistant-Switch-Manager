@@ -1,0 +1,57 @@
+name: Sengled Smart Light Switch E1E-G7FW
+service: ZHA
+event_type: zha_event
+identifier_key: device_id
+buttons:
+  - x: 11
+    y: 9
+    width: 121
+    height: 83
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: "on"
+      - title: press 2x
+        conditions:
+          - key: command
+            value: "on_double"
+      - title: hold
+        conditions:
+          - key: command
+            value: "on_long"
+  - x: 11
+    y: 93
+    width: 121
+    height: 78
+    actions:
+      - title: press
+        conditions: "{{ data.command == 'step' and data.args == [0,1,0] }}"
+      - title: hold
+        conditions: "{{ data.command == 'step' and data.args == [0,2,0] }}"
+  - x: 11
+    y: 173
+    width: 121
+    height: 78
+    actions:
+      - title: press
+        conditions: "{{ data.command == 'step' and data.args == [1,1,0] }}"
+      - title: hold
+        conditions: "{{ data.command == 'step' and data.args == [1,2,0] }}"
+  - x: 11
+    y: 251
+    width: 121
+    height: 83
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: "off"
+      - title: press 2x
+        conditions:
+          - key: command
+            value: "off_double"
+      - title: hold
+        conditions:
+          - key: command
+            value: "off_long"

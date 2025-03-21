@@ -1,0 +1,56 @@
+name: Aqara E1 3 gang switch
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+buttons:
+  - x: 11
+    y: 12
+    width: 114
+    height: 333
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: single_left
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: double_left
+  - x: 125
+    y: 12
+    width: 114
+    height: 333
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: single_center
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: double_center
+  - x: 240
+    y: 12
+    width: 114
+    height: 333
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: single_right
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: double_right
+  - x: 182
+    y: 183
+    width: 50
+    actions:
+      - title: both press
+        conditions:
+          - key: payload
+            value: single_both
+      - title: both press 2x
+        conditions:
+          - key: payload
+            value: double_both

@@ -15,11 +15,12 @@ from .view import async_setup_view, async_bind_blueprint_images
 from . import models
 from .schema import BLUEPRINT_MQTT_SCHEMA, BLUEPRINT_EVENT_SCHEMA, SERVICE_SET_VARIABLES_SCHEMA
 from .connections import async_setup_connections
-from homeassistant.core import Config, HomeAssistant, callback
+from homeassistant.core import HomeAssistant, callback
 from homeassistant.config import format_schema_error
 from homeassistant.helpers import issue_registry as ir
+from homeassistant.helpers.typing import ConfigType
 
-async def async_setup( hass: HomeAssistant, config: Config ):
+async def async_setup( hass: HomeAssistant, config: ConfigType ):
     """Set up is called when Home Assistant is loading our component."""
     
     hass.data.setdefault(DOMAIN, {})

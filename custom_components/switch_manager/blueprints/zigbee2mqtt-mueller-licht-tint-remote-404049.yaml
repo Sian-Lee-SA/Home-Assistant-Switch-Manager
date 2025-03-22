@@ -1,0 +1,148 @@
+name: Müller-Licht Tint Remote (404049)
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+
+info: The four color wheel buttons are sending one indistinguishable button event. Also the remote saves xy color values that are changed by those buttons. Access those values via "{{ data.action_color.x|float }}". You won't be moving from the current color, but will be able to set the color via remote.
+buttons:
+
+# on/off
+  - x: 18
+    y: 17
+    width: 32
+    height: 32
+    actions:
+      - title: press
+        conditions: "{{ data.action in ['on', 'off'] }}"
+
+# color wheel. I would love to be able to use every button on its own, but I
+# don't get the necessary info. The x/y values change, the remote seems to
+# save the "current" value on its own. Event example:
+# {
+#     "action": "color_move",
+#     "action_color": {
+#         "x": 0.7,
+#         "y": 0.3
+#     },
+#     "action_group": 16388,
+#     "action_transition_time": 0,
+#     "last_seen": 1733224394616,
+#     "linkquality": 80
+# }
+  - x: 12
+    y: 56
+    height: 110
+    width: 110
+    actions:
+      - title: press
+        conditions:
+          - key: action
+            value: color_move
+
+# color temp
+  - x: 15
+    y: 172
+    width: 53
+    height: 18
+    actions:
+      - title: press
+        conditions:
+          - key: action
+            value: color_temperature_move
+          - key: action_color_temperature_direction
+            value: down
+  - x: 68
+    y: 172
+    width: 53
+    height: 18
+    actions:
+      - title: press
+        conditions:
+        - key: action
+          value: color_temperature_move
+        - key: action_color_temperature_direction
+          value: up
+
+# brightness
+  - x: 87
+    y: 204
+    width: 32
+    height: 32
+    actions:
+      - title: press
+        conditions:
+          - key: action
+            value: brightness_step_up
+      - title: hold
+        conditions:
+          - key: action
+            value: brightness_move_up
+
+  - x: 15
+    y: 204
+    width: 32
+    height: 32
+    actions:
+      - title: press
+        conditions:
+          - key: action
+            value: brightness_step_down
+      - title: hold
+        conditions:
+          - key: action
+            value: brightness_move_down
+
+# scene buttons
+  - x: 13
+    y: 245
+    width: 32
+    height: 32
+    actions:
+      - title: press
+        conditions:
+          - key: action
+            value: scene_3
+  - x: 51
+    y: 245
+    width: 32
+    height: 32
+    actions:
+      - title: press
+        conditions:
+          - key: action
+            value: scene_1
+  - x: 89
+    y: 245
+    width: 32
+    height: 32
+    actions:
+      - title: press
+        conditions:
+          - key: action
+            value: scene_2
+  - x: 13
+    y: 284
+    width: 32
+    height: 32
+    actions:
+      - title: press
+        conditions:
+          - key: action
+            value: scene_6
+  - x: 51
+    y: 284
+    width: 32
+    height: 32
+    actions:
+      - title: press
+        conditions:
+          - key: action
+            value: scene_4
+  - x: 89
+    y: 284
+    width: 32
+    height: 32
+    actions:
+      - title: press
+        conditions:
+          - key: action
+            value: scene_5

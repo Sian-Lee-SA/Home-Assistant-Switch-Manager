@@ -1,0 +1,27 @@
+name: Tuya 2 buttons TS0042 and LKWS211
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+buttons:
+  - x: 89
+    y: 66
+    width: 252
+    height: 135
+    actions:
+      - title: press
+        conditions: "{{ data.payload in ['1_single', 'button_1_single'] }}"
+      - title: press 2x
+        conditions: "{{ data.payload in ['1_double', 'button_1_double'] }}"
+      - title: hold
+        conditions: "{{ data.payload in ['1_hold', 'button_1_hold'] }}"
+  - x: 89
+    y: 211
+    width: 252
+    height: 109
+    actions:
+      - title: press
+        conditions: "{{ data.payload in ['2_single', 'button_2_single'] }}"
+      - title: press 2x
+        conditions: "{{ data.payload in ['2_double', 'button_2_double'] }}"
+      - title: hold
+        conditions: "{{ data.payload in ['2_hold', 'button_2_hold'] }}"

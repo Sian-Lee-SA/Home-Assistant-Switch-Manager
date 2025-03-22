@@ -1,0 +1,148 @@
+name: Philips Hue Tap Dial
+service: ZHA
+event_type: zha_event
+identifier_key: device_id
+buttons:
+  # Button 1 (from the middle (M) line up (L), circle to the down left (Q), line to the middle (L), close path (Z))
+  # more for SVG path: https://svg-path-visualizer.netlify.app
+  - d: M 197 198 L 197 24 Q 36 37 23 198 L 197 198 Z
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: button_1_short_release
+      - title: press 2x
+        conditions:
+          - key: command
+            value: button_1_double_press
+      - title: press 3x
+        conditions:
+          - key: command
+            value: button_1_triple_press
+      - title: press 4x
+        conditions:
+          - key: command
+            value: button_1_quadruple_press
+      - title: press 5x
+        conditions:
+          - key: command
+            value: button_1_quintuple_press
+      - title: hold
+        conditions:
+          - key: command
+            value: "button_1_hold"
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: button_1_long_release
+  # Button 2 (from the middle (M) line up (L), circle to the down right (Q), line to the middle (L), close path (Z))
+  - d: M 197 198 L 197 24 Q 359 37 372 198 L 197 198 Z
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: button_2_short_release
+      - title: press 2x
+        conditions:
+          - key: command
+            value: button_2_double_press
+      - title: press 3x
+        conditions:
+          - key: command
+            value: button_2_triple_press
+      - title: press 4x
+        conditions:
+          - key: command
+            value: button_2_quadruple_press
+      - title: press 5x
+        conditions:
+          - key: command
+            value: button_2_quintuple_press
+      - title: hold
+        conditions:
+          - key: command
+            value: button_2_hold
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: button_2_long_release
+  # Button 3 (from the middle (M) line down (L), circle to the up left (Q), line to the middle (L), close path (Z))
+  - d: M 197 198 L 197 372 Q 36 359 23 198 L 197 198 Z
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: button_3_short_release
+      - title: press 2x
+        conditions:
+          - key: command
+            value: button_3_double_press
+      - title: press 3x
+        conditions:
+          - key: command
+            value: button_3_triple_press
+      - title: press 4x
+        conditions:
+          - key: command
+            value: button_3_quadruple_press
+      - title: press 5x
+        conditions:
+          - key: command
+            value: button_3_quintuple_press
+      - title: hold
+        conditions:
+          - key: command
+            value: button_3_hold
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: button_3_long_release
+  # Button 4 (from the middle (M) line down (L), circle to the up right (Q), line to the middle (L), close path (Z))
+  - d: M 197 198 L 197 372 Q 359 359 372 198 L 197 198 Z
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: button_4_short_release
+      - title: press 2x
+        conditions:
+          - key: command
+            value: button_4_double_press
+      - title: press 3x
+        conditions:
+          - key: command
+            value: button_4_triple_press
+      - title: press 4x
+        conditions:
+          - key: command
+            value: button_4_quadruple_press
+      - title: press 5x
+        conditions:
+          - key: command
+            value: button_4_quintuple_press
+      - title: hold
+        conditions:
+          - key: command
+            value: button_4_hold
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: button_4_long_release
+  #turn left
+  - d: m198,0 -16,12 16,11 V0 a198,198 0 0 0 0,396 v-23 a175,175 0 0 1 0,-350 M58,58 l16,16 -19,5 3,-21 M0,198 h23 l-11,17 -12,-17 m58,140 18,-14 2,21 -20,-7
+    actions:
+      - title: rotate
+        conditions:
+          - key: command
+            value: step_with_on_off
+          - key: params.step_mode
+            value: 1
+  #turn right
+  - d: m198,0 16,12 -16,11 V0 a198,198 0 0 1 0,396 v-23 a175,175 0 0 0 0,-350 m139,34 5,22 -21,-6 16-16 m59,141 -12,17 -11,-17 h23 m-58,140 -18,-14 -3,21 20,-7
+    actions:
+      - title: rotate
+        conditions:
+          - key: command
+            value: step_with_on_off
+          - key: params.step_mode
+            value: 0

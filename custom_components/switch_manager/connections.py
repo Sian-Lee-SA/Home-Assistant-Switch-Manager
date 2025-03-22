@@ -26,8 +26,9 @@ async def async_setup_connections( hass ):
         connection: websocket_api.ActiveConnection,
         msg: dict[str, Any],
     ) -> None:
-        data = { "blueprint": _get_blueprint(hass, msg['blueprint_id'] ) } if msg.get('blueprint_id') \
-            else { "blueprints": hass.data[DOMAIN].get(CONF_BLUEPRINTS) }
+        data = ({ "blueprint": _get_blueprint(hass, msg['blueprint_id'] ) } 
+                if msg.get('blueprint_id')
+                else { "blueprints": hass.data[DOMAIN].get(CONF_BLUEPRINTS) })
 
         connection.send_result( msg["id"], data )
 

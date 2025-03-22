@@ -67,8 +67,9 @@ async def async_setup_connections( hass ):
         connection: websocket_api.ActiveConnection,
         msg: dict[str, Any],
     ) -> None:
-        data = { "config":_get_switch_config(hass, msg['config_id'] ) } if msg.get('config_id') \
-            else { "configs": hass.data[DOMAIN].get(CONF_MANAGED_SWITCHES) }
+        data = ({ "config":_get_switch_config(hass, msg['config_id'] ) } 
+                if msg.get('config_id')
+                else { "configs": hass.data[DOMAIN].get(CONF_MANAGED_SWITCHES) })
 
         connection.send_result( msg["id"], data )
 

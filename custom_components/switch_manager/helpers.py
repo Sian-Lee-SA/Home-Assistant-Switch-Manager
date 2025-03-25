@@ -1,7 +1,7 @@
 """Helpers for switch_manager integration."""
-import json, pathlib, os, shutil, enum, asyncio
+import json, pathlib, os, shutil, enum
 from homeassistant.core import HomeAssistant
-from homeassistant.util.yaml.loader import _find_files, load_yaml
+from annotatedyaml.loader import _find_files, load_yaml
 from .const import (
     LOGGER, 
     DOMAIN, 

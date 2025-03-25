@@ -1,10 +1,9 @@
 import os, pathlib
-from .const import DOMAIN, CONF_BLUEPRINTS, BLUEPRINTS_FOLDER, PANEL_URL, NAME, LOGGER
+from .const import DOMAIN, CONF_BLUEPRINTS, BLUEPRINTS_FOLDER, PANEL_URL, NAME
 from .helpers import VERSION
 from homeassistant.core import HomeAssistant
 from homeassistant.components.frontend import async_register_built_in_panel
 from homeassistant.components.http import StaticPathConfig
-from homeassistant.util.yaml.loader import _find_files
 
 async def async_setup_view(hass: HomeAssistant):
     staticJS = [StaticPathConfig(PANEL_URL, hass.config.path("custom_components/switch_manager/assets/switch_manager_panel.js"), True)]

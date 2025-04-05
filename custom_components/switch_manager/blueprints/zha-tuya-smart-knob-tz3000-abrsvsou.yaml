@@ -8,12 +8,6 @@
 # - rotate left
 # - rotate right
 
-name: TuYa 4 Button Scene
-service: ZHA
-event_type: zha_event
-identifier_key: device_id
-buttons:
-
 name: TuYa Smart Knob (_TZ3000_abrsvsou/TS004F)
 service: ZHA
 event_type: zha_event

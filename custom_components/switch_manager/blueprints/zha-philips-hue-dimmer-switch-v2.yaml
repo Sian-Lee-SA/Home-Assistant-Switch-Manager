@@ -1,0 +1,49 @@
+name: Philips Hue Dimmer Switch V2
+service: ZHA
+event_type: zha_event
+identifier_key: device_id
+buttons:
+  - x: 2
+    "y": 2
+    width: 189
+    height: 159
+    actions:
+      - title: "press (on)"
+        conditions:
+          - key: command
+            value: "on"
+      - title: "press (off)"
+        conditions:
+          - key: command
+            value: off_with_effect
+  # The Hue Dimmer Switch supports hold (released)-actions for the "brighter"-
+  # and "dimmer"-buttons, but the command is the same for both of them
+  # (command: stop), with no args to differentiate. I left it out to avoid
+  # confusion.
+  - x: 2
+    "y": 161
+    width: 189
+    height: 90
+    actions:
+      - title: press
+        conditions: "{{ data.command == 'step' and data.args == [0, 30, 9] }}"
+      - title: hold
+        conditions: "{{ data.command == 'step' and data.args == [0, 63, 9] }}"
+  - x: 2
+    "y": 251
+    width: 189
+    height: 90
+    actions:
+      - title: press
+        conditions: "{{ data.command == 'step' and data.args == [1, 30, 9] }}"
+      - title: hold
+        conditions: "{{ data.command == 'step' and data.args == [1, 63, 9] }}"
+  - x: 2
+    "y": 341
+    width: 189
+    height: 159
+    actions:
+      - title: "press (on)"
+        conditions: "{{ data.command == 'recall' and data.args == [14869, 0] }}"
+      - title: "press (off)"
+        conditions: "{{ data.command == 'recall' and data.args == [14869, 1] }}"

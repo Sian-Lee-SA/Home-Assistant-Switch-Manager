@@ -1,0 +1,117 @@
+name: Shelly BLU RC Button 4
+service: BTHome
+event_type: bthome_ble_event
+identifier_key: device_id
+buttons:
+  - x: 0
+    y: 0
+    width: 330
+    height: 161
+    conditions:
+      - key: event_class
+        value: button_1
+    actions:
+      - title: press
+        conditions:
+          - key: event_type
+            value: press
+      - title: press 2x
+        conditions:
+          - key: event_type
+            value: double_press
+      - title: press 3x
+        conditions:
+          - key: event_type
+            value: triple_press
+      - title: hold
+        conditions:
+          - key: action
+            value: hold_press
+      - title: hold (released)
+        conditions:
+          - key: action
+            value: long_press
+  - x: 0
+    y: 161
+    width: 330
+    height: 161
+    conditions:
+      - key: event_class
+        value: button_2
+    actions:
+      - title: press
+        conditions:
+          - key: event_type
+            value: press
+      - title: press 2x
+        conditions:
+          - key: event_type
+            value: double_press
+      - title: press 3x
+        conditions:
+          - key: event_type
+            value: triple_press
+      - title: hold
+        conditions:
+          - key: action
+            value: hold_press
+      - title: hold (released)
+        conditions:
+          - key: action
+            value: long_press
+  - x: 0
+    y: 322
+    width: 330
+    height: 161
+    conditions:
+      - key: event_class
+        value: button_3
+    actions:
+      - title: press
+        conditions:
+          - key: event_type
+            value: press
+      - title: press 2x
+        conditions:
+          - key: event_type
+            value: double_press
+      - title: press 3x
+        conditions:
+          - key: event_type
+            value: triple_press
+      - title: hold
+        conditions:
+          - key: action
+            value: hold_press
+      - title: hold (released)
+        conditions:
+          - key: action
+            value: long_press
+  - x: 0
+    y: 483
+    width: 330
+    height: 161
+    conditions:
+      - key: event_class
+        value: button_4
+    actions:
+      - title: press
+        conditions:
+          - key: event_type
+            value: press
+      - title: press 2x
+        conditions:
+          - key: event_type
+            value: double_press
+      - title: press 3x
+        conditions:
+          - key: event_type
+            value: triple_press
+      - title: hold
+        conditions:
+          - key: action
+            value: hold_press
+      - title: hold (released)
+        conditions:
+          - key: action
+            value: long_press

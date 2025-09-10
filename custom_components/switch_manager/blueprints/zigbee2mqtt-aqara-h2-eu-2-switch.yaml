@@ -1,0 +1,41 @@
+name: Aqara H2 EU switch (double rocker)
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+buttons:
+  - x: 19
+    y: 19
+    width: 81
+    height: 81
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: single_left
+  - x: 104
+    y: 19
+    width: 81
+    height: 81
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: single_right
+  - x: 19
+    y: 104
+    width: 81
+    height: 81
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: single_left_down
+  - x: 104
+    y: 104
+    width: 81
+    height: 81
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: single_right_down

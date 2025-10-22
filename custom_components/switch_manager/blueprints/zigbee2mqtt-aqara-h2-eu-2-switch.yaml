@@ -1,5 +1,6 @@
 name: Aqara H2 EU switch (double rocker)
 service: Zigbee2MQTT
+info: Blueprint includes all actions according to Zigbee2MQTT device documentation. However, hold/release/top-row-multiclick actions currently don't seem to be implemented.
 event_type: mqtt
 mqtt_topic_format: zigbee2mqtt/+/action
 buttons:
@@ -12,6 +13,18 @@ buttons:
         conditions:
           - key: payload
             value: single_left
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: double_left
+      - title: hold
+        conditions:
+          - key: payload
+            value: hold_left
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: release_left          
   - x: 104
     y: 19
     width: 81
@@ -21,6 +34,18 @@ buttons:
         conditions:
           - key: payload
             value: single_right
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: double_right
+      - title: hold
+        conditions:
+          - key: payload
+            value: hold_right
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: release_right            
   - x: 19
     y: 104
     width: 81
@@ -30,6 +55,18 @@ buttons:
         conditions:
           - key: payload
             value: single_left_down
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: double_left_down
+      - title: hold
+        conditions:
+          - key: payload
+            value: hold_left_down
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: release_left_down            
   - x: 104
     y: 104
     width: 81
@@ -39,3 +76,15 @@ buttons:
         conditions:
           - key: payload
             value: single_right_down
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: double_right_down
+      - title: hold
+        conditions:
+          - key: payload
+            value: hold_right_down
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: release_right_down         

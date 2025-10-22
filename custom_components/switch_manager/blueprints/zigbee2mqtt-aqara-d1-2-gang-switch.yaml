@@ -1,0 +1,55 @@
+name: Aqara D1 2 gang switch
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+buttons:
+  - x: 15
+    y: 14
+    width: 325
+    height: 648
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: single_left
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: double_left
+      - title: hold
+        conditions:
+          - key: payload
+            value: hold_left
+  - x: 340
+    y: 14
+    width: 325
+    height: 648
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: single_right
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: double_right
+      - title: hold
+        conditions:
+          - key: payload
+            value: hold_right
+  - x: 340
+    y: 340
+    width: 100
+    actions:
+      - title: both press
+        conditions:
+          - key: payload
+            value: single_both
+      - title: both press 2x
+        conditions:
+          - key: payload
+            value: double_both
+      - title: hold
+        conditions:
+          - key: payload
+            value: hold_both

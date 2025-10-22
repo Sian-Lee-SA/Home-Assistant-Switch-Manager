@@ -1,0 +1,146 @@
+name: EcoDim ED10014 8 button switch
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+buttons:
+    ##Row 1
+  - x: 75
+    y: 75
+    width: 105
+    height: 85
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: on_1
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_move_up_1
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: brightness_stop_1
+  - x: 320
+    y: 75
+    width: 105
+    height: 85
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: off_1
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_move_down_1
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: brightness_stop_1            
+    ##Row 2
+  - x: 75
+    y: 163
+    width: 105
+    height: 85
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: on_2
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_move_up_2
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: brightness_stop_2
+  - x: 320
+    y: 163
+    width: 105
+    height: 85
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: off_2
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_move_down_2
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: brightness_stop_2       
+    ##Row 3
+  - x: 75
+    y: 250
+    width: 105
+    height: 85
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: on_3
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_move_up_3
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: brightness_stop_3
+  - x: 320
+    y: 250
+    width: 105
+    height: 85
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: off_3
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_move_down_3
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: brightness_stop_3
+    ##Row 4
+  - x: 75
+    y: 337
+    width: 105
+    height: 85
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: on_4
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_move_up_4
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: brightness_stop_4
+  - x: 320
+    y: 337
+    width: 105
+    height: 85
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: off_4
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_move_down_4
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: brightness_stop_4
+            

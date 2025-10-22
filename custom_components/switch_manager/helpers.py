@@ -1,7 +1,7 @@
 """Helpers for switch_manager integration."""
 import json, pathlib, os, shutil, enum
 from homeassistant.core import HomeAssistant
-from homeassistant.util.yaml.loader import _find_files, load_yaml
+from annotatedyaml.loader import _find_files, load_yaml
 from .const import (
     LOGGER, 
     DOMAIN, 
@@ -20,7 +20,6 @@ MANIFEST = json.load(
     
 VERSION = MANIFEST['version']
 
-
 async def check_blueprints_folder_exists( hass ):
     dest_folder = pathlib.Path(hass.config.path(BLUEPRINTS_FOLDER, DOMAIN))
     return os.path.exists( dest_folder )
@@ -31,30 +30,43 @@ async def deploy_blueprints( hass ):
         os.makedirs( dest_folder )
     
     component_blueprints_path = os.path.join( COMPONENT_PATH, 'blueprints' )
-    files = os.listdir(component_blueprints_path)
-    for file in files:
-        if os.path.isfile( os.path.join( component_blueprints_path, file )):
-            shutil.copy( 
-                os.path.join( component_blueprints_path, file ),
-                dest_folder
-            )
+    files = await hass.loop.run_in_executor(
+            None,
+            os.listdir,
+            component_blueprints_path
+        )
 
-def load_blueprints( hass ):
+    def doFiles():
+        for file in files:
+            if os.path.isfile( os.path.join( component_blueprints_path, file )):
+                shutil.copy( 
+                    os.path.join( component_blueprints_path, file ),
+                    dest_folder
+                )
+
+    await hass.async_add_executor_job(doFiles)
+
+async def load_blueprints( hass ):
     folder = pathlib.Path(hass.config.path(BLUEPRINTS_FOLDER, DOMAIN))
-    results = [];
-    for f in _find_files(folder, "*.yaml"):
-        try:
-            data = load_yaml(f)
-        except HomeAssistantError as ex:
-            LOGGER.error(str(ex))
-            continue
-        results.append({
-            'id': os.path.splitext(os.path.basename(f))[0],
-            'has_image': os.path.exists(
-                os.path.join(folder, os.path.splitext(os.path.basename(f))[0] + '.png')
-            ),
-            'data': data        
-        })
+    files = await hass.loop.run_in_executor(None, _find_files, folder, "*.yaml")
+
+    results = []
+    def doFiles():
+        for f in files:
+            try:
+                data = load_yaml(f)
+            except HomeAssistantError as ex:
+                LOGGER.error(str(ex))
+                continue
+            results.append({
+                'id': os.path.splitext(os.path.basename(f))[0],
+                'has_image': os.path.exists(
+                    os.path.join(folder, os.path.splitext(os.path.basename(f))[0] + '.png')
+                ),
+                'data': data        
+            })
+    
+    await hass.async_add_executor_job(doFiles)
     return results
 
 def format_mqtt_message( message: ReceiveMessage):

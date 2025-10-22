@@ -2,6 +2,8 @@ name: Ikea Styrbar
 service: Zigbee2MQTT
 event_type: mqtt
 mqtt_topic_format: zigbee2mqtt/+/action
+info: |
+  Hold (released) for both brightness buttons receives the same action event
 buttons:
   ## Not sure why the buttons are back to front and illogical by their numbers??
   - x: 247
@@ -19,7 +21,7 @@ buttons:
       - title: hold (released)
         conditions:
           - key: payload
-            value: brightness_stop_up
+            value: brightness_stop
   - x: 442
     y: 248
     width: 50
@@ -51,7 +53,7 @@ buttons:
       - title: hold (released)
         conditions:
           - key: payload
-            value: brightness_stop_down
+            value: brightness_stop
   - x: 52
     y: 248
     width: 50

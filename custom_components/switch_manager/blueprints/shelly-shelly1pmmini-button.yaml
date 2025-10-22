@@ -1,0 +1,26 @@
+name: Shelly 1pm mini Gen3 (button)
+service: Shelly
+event_type: shelly.click
+identifier_key: device_id
+buttons:
+  - actions:
+      - title: press
+        conditions:
+          - key: click_type
+            value: single_push
+      - title: press 2x
+        conditions:
+          - key: click_type
+            value: double_push
+      - title: press 3x
+        conditions:
+          - key: click_type
+            value: triple_push
+      - title: hold
+        conditions:
+          - key: click_type
+            value: long_push
+      - title: released
+        conditions:
+          - key: click_type
+            value: btn_up

@@ -1,17 +1,24 @@
+import os, pathlib
 from .const import DOMAIN, CONF_BLUEPRINTS, BLUEPRINTS_FOLDER, PANEL_URL, NAME
 from .helpers import VERSION
 from homeassistant.core import HomeAssistant
+from homeassistant.components.frontend import async_register_built_in_panel
+from homeassistant.components.http import StaticPathConfig
 
 async def async_setup_view(hass: HomeAssistant):
+    staticJS = [StaticPathConfig(PANEL_URL, hass.config.path("custom_components/switch_manager/assets/switch_manager_panel.js"), True)]
+    
+    # folder = pathlib.Path(hass.config.path("custom_components/switch_manager/assets"))
+    # staticJS = [];
+    # for f in _find_files(folder, "*.js"):
+    #     staticJS.append(
+    #         StaticPathConfig(f"/{os.path.basename(f)}", f, True)
+    #     )
 
-    hass.http.register_static_path(
-        PANEL_URL,
-        hass.config.path("custom_components/switch_manager/assets/switch_manager_panel.js"),
-    )
-
+    await hass.http.async_register_static_paths(staticJS)
     await async_bind_blueprint_images(hass)
 
-    hass.components.frontend.async_register_built_in_panel(
+    async_register_built_in_panel(hass,
         component_name="custom",
         sidebar_title=NAME,
         sidebar_icon="mdi:light-switch-off",
@@ -28,9 +35,16 @@ async def async_setup_view(hass: HomeAssistant):
     )
 
 async def async_bind_blueprint_images(hass: HomeAssistant):
+    static_paths = []
+    
     for key in hass.data[DOMAIN].get(CONF_BLUEPRINTS):
         if hass.data[DOMAIN].get(CONF_BLUEPRINTS)[key].has_image:
-            hass.http.register_static_path(
-                f'/assets/{DOMAIN}/{key}.png',
-                hass.config.path(f"{BLUEPRINTS_FOLDER}/{DOMAIN}/{key}.png"),
+            static_paths.append(
+                StaticPathConfig(
+                    f'/assets/{DOMAIN}/{key}.png',
+                    hass.config.path(f"{BLUEPRINTS_FOLDER}/{DOMAIN}/{key}.png"),
+                    True
+                )
             )
+            
+    await hass.http.async_register_static_paths(static_paths)

@@ -11,7 +11,7 @@ buttons:
       - key: channel
         value: 1
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: click_type
             value: single_push
@@ -28,7 +28,7 @@ buttons:
       - key: channel
         value: 2
     actions:
-      - title: tap
+      - title: press
         conditions:
           - key: click_type
             value: single_push

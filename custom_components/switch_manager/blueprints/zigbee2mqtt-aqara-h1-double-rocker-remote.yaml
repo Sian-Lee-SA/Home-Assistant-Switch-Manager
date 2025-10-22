@@ -1,0 +1,67 @@
+name: Aqara H1 Double Rocker Remote
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+buttons:
+  - x: 0
+    y: 0
+    width: 250
+    height: 500
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: single_left
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: double_left
+      - title: press 3x
+        conditions:
+          - key: payload
+            value: triple_left
+      - title: hold
+        conditions:
+          - key: payload
+            value: hold_left
+  - x: 250
+    y: 0
+    width: 250
+    height: 500
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: single_right
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: double_right
+      - title: press 3x
+        conditions:
+          - key: payload
+            value: triple_right
+      - title: hold
+        conditions:
+          - key: payload
+            value: hold_right
+  - x: 250
+    y: 360
+    width: 80
+    actions:
+      - title: both press
+        conditions:
+          - key: payload
+            value: single_both
+      - title: both press 2x
+        conditions:
+          - key: payload
+            value: double_both
+      - title: both press 3x
+        conditions:
+          - key: payload
+            value: triple_both
+      - title: both hold
+        conditions:
+          - key: payload
+            value: hold_both

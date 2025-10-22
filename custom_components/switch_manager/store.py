@@ -4,6 +4,8 @@ from .const import LOGGER
 from .models import ManagedSwitchConfig
 import attr
 
+from homeassistant.helpers.storage import Store
+
 STORAGE_VERSION = 1
 STORAGE_ID = "switch_manager"
 
@@ -45,7 +47,8 @@ class SwitchManagerStoreData:
 class SwitchManagerStore:
     
     def __init__(self, hass):
-        self.store = hass.helpers.storage.Store(STORAGE_VERSION, STORAGE_ID)
+        self.store = Store(hass, STORAGE_VERSION, STORAGE_ID)
+        
         self.data = None
         self.dirty = False
 

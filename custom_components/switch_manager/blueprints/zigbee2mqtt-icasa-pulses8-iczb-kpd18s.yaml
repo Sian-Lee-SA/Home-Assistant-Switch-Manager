@@ -1,0 +1,121 @@
+name: iCasa Pulse 8s (ICZB-KPD18S) 8 button switch
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+buttons:
+    ##Row 1 (off+on)
+  - x: 75
+    y: 70
+    width: 105
+    height: 90
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: "off"
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_move_down
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: brightness_stop
+  - x: 325
+    y: 70
+    width: 105
+    height: 90
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: "on"
+      - title: hold
+        conditions:
+          - key: payload
+            value: brightness_move_up
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: brightness_stop
+    ##Row 2 (S1+S2)
+  - x: 75
+    y: 157
+    width: 105
+    height: 90
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: recall_1
+      - title: hold
+        conditions:
+          - key: payload
+            value: store_1
+  - x: 325
+    y: 157
+    width: 105
+    height: 90
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: recall_2
+      - title: hold
+        conditions:
+          - key: payload
+            value: store_2
+    ##Row 3 (S3+S4)
+  - x: 75
+    y: 245 
+    width: 105
+    height: 90
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: recall_3
+      - title: hold
+        conditions:
+          - key: payload
+            value: store_3
+  - x: 325
+    y: 245
+    width: 105
+    height: 90
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: recall_4
+      - title: hold
+        conditions:
+          - key: payload
+            value: store_4
+    ##Row 4 (S5+S6)
+  - x: 75
+    y: 333 
+    width: 105
+    height: 90
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: recall_5
+      - title: hold
+        conditions:
+          - key: payload
+            value: store_5
+  - x: 325
+    y: 333
+    width: 105
+    height: 90
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: recall_6
+      - title: hold
+        conditions:
+          - key: payload
+            value: store_6

@@ -1,0 +1,126 @@
+name: IKEA SYMFONISK Remote Gen 2
+service: ZHA
+event_type: zha_event
+identifier_key: device_id
+buttons:
+  # VOLUME UP
+  - d: "M192.3,137.86h116.38c14.78,0,28.17,5.91,37.97,15.49l118-118C442.81,13.51,412.64,0,379.31,0 H120.69c-33.33,0-63.5,13.51-85.34,35.35l118.48,118.48C163.67,143.97,177.27,137.86,192.3,137.86z"
+    actions:
+      - title: press
+        conditions: "{{ data.command == 'move_with_on_off' and data.params.move_mode == 0 }}"
+      - title: hold
+        conditions: "{{ data.command == 'move' and data.params.move_mode == 0 }}"
+  # NEXT
+  - d: "M500,120.69c0-33.33-13.51-63.5-35.35-85.34l-118,118c10.08,9.86,16.34,23.6,16.34,38.82V250H500 V120.69z"
+    actions:
+      - title: press
+        conditions: "{{ data.command == 'step' and data.params.step_mode == 0 }}"
+  # DOT 2
+  - d: "M362.99,250v58.55c0,15.03-6.11,28.63-15.97,38.47l117.64,117.64 c21.84-21.84,35.35-52.01,35.35-85.34V250H362.99z"
+    actions:
+      - title: init
+        conditions:
+          - key: command
+            value: initial_press
+          - key: cluster_id
+            value: 64640
+          - key: endpoint_id
+            value: 3
+      - title: press
+        conditions:
+          - key: command
+            value: short_release
+          - key: cluster_id
+            value: 64640
+          - key: endpoint_id
+            value: 3
+      - title: press 2x
+        conditions:
+          - key: command
+            value: multi_press_complete
+          - key: cluster_id
+            value: 64640
+          - key: endpoint_id
+            value: 3
+      - title: hold
+        conditions:
+          - key: command
+            value: long_press
+          - key: cluster_id
+            value: 64640
+          - key: endpoint_id
+            value: 3
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: long_release
+          - key: cluster_id
+            value: 64640
+          - key: endpoint_id
+            value: 3
+  # VOLUME DOWN
+  - d: "M347.02,347.02c-9.82,9.79-23.37,15.84-38.34,15.84H192.3c-15.21,0-28.96-6.26-38.82-16.34	L35.35,464.65C57.19,486.49,87.36,500,120.69,500h258.63c33.33,0,63.5-13.51,85.34-35.35L347.02,347.02z"
+    actions:
+      - title: press
+        conditions: "{{ data.command == 'move_with_on_off' and data.params.move_mode == 1 }}"
+      - title: hold
+        conditions: "{{ data.command == 'move' and data.params.move_mode == 1 }}"
+  # DOT 1
+  - d: "M137.99,250H0v129.31c0,33.33,13.51,63.5,35.35,85.34l118.13-118.13 c-9.58-9.79-15.49-23.19-15.49-37.97V250z"
+    actions:
+      - title: init
+        conditions:
+          - key: command
+            value: initial_press
+          - key: cluster_id
+            value: 64640
+          - key: endpoint_id
+            value: 2
+      - title: press
+        conditions:
+          - key: command
+            value: short_release
+          - key: cluster_id
+            value: 64640
+          - key: endpoint_id
+            value: 2
+      - title: press 2x
+        conditions:
+          - key: command
+            value: multi_press_complete
+          - key: cluster_id
+            value: 64640
+          - key: endpoint_id
+            value: 2
+      - title: hold
+        conditions:
+          - key: command
+            value: long_press
+          - key: cluster_id
+            value: 64640
+          - key: endpoint_id
+            value: 2
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: long_release
+          - key: cluster_id
+            value: 64640
+          - key: endpoint_id
+            value: 2
+  # PREVIOUS
+  - d: "M153.83,153.83L35.35,35.35C13.51,57.19,0,87.36,0,120.69V250h137.99v-57.83 C137.99,177.2,144.04,163.66,153.83,153.83z"
+    actions:
+      - title: press
+        conditions: "{{ data.command == 'step' and data.params.step_mode == 1 }}"
+  # PLAY
+  - d: "M308.68,362.86H192.3c-29.99,0-54.31-24.31-54.31-54.31V192.17 c0-29.99,24.31-54.31,54.31-54.31h116.38c29.99,0,54.31,24.31,54.31,54.31v116.38C362.99,338.54,338.68,362.86,308.68,362.86z"
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: toggle
+          - key: cluster_id
+            value: 6
+          - key: endpoint_id
+            value: 1

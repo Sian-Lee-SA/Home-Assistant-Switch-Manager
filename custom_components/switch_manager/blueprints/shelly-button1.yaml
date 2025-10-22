@@ -1,0 +1,22 @@
+name: Shelly Button 1 (1 Button)
+service: Shelly
+event_type: shelly.click
+identifier_key: device
+buttons:
+  - actions:
+      - title: press
+        conditions:
+          - key: click_type
+            value: single
+      - title: press 2x
+        conditions:
+          - key: click_type
+            value: double
+      - title: press 3x
+        conditions:
+          - key: click_type
+            value: triple
+      - title: hold
+        conditions:
+          - key: click_type
+            value: long

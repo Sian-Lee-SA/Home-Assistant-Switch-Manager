@@ -1,0 +1,53 @@
+name: Ikea Somrig
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+buttons:
+  - x: 143
+    y: 76
+    width: 42
+    actions:
+      - title: init
+        conditions:
+          - key: payload
+            value: 1_initial_press
+      - title: press
+        conditions:
+          - key: payload
+            value: 1_short_release
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: 1_double_press
+      - title: hold
+        conditions:
+          - key: payload
+            value: 1_long_press
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: 1_long_release
+  - x: 143
+    y: 436
+    width: 42
+    actions:
+      - title: init
+        conditions:
+          - key: payload
+            value: 2_initial_press
+      - title: press
+        conditions:
+          - key: payload
+            value: 2_short_release
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: 2_double_press
+      - title: hold
+        conditions:
+          - key: payload
+            value: 2_long_press
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: 2_long_release

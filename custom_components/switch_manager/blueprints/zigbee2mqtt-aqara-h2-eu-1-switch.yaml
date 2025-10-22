@@ -1,5 +1,6 @@
 name: Aqara H2 EU switch (single rocker)
 service: Zigbee2MQTT
+info: Blueprint includes all actions according to Zigbee2MQTT device documentation. However, hold/release/top-row-multiclick actions currently don't seem to be implemented.
 event_type: mqtt
 mqtt_topic_format: zigbee2mqtt/+/action
 buttons:
@@ -12,6 +13,18 @@ buttons:
         conditions:
           - key: payload
             value: single_up
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: double_up
+      - title: hold
+        conditions:
+          - key: payload
+            value: hold_up
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: release_up 
   - x: 18
     y: 103
     width: 170
@@ -21,3 +34,15 @@ buttons:
         conditions:
           - key: payload
             value: single_down
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: double_down
+      - title: hold
+        conditions:
+          - key: payload
+            value: hold_down
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: release_down            

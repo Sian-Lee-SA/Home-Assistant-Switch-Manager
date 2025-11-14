@@ -1,0 +1,34 @@
+name: Aqara H2 EU Rotary Dimmer
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+buttons:
+  - actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: single
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: double
+      - title: hold
+        conditions:
+          - key: payload
+            value: hold
+      - title: hold (released)
+        conditions:
+          - key: payload
+            value: release
+      - title: start rotating
+        conditions:
+          - key: payload
+            value: start_rotating
+      - title: stop rotating
+        conditions:
+          - key: payload
+            value: stop_rotating
+      - title: rotation
+        conditions:
+          - key: payload
+            value: rotation

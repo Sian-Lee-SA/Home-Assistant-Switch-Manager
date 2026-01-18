@@ -1,0 +1,32 @@
+name: Sonoff ZBM5-3C
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+buttons:
+  - x: 0
+    y: 0
+    width: 125
+    height: 382
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: toggle_l1
+  - x: 125
+    y: 0
+    width: 125
+    height: 382
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: toggle_l2
+  - x: 250
+    y: 0
+    width: 127
+    height: 382
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: toggle_l3

@@ -1,0 +1,15 @@
+name: Sonoff Mini Duo (MINI-ZB2GS/MINI-ZB2GS-L)
+info: Sonoff Mini Duo dual gang smart relay, neutral or no-neutral version.
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+buttons:
+  - actions:
+      - title: toggle s1
+        conditions:
+          - key: payload
+            value: toggle_l1
+      - title: toggle s2
+        conditions: 
+          - key: payload
+            value: toggle_l2

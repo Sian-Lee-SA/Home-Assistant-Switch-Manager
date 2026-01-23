@@ -5,11 +5,11 @@ event_type: mqtt
 mqtt_topic_format: zigbee2mqtt/+/action
 buttons:
   - actions:
-      - title: Toggle Switch 1
+      - title: toggle s1
         conditions:
           - key: payload
             value: toggle_l1
-      - title: Toggle Switch 2
+      - title: toggle s2
         conditions: 
           - key: payload
             value: toggle_l2

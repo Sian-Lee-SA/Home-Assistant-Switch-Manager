@@ -1,0 +1,10 @@
+name: Sonoff ZBM5-1C
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+buttons:
+  - actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: toggle_l1

@@ -1,0 +1,119 @@
+name: TuYa 6 Button Scene (TS0046)
+service: ZHA
+event_type: zha_event
+identifier_key: device_id
+buttons:
+  - x: 167
+    y: 143
+    width: 42
+    conditions:
+      - key: endpoint_id
+        value: 1
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: remote_button_short_press
+      - title: press 2x
+        conditions:
+          - key: command
+            value: remote_button_double_press
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: remote_button_long_press
+  - x: 332
+    y: 143
+    width: 42
+    conditions:
+      - key: endpoint_id
+        value: 2
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: remote_button_short_press
+      - title: press 2x
+        conditions:
+          - key: command
+            value: remote_button_double_press
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: remote_button_long_press
+  - x: 167
+    y: 253
+    width: 42
+    conditions:
+      - key: endpoint_id
+        value: 3
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: remote_button_short_press
+      - title: press 2x
+        conditions:
+          - key: command
+            value: remote_button_double_press
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: remote_button_long_press
+  - x: 332
+    y: 252
+    width: 42
+    conditions:
+      - key: endpoint_id
+        value: 4
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: remote_button_short_press
+      - title: press 2x
+        conditions:
+          - key: command
+            value: remote_button_double_press
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: remote_button_long_press
+  - x: 167
+    y: 358
+    width: 42
+    conditions:
+      - key: endpoint_id
+        value: 5
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: remote_button_short_press
+      - title: press 2x
+        conditions:
+          - key: command
+            value: remote_button_double_press
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: remote_button_long_press
+  - x: 332
+    y: 358
+    width: 42
+    conditions:
+      - key: endpoint_id
+        value: 6
+    actions:
+      - title: press
+        conditions:
+          - key: command
+            value: remote_button_short_press
+      - title: press 2x
+        conditions:
+          - key: command
+            value: remote_button_double_press
+      - title: hold (released)
+        conditions:
+          - key: command
+            value: remote_button_long_press

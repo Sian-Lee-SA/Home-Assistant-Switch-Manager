@@ -1,0 +1,20 @@
+name: Moes ZG-101ZD
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+
+buttons:
+  - actions:
+      - title: press
+        conditions: "{{ data.action in ['single', 'toggle'] }}"
+      - title: press 2x
+        conditions: "{{ data.action == 'double' }}"
+      - title: hold
+        conditions: "{{ data.action in ['hold', 'hue_move'] }}"
+      - title: rotate left
+        conditions: "{{ data.action == 'rotate_left' }}"
+      - title: rotate right
+        conditions: "{{ data.action == 'rotate_right' }}"
+      - title: alt rotate left
+        conditions: "{{ data.action == 'brightness_step_down' }}"
+      - title: alt rotate right
+        conditions: "{{ data.action == 'brightness_step_up' }}"

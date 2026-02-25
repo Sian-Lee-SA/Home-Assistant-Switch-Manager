@@ -1,0 +1,389 @@
+name: LocalBytes LocalDeck 24
+service: ESPhome
+event_type: esphome.localdeck_button
+identifier_key: device_id
+buttons:
+  - x: 50
+    y: 305
+    width: 70
+    height: 70
+    conditions:
+      - key: button
+        value: 1
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: single
+      - title: press 2x
+        conditions:
+          - key: type
+            value: double
+  - x: 135
+    y: 305
+    width: 70
+    height: 70
+    conditions:
+      - key: button
+        value: 2
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: single
+      - title: press 2x
+        conditions:
+          - key: type
+            value: double
+  - x: 225
+    y: 305
+    width: 70
+    height: 70
+    conditions:
+      - key: button
+        value: 3
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: single
+      - title: press 2x
+        conditions:
+          - key: type
+            value: double
+  - x: 311
+    y: 305
+    width: 70
+    height: 70
+    conditions:
+      - key: button
+        value: 4
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: single
+      - title: press 2x
+        conditions:
+          - key: type
+            value: double
+  - x: 400
+    y: 305
+    width: 70
+    height: 70
+    conditions:
+      - key: button
+        value: 5
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: single
+      - title: press 2x
+        conditions:
+          - key: type
+            value: double
+  - x: 485
+    y: 305
+    width: 70
+    height: 70
+    conditions:
+      - key: button
+        value: 6
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: single
+      - title: press 2x
+        conditions:
+          - key: type
+            value: double
+  - x: 50
+    y: 220
+    width: 70
+    height: 70
+    conditions:
+      - key: button
+        value: 7
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: single
+      - title: press 2x
+        conditions:
+          - key: type
+            value: double
+  - x: 135
+    y: 220
+    width: 70
+    height: 70
+    conditions:
+      - key: button
+        value: 8
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: single
+      - title: press 2x
+        conditions:
+          - key: type
+            value: double
+  - x: 225
+    y: 220
+    width: 70
+    height: 70
+    conditions:
+      - key: button
+        value: 9
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: single
+      - title: press 2x
+        conditions:
+          - key: type
+            value: double
+  - x: 311
+    y: 220
+    width: 70
+    height: 70
+    conditions:
+      - key: button
+        value: 10
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: single
+      - title: press 2x
+        conditions:
+          - key: type
+            value: double
+  - x: 400
+    y: 220
+    width: 70
+    height: 70
+    conditions:
+      - key: button
+        value: 11
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: single
+      - title: press 2x
+        conditions:
+          - key: type
+            value: double
+  - x: 485
+    y: 220
+    width: 70
+    height: 70
+    conditions:
+      - key: button
+        value: 12
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: single
+      - title: press 2x
+        conditions:
+          - key: type
+            value: double
+  - x: 50
+    y: 135
+    width: 70
+    height: 70
+    conditions:
+      - key: button
+        value: 13
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: single
+      - title: press 2x
+        conditions:
+          - key: type
+            value: double
+  - x: 135
+    y: 135
+    width: 70
+    height: 70
+    conditions:
+      - key: button
+        value: 14
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: single
+      - title: press 2x
+        conditions:
+          - key: type
+            value: double
+  - x: 225
+    y: 135
+    width: 70
+    height: 70
+    conditions:
+      - key: button
+        value: 15
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: single
+      - title: press 2x
+        conditions:
+          - key: type
+            value: double
+  - x: 311
+    y: 135
+    width: 70
+    height: 70
+    conditions:
+      - key: button
+        value: 16
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: single
+      - title: press 2x
+        conditions:
+          - key: type
+            value: double
+  - x: 400
+    y: 135
+    width: 70
+    height: 70
+    conditions:
+      - key: button
+        value: 17
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: single
+      - title: press 2x
+        conditions:
+          - key: type
+            value: double
+  - x: 485
+    y: 135
+    width: 70
+    height: 70
+    conditions:
+      - key: button
+        value: 18
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: single
+      - title: press 2x
+        conditions:
+          - key: type
+            value: double
+  - x: 50
+    y: 45
+    width: 70
+    height: 70
+    conditions:
+      - key: button
+        value: 19
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: single
+      - title: press 2x
+        conditions:
+          - key: type
+            value: double
+  - x: 135
+    y: 45
+    width: 70
+    height: 70
+    conditions:
+      - key: button
+        value: 20
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: single
+      - title: press 2x
+        conditions:
+          - key: type
+            value: double
+  - x: 225
+    y: 45
+    width: 70
+    height: 70
+    conditions:
+      - key: button
+        value: 21
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: single
+      - title: press 2x
+        conditions:
+          - key: type
+            value: double
+  - x: 311
+    y: 45
+    width: 70
+    height: 70
+    conditions:
+      - key: button
+        value: 22
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: single
+      - title: press 2x
+        conditions:
+          - key: type
+            value: double
+  - x: 400
+    y: 45
+    width: 70
+    height: 70
+    conditions:
+      - key: button
+        value: 23
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: single
+      - title: press 2x
+        conditions:
+          - key: type
+            value: double
+  - x: 485
+    y: 45
+    width: 70
+    height: 70
+    conditions:
+      - key: button
+        value: 24
+    actions:
+      - title: press
+        conditions:
+          - key: type
+            value: single
+      - title: press 2x
+        conditions:
+          - key: type
+            value: double

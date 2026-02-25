@@ -1,0 +1,101 @@
+name: Shelly BLU Wall Switch 4
+service: BTHome
+event_type: bthome_ble_event
+identifier_key: device_id
+buttons:
+  - x: 45
+    y: 45
+    width: 206
+    height: 205
+    conditions:
+      - key: event_class
+        value: button_1
+    actions:
+      - title: press
+        conditions:
+          - key: event_type
+            value: press
+      - title: press 2x
+        conditions:
+          - key: event_type
+            value: double_press
+      - title: press 3x
+        conditions:
+          - key: event_type
+            value: triple_press
+      - title: hold
+        conditions:
+          - key: event_type
+            value: long_press
+  - x: 45
+    y: 252
+    width: 206
+    height: 205
+    conditions:
+      - key: event_class
+        value: button_2
+    actions:
+      - title: press
+        conditions:
+          - key: event_type
+            value: press
+      - title: press 2x
+        conditions:
+          - key: event_type
+            value: double_press
+      - title: press 3x
+        conditions:
+          - key: event_type
+            value: triple_press
+      - title: hold
+        conditions:
+          - key: event_type
+            value: long_press
+  - x: 252
+    y: 45
+    width: 206
+    height: 205
+    conditions:
+      - key: event_class
+        value: button_3
+    actions:
+      - title: press
+        conditions:
+          - key: event_type
+            value: press
+      - title: press 2x
+        conditions:
+          - key: event_type
+            value: double_press
+      - title: press 3x
+        conditions:
+          - key: event_type
+            value: triple_press
+      - title: hold
+        conditions:
+          - key: event_type
+            value: long_press
+  - x: 252
+    y: 252
+    width: 206
+    height: 205
+    conditions:
+      - key: event_class
+        value: button_4
+    actions:
+      - title: press
+        conditions:
+          - key: event_type
+            value: press
+      - title: press 2x
+        conditions:
+          - key: event_type
+            value: double_press
+      - title: press 3x
+        conditions:
+          - key: event_type
+            value: triple_press
+      - title: hold
+        conditions:
+          - key: event_type
+            value: long_press

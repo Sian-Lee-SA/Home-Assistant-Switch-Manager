@@ -25,11 +25,7 @@ buttons:
             value: triple_press
       - title: hold
         conditions:
-          - key: action
-            value: hold_press
-      - title: hold (released)
-        conditions:
-          - key: action
+          - key: event_type
             value: long_press
   - x: 0
     y: 161
@@ -53,11 +49,7 @@ buttons:
             value: triple_press
       - title: hold
         conditions:
-          - key: action
-            value: hold_press
-      - title: hold (released)
-        conditions:
-          - key: action
+          - key: event_type
             value: long_press
   - x: 0
     y: 322
@@ -81,11 +73,7 @@ buttons:
             value: triple_press
       - title: hold
         conditions:
-          - key: action
-            value: hold_press
-      - title: hold (released)
-        conditions:
-          - key: action
+          - key: event_type
             value: long_press
   - x: 0
     y: 483
@@ -109,9 +97,5 @@ buttons:
             value: triple_press
       - title: hold
         conditions:
-          - key: action
-            value: hold_press
-      - title: hold (released)
-        conditions:
-          - key: action
+          - key: event_type
             value: long_press

@@ -1,0 +1,69 @@
+name: Moes ZG-101ZD (TS004F) - State topic
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+
+info: |
+  This blueprint listens on the main Zigbee2MQTT state topic and matches all action values exposed by the device.
+  The knob can switch between event and command mode by pressing it 3 times.
+  In "event" mode it emits: single, double, hold, rotate_left and rotate_right.
+  In "command" mode it emits: toggle, double, brightness_step_up, brightness_step_down, hue_move, color_temperature_step_up and color_temperature_step_down.
+  Observed mappings: 
+  toggle = press, double = press 2x, brightness_step_up/down = rotate right/left, hue_move = hold, color_temperature_step_up/down = hold + rotate right/left.
+  saturation_move and hue_stop are exposed by Zigbee2MQTT but have not been reproduced on this device/firmware yet (if so, please open a GitHub issue).
+  HINT; To make your setup work across both operation modes, assign the same sequence to press and toggle, and the same sequences to rotate_left/rotate_right and brightness_step_down/brightness_step_up.
+  double already behaves the same in both modes.
+  The built-in YAML editor can be used to copy and paste the same sequence between these actions.
+buttons:
+  - actions:
+      - title: press
+        conditions:
+          - key: action
+            value: single
+      - title: press 2x
+        conditions:
+          - key: action
+            value: double
+      - title: hold
+        conditions:
+          - key: action
+            value: hold
+      - title: rotate left
+        conditions:
+          - key: action
+            value: rotate_left
+      - title: rotate right
+        conditions:
+          - key: action
+            value: rotate_right
+      - title: toggle
+        conditions:
+          - key: action
+            value: toggle
+      - title: brightness step up
+        conditions:
+          - key: action
+            value: brightness_step_up
+      - title: brightness step down
+        conditions:
+          - key: action
+            value: brightness_step_down
+      - title: color temperature step up
+        conditions:
+          - key: action
+            value: color_temperature_step_up
+      - title: color temperature step down
+        conditions:
+          - key: action
+            value: color_temperature_step_down
+      - title: saturation move
+        conditions:
+          - key: action
+            value: saturation_move
+      - title: hue move
+        conditions:
+          - key: action
+            value: hue_move
+      - title: hue stop
+        conditions:
+          - key: action
+            value: hue_stop

@@ -1,0 +1,77 @@
+name: Moes 4-Button Remote (XH-SY-04Z)
+service: Zigbee2MQTT
+event_type: mqtt
+mqtt_topic_format: zigbee2mqtt/+/action
+
+buttons:
+  # Taste 1 (P1)
+  - x: 97
+    y: 161
+    width: 18
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: "1_single"
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: "1_double"
+      - title: hold
+        conditions:
+          - key: payload
+            value: "1_hold"
+
+  # Taste 2 (P2)
+  - x: 97
+    y: 217
+    width: 18
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: "2_single"
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: "2_double"
+      - title: hold
+        conditions:
+          - key: payload
+            value: "2_hold"
+
+  # Taste 3 (P3)
+  - x: 97
+    y: 273
+    width: 18
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: "3_single"
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: "3_double"
+      - title: hold
+        conditions:
+          - key: payload
+            value: "3_hold"
+
+  # Taste 4 (P4)
+  - x: 97
+    y: 330
+    width: 18
+    actions:
+      - title: press
+        conditions:
+          - key: payload
+            value: "4_single"
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: "4_double"
+      - title: hold
+        conditions:
+          - key: payload
+            value: "4_hold"

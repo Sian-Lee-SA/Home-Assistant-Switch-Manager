@@ -30,6 +30,10 @@ buttons:
         conditions:
           - key: payload
             value: single_left_down
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: double_left_down
   - x: 104
     y: 104
     width: 81
@@ -39,3 +43,7 @@ buttons:
         conditions:
           - key: payload
             value: single_right_down
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: double_right_down

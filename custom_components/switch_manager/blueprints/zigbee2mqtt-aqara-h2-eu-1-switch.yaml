@@ -21,3 +21,7 @@ buttons:
         conditions:
           - key: payload
             value: single_down
+      - title: press 2x
+        conditions:
+          - key: payload
+            value: double_down

@@ -1,0 +1,58 @@
+name: HomematicIP Local HM-RC-Sec4-2
+service: HomematicIP Local
+event_type: homematic.keypress
+identifier_key: address
+info: "Use the device serial number as identifier, for example MEQ0076410."
+buttons:
+  - d: "M53,168 C57,144 64,117 78,92 C84,79 91,70 97,68 L134,105 C137,109 136,130 135,136 L135,169 Z"
+    conditions:
+      - key: subtype
+        value: 2
+    actions:
+      - title: short press
+        conditions:
+          - key: type
+            value: press_short
+      - title: long press
+        conditions:
+          - key: type
+            value: press_long
+  - d: "M49,181 C82,181 107,180 132,181 C133,181 132,203 132,205 L133,249 C133,251 134,250 132,250 L42,251 C43,231 43,218 44,207 C45,198 48,185 49,181 Z"
+    conditions:
+      - key: subtype
+        value: 1
+    actions:
+      - title: short press
+        conditions:
+          - key: type
+            value: press_short
+      - title: long press
+        conditions:
+          - key: type
+            value: press_long
+  - d: "M43,278 C43,274 42,264 44,264 L132,263 C133,263 132,278 132,280 L132,330 C132,332 134,332 132,332 L48,333 C47,333 46,325 46,323 C45,306 44,296 43,278 Z"
+    conditions:
+      - key: subtype
+        value: 4
+    actions:
+      - title: short press
+        conditions:
+          - key: type
+            value: press_short
+      - title: long press
+        conditions:
+          - key: type
+            value: press_long
+  - d: "M51,345 C82,346 101,344 132,345 C133,345 133,357 133,359 L132,404 C132,410 113,427 108,431 L97,442 C93,446 91,448 88,442 L67,404 C64,398 59,385 58,379 C53,360 53,366 51,345 Z"
+    conditions:
+      - key: subtype
+        value: 3
+    actions:
+      - title: short press
+        conditions:
+          - key: type
+            value: press_short
+      - title: long press
+        conditions:
+          - key: type
+            value: press_long
